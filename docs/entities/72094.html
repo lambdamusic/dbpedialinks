@@ -1,0 +1,2556 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">White noise</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">White noise</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/White_noise" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/White_noise" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="64130.html"
+        
+       title="View other articles tagged with this concept">Quantum mechanics</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="74236.html"
+        
+       title="View other articles tagged with this concept">Gaussian noise</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63265.html"
+        
+       title="View other articles tagged with this concept">Resonance</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60690.html"
+        
+       title="View other articles tagged with this concept">Monte Carlo method</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="71528.html"
+        
+       title="View other articles tagged with this concept">Lyapunov exponent</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63233.html"
+        
+       title="View other articles tagged with this concept">Electroencephalography</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64147.html"
+        
+       title="View other articles tagged with this concept">Dynamical system</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63803.html"
+        
+       title="View other articles tagged with this concept">Zygosity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68489.html"
+        
+       title="View other articles tagged with this concept">Wavenumber</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62246.html"
+        
+       title="View other articles tagged with this concept">Wavelet</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68448.html"
+        
+       title="View other articles tagged with this concept">Virtual work</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68451.html"
+        
+       title="View other articles tagged with this concept">Uncertainty principle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65891.html"
+        
+       title="View other articles tagged with this concept">Transcranial magnetic stimulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61533.html"
+        
+       title="View other articles tagged with this concept">Time series</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73545.html"
+        
+       title="View other articles tagged with this concept">Thermocline</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76070.html"
+        
+       title="View other articles tagged with this concept">Tandem repeat</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63158.html"
+        
+       title="View other articles tagged with this concept">Structural health monitoring</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63721.html"
+        
+       title="View other articles tagged with this concept">Statistical hypothesis testing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71408.html"
+        
+       title="View other articles tagged with this concept">Spectral theorem</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61416.html"
+        
+       title="View other articles tagged with this concept">Soviet Union</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60788.html"
+        
+       title="View other articles tagged with this concept">Single-nucleotide polymorphism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60625.html"
+        
+       title="View other articles tagged with this concept">Signal processing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67828.html"
+        
+       title="View other articles tagged with this concept">Self-adjoint operator</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62007.html"
+        
+       title="View other articles tagged with this concept">Sea surface temperature</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65919.html"
+        
+       title="View other articles tagged with this concept">Richard Feynman</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65367.html"
+        
+       title="View other articles tagged with this concept">RGB color model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77695.html"
+        
+       title="View other articles tagged with this concept">Quantum decoherence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62913.html"
+        
+       title="View other articles tagged with this concept">Quantum computing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61841.html"
+        
+       title="View other articles tagged with this concept">Probability distribution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63160.html"
+        
+       title="View other articles tagged with this concept">Prefrontal cortex</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="84286.html"
+        
+       title="View other articles tagged with this concept">Poisson point process</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62851.html"
+        
+       title="View other articles tagged with this concept">Philipp Otto Runge</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61952.html"
+        
+       title="View other articles tagged with this concept">Oxygen</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69759.html"
+        
+       title="View other articles tagged with this concept">Oreochromis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64356.html"
+        
+       title="View other articles tagged with this concept">New York City</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62888.html"
+        
+       title="View other articles tagged with this concept">Markov chain</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65754.html"
+        
+       title="View other articles tagged with this concept">Management system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60720.html"
+        
+       title="View other articles tagged with this concept">Magnetic resonance imaging</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60643.html"
+        
+       title="View other articles tagged with this concept">Magnetic field</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64801.html"
+        
+       title="View other articles tagged with this concept">Ising model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74600.html"
+        
+       title="View other articles tagged with this concept">Heat equation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63017.html"
+        
+       title="View other articles tagged with this concept">Harmonic oscillator</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="84613.html"
+        
+       title="View other articles tagged with this concept">Grayscale</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62553.html"
+        
+       title="View other articles tagged with this concept">Global Positioning System</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62427.html"
+        
+       title="View other articles tagged with this concept">Geometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70543.html"
+        
+       title="View other articles tagged with this concept">Generating function</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60759.html"
+        
+       title="View other articles tagged with this concept">Gene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62241.html"
+        
+       title="View other articles tagged with this concept">Finite element method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63949.html"
+        
+       title="View other articles tagged with this concept">Evoked potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66764.html"
+        
+       title="View other articles tagged with this concept">Entropy (information theory)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61675.html"
+        
+       title="View other articles tagged with this concept">Entropy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62003.html"
+        
+       title="View other articles tagged with this concept">El Niño–Southern Oscillation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63452.html"
+        
+       title="View other articles tagged with this concept">Eigenvalues and eigenvectors</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74152.html"
+        
+       title="View other articles tagged with this concept">Dopamine transporter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63032.html"
+        
+       title="View other articles tagged with this concept">Dopamine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65771.html"
+        
+       title="View other articles tagged with this concept">Domain decomposition methods</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75755.html"
+        
+       title="View other articles tagged with this concept">Direct numerical simulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62421.html"
+        
+       title="View other articles tagged with this concept">Deconvolution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62869.html"
+        
+       title="View other articles tagged with this concept">Cross-correlation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62096.html"
+        
+       title="View other articles tagged with this concept">Covariance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62102.html"
+        
+       title="View other articles tagged with this concept">Convection</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69589.html"
+        
+       title="View other articles tagged with this concept">Conjugate gradient method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60814.html"
+        
+       title="View other articles tagged with this concept">Classical mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65651.html"
+        
+       title="View other articles tagged with this concept">Autocorrelation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63901.html"
+        
+       title="View other articles tagged with this concept">Amygdala</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62109.html"
+        
+       title="View other articles tagged with this concept">Allele</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60663.html"
+        
+       title="View other articles tagged with this concept">Algorithm</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65898.html"
+        
+       title="View other articles tagged with this concept">Albinism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76605.html"
+        
+       title="View other articles tagged with this concept">Airfoil</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">32</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#147b6737fd385c027cf707a1f202244f" style="font-size: 90%;" title="Open panel">
+                1. Effects of Conjugate Gradient Methods and Step-Length Formulas on the Multiscale Full Waveform Inversion in Time Domain: Numerical Experiments
+              </a> 
+            </h4>
+          </div>
+          <div id="147b6737fd385c027cf707a1f202244f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00024-017-1512-3" target="_blank" title="View Publication 10.1007/s00024-017-1512-3">DOI: 10.1007/s00024-017-1512-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00024-017-1512-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#217f1f039577070d809c9726e97af7a4" style="font-size: 90%;" title="Open panel">
+                2. Time-homogeneous parabolic Wick–Anderson model in one space dimension: regularity of solution
+              </a> 
+            </h4>
+          </div>
+          <div id="217f1f039577070d809c9726e97af7a4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40072-017-0097-2" target="_blank" title="View Publication 10.1007/s40072-017-0097-2">DOI: 10.1007/s40072-017-0097-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40072-017-0097-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#275c88243527fa67b96b108c5a2a993c" style="font-size: 90%;" title="Open panel">
+                3. Onset of colored-noise-induced chaos in the generalized Duffing system
+              </a> 
+            </h4>
+          </div>
+          <div id="275c88243527fa67b96b108c5a2a993c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11071-017-3522-1" target="_blank" title="View Publication 10.1007/s11071-017-3522-1">DOI: 10.1007/s11071-017-3522-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11071-017-3522-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#311c7a43520f9d0166df217260267ed7" style="font-size: 90%;" title="Open panel">
+                4. Boolean approach to dichotomic quantum measurement theories
+              </a> 
+            </h4>
+          </div>
+          <div id="311c7a43520f9d0166df217260267ed7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3938/jkps.70.229" target="_blank" title="View Publication 10.3938/jkps.70.229">DOI: 10.3938/jkps.70.229</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3938/jkps.70.229" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#3a326acb64778f4742079818fdfe1532" style="font-size: 90%;" title="Open panel">
+                5. Is prepulse modification altered by continuous theta burst stimulation? DAT1 genotype and motor threshold interact on prepulse modification following brain stimulation
+              </a> 
+            </h4>
+          </div>
+          <div id="3a326acb64778f4742079818fdfe1532" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00406-017-0786-x" target="_blank" title="View Publication 10.1007/s00406-017-0786-x">DOI: 10.1007/s00406-017-0786-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00406-017-0786-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#3ca7a8c01ced81cb69dca17917c5f494" style="font-size: 90%;" title="Open panel">
+                6. On Consistent Hypothesis Testing
+              </a> 
+            </h4>
+          </div>
+          <div id="3ca7a8c01ced81cb69dca17917c5f494" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10958-017-3491-4" target="_blank" title="View Publication 10.1007/s10958-017-3491-4">DOI: 10.1007/s10958-017-3491-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10958-017-3491-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#44e2367df7f986054683961c01c3e096" style="font-size: 90%;" title="Open panel">
+                7. Characterizing stochastic resonance in coupled bistable system with Poisson white noises via statistical complexity measures
+              </a> 
+            </h4>
+          </div>
+          <div id="44e2367df7f986054683961c01c3e096" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11071-016-3302-3" target="_blank" title="View Publication 10.1007/s11071-016-3302-3">DOI: 10.1007/s11071-016-3302-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11071-016-3302-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#50449837c1d85a2b2a7512307a62c7f3" style="font-size: 90%;" title="Open panel">
+                8. A Note on Feynman Path Integral for Electromagnetic External Fields
+              </a> 
+            </h4>
+          </div>
+          <div id="50449837c1d85a2b2a7512307a62c7f3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10773-017-3406-7" target="_blank" title="View Publication 10.1007/s10773-017-3406-7">DOI: 10.1007/s10773-017-3406-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10773-017-3406-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#54c55d5adf3ead1e574680890dd218fe" style="font-size: 90%;" title="Open panel">
+                9. Interdecadal variations of ENSO around 1999/2000
+              </a> 
+            </h4>
+          </div>
+          <div id="54c55d5adf3ead1e574680890dd218fe" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13351-017-6074-x" target="_blank" title="View Publication 10.1007/s13351-017-6074-x">DOI: 10.1007/s13351-017-6074-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13351-017-6074-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#56e5e02355adebb6740bce45ce5e357a" style="font-size: 90%;" title="Open panel">
+                10. Stealthiness of analytical chaotic signals
+              </a> 
+            </h4>
+          </div>
+          <div id="56e5e02355adebb6740bce45ce5e357a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S0735272717030050" target="_blank" title="View Publication 10.3103/S0735272717030050">DOI: 10.3103/S0735272717030050</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S0735272717030050" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#62a56636060f0335fad28710215ac305" style="font-size: 90%;" title="Open panel">
+                11. Moment Lyapunov exponent and stochastic stability of binary airfoil under combined harmonic and Gaussian white noise excitation
+              </a> 
+            </h4>
+          </div>
+          <div id="62a56636060f0335fad28710215ac305" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11071-017-3470-9" target="_blank" title="View Publication 10.1007/s11071-017-3470-9">DOI: 10.1007/s11071-017-3470-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11071-017-3470-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#67bf38ac7b3a97d4d4f4914e8f494565" style="font-size: 90%;" title="Open panel">
+                12. Escape from Noise by Rats and Undermatching
+              </a> 
+            </h4>
+          </div>
+          <div id="67bf38ac7b3a97d4d4f4914e8f494565" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03394536" target="_blank" title="View Publication 10.1007/BF03394536">DOI: 10.1007/BF03394536</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03394536" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#6dffc5efda713b53dbef56c61bfb7552" style="font-size: 90%;" title="Open panel">
+                13. MEG and EEG dipole clusters from extended cortical sources
+              </a> 
+            </h4>
+          </div>
+          <div id="6dffc5efda713b53dbef56c61bfb7552" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13534-017-0019-2" target="_blank" title="View Publication 10.1007/s13534-017-0019-2">DOI: 10.1007/s13534-017-0019-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13534-017-0019-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#71cfc3660f1e0ef274a632b14ef19611" style="font-size: 90%;" title="Open panel">
+                14. Reducing low-frequency noise during reversible fluctuations
+              </a> 
+            </h4>
+          </div>
+          <div id="71cfc3660f1e0ef274a632b14ef19611" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjst/e2016-60182-y" target="_blank" title="View Publication 10.1140/epjst/e2016-60182-y">DOI: 10.1140/epjst/e2016-60182-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjst/e2016-60182-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#748d5e262ed80113bd77806d324ca4b7" style="font-size: 90%;" title="Open panel">
+                15. Computer-manipulated stimuli as a research tool in Mozambique tilapia Oreochromis mossambicus
+              </a> 
+            </h4>
+          </div>
+          <div id="748d5e262ed80113bd77806d324ca4b7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10211-017-0252-9" target="_blank" title="View Publication 10.1007/s10211-017-0252-9">DOI: 10.1007/s10211-017-0252-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10211-017-0252-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#7c084fbd38b23d76ba37b6b0cac13fcd" style="font-size: 90%;" title="Open panel">
+                16. Refined Frequency Domain Decomposition modal dynamic identification from earthquake-induced structural responses
+              </a> 
+            </h4>
+          </div>
+          <div id="7c084fbd38b23d76ba37b6b0cac13fcd" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11012-017-0659-4" target="_blank" title="View Publication 10.1007/s11012-017-0659-4">DOI: 10.1007/s11012-017-0659-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11012-017-0659-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#7d6b078eab21076d3109c3ec68f080f2" style="font-size: 90%;" title="Open panel">
+                17. Parabolic Anderson Model with Space-Time Homogeneous Gaussian Noise and Rough Initial Condition
+              </a> 
+            </h4>
+          </div>
+          <div id="7d6b078eab21076d3109c3ec68f080f2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10959-017-0772-2" target="_blank" title="View Publication 10.1007/s10959-017-0772-2">DOI: 10.1007/s10959-017-0772-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10959-017-0772-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#7f62ca97dbdff6d438aec518c9dd3453" style="font-size: 90%;" title="Open panel">
+                18. A Simple Encryption Algorithm for Quantum Color Image
+              </a> 
+            </h4>
+          </div>
+          <div id="7f62ca97dbdff6d438aec518c9dd3453" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10773-017-3341-7" target="_blank" title="View Publication 10.1007/s10773-017-3341-7">DOI: 10.1007/s10773-017-3341-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10773-017-3341-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#8f2cabd0a99204b550440e106bdd4b6a" style="font-size: 90%;" title="Open panel">
+                19. Spectral characteristics of auroral region scintillation using 100 Hz sampling
+              </a> 
+            </h4>
+          </div>
+          <div id="8f2cabd0a99204b550440e106bdd4b6a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10291-017-0664-z" target="_blank" title="View Publication 10.1007/s10291-017-0664-z">DOI: 10.1007/s10291-017-0664-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10291-017-0664-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#94053687deb39d2d28c64b54be160eec" style="font-size: 90%;" title="Open panel">
+                20. Sound Quality Experiments in a Student Hostel with Newly Designed Sonic Crystal Window
+              </a> 
+            </h4>
+          </div>
+          <div id="94053687deb39d2d28c64b54be160eec" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40857-017-0111-x" target="_blank" title="View Publication 10.1007/s40857-017-0111-x">DOI: 10.1007/s40857-017-0111-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40857-017-0111-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#ad3328fcf9ce940f8acef239f311ac44" style="font-size: 90%;" title="Open panel">
+                21. Stability of Gaussian-type light bullets in the cubic-quintic-septimal nonlinear media with different diffractions under $${\mathcal {PT}}$$ PT -symmetric potentials
+              </a> 
+            </h4>
+          </div>
+          <div id="ad3328fcf9ce940f8acef239f311ac44" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11071-017-3549-3" target="_blank" title="View Publication 10.1007/s11071-017-3549-3">DOI: 10.1007/s11071-017-3549-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11071-017-3549-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#b88fe89d99c5408353a699a3dbe554e8" style="font-size: 90%;" title="Open panel">
+                22. Relationship between the Itô–Schrödinger and Hudson–Parthasarathy equations
+              </a> 
+            </h4>
+          </div>
+          <div id="b88fe89d99c5408353a699a3dbe554e8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1064562417010215" target="_blank" title="View Publication 10.1134/S1064562417010215">DOI: 10.1134/S1064562417010215</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1064562417010215" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#bd8a72748967abf1df19a2f289c283d2" style="font-size: 90%;" title="Open panel">
+                23. Stability of equilibrium with respect to white noise
+              </a> 
+            </h4>
+          </div>
+          <div id="bd8a72748967abf1df19a2f289c283d2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S008154381609008X" target="_blank" title="View Publication 10.1134/S008154381609008X">DOI: 10.1134/S008154381609008X</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S008154381609008X" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#cd9360064c9aef63a05c047128c96f31" style="font-size: 90%;" title="Open panel">
+                24. Theoretical and applied aspects of the mathematical apparatus of permutation-masking transformations
+              </a> 
+            </h4>
+          </div>
+          <div id="cd9360064c9aef63a05c047128c96f31" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1064230717040074" target="_blank" title="View Publication 10.1134/S1064230717040074">DOI: 10.1134/S1064230717040074</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1064230717040074" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#d7a55eeb3d8bb889b32716a64927aa3c" style="font-size: 90%;" title="Open panel">
+                25. Flickering exercise video produces mirror neuron system (MNS) activation and steady state visually evoked potentials (SSVEPs)
+              </a> 
+            </h4>
+          </div>
+          <div id="d7a55eeb3d8bb889b32716a64927aa3c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13534-017-0035-2" target="_blank" title="View Publication 10.1007/s13534-017-0035-2">DOI: 10.1007/s13534-017-0035-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13534-017-0035-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#dc0f24386baff64502d92707b8597715" style="font-size: 90%;" title="Open panel">
+                26. Forced dichotomic diffusion in a viscous media
+              </a> 
+            </h4>
+          </div>
+          <div id="dc0f24386baff64502d92707b8597715" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjb/e2016-70643-y" target="_blank" title="View Publication 10.1140/epjb/e2016-70643-y">DOI: 10.1140/epjb/e2016-70643-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjb/e2016-70643-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#e1e62bbdff6474058e5adb2dda9376ac" style="font-size: 90%;" title="Open panel">
+                27. Modification of smoking behavior by free operant conditioning methods
+              </a> 
+            </h4>
+          </div>
+          <div id="e1e62bbdff6474058e5adb2dda9376ac" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03393575" target="_blank" title="View Publication 10.1007/BF03393575">DOI: 10.1007/BF03393575</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03393575" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#eb08b4b8320f52a96c087bc71b345233" style="font-size: 90%;" title="Open panel">
+                28. Stochastic stability of a dynamical system perturbed by white noise
+              </a> 
+            </h4>
+          </div>
+          <div id="eb08b4b8320f52a96c087bc71b345233" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0001434617010151" target="_blank" title="View Publication 10.1134/S0001434617010151">DOI: 10.1134/S0001434617010151</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0001434617010151" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#efeb14d476893f76b930c592dd5981ef" style="font-size: 90%;" title="Open panel">
+                29. Stochastic implications for long-range rainfall predictions
+              </a> 
+            </h4>
+          </div>
+          <div id="efeb14d476893f76b930c592dd5981ef" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3572-6" target="_blank" title="View Publication 10.1007/s00382-017-3572-6">DOI: 10.1007/s00382-017-3572-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3572-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#efef89a278d596c5056e8bdf609a3b65" style="font-size: 90%;" title="Open panel">
+                30. Efficient method of two-dimensional DOA estimation for coherent signals
+              </a> 
+            </h4>
+          </div>
+          <div id="efef89a278d596c5056e8bdf609a3b65" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13638-017-0835-1" target="_blank" title="View Publication 10.1186/s13638-017-0835-1">DOI: 10.1186/s13638-017-0835-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13638-017-0835-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#f4fd97e164cf8fd86ddc56f64b2b46d2" style="font-size: 90%;" title="Open panel">
+                31. Aeroelastic effect on modal interaction and dynamic behavior of acoustically excited metallic panels
+              </a> 
+            </h4>
+          </div>
+          <div id="f4fd97e164cf8fd86ddc56f64b2b46d2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11071-017-3792-7" target="_blank" title="View Publication 10.1007/s11071-017-3792-7">DOI: 10.1007/s11071-017-3792-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11071-017-3792-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="72094.html#f59e739ac1e143b08ec9c4a8b9d6356c" style="font-size: 90%;" title="Open panel">
+                32. Generalized regularized long wave equation with white noise dispersion
+              </a> 
+            </h4>
+          </div>
+          <div id="f59e739ac1e143b08ec9c4a8b9d6356c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40072-016-0089-7" target="_blank" title="View Publication 10.1007/s40072-016-0089-7">DOI: 10.1007/s40072-016-0089-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40072-016-0089-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/White_noise'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 72094, "target": 64130 },
+      
+          { "source": 72094, "target": 74236 },
+      
+          { "source": 72094, "target": 63265 },
+      
+          { "source": 72094, "target": 60690 },
+      
+          { "source": 72094, "target": 71528 },
+      
+          { "source": 72094, "target": 63233 },
+      
+          { "source": 72094, "target": 64147 },
+      
+          { "source": 72094, "target": 63803 },
+      
+          { "source": 72094, "target": 68489 },
+      
+          { "source": 72094, "target": 62246 },
+      
+          { "source": 64130, "target": 60814 },
+      
+          { "source": 64130, "target": 61246 },
+      
+          { "source": 64130, "target": 62608 },
+      
+          { "source": 64130, "target": 60663 },
+      
+          { "source": 64130, "target": 61369 },
+      
+          { "source": 74236, "target": 60663 },
+      
+          { "source": 74236, "target": 72094 },
+      
+          { "source": 74236, "target": 61092 },
+      
+          { "source": 74236, "target": 61446 },
+      
+          { "source": 74236, "target": 84286 },
+      
+          { "source": 63265, "target": 60971 },
+      
+          { "source": 63265, "target": 60720 },
+      
+          { "source": 63265, "target": 61516 },
+      
+          { "source": 63265, "target": 63604 },
+      
+          { "source": 63265, "target": 62241 },
+      
+          { "source": 60690, "target": 60663 },
+      
+          { "source": 60690, "target": 61092 },
+      
+          { "source": 60690, "target": 63182 },
+      
+          { "source": 60690, "target": 61633 },
+      
+          { "source": 60690, "target": 60814 },
+      
+          { "source": 71528, "target": 61533 },
+      
+          { "source": 71528, "target": 61675 },
+      
+          { "source": 71528, "target": 61868 },
+      
+          { "source": 71528, "target": 66549 },
+      
+          { "source": 71528, "target": 72094 },
+      
+          { "source": 63233, "target": 60663 },
+      
+          { "source": 63233, "target": 60720 },
+      
+          { "source": 63233, "target": 60843 },
+      
+          { "source": 63233, "target": 72835 },
+      
+          { "source": 63233, "target": 60848 },
+      
+          { "source": 64147, "target": 61051 },
+      
+          { "source": 64147, "target": 65366 },
+      
+          { "source": 64147, "target": 61657 },
+      
+          { "source": 64147, "target": 61868 },
+      
+          { "source": 64147, "target": 61784 },
+      
+          { "source": 63803, "target": 60759 },
+      
+          { "source": 63803, "target": 60788 },
+      
+          { "source": 63803, "target": 62109 },
+      
+          { "source": 63803, "target": 61961 },
+      
+          { "source": 63803, "target": 60905 },
+      
+          { "source": 68489, "target": 61003 },
+      
+          { "source": 68489, "target": 62246 },
+      
+          { "source": 68489, "target": 61465 },
+      
+          { "source": 68489, "target": 67915 },
+      
+          { "source": 68489, "target": 75882 },
+      
+          { "source": 62246, "target": 60663 },
+      
+          { "source": 62246, "target": 62244 },
+      
+          { "source": 62246, "target": 61654 },
+      
+          { "source": 62246, "target": 61871 },
+      
+          { "source": 62246, "target": 61533 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 64130, "size": 50, "score": 0 , "title": "Quantum mechanics", "type": "circle"},
+
+      
+
+        {"id": 74236, "size": 50, "score": 0 , "title": "Gaussian noise", "type": "circle"},
+
+      
+
+        {"id": 63265, "size": 50, "score": 0 , "title": "Resonance", "type": "circle"},
+
+      
+
+        {"id": 60690, "size": 50, "score": 0 , "title": "Monte Carlo method", "type": "circle"},
+
+      
+
+        {"id": 71528, "size": 50, "score": 0 , "title": "Lyapunov exponent", "type": "circle"},
+
+      
+
+        {"id": 63233, "size": 50, "score": 0 , "title": "Electroencephalography", "type": "circle"},
+
+      
+
+        {"id": 64147, "size": 50, "score": 0 , "title": "Dynamical system", "type": "circle"},
+
+      
+
+        {"id": 63803, "size": 50, "score": 0 , "title": "Zygosity", "type": "circle"},
+
+      
+
+        {"id": 68489, "size": 50, "score": 0 , "title": "Wavenumber", "type": "circle"},
+
+      
+
+        {"id": 62246, "size": 50, "score": 0 , "title": "Wavelet", "type": "circle"},
+
+      
+
+        {"id": 72094, "size": 70, "score": 0.5 , "title": "White noise", "type": "circle"},
+
+      
+
+        {"id": 60814, "size": 5, "score": 0.4 , "title": "Classical mechanics", "type": "circle"},
+
+      
+
+        {"id": 61246, "size": 5, "score": 0.4 , "title": "Physics", "type": "circle"},
+
+      
+
+        {"id": 62608, "size": 5, "score": 0.4 , "title": "Density functional theory", "type": "circle"},
+
+      
+
+        {"id": 60663, "size": 5, "score": 0.4 , "title": "Algorithm", "type": "circle"},
+
+      
+
+        {"id": 61369, "size": 5, "score": 0.4 , "title": "Nuclear magnetic resonance", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 61446, "size": 5, "score": 0.4 , "title": "Signal-to-noise ratio", "type": "circle"},
+
+      
+
+        {"id": 84286, "size": 5, "score": 0.4 , "title": "Poisson point process", "type": "circle"},
+
+      
+
+        {"id": 60971, "size": 5, "score": 0.4 , "title": "Dielectric", "type": "circle"},
+
+      
+
+        {"id": 60720, "size": 5, "score": 0.4 , "title": "Magnetic resonance imaging", "type": "circle"},
+
+      
+
+        {"id": 61516, "size": 5, "score": 0.4 , "title": "Laser", "type": "circle"},
+
+      
+
+        {"id": 63604, "size": 5, "score": 0.4 , "title": "Surface plasmon", "type": "circle"},
+
+      
+
+        {"id": 62241, "size": 5, "score": 0.4 , "title": "Finite element method", "type": "circle"},
+
+      
+
+        {"id": 63182, "size": 5, "score": 0.4 , "title": "Electronvolt", "type": "circle"},
+
+      
+
+        {"id": 61633, "size": 5, "score": 0.4 , "title": "Sensitivity analysis", "type": "circle"},
+
+      
+
+        {"id": 61533, "size": 5, "score": 0.4 , "title": "Time series", "type": "circle"},
+
+      
+
+        {"id": 61675, "size": 5, "score": 0.4 , "title": "Entropy", "type": "circle"},
+
+      
+
+        {"id": 61868, "size": 5, "score": 0.4 , "title": "Phase space", "type": "circle"},
+
+      
+
+        {"id": 66549, "size": 5, "score": 0.4 , "title": "Bifurcation diagram", "type": "circle"},
+
+      
+
+        {"id": 60843, "size": 5, "score": 0.4 , "title": "Epilepsy", "type": "circle"},
+
+      
+
+        {"id": 72835, "size": 5, "score": 0.4 , "title": "Motor imagery", "type": "circle"},
+
+      
+
+        {"id": 60848, "size": 5, "score": 0.4 , "title": "Memory", "type": "circle"},
+
+      
+
+        {"id": 61051, "size": 5, "score": 0.4 , "title": "Theorem", "type": "circle"},
+
+      
+
+        {"id": 65366, "size": 5, "score": 0.4 , "title": "Torus", "type": "circle"},
+
+      
+
+        {"id": 61657, "size": 5, "score": 0.4 , "title": "Polynomial", "type": "circle"},
+
+      
+
+        {"id": 61784, "size": 5, "score": 0.4 , "title": "Nonlinear system", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60788, "size": 5, "score": 0.4 , "title": "Single-nucleotide polymorphism", "type": "circle"},
+
+      
+
+        {"id": 62109, "size": 5, "score": 0.4 , "title": "Allele", "type": "circle"},
+
+      
+
+        {"id": 61961, "size": 5, "score": 0.4 , "title": "DNA", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 61003, "size": 5, "score": 0.4 , "title": "Infrared spectroscopy", "type": "circle"},
+
+      
+
+        {"id": 61465, "size": 5, "score": 0.4 , "title": "Viscosity", "type": "circle"},
+
+      
+
+        {"id": 67915, "size": 5, "score": 0.4 , "title": "Tropical cyclone", "type": "circle"},
+
+      
+
+        {"id": 75882, "size": 5, "score": 0.4 , "title": "Stratosphere", "type": "circle"},
+
+      
+
+        {"id": 62244, "size": 5, "score": 0.4 , "title": "Wavelet transform", "type": "circle"},
+
+      
+
+        {"id": 61654, "size": 5, "score": 0.4 , "title": "Artificial neural network", "type": "circle"},
+
+      
+
+        {"id": 61871, "size": 5, "score": 0.4 , "title": "Support vector machine", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

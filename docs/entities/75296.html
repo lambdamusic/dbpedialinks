@@ -1,0 +1,2260 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">CUDA</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">CUDA</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/CUDA" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/CUDA" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="60663.html"
+        
+       title="View other articles tagged with this concept">Algorithm</a>
+      <span color="black;" style="opacity: 1;">&nbsp;13 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.0;"   
+        
+          href="61444.html"
+        
+       title="View other articles tagged with this concept">Graphics processing unit</a>
+      <span color="black;" style="opacity: 1.0;">&nbsp;7 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.0;"   
+        
+          href="74435.html"
+        
+       title="View other articles tagged with this concept">General-purpose computing on graphics processing units</a>
+      <span color="black;" style="opacity: 1.0;">&nbsp;7 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="75295.html"
+        
+       title="View other articles tagged with this concept">Nvidia</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="61445.html"
+        
+       title="View other articles tagged with this concept">Central processing unit</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="68260.html"
+        
+       title="View other articles tagged with this concept">Parallel computing</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63942.html"
+        
+       title="View other articles tagged with this concept">Open-source model</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63532.html"
+        
+       title="View other articles tagged with this concept">Library</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61961.html"
+        
+       title="View other articles tagged with this concept">DNA</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="67426.html"
+        
+       title="View other articles tagged with this concept">Application programming interface</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66902.html"
+        
+       title="View other articles tagged with this concept">Visual cortex</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74282.html"
+        
+       title="View other articles tagged with this concept">UniProt</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64365.html"
+        
+       title="View other articles tagged with this concept">Text mining</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64040.html"
+        
+       title="View other articles tagged with this concept">Supercomputer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62931.html"
+        
+       title="View other articles tagged with this concept">String theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73246.html"
+        
+       title="View other articles tagged with this concept">Special unitary group</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="85223.html"
+        
+       title="View other articles tagged with this concept">Sparse matrix</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77405.html"
+        
+       title="View other articles tagged with this concept">Satellite constellation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61869.html"
+        
+       title="View other articles tagged with this concept">Reconstruction Era</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70776.html"
+        
+       title="View other articles tagged with this concept">Random-access memory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61703.html"
+        
+       title="View other articles tagged with this concept">Random forest</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63621.html"
+        
+       title="View other articles tagged with this concept">Radar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64193.html"
+        
+       title="View other articles tagged with this concept">Quark</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68773.html"
+        
+       title="View other articles tagged with this concept">Protein primary structure</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64644.html"
+        
+       title="View other articles tagged with this concept">Program optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65253.html"
+        
+       title="View other articles tagged with this concept">Pattern recognition</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61283.html"
+        
+       title="View other articles tagged with this concept">Numerical integration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67987.html"
+        
+       title="View other articles tagged with this concept">Navier–Stokes equations</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61662.html"
+        
+       title="View other articles tagged with this concept">Natural product</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62693.html"
+        
+       title="View other articles tagged with this concept">NP-hardness</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65883.html"
+        
+       title="View other articles tagged with this concept">NP-completeness</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60690.html"
+        
+       title="View other articles tagged with this concept">Monte Carlo method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65008.html"
+        
+       title="View other articles tagged with this concept">Metabolomics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61511.html"
+        
+       title="View other articles tagged with this concept">Mass spectrometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71528.html"
+        
+       title="View other articles tagged with this concept">Lyapunov exponent</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66095.html"
+        
+       title="View other articles tagged with this concept">Locality of reference</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63077.html"
+        
+       title="View other articles tagged with this concept">Linear regression</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62143.html"
+        
+       title="View other articles tagged with this concept">Jacobian matrix and determinant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71265.html"
+        
+       title="View other articles tagged with this concept">Intel</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71902.html"
+        
+       title="View other articles tagged with this concept">Human genome</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60982.html"
+        
+       title="View other articles tagged with this concept">Graph theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60778.html"
+        
+       title="View other articles tagged with this concept">Genome</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60687.html"
+        
+       title="View other articles tagged with this concept">Genetic algorithm</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62945.html"
+        
+       title="View other articles tagged with this concept">Gauge theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64558.html"
+        
+       title="View other articles tagged with this concept">GOST</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68625.html"
+        
+       title="View other articles tagged with this concept">Fluid dynamics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="81918.html"
+        
+       title="View other articles tagged with this concept">Field-programmable gate array</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62822.html"
+        
+       title="View other articles tagged with this concept">Expectation–maximization algorithm</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61695.html"
+        
+       title="View other articles tagged with this concept">Dynamic programming</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65771.html"
+        
+       title="View other articles tagged with this concept">Domain decomposition methods</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70013.html"
+        
+       title="View other articles tagged with this concept">Dendrochronology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63320.html"
+        
+       title="View other articles tagged with this concept">Data structure</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64931.html"
+        
+       title="View other articles tagged with this concept">Data mining</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60992.html"
+        
+       title="View other articles tagged with this concept">DNA sequencing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69589.html"
+        
+       title="View other articles tagged with this concept">Conjugate gradient method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60739.html"
+        
+       title="View other articles tagged with this concept">Computer vision</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64845.html"
+        
+       title="View other articles tagged with this concept">Computer memory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67857.html"
+        
+       title="View other articles tagged with this concept">Computer data storage</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60929.html"
+        
+       title="View other articles tagged with this concept">Cloud computing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60814.html"
+        
+       title="View other articles tagged with this concept">Classical mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66877.html"
+        
+       title="View other articles tagged with this concept">Analysis of algorithms</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71052.html"
+        
+       title="View other articles tagged with this concept">1000 Genomes Project</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">26</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info&nbsp;<a href="javascript:megaLoad();">(open all)</a></small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#1ba41c9b740a7f3a2c967e32027776e5" style="font-size: 90%;" title="Open panel">
+                1. Research support system for stochastic data processing
+              </a> 
+            </h4>
+          </div>
+          <div id="1ba41c9b740a7f3a2c967e32027776e5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1054661817030117" target="_blank" title="View Publication 10.1134/S1054661817030117">DOI: 10.1134/S1054661817030117</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1054661817030117" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#1ef2835ead8080d1e011c23341cf95b6" style="font-size: 90%;" title="Open panel">
+                2. Massively parallel acceleration methods for image handling operations
+              </a> 
+            </h4>
+          </div>
+          <div id="1ef2835ead8080d1e011c23341cf95b6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10586-017-0788-5" target="_blank" title="View Publication 10.1007/s10586-017-0788-5">DOI: 10.1007/s10586-017-0788-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10586-017-0788-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#4209471d67892afb50ef573be3004f68" style="font-size: 90%;" title="Open panel">
+                3. A modified ZS thinning algorithm by a hybrid approach
+              </a> 
+            </h4>
+          </div>
+          <div id="4209471d67892afb50ef573be3004f68" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00371-017-1407-4" target="_blank" title="View Publication 10.1007/s00371-017-1407-4">DOI: 10.1007/s00371-017-1407-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00371-017-1407-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#4492898a8daf9147ebc71d28d3a1bbd7" style="font-size: 90%;" title="Open panel">
+                4. G.A.M.E.: GPU-accelerated mixture elucidator
+              </a> 
+            </h4>
+          </div>
+          <div id="4492898a8daf9147ebc71d28d3a1bbd7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13321-017-0238-7" target="_blank" title="View Publication 10.1186/s13321-017-0238-7">DOI: 10.1186/s13321-017-0238-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13321-017-0238-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#4acaffcc2dce2342a88a3957c61b85f9" style="font-size: 90%;" title="Open panel">
+                5. A GPU-based genetic algorithm for the p-median problem
+              </a> 
+            </h4>
+          </div>
+          <div id="4acaffcc2dce2342a88a3957c61b85f9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11227-017-2006-x" target="_blank" title="View Publication 10.1007/s11227-017-2006-x">DOI: 10.1007/s11227-017-2006-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11227-017-2006-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#4d6f4b471886ac2b9e9767c219c81517" style="font-size: 90%;" title="Open panel">
+                6. CUDA-based parallelization of a bio-inspired model for fast object classification
+              </a> 
+            </h4>
+          </div>
+          <div id="4d6f4b471886ac2b9e9767c219c81517" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00521-017-2873-3" target="_blank" title="View Publication 10.1007/s00521-017-2873-3">DOI: 10.1007/s00521-017-2873-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00521-017-2873-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#5eb758dd1c92dd9b33e351f7d855a37d" style="font-size: 90%;" title="Open panel">
+                7. Improved phase unwrapping algorithm based on NVIDIA CUDA
+              </a> 
+            </h4>
+          </div>
+          <div id="5eb758dd1c92dd9b33e351f7d855a37d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0361768817010054" target="_blank" title="View Publication 10.1134/S0361768817010054">DOI: 10.1134/S0361768817010054</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0361768817010054" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#677ab10f45be3b7b045dce339a81491c" style="font-size: 90%;" title="Open panel">
+                8. Efficient parallel implementation of a density peaks clustering algorithm on graphics processing unit
+              </a> 
+            </h4>
+          </div>
+          <div id="677ab10f45be3b7b045dce339a81491c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1631/FITEE.1601786" target="_blank" title="View Publication 10.1631/FITEE.1601786">DOI: 10.1631/FITEE.1601786</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1631/FITEE.1601786" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#79328fe4efa5311d4dc2ea3fd1b1f1b9" style="font-size: 90%;" title="Open panel">
+                9. Accelerated parallel algorithm for gene network reverse engineering
+              </a> 
+            </h4>
+          </div>
+          <div id="79328fe4efa5311d4dc2ea3fd1b1f1b9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12918-017-0458-5" target="_blank" title="View Publication 10.1186/s12918-017-0458-5">DOI: 10.1186/s12918-017-0458-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12918-017-0458-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#804be5b3ef454c769377dea6b050e26c" style="font-size: 90%;" title="Open panel">
+                10. Protein database search of hybrid alignment algorithm based on GPU parallel acceleration
+              </a> 
+            </h4>
+          </div>
+          <div id="804be5b3ef454c769377dea6b050e26c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11227-017-2030-x" target="_blank" title="View Publication 10.1007/s11227-017-2030-x">DOI: 10.1007/s11227-017-2030-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11227-017-2030-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#80717df06ea3598fa29d1655892bde80" style="font-size: 90%;" title="Open panel">
+                11. An artifact detection scheme with CUDA-based image operations
+              </a> 
+            </h4>
+          </div>
+          <div id="80717df06ea3598fa29d1655892bde80" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10586-017-0760-4" target="_blank" title="View Publication 10.1007/s10586-017-0760-4">DOI: 10.1007/s10586-017-0760-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10586-017-0760-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#81383681a3733773cec314df51fb7ddb" style="font-size: 90%;" title="Open panel">
+                12. Out-of-core implementation for accelerator kernels on heterogeneous clouds
+              </a> 
+            </h4>
+          </div>
+          <div id="81383681a3733773cec314df51fb7ddb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11227-017-2141-4" target="_blank" title="View Publication 10.1007/s11227-017-2141-4">DOI: 10.1007/s11227-017-2141-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11227-017-2141-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#824ee36aaef6de122d0f1f0be021fb64" style="font-size: 90%;" title="Open panel">
+                13. Genetically improved BarraCUDA
+              </a> 
+            </h4>
+          </div>
+          <div id="824ee36aaef6de122d0f1f0be021fb64" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13040-017-0149-1" target="_blank" title="View Publication 10.1186/s13040-017-0149-1">DOI: 10.1186/s13040-017-0149-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13040-017-0149-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#82e3f6e695a1a53246a9cb495a1fb7d7" style="font-size: 90%;" title="Open panel">
+                14. Implementation of symmetric encryption by State Standard 28147–89 algorithm on a graphical processor
+              </a> 
+            </h4>
+          </div>
+          <div id="82e3f6e695a1a53246a9cb495a1fb7d7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S0146411616080198" target="_blank" title="View Publication 10.3103/S0146411616080198">DOI: 10.3103/S0146411616080198</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S0146411616080198" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#8568f5243bf1de489eff0486879af4eb" style="font-size: 90%;" title="Open panel">
+                15. LightSpMV: Faster CUDA-Compatible Sparse Matrix-Vector Multiplication Using Compressed Sparse Rows
+              </a> 
+            </h4>
+          </div>
+          <div id="8568f5243bf1de489eff0486879af4eb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11265-016-1216-4" target="_blank" title="View Publication 10.1007/s11265-016-1216-4">DOI: 10.1007/s11265-016-1216-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11265-016-1216-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#901a6b8dfea8d7ea7712c9e1c960c253" style="font-size: 90%;" title="Open panel">
+                16. Performance evaluation of unified memory and dynamic parallelism for selected parallel CUDA applications
+              </a> 
+            </h4>
+          </div>
+          <div id="901a6b8dfea8d7ea7712c9e1c960c253" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11227-017-2091-x" target="_blank" title="View Publication 10.1007/s11227-017-2091-x">DOI: 10.1007/s11227-017-2091-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11227-017-2091-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#9126c7371a80c8e1f0e2d4231d3cd060" style="font-size: 90%;" title="Open panel">
+                17. Optimized BiCGStab Based GPU Accelerated Computation of Incompressible Viscous Flows by the $$\psi $$ ψ –v Formulation
+              </a> 
+            </h4>
+          </div>
+          <div id="9126c7371a80c8e1f0e2d4231d3cd060" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40819-017-0403-8" target="_blank" title="View Publication 10.1007/s40819-017-0403-8">DOI: 10.1007/s40819-017-0403-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40819-017-0403-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#a12c3e5be7ad738c0d9183e17fb16383" style="font-size: 90%;" title="Open panel">
+                18. GPU-accelerated computing for Lagrangian coherent structures of multi-body gravitational regimes
+              </a> 
+            </h4>
+          </div>
+          <div id="a12c3e5be7ad738c0d9183e17fb16383" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10509-017-3050-y" target="_blank" title="View Publication 10.1007/s10509-017-3050-y">DOI: 10.1007/s10509-017-3050-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10509-017-3050-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#b3981d83cee367b8afb837fd41dd4d88" style="font-size: 90%;" title="Open panel">
+                19. Confinement at Finite Temperature
+              </a> 
+            </h4>
+          </div>
+          <div id="b3981d83cee367b8afb837fd41dd4d88" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00601-017-1276-4" target="_blank" title="View Publication 10.1007/s00601-017-1276-4">DOI: 10.1007/s00601-017-1276-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00601-017-1276-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#b491f5873181a9ba0b0da45d98fabfac" style="font-size: 90%;" title="Open panel">
+                20. Survey of GPU Based Sorting Algorithms
+              </a> 
+            </h4>
+          </div>
+          <div id="b491f5873181a9ba0b0da45d98fabfac" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10766-017-0502-5" target="_blank" title="View Publication 10.1007/s10766-017-0502-5">DOI: 10.1007/s10766-017-0502-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10766-017-0502-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#c59344b37c0b5793558d6cfa02876118" style="font-size: 90%;" title="Open panel">
+                21. GPU Based N-Gram String Matching Algorithm with Score Table Approach for String Searching in Many Documents
+              </a> 
+            </h4>
+          </div>
+          <div id="c59344b37c0b5793558d6cfa02876118" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40031-017-0295-3" target="_blank" title="View Publication 10.1007/s40031-017-0295-3">DOI: 10.1007/s40031-017-0295-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40031-017-0295-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#e15ccd2af0f51fbcb5e6bf1c4cd83897" style="font-size: 90%;" title="Open panel">
+                22. Energy prediction of CUDA application instances using dynamic regression models
+              </a> 
+            </h4>
+          </div>
+          <div id="e15ccd2af0f51fbcb5e6bf1c4cd83897" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00607-016-0534-5" target="_blank" title="View Publication 10.1007/s00607-016-0534-5">DOI: 10.1007/s00607-016-0534-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00607-016-0534-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#23e6bf0de779c92f90112d25ce4621f0" style="font-size: 90%;" title="Open panel">
+                23. Optimized Algorithms for Solving Structural Inverse Gravimetry and Magnetometry Problems on GPUs
+              </a> 
+            </h4>
+          </div>
+          <div id="23e6bf0de779c92f90112d25ce4621f0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67035-5_11" target="_blank" title="View Publication 10.1007/978-3-319-67035-5_11">DOI: 10.1007/978-3-319-67035-5_11</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67035-5_11" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#29a351a9a6e81e80f077c7fa7337ee42" style="font-size: 90%;" title="Open panel">
+                24. CUSHAW Suite: Parallel and Efficient Algorithms for NGS Read Alignment
+              </a> 
+            </h4>
+          </div>
+          <div id="29a351a9a6e81e80f077c7fa7337ee42" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-59826-0_10" target="_blank" title="View Publication 10.1007/978-3-319-59826-0_10">DOI: 10.1007/978-3-319-59826-0_10</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-59826-0_10" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#831683fc179a1a97f90f62290bad3ead" style="font-size: 90%;" title="Open panel">
+                25. High-Performance Simulation of Electrical Logging Data in Petroleum Reservoirs Using Graphics Processors
+              </a> 
+            </h4>
+          </div>
+          <div id="831683fc179a1a97f90f62290bad3ead" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67035-5_14" target="_blank" title="View Publication 10.1007/978-3-319-67035-5_14">DOI: 10.1007/978-3-319-67035-5_14</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67035-5_14" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="75296.html#cc17da80670bad21fef2d7648d00330d" style="font-size: 90%;" title="Open panel">
+                26. Development of a High Performance Code for Hydrodynamic Calculations Using Graphics Processor Units
+              </a> 
+            </h4>
+          </div>
+          <div id="cc17da80670bad21fef2d7648d00330d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67035-5_21" target="_blank" title="View Publication 10.1007/978-3-319-67035-5_21">DOI: 10.1007/978-3-319-67035-5_21</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67035-5_21" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/CUDA'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 75296, "target": 60663 },
+      
+          { "source": 75296, "target": 61444 },
+      
+          { "source": 75296, "target": 74435 },
+      
+          { "source": 75296, "target": 75295 },
+      
+          { "source": 75296, "target": 61445 },
+      
+          { "source": 75296, "target": 68260 },
+      
+          { "source": 75296, "target": 63942 },
+      
+          { "source": 75296, "target": 81121 },
+      
+          { "source": 75296, "target": 63532 },
+      
+          { "source": 75296, "target": 99246 },
+      
+          { "source": 60663, "target": 61092 },
+      
+          { "source": 60663, "target": 60687 },
+      
+          { "source": 60663, "target": 60982 },
+      
+          { "source": 60663, "target": 60814 },
+      
+          { "source": 60663, "target": 61654 },
+      
+          { "source": 61444, "target": 61445 },
+      
+          { "source": 61444, "target": 60663 },
+      
+          { "source": 61444, "target": 74435 },
+      
+          { "source": 61444, "target": 75296 },
+      
+          { "source": 61444, "target": 68260 },
+      
+          { "source": 74435, "target": 60663 },
+      
+          { "source": 74435, "target": 61444 },
+      
+          { "source": 74435, "target": 75296 },
+      
+          { "source": 74435, "target": 75295 },
+      
+          { "source": 74435, "target": 61445 },
+      
+          { "source": 75295, "target": 60663 },
+      
+          { "source": 75295, "target": 75296 },
+      
+          { "source": 75295, "target": 61444 },
+      
+          { "source": 75295, "target": 74435 },
+      
+          { "source": 75295, "target": 81121 },
+      
+          { "source": 61445, "target": 61444 },
+      
+          { "source": 61445, "target": 60663 },
+      
+          { "source": 61445, "target": 60929 },
+      
+          { "source": 61445, "target": 67857 },
+      
+          { "source": 61445, "target": 61092 },
+      
+          { "source": 68260, "target": 60663 },
+      
+          { "source": 68260, "target": 61444 },
+      
+          { "source": 68260, "target": 61445 },
+      
+          { "source": 68260, "target": 62693 },
+      
+          { "source": 68260, "target": 63532 },
+      
+          { "source": 63942, "target": 60663 },
+      
+          { "source": 63942, "target": 60778 },
+      
+          { "source": 63942, "target": 60992 },
+      
+          { "source": 63942, "target": 63545 },
+      
+          { "source": 63942, "target": 71276 },
+      
+          { "source": 81121, "target": 61444 },
+      
+          { "source": 81121, "target": 60663 },
+      
+          { "source": 81121, "target": 75295 },
+      
+          { "source": 81121, "target": 75296 },
+      
+          { "source": 81121, "target": 63942 },
+      
+          { "source": 63532, "target": 60759 },
+      
+          { "source": 63532, "target": 60905 },
+      
+          { "source": 63532, "target": 61961 },
+      
+          { "source": 63532, "target": 61045 },
+      
+          { "source": 63532, "target": 60663 },
+      
+          { "source": 99246, "target": 61444 },
+      
+          { "source": 99246, "target": 61445 },
+      
+          { "source": 99246, "target": 63532 },
+      
+          { "source": 99246, "target": 75296 },
+      
+          { "source": 99246, "target": 81920 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 60663, "size": 50, "score": 0 , "title": "Algorithm", "type": "circle"},
+
+      
+
+        {"id": 61444, "size": 50, "score": 0 , "title": "Graphics processing unit", "type": "circle"},
+
+      
+
+        {"id": 74435, "size": 50, "score": 0 , "title": "General-purpose computing on graphics processing units", "type": "circle"},
+
+      
+
+        {"id": 75295, "size": 50, "score": 0 , "title": "Nvidia", "type": "circle"},
+
+      
+
+        {"id": 61445, "size": 50, "score": 0 , "title": "Central processing unit", "type": "circle"},
+
+      
+
+        {"id": 68260, "size": 50, "score": 0 , "title": "Parallel computing", "type": "circle"},
+
+      
+
+        {"id": 63942, "size": 50, "score": 0 , "title": "Open-source model", "type": "circle"},
+
+      
+
+        {"id": 81121, "size": 50, "score": 0 , "title": "Nvidia Tesla", "type": "circle"},
+
+      
+
+        {"id": 63532, "size": 50, "score": 0 , "title": "Library", "type": "circle"},
+
+      
+
+        {"id": 99246, "size": 50, "score": 0 , "title": "OpenCL", "type": "circle"},
+
+      
+
+        {"id": 75296, "size": 70, "score": 0.5 , "title": "CUDA", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 60687, "size": 5, "score": 0.4 , "title": "Genetic algorithm", "type": "circle"},
+
+      
+
+        {"id": 60982, "size": 5, "score": 0.4 , "title": "Graph theory", "type": "circle"},
+
+      
+
+        {"id": 60814, "size": 5, "score": 0.4 , "title": "Classical mechanics", "type": "circle"},
+
+      
+
+        {"id": 61654, "size": 5, "score": 0.4 , "title": "Artificial neural network", "type": "circle"},
+
+      
+
+        {"id": 60929, "size": 5, "score": 0.4 , "title": "Cloud computing", "type": "circle"},
+
+      
+
+        {"id": 67857, "size": 5, "score": 0.4 , "title": "Computer data storage", "type": "circle"},
+
+      
+
+        {"id": 62693, "size": 5, "score": 0.4 , "title": "NP-hardness", "type": "circle"},
+
+      
+
+        {"id": 60778, "size": 5, "score": 0.4 , "title": "Genome", "type": "circle"},
+
+      
+
+        {"id": 60992, "size": 5, "score": 0.4 , "title": "DNA sequencing", "type": "circle"},
+
+      
+
+        {"id": 63545, "size": 5, "score": 0.4 , "title": "MATLAB", "type": "circle"},
+
+      
+
+        {"id": 71276, "size": 5, "score": 0.4 , "title": "Stevedore", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 61961, "size": 5, "score": 0.4 , "title": "DNA", "type": "circle"},
+
+      
+
+        {"id": 61045, "size": 5, "score": 0.4 , "title": "Polymerase chain reaction", "type": "circle"},
+
+      
+
+        {"id": 81920, "size": 5, "score": 0.4 , "title": "Xilinx", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

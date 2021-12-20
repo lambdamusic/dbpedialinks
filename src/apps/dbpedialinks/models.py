@@ -4,8 +4,27 @@ from django.contrib import admin
 from collections import Counter
 
 import datetime
+from django.conf import settings 
+DEMO_MODE_FLAG = settings.DEMO_MODE_FLAG
 
 # See also: https://docs.djangoproject.com/en/1.10/topics/migrations/#workflow
+
+
+
+# =============================================================================
+# UPDATE HERE TO REDUCE THE NUMBER OF SUBJECTS USED
+# =============================================================================
+
+class FilteredModelManager(models.Manager):
+    """A custom model manager that filters out DBPediaEntity subjects with less than 2 articles.
+    This ensures that we never generate too many pages when building a static dump of the site"""
+    def get_queryset(self):
+        if DEMO_MODE_FLAG:
+            return super(FilteredModelManager, self).get_queryset().filter(totarticles__gt=10)
+        else:
+            return super(FilteredModelManager, self).get_queryset()
+
+
 
 
 class SGDocument(models.Model):
@@ -45,6 +64,8 @@ class SGDocument(models.Model):
         search_fields = ['id', 'title', 'uri']
 
 
+
+
 class DBPediaEntity(models.Model):
     """Model definition for DBPediaEntity."""
 
@@ -70,6 +91,8 @@ class DBPediaEntity(models.Model):
         # related_name="subject2",
         through_fields=('subject1', 'subject2'),
     )
+
+    objects = FilteredModelManager()
 
     class Meta:
         """Meta definition for DBPediaEntity."""

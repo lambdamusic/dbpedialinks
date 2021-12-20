@@ -1,0 +1,2356 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Foliation</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Foliation</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Foliation" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Foliation" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="62790.html"
+        
+       title="View other articles tagged with this concept">Time</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="62341.html"
+        
+       title="View other articles tagged with this concept">Tectonics</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="66656.html"
+        
+       title="View other articles tagged with this concept">Spacetime</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="65643.html"
+        
+       title="View other articles tagged with this concept">General relativity</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="60814.html"
+        
+       title="View other articles tagged with this concept">Classical mechanics</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61507.html"
+        
+       title="View other articles tagged with this concept">Metamorphism</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="67706.html"
+        
+       title="View other articles tagged with this concept">Triassic</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="70960.html"
+        
+       title="View other articles tagged with this concept">Shear zone</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="81735.html"
+        
+       title="View other articles tagged with this concept">Schist</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61391.html"
+        
+       title="View other articles tagged with this concept">Riemannian manifold</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64130.html"
+        
+       title="View other articles tagged with this concept">Quantum mechanics</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="69415.html"
+        
+       title="View other articles tagged with this concept">Paul Dirac</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61032.html"
+        
+       title="View other articles tagged with this concept">Neoproterozoic</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="67210.html"
+        
+       title="View other articles tagged with this concept">Metamorphic rock</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="81736.html"
+        
+       title="View other articles tagged with this concept">Gneiss</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64521.html"
+        
+       title="View other articles tagged with this concept">Geotechnical engineering</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="86886.html"
+        
+       title="View other articles tagged with this concept">Continental crust</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61682.html"
+        
+       title="View other articles tagged with this concept">Zircon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60642.html"
+        
+       title="View other articles tagged with this concept">X-ray crystallography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67421.html"
+        
+       title="View other articles tagged with this concept">Wave equation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64258.html"
+        
+       title="View other articles tagged with this concept">Tibet</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61051.html"
+        
+       title="View other articles tagged with this concept">Theorem</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61689.html"
+        
+       title="View other articles tagged with this concept">Terrane</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61025.html"
+        
+       title="View other articles tagged with this concept">Subduction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76040.html"
+        
+       title="View other articles tagged with this concept">Silurian</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68468.html"
+        
+       title="View other articles tagged with this concept">Scalar curvature</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68277.html"
+        
+       title="View other articles tagged with this concept">Rutile</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62205.html"
+        
+       title="View other articles tagged with this concept">Rock music</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60682.html"
+        
+       title="View other articles tagged with this concept">Remote sensing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62280.html"
+        
+       title="View other articles tagged with this concept">Quartz</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62944.html"
+        
+       title="View other articles tagged with this concept">Quantum field theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65973.html"
+        
+       title="View other articles tagged with this concept">Principle of locality</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61246.html"
+        
+       title="View other articles tagged with this concept">Physics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65642.html"
+        
+       title="View other articles tagged with this concept">Physical cosmology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78984.html"
+        
+       title="View other articles tagged with this concept">Petrography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69416.html"
+        
+       title="View other articles tagged with this concept">Path integral formulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61803.html"
+        
+       title="View other articles tagged with this concept">Paleozoic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61809.html"
+        
+       title="View other articles tagged with this concept">Paleoproterozoic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77352.html"
+        
+       title="View other articles tagged with this concept">Muscovite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66802.html"
+        
+       title="View other articles tagged with this concept">Monazite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75606.html"
+        
+       title="View other articles tagged with this concept">Minkowski space</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69529.html"
+        
+       title="View other articles tagged with this concept">Middle Triassic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61686.html"
+        
+       title="View other articles tagged with this concept">Mesozoic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="91338.html"
+        
+       title="View other articles tagged with this concept">Mesoproterozoic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69586.html"
+        
+       title="View other articles tagged with this concept">Mercury poisoning</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62754.html"
+        
+       title="View other articles tagged with this concept">Mathematics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60646.html"
+        
+       title="View other articles tagged with this concept">Magnetic susceptibility</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69055.html"
+        
+       title="View other articles tagged with this concept">List of rocks on Mars</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66544.html"
+        
+       title="View other articles tagged with this concept">Lagrange multiplier</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67707.html"
+        
+       title="View other articles tagged with this concept">Jurassic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63060.html"
+        
+       title="View other articles tagged with this concept">Infrared</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61024.html"
+        
+       title="View other articles tagged with this concept">India</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61022.html"
+        
+       title="View other articles tagged with this concept">Igneous rock</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63697.html"
+        
+       title="View other articles tagged with this concept">Iberian Peninsula</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66411.html"
+        
+       title="View other articles tagged with this concept">Himalayas</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64002.html"
+        
+       title="View other articles tagged with this concept">Hamiltonian mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60982.html"
+        
+       title="View other articles tagged with this concept">Graph theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68094.html"
+        
+       title="View other articles tagged with this concept">Glossary of graph theory terms</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69546.html"
+        
+       title="View other articles tagged with this concept">Geodesic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69037.html"
+        
+       title="View other articles tagged with this concept">Geochronology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62945.html"
+        
+       title="View other articles tagged with this concept">Gauge theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71312.html"
+        
+       title="View other articles tagged with this concept">Frozen (2013 film)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60644.html"
+        
+       title="View other articles tagged with this concept">Ferromagnetism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71177.html"
+        
+       title="View other articles tagged with this concept">Fault (geology)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69799.html"
+        
+       title="View other articles tagged with this concept">Facies</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61393.html"
+        
+       title="View other articles tagged with this concept">Euclidean space</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64062.html"
+        
+       title="View other articles tagged with this concept">Ellipsoid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71407.html"
+        
+       title="View other articles tagged with this concept">Edward Witten</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61802.html"
+        
+       title="View other articles tagged with this concept">Ediacaran</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70540.html"
+        
+       title="View other articles tagged with this concept">Dirac equation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64955.html"
+        
+       title="View other articles tagged with this concept">Differential geometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65759.html"
+        
+       title="View other articles tagged with this concept">Diffeomorphism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66009.html"
+        
+       title="View other articles tagged with this concept">Conservation law</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64111.html"
+        
+       title="View other articles tagged with this concept">Configuration space</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63173.html"
+        
+       title="View other articles tagged with this concept">Circular dichroism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67773.html"
+        
+       title="View other articles tagged with this concept">Canonical quantization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61797.html"
+        
+       title="View other articles tagged with this concept">Cambrian</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61941.html"
+        
+       title="View other articles tagged with this concept">Brazil</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64908.html"
+        
+       title="View other articles tagged with this concept">Black hole</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62350.html"
+        
+       title="View other articles tagged with this concept">Biotite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65265.html"
+        
+       title="View other articles tagged with this concept">Austria</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61099.html"
+        
+       title="View other articles tagged with this concept">Anisotropy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65767.html"
+        
+       title="View other articles tagged with this concept">Amphibole</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">22</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info&nbsp;<a href="javascript:megaLoad();">(open all)</a></small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#09b50946dc4d5fcbeaf0c0d813c7938b" style="font-size: 90%;" title="Open panel">
+                1. A Numerical Investigation of Sinkhole Subsidence Development over Shallow Excavations in Tectonised Weak Rocks: The Dolaei Tunnel’s Excavation Case
+              </a> 
+            </h4>
+          </div>
+          <div id="09b50946dc4d5fcbeaf0c0d813c7938b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10706-017-0202-3" target="_blank" title="View Publication 10.1007/s10706-017-0202-3">DOI: 10.1007/s10706-017-0202-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10706-017-0202-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#4f5c7d85bb0e0f188d96a9809c074e8e" style="font-size: 90%;" title="Open panel">
+                2. Weathering of metapelites from the Quadrilátero Ferrífero mineral province, southeastern Brazil
+              </a> 
+            </h4>
+          </div>
+          <div id="4f5c7d85bb0e0f188d96a9809c074e8e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10064-017-1036-1" target="_blank" title="View Publication 10.1007/s10064-017-1036-1">DOI: 10.1007/s10064-017-1036-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10064-017-1036-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#6520e74a8d7b701b6867b5ada230f6b7" style="font-size: 90%;" title="Open panel">
+                3. The control of deformation partitioning and strain localization on porphyroblast behaviour in rocks and experiments
+              </a> 
+            </h4>
+          </div>
+          <div id="6520e74a8d7b701b6867b5ada230f6b7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12303-017-0030-8" target="_blank" title="View Publication 10.1007/s12303-017-0030-8">DOI: 10.1007/s12303-017-0030-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12303-017-0030-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#698e754fa7fac6e9daa062210c4ad794" style="font-size: 90%;" title="Open panel">
+                4. Mayer Kangri metamorphic complexes in Central Qiangtang (Tibet, western China): implications for the Triassic–early Jurassic tectonics associated with the Paleo-Tethys Ocean
+              </a> 
+            </h4>
+          </div>
+          <div id="698e754fa7fac6e9daa062210c4ad794" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00531-017-1526-1" target="_blank" title="View Publication 10.1007/s00531-017-1526-1">DOI: 10.1007/s00531-017-1526-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00531-017-1526-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#6b7787b0b3233f03ab8dd0349a15e436" style="font-size: 90%;" title="Open panel">
+                5. Lifshitz anomalies, Ward identities and split dimensional regularization
+              </a> 
+            </h4>
+          </div>
+          <div id="6b7787b0b3233f03ab8dd0349a15e436" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/JHEP03(2017)088" target="_blank" title="View Publication 10.1007/JHEP03(2017)088">DOI: 10.1007/JHEP03(2017)088</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/JHEP03(2017)088" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#6ecbbe14f78987607ca2b2e9b50759e5" style="font-size: 90%;" title="Open panel">
+                6. Structural complexity at and around the Triassic–Jurassic GSSP at Kuhjoch, Northern Calcareous Alps, Austria
+              </a> 
+            </h4>
+          </div>
+          <div id="6ecbbe14f78987607ca2b2e9b50759e5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00531-017-1450-4" target="_blank" title="View Publication 10.1007/s00531-017-1450-4">DOI: 10.1007/s00531-017-1450-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00531-017-1450-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#80abfdb50b17d806b9b31f74f04c9504" style="font-size: 90%;" title="Open panel">
+                7. New insight of the geological structures and tectonic framework of Ahnet and northwestern part of Tin Zaouatine terranes (western Hoggar, Algeria) constraints from aeromagnetic, gamma ray, and remote sensing data
+              </a> 
+            </h4>
+          </div>
+          <div id="80abfdb50b17d806b9b31f74f04c9504" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12517-017-3060-7" target="_blank" title="View Publication 10.1007/s12517-017-3060-7">DOI: 10.1007/s12517-017-3060-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12517-017-3060-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#80db9621c24190c7258388d1ad14ab0d" style="font-size: 90%;" title="Open panel">
+                8. Determining the reference frame for kinematic analysis in S-tectonites using AMS
+              </a> 
+            </h4>
+          </div>
+          <div id="80db9621c24190c7258388d1ad14ab0d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12594-017-0657-0" target="_blank" title="View Publication 10.1007/s12594-017-0657-0">DOI: 10.1007/s12594-017-0657-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12594-017-0657-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#8179243bc487fad3e836b6bce5752ef3" style="font-size: 90%;" title="Open panel">
+                9. S-type granite generation and emplacement during a regional switch from extensional to contractional deformation (Central Iberian Zone, Iberian autochthonous domain, Variscan Orogeny)
+              </a> 
+            </h4>
+          </div>
+          <div id="8179243bc487fad3e836b6bce5752ef3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00531-017-1488-3" target="_blank" title="View Publication 10.1007/s00531-017-1488-3">DOI: 10.1007/s00531-017-1488-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00531-017-1488-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#8e694362dd93ca0cf1397fb14c002f74" style="font-size: 90%;" title="Open panel">
+                10. Pseudo- and real-inverted metamorphism caused by the superposition and extrusion of a stack of nappes: a case study of the Southern Brasília Orogen, Brazil
+              </a> 
+            </h4>
+          </div>
+          <div id="8e694362dd93ca0cf1397fb14c002f74" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00531-016-1436-7" target="_blank" title="View Publication 10.1007/s00531-016-1436-7">DOI: 10.1007/s00531-016-1436-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00531-016-1436-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#8eeaaef89ac9b46a75533d5c96f95ef9" style="font-size: 90%;" title="Open panel">
+                11. Unique ergodicity for foliations in $$\mathbb {P}^2$$ P2 with an invariant curve
+              </a> 
+            </h4>
+          </div>
+          <div id="8eeaaef89ac9b46a75533d5c96f95ef9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00222-017-0744-2" target="_blank" title="View Publication 10.1007/s00222-017-0744-2">DOI: 10.1007/s00222-017-0744-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00222-017-0744-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#9180038727ca608a3a1cf2095946ca41" style="font-size: 90%;" title="Open panel">
+                12. Existence of self-Cheeger sets on Riemannian manifolds
+              </a> 
+            </h4>
+          </div>
+          <div id="9180038727ca608a3a1cf2095946ca41" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00013-017-1076-6" target="_blank" title="View Publication 10.1007/s00013-017-1076-6">DOI: 10.1007/s00013-017-1076-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00013-017-1076-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#937e149983d06b584ad3257030990e48" style="font-size: 90%;" title="Open panel">
+                13. The complex Monge–Ampère equation, Zoll metrics and algebraization
+              </a> 
+            </h4>
+          </div>
+          <div id="937e149983d06b584ad3257030990e48" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00208-017-1547-x" target="_blank" title="View Publication 10.1007/s00208-017-1547-x">DOI: 10.1007/s00208-017-1547-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00208-017-1547-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#b549e2f97cb5d482552dd7cd24f76a93" style="font-size: 90%;" title="Open panel">
+                14. 4D scattering amplitudes and asymptotic symmetries from 2D CFT
+              </a> 
+            </h4>
+          </div>
+          <div id="b549e2f97cb5d482552dd7cd24f76a93" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/JHEP01(2017)112" target="_blank" title="View Publication 10.1007/JHEP01(2017)112">DOI: 10.1007/JHEP01(2017)112</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/JHEP01(2017)112" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#c2be5f24375f7f0557b1f629dae435b0" style="font-size: 90%;" title="Open panel">
+                15. A Continuous Family of Equilibria in Ferromagnetic Media are Ground States
+              </a> 
+            </h4>
+          </div>
+          <div id="c2be5f24375f7f0557b1f629dae435b0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00220-017-2913-y" target="_blank" title="View Publication 10.1007/s00220-017-2913-y">DOI: 10.1007/s00220-017-2913-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00220-017-2913-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#de1d93162d9f17d3e6f3df06fa8d02be" style="font-size: 90%;" title="Open panel">
+                16. The Characteristic Gluing Problem and Conservation Laws for the Wave Equation on Null Hypersurfaces
+              </a> 
+            </h4>
+          </div>
+          <div id="de1d93162d9f17d3e6f3df06fa8d02be" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40818-017-0023-y" target="_blank" title="View Publication 10.1007/s40818-017-0023-y">DOI: 10.1007/s40818-017-0023-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40818-017-0023-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#0325179520043dc4679c9d1b058d704f" style="font-size: 90%;" title="Open panel">
+                17. Combining Temporal and Configurational Relationalisms
+              </a> 
+            </h4>
+          </div>
+          <div id="0325179520043dc4679c9d1b058d704f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-58848-3_16" target="_blank" title="View Publication 10.1007/978-3-319-58848-3_16">DOI: 10.1007/978-3-319-58848-3_16</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-58848-3_16" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#0f1ad13c5c2492211308923cc6e3a7fb" style="font-size: 90%;" title="Open panel">
+                18. Slightly Inhomogeneous Cosmology (SIC)
+              </a> 
+            </h4>
+          </div>
+          <div id="0f1ad13c5c2492211308923cc6e3a7fb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-58848-3_30" target="_blank" title="View Publication 10.1007/978-3-319-58848-3_30">DOI: 10.1007/978-3-319-58848-3_30</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-58848-3_30" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#183e80a58812badb019ccbd83c72e1ce" style="font-size: 90%;" title="Open panel">
+                19. Embeddings, Slices and Foliations
+              </a> 
+            </h4>
+          </div>
+          <div id="183e80a58812badb019ccbd83c72e1ce" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-58848-3_31" target="_blank" title="View Publication 10.1007/978-3-319-58848-3_31">DOI: 10.1007/978-3-319-58848-3_31</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-58848-3_31" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#1f5de09b87c7a507a537b07b7b4d7390" style="font-size: 90%;" title="Open panel">
+                20. Classical-Level Background Independence and the Problem of Time. ii. Spacetime and Its Interrelation with Space
+              </a> 
+            </h4>
+          </div>
+          <div id="1f5de09b87c7a507a537b07b7b4d7390" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-58848-3_10" target="_blank" title="View Publication 10.1007/978-3-319-58848-3_10">DOI: 10.1007/978-3-319-58848-3_10</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-58848-3_10" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#441dfd55423155c6c0d572b5d21277f5" style="font-size: 90%;" title="Open panel">
+                21. Quantum-Level Background Independence and the Problem of Time
+              </a> 
+            </h4>
+          </div>
+          <div id="441dfd55423155c6c0d572b5d21277f5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-58848-3_12" target="_blank" title="View Publication 10.1007/978-3-319-58848-3_12">DOI: 10.1007/978-3-319-58848-3_12</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-58848-3_12" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68222.html#80953e572d0e06614dc177ba3eaa2f0b" style="font-size: 90%;" title="Open panel">
+                22. Conformal Approach and Its York Time
+              </a> 
+            </h4>
+          </div>
+          <div id="80953e572d0e06614dc177ba3eaa2f0b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-58848-3_21" target="_blank" title="View Publication 10.1007/978-3-319-58848-3_21">DOI: 10.1007/978-3-319-58848-3_21</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-58848-3_21" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Foliation'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 68222, "target": 62790 },
+      
+          { "source": 68222, "target": 62341 },
+      
+          { "source": 68222, "target": 66656 },
+      
+          { "source": 68222, "target": 65643 },
+      
+          { "source": 68222, "target": 60814 },
+      
+          { "source": 68222, "target": 61507 },
+      
+          { "source": 68222, "target": 71443 },
+      
+          { "source": 68222, "target": 67706 },
+      
+          { "source": 68222, "target": 70960 },
+      
+          { "source": 68222, "target": 81735 },
+      
+          { "source": 62790, "target": 60814 },
+      
+          { "source": 62790, "target": 65643 },
+      
+          { "source": 62790, "target": 60663 },
+      
+          { "source": 62790, "target": 64130 },
+      
+          { "source": 62790, "target": 66656 },
+      
+          { "source": 62341, "target": 63596 },
+      
+          { "source": 62341, "target": 62205 },
+      
+          { "source": 62341, "target": 67706 },
+      
+          { "source": 62341, "target": 61025 },
+      
+          { "source": 62341, "target": 61682 },
+      
+          { "source": 66656, "target": 65643 },
+      
+          { "source": 66656, "target": 64908 },
+      
+          { "source": 66656, "target": 66655 },
+      
+          { "source": 66656, "target": 62944 },
+      
+          { "source": 66656, "target": 62790 },
+      
+          { "source": 65643, "target": 66656 },
+      
+          { "source": 65643, "target": 66655 },
+      
+          { "source": 65643, "target": 62790 },
+      
+          { "source": 65643, "target": 64908 },
+      
+          { "source": 65643, "target": 60814 },
+      
+          { "source": 60814, "target": 60663 },
+      
+          { "source": 60814, "target": 61051 },
+      
+          { "source": 60814, "target": 61092 },
+      
+          { "source": 60814, "target": 64130 },
+      
+          { "source": 60814, "target": 62241 },
+      
+          { "source": 61507, "target": 61682 },
+      
+          { "source": 61507, "target": 61022 },
+      
+          { "source": 61507, "target": 62341 },
+      
+          { "source": 61507, "target": 61508 },
+      
+          { "source": 61507, "target": 62280 },
+      
+          { "source": 71443, "target": 62537 },
+      
+          { "source": 71443, "target": 61875 },
+      
+          { "source": 71443, "target": 66656 },
+      
+          { "source": 71443, "target": 65806 },
+      
+          { "source": 71443, "target": 62944 },
+      
+          { "source": 67706, "target": 62341 },
+      
+          { "source": 67706, "target": 63198 },
+      
+          { "source": 67706, "target": 67707 },
+      
+          { "source": 67706, "target": 61682 },
+      
+          { "source": 67706, "target": 61687 },
+      
+          { "source": 70960, "target": 62341 },
+      
+          { "source": 70960, "target": 61507 },
+      
+          { "source": 70960, "target": 62280 },
+      
+          { "source": 70960, "target": 91810 },
+      
+          { "source": 70960, "target": 70962 },
+      
+          { "source": 81735, "target": 61507 },
+      
+          { "source": 81735, "target": 81736 },
+      
+          { "source": 81735, "target": 94004 },
+      
+          { "source": 81735, "target": 73283 },
+      
+          { "source": 81735, "target": 94003 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 62790, "size": 50, "score": 0 , "title": "Time", "type": "circle"},
+
+      
+
+        {"id": 62341, "size": 50, "score": 0 , "title": "Tectonics", "type": "circle"},
+
+      
+
+        {"id": 66656, "size": 50, "score": 0 , "title": "Spacetime", "type": "circle"},
+
+      
+
+        {"id": 65643, "size": 50, "score": 0 , "title": "General relativity", "type": "circle"},
+
+      
+
+        {"id": 60814, "size": 50, "score": 0 , "title": "Classical mechanics", "type": "circle"},
+
+      
+
+        {"id": 61507, "size": 50, "score": 0 , "title": "Metamorphism", "type": "circle"},
+
+      
+
+        {"id": 71443, "size": 50, "score": 0 , "title": "Ward–Takahashi identity", "type": "circle"},
+
+      
+
+        {"id": 67706, "size": 50, "score": 0 , "title": "Triassic", "type": "circle"},
+
+      
+
+        {"id": 70960, "size": 50, "score": 0 , "title": "Shear zone", "type": "circle"},
+
+      
+
+        {"id": 81735, "size": 50, "score": 0 , "title": "Schist", "type": "circle"},
+
+      
+
+        {"id": 68222, "size": 70, "score": 0.5 , "title": "Foliation", "type": "circle"},
+
+      
+
+        {"id": 60663, "size": 5, "score": 0.4 , "title": "Algorithm", "type": "circle"},
+
+      
+
+        {"id": 64130, "size": 5, "score": 0.4 , "title": "Quantum mechanics", "type": "circle"},
+
+      
+
+        {"id": 63596, "size": 5, "score": 0.4 , "title": "Earthquake", "type": "circle"},
+
+      
+
+        {"id": 62205, "size": 5, "score": 0.4 , "title": "Rock music", "type": "circle"},
+
+      
+
+        {"id": 61025, "size": 5, "score": 0.4 , "title": "Subduction", "type": "circle"},
+
+      
+
+        {"id": 61682, "size": 5, "score": 0.4 , "title": "Zircon", "type": "circle"},
+
+      
+
+        {"id": 64908, "size": 5, "score": 0.4 , "title": "Black hole", "type": "circle"},
+
+      
+
+        {"id": 66655, "size": 5, "score": 0.4 , "title": "Albert Einstein", "type": "circle"},
+
+      
+
+        {"id": 62944, "size": 5, "score": 0.4 , "title": "Quantum field theory", "type": "circle"},
+
+      
+
+        {"id": 61051, "size": 5, "score": 0.4 , "title": "Theorem", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 62241, "size": 5, "score": 0.4 , "title": "Finite element method", "type": "circle"},
+
+      
+
+        {"id": 61022, "size": 5, "score": 0.4 , "title": "Igneous rock", "type": "circle"},
+
+      
+
+        {"id": 61508, "size": 5, "score": 0.4 , "title": "Metasomatism", "type": "circle"},
+
+      
+
+        {"id": 62280, "size": 5, "score": 0.4 , "title": "Quartz", "type": "circle"},
+
+      
+
+        {"id": 62537, "size": 5, "score": 0.4 , "title": "Tensor", "type": "circle"},
+
+      
+
+        {"id": 61875, "size": 5, "score": 0.4 , "title": "Supersymmetry", "type": "circle"},
+
+      
+
+        {"id": 65806, "size": 5, "score": 0.4 , "title": "Renormalization", "type": "circle"},
+
+      
+
+        {"id": 63198, "size": 5, "score": 0.4 , "title": "Permian", "type": "circle"},
+
+      
+
+        {"id": 67707, "size": 5, "score": 0.4 , "title": "Jurassic", "type": "circle"},
+
+      
+
+        {"id": 61687, "size": 5, "score": 0.4 , "title": "Cretaceous", "type": "circle"},
+
+      
+
+        {"id": 91810, "size": 5, "score": 0.4 , "title": "Singhbhum district", "type": "circle"},
+
+      
+
+        {"id": 70962, "size": 5, "score": 0.4 , "title": "Polyphase system", "type": "circle"},
+
+      
+
+        {"id": 81736, "size": 5, "score": 0.4 , "title": "Gneiss", "type": "circle"},
+
+      
+
+        {"id": 94004, "size": 5, "score": 0.4 , "title": "Phengite", "type": "circle"},
+
+      
+
+        {"id": 73283, "size": 5, "score": 0.4 , "title": "Greenschist", "type": "circle"},
+
+      
+
+        {"id": 94003, "size": 5, "score": 0.4 , "title": "Blueschist", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

@@ -13,6 +13,9 @@ from collections import Counter, OrderedDict
 import pyscigraph
 import ontospy
 
+from django.conf import settings 
+DEMO_MODE_FLAG = settings.DEMO_MODE_FLAG
+
 from render_block import render_block_to_string
 from .models import *
 
@@ -21,7 +24,7 @@ class OrderedCounter(Counter, OrderedDict):
     pass
 
 
-def home(request):
+def home(request, letter_bit=None):
     """
     landing page
 
@@ -48,6 +51,10 @@ def home(request):
 
     letter = request.GET.get("letter", None)
     query = request.GET.get("query", None)
+
+    # fix to allow proper URLs wget can extract
+    if letter_bit:
+        letter = letter_bit
 
     alphabet = string.ascii_lowercase
     alphabet = alphabet + "*"
@@ -77,6 +84,7 @@ def home(request):
         'alphabet': alphabet,
         'thisletter': letter,
         'query': query,
+        'DEMO_MODE_FLAG': DEMO_MODE_FLAG,
     }
 
     return render(request, 'dbpedialinks/home.html', context)
@@ -103,7 +111,11 @@ def entities(request, entity_id=None):
             articles = articles.filter(dbentities=el)
 
     else:
-        articles = subject.sgdocument_set.all()
+
+        if DEMO_MODE_FLAG:
+            articles = subject.sgdocument_set.all()[:50]
+        else:
+            articles = subject.sgdocument_set.all()
 
         #  create data for dataviz
         SIZE0, SIZE1, SIZE2 = 70, 50, 5
@@ -137,6 +149,7 @@ def entities(request, entity_id=None):
         'filters_minus_entity': filters_minus_entity,
         'articles': articles,
         'related_subjects': sorted_related,
+        'DEMO_MODE_FLAG': DEMO_MODE_FLAG,
         # 'related_subjects_graph': sorted_related[:20]
     })
 

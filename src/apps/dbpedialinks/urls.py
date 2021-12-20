@@ -6,8 +6,10 @@ from . import views
 app_name = 'dbpedialinks'
 urlpatterns = [
     url(r'^$', views.home, name='home'),
+    url(r'^letter/(?P<letter_bit>.*).html$', views.home, name='home_letter'),
+
     url(r'^entities$', views.entities, name='entities'),
-    url(r'^entities/(?P<entity_id>\d+)$',
+    url(r'^entities/(?P<entity_id>\d+).html$',
         views.entities,
         name='entities_detail'),
     url(r'^graph_test/(?P<entity_id>\d+)$',

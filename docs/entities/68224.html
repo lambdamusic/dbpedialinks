@@ -1,0 +1,3812 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Psychosis</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Psychosis</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Psychosis" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Psychosis" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="63688.html"
+        
+       title="View other articles tagged with this concept">Schizophrenia</a>
+      <span color="black;" style="opacity: 1;">&nbsp;15 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="61108.html"
+        
+       title="View other articles tagged with this concept">Logistic regression</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="63485.html"
+        
+       title="View other articles tagged with this concept">Antipsychotic</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="60671.html"
+        
+       title="View other articles tagged with this concept">Syndrome</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="63634.html"
+        
+       title="View other articles tagged with this concept">Bipolar disorder</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="62436.html"
+        
+       title="View other articles tagged with this concept">Attention deficit hyperactivity disorder</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="61954.html"
+        
+       title="View other articles tagged with this concept">Dementia</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="64049.html"
+        
+       title="View other articles tagged with this concept">Substance dependence</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="70723.html"
+        
+       title="View other articles tagged with this concept">Mood disorder</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60848.html"
+        
+       title="View other articles tagged with this concept">Memory</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="72043.html"
+        
+       title="View other articles tagged with this concept">Dopamine receptor D2</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63032.html"
+        
+       title="View other articles tagged with this concept">Dopamine</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60919.html"
+        
+       title="View other articles tagged with this concept">Disease</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63963.html"
+        
+       title="View other articles tagged with this concept">Working memory</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64936.html"
+        
+       title="View other articles tagged with this concept">White people</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65928.html"
+        
+       title="View other articles tagged with this concept">Toronto</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60696.html"
+        
+       title="View other articles tagged with this concept">PubMed</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64019.html"
+        
+       title="View other articles tagged with this concept">PsycINFO</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61249.html"
+        
+       title="View other articles tagged with this concept">Pharmacokinetics</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="68750.html"
+        
+       title="View other articles tagged with this concept">Neuropathology</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62354.html"
+        
+       title="View other articles tagged with this concept">National Health Service</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66627.html"
+        
+       title="View other articles tagged with this concept">Movement disorder</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62388.html"
+        
+       title="View other articles tagged with this concept">Methamphetamine</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="70090.html"
+        
+       title="View other articles tagged with this concept">Mental disorder</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60720.html"
+        
+       title="View other articles tagged with this concept">Magnetic resonance imaging</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63077.html"
+        
+       title="View other articles tagged with this concept">Linear regression</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66931.html"
+        
+       title="View other articles tagged with this concept">Insomnia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60960.html"
+        
+       title="View other articles tagged with this concept">Insidious (film)</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62879.html"
+        
+       title="View other articles tagged with this concept">Frontal lobe</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60843.html"
+        
+       title="View other articles tagged with this concept">Epilepsy</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64312.html"
+        
+       title="View other articles tagged with this concept">Encephalitis</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="74154.html"
+        
+       title="View other articles tagged with this concept">Dyskinesia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="68069.html"
+        
+       title="View other articles tagged with this concept">Caribbean</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60634.html"
+        
+       title="View other articles tagged with this concept">Antibody</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62374.html"
+        
+       title="View other articles tagged with this concept">World Health Organization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61772.html"
+        
+       title="View other articles tagged with this concept">White matter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63504.html"
+        
+       title="View other articles tagged with this concept">Ventricular system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61677.html"
+        
+       title="View other articles tagged with this concept">Venous thrombosis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66882.html"
+        
+       title="View other articles tagged with this concept">University of Washington</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69823.html"
+        
+       title="View other articles tagged with this concept">Tyrosine hydroxylase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72965.html"
+        
+       title="View other articles tagged with this concept">Tropomyosin receptor kinase B</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63899.html"
+        
+       title="View other articles tagged with this concept">Tremor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61533.html"
+        
+       title="View other articles tagged with this concept">Time series</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61626.html"
+        
+       title="View other articles tagged with this concept">Test cricket</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61773.html"
+        
+       title="View other articles tagged with this concept">Temporal lobe</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73398.html"
+        
+       title="View other articles tagged with this concept">Syphilis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65566.html"
+        
+       title="View other articles tagged with this concept">Sweden</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63272.html"
+        
+       title="View other articles tagged with this concept">Survival analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62118.html"
+        
+       title="View other articles tagged with this concept">Superoxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63491.html"
+        
+       title="View other articles tagged with this concept">Substantia nigra</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61650.html"
+        
+       title="View other articles tagged with this concept">Structured interview</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61320.html"
+        
+       title="View other articles tagged with this concept">Sri Lanka</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62169.html"
+        
+       title="View other articles tagged with this concept">South Africa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60788.html"
+        
+       title="View other articles tagged with this concept">Single-nucleotide polymorphism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63035.html"
+        
+       title="View other articles tagged with this concept">Serotonin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61118.html"
+        
+       title="View other articles tagged with this concept">Sensory neuron</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76021.html"
+        
+       title="View other articles tagged with this concept">Selective serotonin reuptake inhibitor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70720.html"
+        
+       title="View other articles tagged with this concept">Sedative</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64280.html"
+        
+       title="View other articles tagged with this concept">Saudi Arabia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69442.html"
+        
+       title="View other articles tagged with this concept">Risperidone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61793.html"
+        
+       title="View other articles tagged with this concept">Redox</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63520.html"
+        
+       title="View other articles tagged with this concept">Randomized controlled trial</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69808.html"
+        
+       title="View other articles tagged with this concept">Psychotherapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64683.html"
+        
+       title="View other articles tagged with this concept">Psychological intervention</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69086.html"
+        
+       title="View other articles tagged with this concept">Psychoactive drug</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62545.html"
+        
+       title="View other articles tagged with this concept">Psychiatry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72424.html"
+        
+       title="View other articles tagged with this concept">Protein–protein interaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66217.html"
+        
+       title="View other articles tagged with this concept">Protein kinase C</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66992.html"
+        
+       title="View other articles tagged with this concept">Prolactin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75138.html"
+        
+       title="View other articles tagged with this concept">Prodrome</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63160.html"
+        
+       title="View other articles tagged with this concept">Prefrontal cortex</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61045.html"
+        
+       title="View other articles tagged with this concept">Polymerase chain reaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61039.html"
+        
+       title="View other articles tagged with this concept">Phosphorylation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61850.html"
+        
+       title="View other articles tagged with this concept">Phenotype</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63640.html"
+        
+       title="View other articles tagged with this concept">Peripheral neuropathy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75049.html"
+        
+       title="View other articles tagged with this concept">Patient Health Questionnaire</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61539.html"
+        
+       title="View other articles tagged with this concept">Oxidative stress</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63223.html"
+        
+       title="View other articles tagged with this concept">Oncology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69440.html"
+        
+       title="View other articles tagged with this concept">Olanzapine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64637.html"
+        
+       title="View other articles tagged with this concept">Norway</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63058.html"
+        
+       title="View other articles tagged with this concept">Nitric oxide synthase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62788.html"
+        
+       title="View other articles tagged with this concept">Nitric oxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61660.html"
+        
+       title="View other articles tagged with this concept">Neuroscience</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78755.html"
+        
+       title="View other articles tagged with this concept">Neuromyelitis optica</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61636.html"
+        
+       title="View other articles tagged with this concept">Neurogenesis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61117.html"
+        
+       title="View other articles tagged with this concept">Neurodegeneration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61526.html"
+        
+       title="View other articles tagged with this concept">Netherlands</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62897.html"
+        
+       title="View other articles tagged with this concept">Monoamine oxidase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69645.html"
+        
+       title="View other articles tagged with this concept">Monoamine neurotransmitter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71313.html"
+        
+       title="View other articles tagged with this concept">Micronutrient</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72320.html"
+        
+       title="View other articles tagged with this concept">Methylprednisolone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74157.html"
+        
+       title="View other articles tagged with this concept">Methylenetetrahydrofolate reductase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61008.html"
+        
+       title="View other articles tagged with this concept">Metabolite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60721.html"
+        
+       title="View other articles tagged with this concept">Metabolism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68790.html"
+        
+       title="View other articles tagged with this concept">Medulla oblongata</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78734.html"
+        
+       title="View other articles tagged with this concept">Medication therapy management</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62576.html"
+        
+       title="View other articles tagged with this concept">Master&#x27;s degree</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72735.html"
+        
+       title="View other articles tagged with this concept">Martin Heidegger</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61057.html"
+        
+       title="View other articles tagged with this concept">MEDLINE</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62069.html"
+        
+       title="View other articles tagged with this concept">Lipoprotein</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67038.html"
+        
+       title="View other articles tagged with this concept">Lewis Hamilton</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="81438.html"
+        
+       title="View other articles tagged with this concept">Lateral ventricles</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63489.html"
+        
+       title="View other articles tagged with this concept">L-DOPA</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61041.html"
+        
+       title="View other articles tagged with this concept">Kinase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62111.html"
+        
+       title="View other articles tagged with this concept">Japan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="79252.html"
+        
+       title="View other articles tagged with this concept">Islamic calendar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71058.html"
+        
+       title="View other articles tagged with this concept">Intracerebral hemorrhage</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63964.html"
+        
+       title="View other articles tagged with this concept">Interquartile range</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77104.html"
+        
+       title="View other articles tagged with this concept">Intelligence quotient</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61024.html"
+        
+       title="View other articles tagged with this concept">India</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65492.html"
+        
+       title="View other articles tagged with this concept">Immunoglobulin therapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64352.html"
+        
+       title="View other articles tagged with this concept">Immunoglobulin G</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63012.html"
+        
+       title="View other articles tagged with this concept">Hippocampus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77392.html"
+        
+       title="View other articles tagged with this concept">Haloperidol</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65301.html"
+        
+       title="View other articles tagged with this concept">Glutamic acid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60759.html"
+        
+       title="View other articles tagged with this concept">Gene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64869.html"
+        
+       title="View other articles tagged with this concept">Fractional anisotropy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61347.html"
+        
+       title="View other articles tagged with this concept">Fractal dimension</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61350.html"
+        
+       title="View other articles tagged with this concept">Fractal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63626.html"
+        
+       title="View other articles tagged with this concept">Fistula</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61322.html"
+        
+       title="View other articles tagged with this concept">Fasting</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63898.html"
+        
+       title="View other articles tagged with this concept">Event-related potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60657.html"
+        
+       title="View other articles tagged with this concept">Estrogen receptor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60817.html"
+        
+       title="View other articles tagged with this concept">Enzyme inhibitor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61061.html"
+        
+       title="View other articles tagged with this concept">Enzyme</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65171.html"
+        
+       title="View other articles tagged with this concept">Encephalopathy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69604.html"
+        
+       title="View other articles tagged with this concept">Empirical research</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66558.html"
+        
+       title="View other articles tagged with this concept">Emergency department</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60694.html"
+        
+       title="View other articles tagged with this concept">Embase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74152.html"
+        
+       title="View other articles tagged with this concept">Dopamine transporter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74475.html"
+        
+       title="View other articles tagged with this concept">Diplopia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64871.html"
+        
+       title="View other articles tagged with this concept">Diffusion MRI</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64143.html"
+        
+       title="View other articles tagged with this concept">Diagnostic and Statistical Manual of Mental Disorders</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62372.html"
+        
+       title="View other articles tagged with this concept">Diabetes mellitus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65622.html"
+        
+       title="View other articles tagged with this concept">Descriptive statistics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70228.html"
+        
+       title="View other articles tagged with this concept">Cyclic guanosine monophosphate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65413.html"
+        
+       title="View other articles tagged with this concept">Corticosteroid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62258.html"
+        
+       title="View other articles tagged with this concept">Corpus callosum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61629.html"
+        
+       title="View other articles tagged with this concept">Confidence interval</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66014.html"
+        
+       title="View other articles tagged with this concept">Cognitive behavioral therapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60636.html"
+        
+       title="View other articles tagged with this concept">Chemotherapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61254.html"
+        
+       title="View other articles tagged with this concept">Cerebrospinal fluid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65169.html"
+        
+       title="View other articles tagged with this concept">Cerebral hemisphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61244.html"
+        
+       title="View other articles tagged with this concept">Central nervous system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61885.html"
+        
+       title="View other articles tagged with this concept">Cell surface receptor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65615.html"
+        
+       title="View other articles tagged with this concept">Causality</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62571.html"
+        
+       title="View other articles tagged with this concept">Cannabis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61096.html"
+        
+       title="View other articles tagged with this concept">Canada</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60638.html"
+        
+       title="View other articles tagged with this concept">Camera lens</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61741.html"
+        
+       title="View other articles tagged with this concept">CINAHL</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66011.html"
+        
+       title="View other articles tagged with this concept">Bulimia nervosa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61828.html"
+        
+       title="View other articles tagged with this concept">Breast cancer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62894.html"
+        
+       title="View other articles tagged with this concept">Brain-derived neurotrophic factor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68616.html"
+        
+       title="View other articles tagged with this concept">Borderline personality disorder</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60630.html"
+        
+       title="View other articles tagged with this concept">Biomarker</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63482.html"
+        
+       title="View other articles tagged with this concept">Binomial distribution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66060.html"
+        
+       title="View other articles tagged with this concept">Autoimmune disease</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62437.html"
+        
+       title="View other articles tagged with this concept">Autism spectrum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63099.html"
+        
+       title="View other articles tagged with this concept">Ataxia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69498.html"
+        
+       title="View other articles tagged with this concept">Aripiprazole</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60755.html"
+        
+       title="View other articles tagged with this concept">Apoptosis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62269.html"
+        
+       title="View other articles tagged with this concept">Anxiolytic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67664.html"
+        
+       title="View other articles tagged with this concept">Antidepressant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78991.html"
+        
+       title="View other articles tagged with this concept">Anticonvulsant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68821.html"
+        
+       title="View other articles tagged with this concept">Anorexia nervosa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61147.html"
+        
+       title="View other articles tagged with this concept">Anesthesia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62261.html"
+        
+       title="View other articles tagged with this concept">Analgesic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63901.html"
+        
+       title="View other articles tagged with this concept">Amygdala</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61830.html"
+        
+       title="View other articles tagged with this concept">Alkaline phosphatase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62176.html"
+        
+       title="View other articles tagged with this concept">Agonist</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62596.html"
+        
+       title="View other articles tagged with this concept">Adjuvant therapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61143.html"
+        
+       title="View other articles tagged with this concept">Acid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">50</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#09b72734e04b75caeb97dd06be5904e7" style="font-size: 90%;" title="Open panel">
+                1. Diagnosis and treatment delays among elderly breast cancer patients with pre-existing mental illness
+              </a> 
+            </h4>
+          </div>
+          <div id="09b72734e04b75caeb97dd06be5904e7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10549-017-4399-x" target="_blank" title="View Publication 10.1007/s10549-017-4399-x">DOI: 10.1007/s10549-017-4399-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10549-017-4399-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#0f8fbb8f27d353056d2813e82a815c36" style="font-size: 90%;" title="Open panel">
+                2. Current Situation and Clinical Characteristics of Sedative-Related Disorder Patients in Japan: Comparison with Methamphetamine-Related Disorder Patients
+              </a> 
+            </h4>
+          </div>
+          <div id="0f8fbb8f27d353056d2813e82a815c36" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03379620" target="_blank" title="View Publication 10.1007/BF03379620">DOI: 10.1007/BF03379620</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03379620" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#1401029c556b020edf8d22588e86ba6b" style="font-size: 90%;" title="Open panel">
+                3. The safety and tolerability of cariprazine in long-term treatment of schizophrenia: a post hoc pooled analysis
+              </a> 
+            </h4>
+          </div>
+          <div id="1401029c556b020edf8d22588e86ba6b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1459-z" target="_blank" title="View Publication 10.1186/s12888-017-1459-z">DOI: 10.1186/s12888-017-1459-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1459-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#1638280049a44bcc40e35770c2b5c211" style="font-size: 90%;" title="Open panel">
+                4. Mood, Delusions and Poetry: Emotional ‘Wording of the World’ in Psychosis, Philosophy and the Everyday
+              </a> 
+            </h4>
+          </div>
+          <div id="1638280049a44bcc40e35770c2b5c211" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11406-017-9854-8" target="_blank" title="View Publication 10.1007/s11406-017-9854-8">DOI: 10.1007/s11406-017-9854-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11406-017-9854-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#197734514d00cfa059eded97b62ab6f3" style="font-size: 90%;" title="Open panel">
+                5. A systematic review and integrative approach to decode the common molecular link between levodopa response and Parkinson’s disease
+              </a> 
+            </h4>
+          </div>
+          <div id="197734514d00cfa059eded97b62ab6f3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12920-017-0291-0" target="_blank" title="View Publication 10.1186/s12920-017-0291-0">DOI: 10.1186/s12920-017-0291-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12920-017-0291-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#1a3e12ade8a119cfd2577b1294b64092" style="font-size: 90%;" title="Open panel">
+                6. Non-Suicidal Self-Injury in Pediatric Bipolar Disorder: Clinical Correlates and Impact on Psychosocial Treatment Outcomes
+              </a> 
+            </h4>
+          </div>
+          <div id="1a3e12ade8a119cfd2577b1294b64092" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10802-017-0331-4" target="_blank" title="View Publication 10.1007/s10802-017-0331-4">DOI: 10.1007/s10802-017-0331-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10802-017-0331-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#1f6bd8fda8b9087153799a87515ad903" style="font-size: 90%;" title="Open panel">
+                7. Psychiatric comorbidity in alcohol use disorders: results from the German S3 guidelines
+              </a> 
+            </h4>
+          </div>
+          <div id="1f6bd8fda8b9087153799a87515ad903" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00406-017-0801-2" target="_blank" title="View Publication 10.1007/s00406-017-0801-2">DOI: 10.1007/s00406-017-0801-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00406-017-0801-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#20079749ac188fb6d968e3c318ef350e" style="font-size: 90%;" title="Open panel">
+                8. Patterns of illness and care over the 5 years following onset of psychosis in different ethnic groups; the GAP-5 study
+              </a> 
+            </h4>
+          </div>
+          <div id="20079749ac188fb6d968e3c318ef350e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00127-017-1417-6" target="_blank" title="View Publication 10.1007/s00127-017-1417-6">DOI: 10.1007/s00127-017-1417-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00127-017-1417-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#27df2c243ce9bd46c871fe9ab7bbd895" style="font-size: 90%;" title="Open panel">
+                9. Clinical high risk for psychosis in children and adolescents: a systematic review
+              </a> 
+            </h4>
+          </div>
+          <div id="27df2c243ce9bd46c871fe9ab7bbd895" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00787-017-1046-3" target="_blank" title="View Publication 10.1007/s00787-017-1046-3">DOI: 10.1007/s00787-017-1046-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00787-017-1046-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#29ce3dbe87c9e7bc407aebb9c3174dc9" style="font-size: 90%;" title="Open panel">
+                10. Cognitive changes in alcohol-induced psychotic disorder
+              </a> 
+            </h4>
+          </div>
+          <div id="29ce3dbe87c9e7bc407aebb9c3174dc9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13104-017-2485-0" target="_blank" title="View Publication 10.1186/s13104-017-2485-0">DOI: 10.1186/s13104-017-2485-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13104-017-2485-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#2a5f9a86b147e745d699d51fa97d139e" style="font-size: 90%;" title="Open panel">
+                11. Effects of transcranial direct current stimulation on the auditory mismatch negativity response and working memory performance in schizophrenia: a pilot study
+              </a> 
+            </h4>
+          </div>
+          <div id="2a5f9a86b147e745d699d51fa97d139e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00702-017-1783-y" target="_blank" title="View Publication 10.1007/s00702-017-1783-y">DOI: 10.1007/s00702-017-1783-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00702-017-1783-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#2fe48b7d427d18573ffa07632527a96c" style="font-size: 90%;" title="Open panel">
+                12. Medication Adherence in Schizophrenia: A Hospital Based Cross Sectional Study of Family Related Factors
+              </a> 
+            </h4>
+          </div>
+          <div id="2fe48b7d427d18573ffa07632527a96c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40737-017-0093-x" target="_blank" title="View Publication 10.1007/s40737-017-0093-x">DOI: 10.1007/s40737-017-0093-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40737-017-0093-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#31e2926e1d595265c3d76fb1a5ea4644" style="font-size: 90%;" title="Open panel">
+                13. Comparison of neuropsychiatric symptoms and diffusion tensor imaging correlates among patients with subcortical ischemic vascular disease and Alzheimer’s disease
+              </a> 
+            </h4>
+          </div>
+          <div id="31e2926e1d595265c3d76fb1a5ea4644" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12883-017-0911-5" target="_blank" title="View Publication 10.1186/s12883-017-0911-5">DOI: 10.1186/s12883-017-0911-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12883-017-0911-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#326fb09b74fbdea0fe23ed9d1db16e27" style="font-size: 90%;" title="Open panel">
+                14. Differences of temporal dynamics and signal complexity of gamma band oscillations in first-episode psychosis during a working memory task
+              </a> 
+            </h4>
+          </div>
+          <div id="326fb09b74fbdea0fe23ed9d1db16e27" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00702-017-1728-5" target="_blank" title="View Publication 10.1007/s00702-017-1728-5">DOI: 10.1007/s00702-017-1728-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00702-017-1728-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#3277ca2110ef5b81ef6a771f242d7239" style="font-size: 90%;" title="Open panel">
+                15. Current understanding of methamphetamine-associated dopaminergic neurodegeneration and psychotoxic behaviors
+              </a> 
+            </h4>
+          </div>
+          <div id="3277ca2110ef5b81ef6a771f242d7239" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12272-017-0897-y" target="_blank" title="View Publication 10.1007/s12272-017-0897-y">DOI: 10.1007/s12272-017-0897-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12272-017-0897-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#33b551ad50d84b626050dbbd633f44fb" style="font-size: 90%;" title="Open panel">
+                16. Dementia and cognitive disorder identified at a forensic psychiatric examination - a study from Sweden
+              </a> 
+            </h4>
+          </div>
+          <div id="33b551ad50d84b626050dbbd633f44fb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12877-017-0614-1" target="_blank" title="View Publication 10.1186/s12877-017-0614-1">DOI: 10.1186/s12877-017-0614-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12877-017-0614-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#3468d7b2be356165ffa7ffb6b95a66b6" style="font-size: 90%;" title="Open panel">
+                17. Sex-specific issues in eating disorders: a clinical and psychopathological investigation
+              </a> 
+            </h4>
+          </div>
+          <div id="3468d7b2be356165ffa7ffb6b95a66b6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40519-017-0432-7" target="_blank" title="View Publication 10.1007/s40519-017-0432-7">DOI: 10.1007/s40519-017-0432-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40519-017-0432-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#3b9f8b52f2c988a8f1b5f00391990ec5" style="font-size: 90%;" title="Open panel">
+                18. The Care-Giving Needs of Carers of Persons with First Episode of Psychosis: Exploratory Qualitative Findings from India
+              </a> 
+            </h4>
+          </div>
+          <div id="3b9f8b52f2c988a8f1b5f00391990ec5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40737-017-0094-9" target="_blank" title="View Publication 10.1007/s40737-017-0094-9">DOI: 10.1007/s40737-017-0094-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40737-017-0094-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#3c866e9c3cf38e1fdd64e47231d162bd" style="font-size: 90%;" title="Open panel">
+                19. The role of ethnicity in pathways to emergency psychiatric services for clients with psychosis
+              </a> 
+            </h4>
+          </div>
+          <div id="3c866e9c3cf38e1fdd64e47231d162bd" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1285-3" target="_blank" title="View Publication 10.1186/s12888-017-1285-3">DOI: 10.1186/s12888-017-1285-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1285-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#3cda9a9c8dd5311e5bafac0f93b52b68" style="font-size: 90%;" title="Open panel">
+                20. Mental health literacy in adolescents: ability to recognise problems, helpful interventions and outcomes
+              </a> 
+            </h4>
+          </div>
+          <div id="3cda9a9c8dd5311e5bafac0f93b52b68" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13034-017-0176-1" target="_blank" title="View Publication 10.1186/s13034-017-0176-1">DOI: 10.1186/s13034-017-0176-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13034-017-0176-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#422037ac333e90a686570e2436a2be0c" style="font-size: 90%;" title="Open panel">
+                21. Psychosocial stressors contributing to emergency psychiatric service utilization in a sample of ethno-culturally diverse clients with psychosis in Toronto
+              </a> 
+            </h4>
+          </div>
+          <div id="422037ac333e90a686570e2436a2be0c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1487-8" target="_blank" title="View Publication 10.1186/s12888-017-1487-8">DOI: 10.1186/s12888-017-1487-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1487-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#504c49b1a5dcf3b51dfa078220832805" style="font-size: 90%;" title="Open panel">
+                22. Pharmacogenetic evaluation to assess breakthrough psychosis with aripiprazole long-acting injection: a case report
+              </a> 
+            </h4>
+          </div>
+          <div id="504c49b1a5dcf3b51dfa078220832805" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1396-x" target="_blank" title="View Publication 10.1186/s12888-017-1396-x">DOI: 10.1186/s12888-017-1396-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1396-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#545cc65b5079a291f48bfe14d942b213" style="font-size: 90%;" title="Open panel">
+                23. Tracheo-Esophageal Fistula (TEF) in a Newborn Following Maternal Antenatal Exposure to Olanzapine
+              </a> 
+            </h4>
+          </div>
+          <div id="545cc65b5079a291f48bfe14d942b213" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40800-016-0044-6" target="_blank" title="View Publication 10.1007/s40800-016-0044-6">DOI: 10.1007/s40800-016-0044-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40800-016-0044-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#591917540a556c9d20805490b32f7e1b" style="font-size: 90%;" title="Open panel">
+                24. Cognitive Bias Modification for paranoia (CBM-pa): study protocol for a randomised controlled trial
+              </a> 
+            </h4>
+          </div>
+          <div id="591917540a556c9d20805490b32f7e1b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13063-017-2037-x" target="_blank" title="View Publication 10.1186/s13063-017-2037-x">DOI: 10.1186/s13063-017-2037-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13063-017-2037-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#5aaf1c67c43b610aa511a7d224bdb0ec" style="font-size: 90%;" title="Open panel">
+                25. Psychosis in Spinocerebellar Ataxias: a Case Series and Study of Tyrosine Hydroxylase in Substantia Nigra
+              </a> 
+            </h4>
+          </div>
+          <div id="5aaf1c67c43b610aa511a7d224bdb0ec" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12311-017-0882-5" target="_blank" title="View Publication 10.1007/s12311-017-0882-5">DOI: 10.1007/s12311-017-0882-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12311-017-0882-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#6241e7a7d8a6edd6a6dffcd081f5a1ef" style="font-size: 90%;" title="Open panel">
+                26. Cerebrospinal fluid monoamine metabolite profiles in bipolar disorder, ADHD, and controls
+              </a> 
+            </h4>
+          </div>
+          <div id="6241e7a7d8a6edd6a6dffcd081f5a1ef" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00702-017-1746-3" target="_blank" title="View Publication 10.1007/s00702-017-1746-3">DOI: 10.1007/s00702-017-1746-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00702-017-1746-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#68abd773b2e7c11d4dcc9a6ae91717d2" style="font-size: 90%;" title="Open panel">
+                27. Antipsychotic Prescribing to Patients Diagnosed with Dementia Without a Diagnosis of Psychosis in the Context of National Guidance and Drug Safety Warnings: Longitudinal Study in UK General Practice
+              </a> 
+            </h4>
+          </div>
+          <div id="68abd773b2e7c11d4dcc9a6ae91717d2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40264-017-0538-x" target="_blank" title="View Publication 10.1007/s40264-017-0538-x">DOI: 10.1007/s40264-017-0538-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40264-017-0538-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#6d09072ee9d0d5a4ac402b162279900f" style="font-size: 90%;" title="Open panel">
+                28. The interplay of psychosis and victimisation across the life course: a prospective study in the general population
+              </a> 
+            </h4>
+          </div>
+          <div id="6d09072ee9d0d5a4ac402b162279900f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00127-017-1430-9" target="_blank" title="View Publication 10.1007/s00127-017-1430-9">DOI: 10.1007/s00127-017-1430-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00127-017-1430-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#6e532ea53eba9bd9668246ae00b4f434" style="font-size: 90%;" title="Open panel">
+                29. Ethical acceptability of offering financial incentives for taking antipsychotic depot medication: patients’ and clinicians’ perspectives after a 12-month randomized controlled trial
+              </a> 
+            </h4>
+          </div>
+          <div id="6e532ea53eba9bd9668246ae00b4f434" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1485-x" target="_blank" title="View Publication 10.1186/s12888-017-1485-x">DOI: 10.1186/s12888-017-1485-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1485-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#6e684f439ff510e8c936acf2e06babc9" style="font-size: 90%;" title="Open panel">
+                30. Neurological soft signs in Tunisian patients with first-episode psychosis and relation with cannabis use
+              </a> 
+            </h4>
+          </div>
+          <div id="6e684f439ff510e8c936acf2e06babc9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12991-017-0153-3" target="_blank" title="View Publication 10.1186/s12991-017-0153-3">DOI: 10.1186/s12991-017-0153-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12991-017-0153-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#73793a6df68b6a76a3bcff2d7ebc853f" style="font-size: 90%;" title="Open panel">
+                31. Methylene blue and its analogues as antidepressant compounds
+              </a> 
+            </h4>
+          </div>
+          <div id="73793a6df68b6a76a3bcff2d7ebc853f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11011-017-0081-6" target="_blank" title="View Publication 10.1007/s11011-017-0081-6">DOI: 10.1007/s11011-017-0081-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11011-017-0081-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#7a38cb668e8d48d9ab14be39ec92d9c7" style="font-size: 90%;" title="Open panel">
+                32. Anti-phospholipid syndrome associated with schizophrenia description of five patients and review of the literature
+              </a> 
+            </h4>
+          </div>
+          <div id="7a38cb668e8d48d9ab14be39ec92d9c7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12026-017-8895-1" target="_blank" title="View Publication 10.1007/s12026-017-8895-1">DOI: 10.1007/s12026-017-8895-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12026-017-8895-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#7ad6e00a23898a1d97e9c75a94a28177" style="font-size: 90%;" title="Open panel">
+                33. Diagnostic profiles and predictors of treatment outcome among children and adolescents attending a national psychiatric hospital in Botswana
+              </a> 
+            </h4>
+          </div>
+          <div id="7ad6e00a23898a1d97e9c75a94a28177" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13034-017-0144-9" target="_blank" title="View Publication 10.1186/s13034-017-0144-9">DOI: 10.1186/s13034-017-0144-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13034-017-0144-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#7dba451947d4c020051e753c2b3ba187" style="font-size: 90%;" title="Open panel">
+                34. Disposition Decisions for Psychiatric Patients Presenting to the Emergency Department
+              </a> 
+            </h4>
+          </div>
+          <div id="7dba451947d4c020051e753c2b3ba187" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40138-017-0133-6" target="_blank" title="View Publication 10.1007/s40138-017-0133-6">DOI: 10.1007/s40138-017-0133-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40138-017-0133-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#7e1004cfddae3418d6af4d30b295459a" style="font-size: 90%;" title="Open panel">
+                35. Hospitalization cost of conventional psychiatric care compared to broad-spectrum micronutrient treatment: literature review and case study of adult psychosis
+              </a> 
+            </h4>
+          </div>
+          <div id="7e1004cfddae3418d6af4d30b295459a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13033-017-0122-x" target="_blank" title="View Publication 10.1186/s13033-017-0122-x">DOI: 10.1186/s13033-017-0122-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13033-017-0122-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#7f5f51ddbfac68b09944ba4796da8e60" style="font-size: 90%;" title="Open panel">
+                36. The global prevalence of postpartum psychosis: a systematic review
+              </a> 
+            </h4>
+          </div>
+          <div id="7f5f51ddbfac68b09944ba4796da8e60" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1427-7" target="_blank" title="View Publication 10.1186/s12888-017-1427-7">DOI: 10.1186/s12888-017-1427-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1427-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#80535b040efc8502f62703de9e02c48c" style="font-size: 90%;" title="Open panel">
+                37. Vocational rehabilitation for adults with psychotic disorders in a Scandinavian welfare society
+              </a> 
+            </h4>
+          </div>
+          <div id="80535b040efc8502f62703de9e02c48c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-016-1183-0" target="_blank" title="View Publication 10.1186/s12888-016-1183-0">DOI: 10.1186/s12888-016-1183-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-016-1183-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#878c46def55b06525c78929b94e627e0" style="font-size: 90%;" title="Open panel">
+                38. Waiting time variation in Early Intervention Psychosis services: longitudinal evidence from the SEPEA naturalistic cohort study
+              </a> 
+            </h4>
+          </div>
+          <div id="878c46def55b06525c78929b94e627e0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00127-017-1343-7" target="_blank" title="View Publication 10.1007/s00127-017-1343-7">DOI: 10.1007/s00127-017-1343-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00127-017-1343-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#8847b1cc91f3a39b31008cab90cbfb10" style="font-size: 90%;" title="Open panel">
+                39. Abnormal relationships between local and global brain measures in subjects at clinical high risk for psychosis: a pilot study
+              </a> 
+            </h4>
+          </div>
+          <div id="8847b1cc91f3a39b31008cab90cbfb10" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11682-017-9758-z" target="_blank" title="View Publication 10.1007/s11682-017-9758-z">DOI: 10.1007/s11682-017-9758-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11682-017-9758-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#8b4e7626eb0199adfe1f792c08e846c3" style="font-size: 90%;" title="Open panel">
+                40. Metacognitive training in patients recovering from a first psychosis: an experience sampling study testing treatment effects
+              </a> 
+            </h4>
+          </div>
+          <div id="8b4e7626eb0199adfe1f792c08e846c3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00406-017-0833-7" target="_blank" title="View Publication 10.1007/s00406-017-0833-7">DOI: 10.1007/s00406-017-0833-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00406-017-0833-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#8c878d7d4aa4831212244991cdf81671" style="font-size: 90%;" title="Open panel">
+                41. Extract of Synedrella nodiflora (L) Gaertn exhibits antipsychotic properties in murine models of psychosis
+              </a> 
+            </h4>
+          </div>
+          <div id="8c878d7d4aa4831212244991cdf81671" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12906-017-1901-2" target="_blank" title="View Publication 10.1186/s12906-017-1901-2">DOI: 10.1186/s12906-017-1901-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12906-017-1901-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#8dfde28e0b98200fe0683f0b9703907a" style="font-size: 90%;" title="Open panel">
+                42. Understanding Adaptation to First Episode Psychosis Through the Creation of Images
+              </a> 
+            </h4>
+          </div>
+          <div id="8dfde28e0b98200fe0683f0b9703907a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40737-017-0079-8" target="_blank" title="View Publication 10.1007/s40737-017-0079-8">DOI: 10.1007/s40737-017-0079-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40737-017-0079-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#a34ad72bc6d6aad25f0edf7ed38e7705" style="font-size: 90%;" title="Open panel">
+                43. Exercise Treatments for Psychosis: a Review
+              </a> 
+            </h4>
+          </div>
+          <div id="a34ad72bc6d6aad25f0edf7ed38e7705" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40501-017-0112-2" target="_blank" title="View Publication 10.1007/s40501-017-0112-2">DOI: 10.1007/s40501-017-0112-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40501-017-0112-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#a7e885cb6845e8992ba05e5e52acc841" style="font-size: 90%;" title="Open panel">
+                44. The specific and combined role of domestic violence and mental health disorders during pregnancy on new-born health
+              </a> 
+            </h4>
+          </div>
+          <div id="a7e885cb6845e8992ba05e5e52acc841" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12884-017-1438-x" target="_blank" title="View Publication 10.1186/s12884-017-1438-x">DOI: 10.1186/s12884-017-1438-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12884-017-1438-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#aae3df591b139c86244617b4831a2302" style="font-size: 90%;" title="Open panel">
+                45. X-linked ichthyosis associated with psychosis and behavioral abnormalities: a case report
+              </a> 
+            </h4>
+          </div>
+          <div id="aae3df591b139c86244617b4831a2302" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13256-017-1420-2" target="_blank" title="View Publication 10.1186/s13256-017-1420-2">DOI: 10.1186/s13256-017-1420-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13256-017-1420-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#b3faeb7c66a495bf89df60ae6cd70d46" style="font-size: 90%;" title="Open panel">
+                46. Anti-N-methyl-D-aspartate receptor(NMDAR) antibody encephalitis presents in atypical types and coexists with neuromyelitis optica spectrum disorder or neurosyphilis
+              </a> 
+            </h4>
+          </div>
+          <div id="b3faeb7c66a495bf89df60ae6cd70d46" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12883-016-0787-9" target="_blank" title="View Publication 10.1186/s12883-016-0787-9">DOI: 10.1186/s12883-016-0787-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12883-016-0787-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#b6cd40b95dfaa47cc9be0484827c8ce8" style="font-size: 90%;" title="Open panel">
+                47. Auditory feature perception and auditory hallucinatory experiences in schizophrenia spectrum disorder
+              </a> 
+            </h4>
+          </div>
+          <div id="b6cd40b95dfaa47cc9be0484827c8ce8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00406-017-0839-1" target="_blank" title="View Publication 10.1007/s00406-017-0839-1">DOI: 10.1007/s00406-017-0839-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00406-017-0839-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#b80ab2d7a8e901355a71610aef951483" style="font-size: 90%;" title="Open panel">
+                48. Only a small proportion of patients with first episode psychosis come via prodromal services: a retrospective survey of a large UK mental health programme
+              </a> 
+            </h4>
+          </div>
+          <div id="b80ab2d7a8e901355a71610aef951483" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12888-017-1468-y" target="_blank" title="View Publication 10.1186/s12888-017-1468-y">DOI: 10.1186/s12888-017-1468-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12888-017-1468-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#c51dff3a983352d7e6d01f4eef0745f4" style="font-size: 90%;" title="Open panel">
+                49. Intake of 7,8-dihydroxyflavone from pregnancy to weaning prevents cognitive deficits in adult offspring after maternal immune activation
+              </a> 
+            </h4>
+          </div>
+          <div id="c51dff3a983352d7e6d01f4eef0745f4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00406-017-0802-1" target="_blank" title="View Publication 10.1007/s00406-017-0802-1">DOI: 10.1007/s00406-017-0802-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00406-017-0802-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68224.html#c88f5abf95b8750712bbd40492d2bf5f" style="font-size: 90%;" title="Open panel">
+                50. Psychological status and quality of life among primary caregivers of individuals with mental illness: a hospital based study
+              </a> 
+            </h4>
+          </div>
+          <div id="c88f5abf95b8750712bbd40492d2bf5f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12955-017-0676-y" target="_blank" title="View Publication 10.1186/s12955-017-0676-y">DOI: 10.1186/s12955-017-0676-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12955-017-0676-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Psychosis'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 68224, "target": 63688 },
+      
+          { "source": 68224, "target": 61108 },
+      
+          { "source": 68224, "target": 60671 },
+      
+          { "source": 68224, "target": 63634 },
+      
+          { "source": 68224, "target": 63485 },
+      
+          { "source": 68224, "target": 62436 },
+      
+          { "source": 68224, "target": 60848 },
+      
+          { "source": 68224, "target": 61954 },
+      
+          { "source": 68224, "target": 64049 },
+      
+          { "source": 68224, "target": 79950 },
+      
+          { "source": 63688, "target": 63485 },
+      
+          { "source": 63688, "target": 63634 },
+      
+          { "source": 63688, "target": 68224 },
+      
+          { "source": 63688, "target": 61108 },
+      
+          { "source": 63688, "target": 60848 },
+      
+          { "source": 61108, "target": 60672 },
+      
+          { "source": 61108, "target": 61629 },
+      
+          { "source": 61108, "target": 60667 },
+      
+          { "source": 61108, "target": 62339 },
+      
+          { "source": 61108, "target": 60921 },
+      
+          { "source": 60671, "target": 60759 },
+      
+          { "source": 60671, "target": 60905 },
+      
+          { "source": 60671, "target": 60673 },
+      
+          { "source": 60671, "target": 62339 },
+      
+          { "source": 60671, "target": 61850 },
+      
+          { "source": 63634, "target": 63688 },
+      
+          { "source": 63634, "target": 74539 },
+      
+          { "source": 63634, "target": 61108 },
+      
+          { "source": 63634, "target": 68224 },
+      
+          { "source": 63634, "target": 60671 },
+      
+          { "source": 63485, "target": 63688 },
+      
+          { "source": 63485, "target": 65780 },
+      
+          { "source": 63485, "target": 77392 },
+      
+          { "source": 63485, "target": 69442 },
+      
+          { "source": 63485, "target": 69498 },
+      
+          { "source": 62436, "target": 62437 },
+      
+          { "source": 62436, "target": 69876 },
+      
+          { "source": 62436, "target": 69874 },
+      
+          { "source": 62436, "target": 63160 },
+      
+          { "source": 62436, "target": 63963 },
+      
+          { "source": 60848, "target": 63012 },
+      
+          { "source": 60848, "target": 60905 },
+      
+          { "source": 60848, "target": 63963 },
+      
+          { "source": 60848, "target": 61954 },
+      
+          { "source": 60848, "target": 60759 },
+      
+          { "source": 61954, "target": 60848 },
+      
+          { "source": 61954, "target": 61640 },
+      
+          { "source": 61954, "target": 63675 },
+      
+          { "source": 61954, "target": 60905 },
+      
+          { "source": 61954, "target": 60720 },
+      
+          { "source": 64049, "target": 61622 },
+      
+          { "source": 64049, "target": 60966 },
+      
+          { "source": 64049, "target": 64143 },
+      
+          { "source": 64049, "target": 63520 },
+      
+          { "source": 64049, "target": 61626 },
+      
+          { "source": 79950, "target": 63688 },
+      
+          { "source": 79950, "target": 68224 },
+      
+          { "source": 79950, "target": 63634 },
+      
+          { "source": 79950, "target": 63485 },
+      
+          { "source": 79950, "target": 61249 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 63688, "size": 50, "score": 0 , "title": "Schizophrenia", "type": "circle"},
+
+      
+
+        {"id": 61108, "size": 50, "score": 0 , "title": "Logistic regression", "type": "circle"},
+
+      
+
+        {"id": 60671, "size": 50, "score": 0 , "title": "Syndrome", "type": "circle"},
+
+      
+
+        {"id": 63634, "size": 50, "score": 0 , "title": "Bipolar disorder", "type": "circle"},
+
+      
+
+        {"id": 63485, "size": 50, "score": 0 , "title": "Antipsychotic", "type": "circle"},
+
+      
+
+        {"id": 62436, "size": 50, "score": 0 , "title": "Attention deficit hyperactivity disorder", "type": "circle"},
+
+      
+
+        {"id": 60848, "size": 50, "score": 0 , "title": "Memory", "type": "circle"},
+
+      
+
+        {"id": 61954, "size": 50, "score": 0 , "title": "Dementia", "type": "circle"},
+
+      
+
+        {"id": 64049, "size": 50, "score": 0 , "title": "Substance dependence", "type": "circle"},
+
+      
+
+        {"id": 79950, "size": 50, "score": 0 , "title": "Schizoaffective disorder", "type": "circle"},
+
+      
+
+        {"id": 68224, "size": 70, "score": 0.5 , "title": "Psychosis", "type": "circle"},
+
+      
+
+        {"id": 60672, "size": 5, "score": 0.4 , "title": "Odds ratio", "type": "circle"},
+
+      
+
+        {"id": 61629, "size": 5, "score": 0.4 , "title": "Confidence interval", "type": "circle"},
+
+      
+
+        {"id": 60667, "size": 5, "score": 0.4 , "title": "Body mass index", "type": "circle"},
+
+      
+
+        {"id": 62339, "size": 5, "score": 0.4 , "title": "Hypertension", "type": "circle"},
+
+      
+
+        {"id": 60921, "size": 5, "score": 0.4 , "title": "Multivariate analysis", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 60673, "size": 5, "score": 0.4 , "title": "Obesity", "type": "circle"},
+
+      
+
+        {"id": 61850, "size": 5, "score": 0.4 , "title": "Phenotype", "type": "circle"},
+
+      
+
+        {"id": 74539, "size": 5, "score": 0.4 , "title": "Mania", "type": "circle"},
+
+      
+
+        {"id": 65780, "size": 5, "score": 0.4 , "title": "Clozapine", "type": "circle"},
+
+      
+
+        {"id": 77392, "size": 5, "score": 0.4 , "title": "Haloperidol", "type": "circle"},
+
+      
+
+        {"id": 69442, "size": 5, "score": 0.4 , "title": "Risperidone", "type": "circle"},
+
+      
+
+        {"id": 69498, "size": 5, "score": 0.4 , "title": "Aripiprazole", "type": "circle"},
+
+      
+
+        {"id": 62437, "size": 5, "score": 0.4 , "title": "Autism spectrum", "type": "circle"},
+
+      
+
+        {"id": 69876, "size": 5, "score": 0.4 , "title": "Methylphenidate", "type": "circle"},
+
+      
+
+        {"id": 69874, "size": 5, "score": 0.4 , "title": "Atomoxetine", "type": "circle"},
+
+      
+
+        {"id": 63160, "size": 5, "score": 0.4 , "title": "Prefrontal cortex", "type": "circle"},
+
+      
+
+        {"id": 63963, "size": 5, "score": 0.4 , "title": "Working memory", "type": "circle"},
+
+      
+
+        {"id": 63012, "size": 5, "score": 0.4 , "title": "Hippocampus", "type": "circle"},
+
+      
+
+        {"id": 61640, "size": 5, "score": 0.4 , "title": "Amyloid beta", "type": "circle"},
+
+      
+
+        {"id": 63675, "size": 5, "score": 0.4 , "title": "Mild cognitive impairment", "type": "circle"},
+
+      
+
+        {"id": 60720, "size": 5, "score": 0.4 , "title": "Magnetic resonance imaging", "type": "circle"},
+
+      
+
+        {"id": 61622, "size": 5, "score": 0.4 , "title": "Nicotine", "type": "circle"},
+
+      
+
+        {"id": 60966, "size": 5, "score": 0.4 , "title": "HIV", "type": "circle"},
+
+      
+
+        {"id": 64143, "size": 5, "score": 0.4 , "title": "Diagnostic and Statistical Manual of Mental Disorders", "type": "circle"},
+
+      
+
+        {"id": 63520, "size": 5, "score": 0.4 , "title": "Randomized controlled trial", "type": "circle"},
+
+      
+
+        {"id": 61626, "size": 5, "score": 0.4 , "title": "Test cricket", "type": "circle"},
+
+      
+
+        {"id": 61249, "size": 5, "score": 0.4 , "title": "Pharmacokinetics", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

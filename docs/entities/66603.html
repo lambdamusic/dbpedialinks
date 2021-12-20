@@ -1,0 +1,2744 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Arctic Ocean</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Arctic Ocean</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Arctic_Ocean" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Arctic_Ocean" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.2;"   
+        
+          href="68254.html"
+        
+       title="View other articles tagged with this concept">Arctic</a>
+      <span color="black;" style="opacity: 1.2;">&nbsp;9 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="61987.html"
+        
+       title="View other articles tagged with this concept">Salinity</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="74502.html"
+        
+       title="View other articles tagged with this concept">Kara Sea</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="68592.html"
+        
+       title="View other articles tagged with this concept">Phytoplankton</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="66055.html"
+        
+       title="View other articles tagged with this concept">Holocene</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="70659.html"
+        
+       title="View other articles tagged with this concept">Greenland</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61241.html"
+        
+       title="View other articles tagged with this concept">Biomass</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64176.html"
+        
+       title="View other articles tagged with this concept">Zooplankton</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64660.html"
+        
+       title="View other articles tagged with this concept">Quaternary</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66600.html"
+        
+       title="View other articles tagged with this concept">Pacific Ocean</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="72433.html"
+        
+       title="View other articles tagged with this concept">Northern Hemisphere</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61686.html"
+        
+       title="View other articles tagged with this concept">Mesozoic</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="67707.html"
+        
+       title="View other articles tagged with this concept">Jurassic</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="69799.html"
+        
+       title="View other articles tagged with this concept">Facies</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="71620.html"
+        
+       title="View other articles tagged with this concept">Eurasia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61687.html"
+        
+       title="View other articles tagged with this concept">Cretaceous</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="70073.html"
+        
+       title="View other articles tagged with this concept">Continental shelf</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61162.html"
+        
+       title="View other articles tagged with this concept">Climate change</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61361.html"
+        
+       title="View other articles tagged with this concept">China</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61096.html"
+        
+       title="View other articles tagged with this concept">Canada</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60795.html"
+        
+       title="View other articles tagged with this concept">Waveguide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72694.html"
+        
+       title="View other articles tagged with this concept">Unconformity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75439.html"
+        
+       title="View other articles tagged with this concept">Troposphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61568.html"
+        
+       title="View other articles tagged with this concept">Thermal conductivity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="83575.html"
+        
+       title="View other articles tagged with this concept">Tectonic uplift</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68516.html"
+        
+       title="View other articles tagged with this concept">Summertime (song)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71119.html"
+        
+       title="View other articles tagged with this concept">Southern Hemisphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62006.html"
+        
+       title="View other articles tagged with this concept">South China Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71506.html"
+        
+       title="View other articles tagged with this concept">Solar irradiance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68674.html"
+        
+       title="View other articles tagged with this concept">Social security</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62406.html"
+        
+       title="View other articles tagged with this concept">Siberia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68228.html"
+        
+       title="View other articles tagged with this concept">Self-organizing map</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68671.html"
+        
+       title="View other articles tagged with this concept">Secure Shell</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62007.html"
+        
+       title="View other articles tagged with this concept">Sea surface temperature</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61610.html"
+        
+       title="View other articles tagged with this concept">Russia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64184.html"
+        
+       title="View other articles tagged with this concept">Renewable energy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71319.html"
+        
+       title="View other articles tagged with this concept">Reflection seismology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68364.html"
+        
+       title="View other articles tagged with this concept">Pleistocene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77356.html"
+        
+       title="View other articles tagged with this concept">Photic zone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66599.html"
+        
+       title="View other articles tagged with this concept">Pascal (unit)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65647.html"
+        
+       title="View other articles tagged with this concept">Partial pressure</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71748.html"
+        
+       title="View other articles tagged with this concept">Ocean acidification</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68196.html"
+        
+       title="View other articles tagged with this concept">North Atlantic oscillation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68677.html"
+        
+       title="View other articles tagged with this concept">Nitrogen cycle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69033.html"
+        
+       title="View other articles tagged with this concept">Levee</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73710.html"
+        
+       title="View other articles tagged with this concept">Last Glacial Maximum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66602.html"
+        
+       title="View other articles tagged with this concept">Lake Baikal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70047.html"
+        
+       title="View other articles tagged with this concept">Kuroshio Current</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63772.html"
+        
+       title="View other articles tagged with this concept">Korea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65372.html"
+        
+       title="View other articles tagged with this concept">Kinetic energy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62111.html"
+        
+       title="View other articles tagged with this concept">Japan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62242.html"
+        
+       title="View other articles tagged with this concept">Isotope</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70749.html"
+        
+       title="View other articles tagged with this concept">Indicator species</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66784.html"
+        
+       title="View other articles tagged with this concept">Indian Ocean</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61024.html"
+        
+       title="View other articles tagged with this concept">India</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61022.html"
+        
+       title="View other articles tagged with this concept">Igneous rock</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64831.html"
+        
+       title="View other articles tagged with this concept">Green algae</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70519.html"
+        
+       title="View other articles tagged with this concept">Gonad</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63711.html"
+        
+       title="View other articles tagged with this concept">Global warming</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65332.html"
+        
+       title="View other articles tagged with this concept">Geopotential height</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69037.html"
+        
+       title="View other articles tagged with this concept">Geochronology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64010.html"
+        
+       title="View other articles tagged with this concept">General circulation model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68625.html"
+        
+       title="View other articles tagged with this concept">Fluid dynamics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61632.html"
+        
+       title="View other articles tagged with this concept">Evapotranspiration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76239.html"
+        
+       title="View other articles tagged with this concept">European Centre for Medium-Range Weather Forecasts</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63348.html"
+        
+       title="View other articles tagged with this concept">Endemism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78189.html"
+        
+       title="View other articles tagged with this concept">East China Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62320.html"
+        
+       title="View other articles tagged with this concept">Diatom</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69659.html"
+        
+       title="View other articles tagged with this concept">Denitrification</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61163.html"
+        
+       title="View other articles tagged with this concept">Coupled model intercomparison project</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61100.html"
+        
+       title="View other articles tagged with this concept">Correlation and dependence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62102.html"
+        
+       title="View other articles tagged with this concept">Convection</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62089.html"
+        
+       title="View other articles tagged with this concept">Cluster analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71202.html"
+        
+       title="View other articles tagged with this concept">Climate model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63748.html"
+        
+       title="View other articles tagged with this concept">Chlorophyll</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73446.html"
+        
+       title="View other articles tagged with this concept">Carbon dioxide equivalent</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61239.html"
+        
+       title="View other articles tagged with this concept">Carbon dioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60734.html"
+        
+       title="View other articles tagged with this concept">Carbon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61607.html"
+        
+       title="View other articles tagged with this concept">Black Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60630.html"
+        
+       title="View other articles tagged with this concept">Biomarker</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63553.html"
+        
+       title="View other articles tagged with this concept">Biogeography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68073.html"
+        
+       title="View other articles tagged with this concept">Bengal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68016.html"
+        
+       title="View other articles tagged with this concept">Bayesian inference in phylogeny</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71908.html"
+        
+       title="View other articles tagged with this concept">Bathymetry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67708.html"
+        
+       title="View other articles tagged with this concept">Barents Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66782.html"
+        
+       title="View other articles tagged with this concept">Arabian Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61870.html"
+        
+       title="View other articles tagged with this concept">Arabian Peninsula</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71401.html"
+        
+       title="View other articles tagged with this concept">Amplifier</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60948.html"
+        
+       title="View other articles tagged with this concept">Ammonium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">34</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#0732379da87e7773437e733dad103308" style="font-size: 90%;" title="Open panel">
+                1. Effects of AO and Pacific SSTA on severe droughts in Luanhe River basin, China
+              </a> 
+            </h4>
+          </div>
+          <div id="0732379da87e7773437e733dad103308" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11069-017-2917-0" target="_blank" title="View Publication 10.1007/s11069-017-2917-0">DOI: 10.1007/s11069-017-2917-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11069-017-2917-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#138ca589498f10a63c5663c34cc52332" style="font-size: 90%;" title="Open panel">
+                2. Resistance of Arctic phytoplankton to ocean acidification and enhanced irradiance
+              </a> 
+            </h4>
+          </div>
+          <div id="138ca589498f10a63c5663c34cc52332" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00300-017-2186-0" target="_blank" title="View Publication 10.1007/s00300-017-2186-0">DOI: 10.1007/s00300-017-2186-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00300-017-2186-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#22413c3a22bed1339ebca83dcaa6bcdc" style="font-size: 90%;" title="Open panel">
+                3. The structure of phytoplankton communities in the eastern part of the Laptev Sea
+              </a> 
+            </h4>
+          </div>
+          <div id="22413c3a22bed1339ebca83dcaa6bcdc" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0001437017010209" target="_blank" title="View Publication 10.1134/S0001437017010209">DOI: 10.1134/S0001437017010209</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0001437017010209" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#28f73b3a35d6bd12e4ed784fed2e6c57" style="font-size: 90%;" title="Open panel">
+                4. Segmentation and seismicity of the ultraslow Knipovich and Gakkel mid-ocean ridges
+              </a> 
+            </h4>
+          </div>
+          <div id="28f73b3a35d6bd12e4ed784fed2e6c57" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0016852117010095" target="_blank" title="View Publication 10.1134/S0016852117010095">DOI: 10.1134/S0016852117010095</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0016852117010095" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#2d51aba6cefe3c347d7d467acc45af66" style="font-size: 90%;" title="Open panel">
+                5. Catching of Greenland halibut Reinhardtius hippoglossoides (Pleuronectidae) on the shelf edge of the Laptev and East Siberian Seas
+              </a> 
+            </h4>
+          </div>
+          <div id="2d51aba6cefe3c347d7d467acc45af66" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0032945217020059" target="_blank" title="View Publication 10.1134/S0032945217020059">DOI: 10.1134/S0032945217020059</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0032945217020059" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#361aa255ffb78fb7e9ec6a42b6ca2149" style="font-size: 90%;" title="Open panel">
+                6. Geochemistry of sediments of the Holocene transgressive sequences of the Kara Sea
+              </a> 
+            </h4>
+          </div>
+          <div id="361aa255ffb78fb7e9ec6a42b6ca2149" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S001670291706009X" target="_blank" title="View Publication 10.1134/S001670291706009X">DOI: 10.1134/S001670291706009X</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S001670291706009X" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#397b3cacd19bec97b11b8a27272e1574" style="font-size: 90%;" title="Open panel">
+                7. Emergence of deep convection in the Arctic Ocean under a warming climate
+              </a> 
+            </h4>
+          </div>
+          <div id="397b3cacd19bec97b11b8a27272e1574" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3849-9" target="_blank" title="View Publication 10.1007/s00382-017-3849-9">DOI: 10.1007/s00382-017-3849-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3849-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#4733127df155ba6a77bfea05a7cadb76" style="font-size: 90%;" title="Open panel">
+                8. Deltas, freshwater discharge, and waves along the Young Sound, NE Greenland
+              </a> 
+            </h4>
+          </div>
+          <div id="4733127df155ba6a77bfea05a7cadb76" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13280-016-0869-3" target="_blank" title="View Publication 10.1007/s13280-016-0869-3">DOI: 10.1007/s13280-016-0869-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13280-016-0869-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#5d6a5e5d1ef31a1fd3d4b6120d68efc5" style="font-size: 90%;" title="Open panel">
+                9. Variation of sea ice extent in different regions of the Arctic Ocean
+              </a> 
+            </h4>
+          </div>
+          <div id="5d6a5e5d1ef31a1fd3d4b6120d68efc5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13131-016-0886-x" target="_blank" title="View Publication 10.1007/s13131-016-0886-x">DOI: 10.1007/s13131-016-0886-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13131-016-0886-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#636966066beb461bef3b4b0dd4ed85d6" style="font-size: 90%;" title="Open panel">
+                10. Changes in water chemistry along the newly formed High Arctic fluvial–lacustrine system of the Brattegg Valley (SW Spitsbergen, Svalbard)
+              </a> 
+            </h4>
+          </div>
+          <div id="636966066beb461bef3b4b0dd4ed85d6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6772-9" target="_blank" title="View Publication 10.1007/s12665-017-6772-9">DOI: 10.1007/s12665-017-6772-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6772-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#63d4821124dad623b0c0afaa2fb02050" style="font-size: 90%;" title="Open panel">
+                11. Respective roles of direct GHG radiative forcing and induced Arctic sea ice loss on the Northern Hemisphere atmospheric circulation
+              </a> 
+            </h4>
+          </div>
+          <div id="63d4821124dad623b0c0afaa2fb02050" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3541-0" target="_blank" title="View Publication 10.1007/s00382-017-3541-0">DOI: 10.1007/s00382-017-3541-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3541-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#65750f143096778a1efa2cbc8e63975e" style="font-size: 90%;" title="Open panel">
+                12. First records of Pacific sand lance (Ammodytes hexapterus) in the Canadian Arctic Archipelago
+              </a> 
+            </h4>
+          </div>
+          <div id="65750f143096778a1efa2cbc8e63975e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00300-017-2141-0" target="_blank" title="View Publication 10.1007/s00300-017-2141-0">DOI: 10.1007/s00300-017-2141-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00300-017-2141-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#6757b830bd0c590daec23d0d51fece62" style="font-size: 90%;" title="Open panel">
+                13. The status and prospect of seasonal climate prediction of climate over Korea and East Asia: A review
+              </a> 
+            </h4>
+          </div>
+          <div id="6757b830bd0c590daec23d0d51fece62" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13143-017-0008-5" target="_blank" title="View Publication 10.1007/s13143-017-0008-5">DOI: 10.1007/s13143-017-0008-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13143-017-0008-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#6e91b34565f560d9aaf80a1c0490e523" style="font-size: 90%;" title="Open panel">
+                14. Lithological and geochemical typification of surface bottom sediments in the Kara Sea
+              </a> 
+            </h4>
+          </div>
+          <div id="6e91b34565f560d9aaf80a1c0490e523" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0001437017010167" target="_blank" title="View Publication 10.1134/S0001437017010167">DOI: 10.1134/S0001437017010167</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0001437017010167" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#7bebf8a62975a60ccb00dffbf69a4450" style="font-size: 90%;" title="Open panel">
+                15. Evaluation of the net CO2 uptake in the Canada Basin in the summer of 2008
+              </a> 
+            </h4>
+          </div>
+          <div id="7bebf8a62975a60ccb00dffbf69a4450" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13131-017-1028-9" target="_blank" title="View Publication 10.1007/s13131-017-1028-9">DOI: 10.1007/s13131-017-1028-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13131-017-1028-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#89495a6b1f7ff49ef3b88636d2c68c00" style="font-size: 90%;" title="Open panel">
+                16. Radiolarian biogeography in surface sediments of the Northwest Pacific marginal seas
+              </a> 
+            </h4>
+          </div>
+          <div id="89495a6b1f7ff49ef3b88636d2c68c00" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11430-016-5179-4" target="_blank" title="View Publication 10.1007/s11430-016-5179-4">DOI: 10.1007/s11430-016-5179-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11430-016-5179-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#8a4bb64627652cd0dd83cbe0a462e766" style="font-size: 90%;" title="Open panel">
+                17. Assessment of Gradient-Based Similarity Functions in the Stable Boundary Layer Derived from a Large-Eddy Simulation
+              </a> 
+            </h4>
+          </div>
+          <div id="8a4bb64627652cd0dd83cbe0a462e766" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10546-017-0234-5" target="_blank" title="View Publication 10.1007/s10546-017-0234-5">DOI: 10.1007/s10546-017-0234-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10546-017-0234-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#90aac4776e6f18d68891a6a5ddd3d260" style="font-size: 90%;" title="Open panel">
+                18. Composition of algal pigments in surface freshen layer after ice melt in the central Arctic
+              </a> 
+            </h4>
+          </div>
+          <div id="90aac4776e6f18d68891a6a5ddd3d260" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13131-017-1024-0" target="_blank" title="View Publication 10.1007/s13131-017-1024-0">DOI: 10.1007/s13131-017-1024-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13131-017-1024-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#9c958d13e734449db2188d0af549b930" style="font-size: 90%;" title="Open panel">
+                19. Arctic sea ice in CMIP5 climate model projections and their seasonal variability
+              </a> 
+            </h4>
+          </div>
+          <div id="9c958d13e734449db2188d0af549b930" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13131-017-1029-8" target="_blank" title="View Publication 10.1007/s13131-017-1029-8">DOI: 10.1007/s13131-017-1029-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13131-017-1029-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#aa25fb0685c7604dc63def1f5db665c2" style="font-size: 90%;" title="Open panel">
+                20. First record of juvenile northern wolffish Anarhichas denticulatus Krøyer, 1845, on the continental slope of Northeast Greenland
+              </a> 
+            </h4>
+          </div>
+          <div id="aa25fb0685c7604dc63def1f5db665c2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0032945217040051" target="_blank" title="View Publication 10.1134/S0032945217040051">DOI: 10.1134/S0032945217040051</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0032945217040051" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#ad80b52a1771f2704a73394e5595b61b" style="font-size: 90%;" title="Open panel">
+                21. Evidence for Holocene centennial variability in sea ice cover based on IP25 biomarker reconstruction in the southern Kara Sea (Arctic Ocean)
+              </a> 
+            </h4>
+          </div>
+          <div id="ad80b52a1771f2704a73394e5595b61b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00367-017-0501-y" target="_blank" title="View Publication 10.1007/s00367-017-0501-y">DOI: 10.1007/s00367-017-0501-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00367-017-0501-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#b579d6877dc34f274ce6005dbd40fb73" style="font-size: 90%;" title="Open panel">
+                22. The gonad maturation and size structure of the population of abundant planktonic predator Eukrohnia hamata (Möbius, 1875) (Chaetognatha) in the Eurasian basin of the Arctic Ocean in summer
+              </a> 
+            </h4>
+          </div>
+          <div id="b579d6877dc34f274ce6005dbd40fb73" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1063074017010072" target="_blank" title="View Publication 10.1134/S1063074017010072">DOI: 10.1134/S1063074017010072</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1063074017010072" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#b5e150431573952060945ad276de54cb" style="font-size: 90%;" title="Open panel">
+                23. Towards a balanced view of Arctic shipping: estimating economic impacts of emissions from increased traffic on the Northern Sea Route
+              </a> 
+            </h4>
+          </div>
+          <div id="b5e150431573952060945ad276de54cb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10584-017-1980-6" target="_blank" title="View Publication 10.1007/s10584-017-1980-6">DOI: 10.1007/s10584-017-1980-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10584-017-1980-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#b642fa0e9283e9972dd7284e93f46faa" style="font-size: 90%;" title="Open panel">
+                24. Seasonal differences in the response of Arctic cyclones to climate change in CESM1
+              </a> 
+            </h4>
+          </div>
+          <div id="b642fa0e9283e9972dd7284e93f46faa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3767-x" target="_blank" title="View Publication 10.1007/s00382-017-3767-x">DOI: 10.1007/s00382-017-3767-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3767-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#baad8d5b4731989cd4f213d366eb74f9" style="font-size: 90%;" title="Open panel">
+                25. A potential nitrogen sink discovered in the oxygenated Chukchi Shelf waters of the Arctic
+              </a> 
+            </h4>
+          </div>
+          <div id="baad8d5b4731989cd4f213d366eb74f9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12932-017-0043-2" target="_blank" title="View Publication 10.1186/s12932-017-0043-2">DOI: 10.1186/s12932-017-0043-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12932-017-0043-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#c405b37cd3982fa45574dd9efd21576b" style="font-size: 90%;" title="Open panel">
+                26. Seismic stratigraphy of sedimentary cover in the Podvodnikov Basin and North Chukchi trough
+              </a> 
+            </h4>
+          </div>
+          <div id="c405b37cd3982fa45574dd9efd21576b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1028334X17060137" target="_blank" title="View Publication 10.1134/S1028334X17060137">DOI: 10.1134/S1028334X17060137</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1028334X17060137" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#c7073898aaa4803376c55821440f11af" style="font-size: 90%;" title="Open panel">
+                27. The first detailed δ13Соrg record in Permo-Triassic boundary deposits in the Kolyma–Omolon region (Northeast Asia)
+              </a> 
+            </h4>
+          </div>
+          <div id="c7073898aaa4803376c55821440f11af" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1028334X17050221" target="_blank" title="View Publication 10.1134/S1028334X17050221">DOI: 10.1134/S1028334X17050221</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1028334X17050221" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#e6a1d3a556fb427420c9ea09f9bf246c" style="font-size: 90%;" title="Open panel">
+                28. A seasonal grade division of the global offshore wind energy resource
+              </a> 
+            </h4>
+          </div>
+          <div id="e6a1d3a556fb427420c9ea09f9bf246c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13131-017-1043-x" target="_blank" title="View Publication 10.1007/s13131-017-1043-x">DOI: 10.1007/s13131-017-1043-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13131-017-1043-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#e9e5ee90020c150e309c6ce31cd544b7" style="font-size: 90%;" title="Open panel">
+                29. Slowdown of sea surface height rises in the Nordic seas and related mechanisms
+              </a> 
+            </h4>
+          </div>
+          <div id="e9e5ee90020c150e309c6ce31cd544b7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13131-017-1027-x" target="_blank" title="View Publication 10.1007/s13131-017-1027-x">DOI: 10.1007/s13131-017-1027-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13131-017-1027-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#ed127082dd53cf5a974d76356fc21766" style="font-size: 90%;" title="Open panel">
+                30. Postglacial expansion of the Arctic keystone copepod Calanus glacialis
+              </a> 
+            </h4>
+          </div>
+          <div id="ed127082dd53cf5a974d76356fc21766" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12526-017-0774-4" target="_blank" title="View Publication 10.1007/s12526-017-0774-4">DOI: 10.1007/s12526-017-0774-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12526-017-0774-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#eeaf4d8b0e0649a7a1a33e9f7c67e9ab" style="font-size: 90%;" title="Open panel">
+                31. Comparison of Arctic sea ice thickness and snow depth estimates from CFSR with in situ observations
+              </a> 
+            </h4>
+          </div>
+          <div id="eeaf4d8b0e0649a7a1a33e9f7c67e9ab" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3607-z" target="_blank" title="View Publication 10.1007/s00382-017-3607-z">DOI: 10.1007/s00382-017-3607-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3607-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#f5b22e1e8f7dbc260a126cb2993a7aab" style="font-size: 90%;" title="Open panel">
+                32. Sound attenuation in a random waveguide when using a radiating system with different patterns of directivity
+              </a> 
+            </h4>
+          </div>
+          <div id="f5b22e1e8f7dbc260a126cb2993a7aab" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1062873817080214" target="_blank" title="View Publication 10.3103/S1062873817080214">DOI: 10.3103/S1062873817080214</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1062873817080214" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#f5d12ad9ff48d95fb6a348cc700c2d4f" style="font-size: 90%;" title="Open panel">
+                33. Geodynamics of the Barents–Kara margin in the Mesozoic inferred from paleomagnetic data on rocks from the Franz Josef Land Archipelago
+              </a> 
+            </h4>
+          </div>
+          <div id="f5d12ad9ff48d95fb6a348cc700c2d4f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1028334X16120205" target="_blank" title="View Publication 10.1134/S1028334X16120205">DOI: 10.1134/S1028334X16120205</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1028334X16120205" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="66603.html#f641187f7f0b11d9239807cdae7e8248" style="font-size: 90%;" title="Open panel">
+                34. Moisture sources and pathways associated with the spatial variability of seasonal extreme precipitation over Canada
+              </a> 
+            </h4>
+          </div>
+          <div id="f641187f7f0b11d9239807cdae7e8248" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3630-0" target="_blank" title="View Publication 10.1007/s00382-017-3630-0">DOI: 10.1007/s00382-017-3630-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3630-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Arctic_Ocean'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 66603, "target": 68254 },
+      
+          { "source": 66603, "target": 61987 },
+      
+          { "source": 66603, "target": 74502 },
+      
+          { "source": 66603, "target": 89951 },
+      
+          { "source": 66603, "target": 68592 },
+      
+          { "source": 66603, "target": 67711 },
+      
+          { "source": 66603, "target": 66055 },
+      
+          { "source": 66603, "target": 70659 },
+      
+          { "source": 66603, "target": 61241 },
+      
+          { "source": 66603, "target": 64176 },
+      
+          { "source": 68254, "target": 61162 },
+      
+          { "source": 68254, "target": 61096 },
+      
+          { "source": 68254, "target": 66603 },
+      
+          { "source": 68254, "target": 61610 },
+      
+          { "source": 68254, "target": 84643 },
+      
+          { "source": 61987, "target": 60771 },
+      
+          { "source": 61987, "target": 61241 },
+      
+          { "source": 61987, "target": 60759 },
+      
+          { "source": 61987, "target": 60905 },
+      
+          { "source": 61987, "target": 61143 },
+      
+          { "source": 74502, "target": 78265 },
+      
+          { "source": 74502, "target": 82281 },
+      
+          { "source": 74502, "target": 95704 },
+      
+          { "source": 74502, "target": 67708 },
+      
+          { "source": 74502, "target": 66603 },
+      
+          { "source": 89951, "target": 66603 },
+      
+          { "source": 89951, "target": 80951 },
+      
+          { "source": 89951, "target": 72694 },
+      
+          { "source": 89951, "target": 61568 },
+      
+          { "source": 89951, "target": 83575 },
+      
+          { "source": 68592, "target": 61241 },
+      
+          { "source": 68592, "target": 64176 },
+      
+          { "source": 68592, "target": 60769 },
+      
+          { "source": 68592, "target": 63748 },
+      
+          { "source": 68592, "target": 62320 },
+      
+          { "source": 67711, "target": 66603 },
+      
+          { "source": 67711, "target": 82281 },
+      
+          { "source": 67711, "target": 67705 },
+      
+          { "source": 67711, "target": 74502 },
+      
+          { "source": 67711, "target": 78608 },
+      
+          { "source": 66055, "target": 68364 },
+      
+          { "source": 66055, "target": 68783 },
+      
+          { "source": 66055, "target": 62885 },
+      
+          { "source": 66055, "target": 62242 },
+      
+          { "source": 66055, "target": 63054 },
+      
+          { "source": 70659, "target": 68254 },
+      
+          { "source": 70659, "target": 66603 },
+      
+          { "source": 70659, "target": 70073 },
+      
+          { "source": 70659, "target": 61143 },
+      
+          { "source": 70659, "target": 62844 },
+      
+          { "source": 61241, "target": 60734 },
+      
+          { "source": 61241, "target": 61235 },
+      
+          { "source": 61241, "target": 61143 },
+      
+          { "source": 61241, "target": 60771 },
+      
+          { "source": 61241, "target": 62517 },
+      
+          { "source": 64176, "target": 68592 },
+      
+          { "source": 64176, "target": 61241 },
+      
+          { "source": 64176, "target": 60958 },
+      
+          { "source": 64176, "target": 66787 },
+      
+          { "source": 64176, "target": 60955 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 68254, "size": 50, "score": 0 , "title": "Arctic", "type": "circle"},
+
+      
+
+        {"id": 61987, "size": 50, "score": 0 , "title": "Salinity", "type": "circle"},
+
+      
+
+        {"id": 74502, "size": 50, "score": 0 , "title": "Kara Sea", "type": "circle"},
+
+      
+
+        {"id": 89951, "size": 50, "score": 0 , "title": "Chukchi Sea", "type": "circle"},
+
+      
+
+        {"id": 68592, "size": 50, "score": 0 , "title": "Phytoplankton", "type": "circle"},
+
+      
+
+        {"id": 67711, "size": 50, "score": 0 , "title": "PFC Akademik Sofia", "type": "circle"},
+
+      
+
+        {"id": 66055, "size": 50, "score": 0 , "title": "Holocene", "type": "circle"},
+
+      
+
+        {"id": 70659, "size": 50, "score": 0 , "title": "Greenland", "type": "circle"},
+
+      
+
+        {"id": 61241, "size": 50, "score": 0 , "title": "Biomass", "type": "circle"},
+
+      
+
+        {"id": 64176, "size": 50, "score": 0 , "title": "Zooplankton", "type": "circle"},
+
+      
+
+        {"id": 66603, "size": 70, "score": 0.5 , "title": "Arctic Ocean", "type": "circle"},
+
+      
+
+        {"id": 61162, "size": 5, "score": 0.4 , "title": "Climate change", "type": "circle"},
+
+      
+
+        {"id": 61096, "size": 5, "score": 0.4 , "title": "Canada", "type": "circle"},
+
+      
+
+        {"id": 61610, "size": 5, "score": 0.4 , "title": "Russia", "type": "circle"},
+
+      
+
+        {"id": 84643, "size": 5, "score": 0.4 , "title": "Tundra", "type": "circle"},
+
+      
+
+        {"id": 60771, "size": 5, "score": 0.4 , "title": "PH", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 61143, "size": 5, "score": 0.4 , "title": "Acid", "type": "circle"},
+
+      
+
+        {"id": 78265, "size": 5, "score": 0.4 , "title": "Novaya Zemlya", "type": "circle"},
+
+      
+
+        {"id": 82281, "size": 5, "score": 0.4 , "title": "Yenisei River", "type": "circle"},
+
+      
+
+        {"id": 95704, "size": 5, "score": 0.4 , "title": "Mstislav Keldysh", "type": "circle"},
+
+      
+
+        {"id": 67708, "size": 5, "score": 0.4 , "title": "Barents Sea", "type": "circle"},
+
+      
+
+        {"id": 80951, "size": 5, "score": 0.4 , "title": "Whale", "type": "circle"},
+
+      
+
+        {"id": 72694, "size": 5, "score": 0.4 , "title": "Unconformity", "type": "circle"},
+
+      
+
+        {"id": 61568, "size": 5, "score": 0.4 , "title": "Thermal conductivity", "type": "circle"},
+
+      
+
+        {"id": 83575, "size": 5, "score": 0.4 , "title": "Tectonic uplift", "type": "circle"},
+
+      
+
+        {"id": 60769, "size": 5, "score": 0.4 , "title": "Phosphorus", "type": "circle"},
+
+      
+
+        {"id": 63748, "size": 5, "score": 0.4 , "title": "Chlorophyll", "type": "circle"},
+
+      
+
+        {"id": 62320, "size": 5, "score": 0.4 , "title": "Diatom", "type": "circle"},
+
+      
+
+        {"id": 67705, "size": 5, "score": 0.4 , "title": "Nikolay Strakhov", "type": "circle"},
+
+      
+
+        {"id": 78608, "size": 5, "score": 0.4 , "title": "Ice sheet", "type": "circle"},
+
+      
+
+        {"id": 68364, "size": 5, "score": 0.4 , "title": "Pleistocene", "type": "circle"},
+
+      
+
+        {"id": 68783, "size": 5, "score": 0.4 , "title": "Before Present", "type": "circle"},
+
+      
+
+        {"id": 62885, "size": 5, "score": 0.4 , "title": "Tibetan Plateau", "type": "circle"},
+
+      
+
+        {"id": 62242, "size": 5, "score": 0.4 , "title": "Isotope", "type": "circle"},
+
+      
+
+        {"id": 63054, "size": 5, "score": 0.4 , "title": "Aquifer", "type": "circle"},
+
+      
+
+        {"id": 70073, "size": 5, "score": 0.4 , "title": "Continental shelf", "type": "circle"},
+
+      
+
+        {"id": 62844, "size": 5, "score": 0.4 , "title": "Uterus", "type": "circle"},
+
+      
+
+        {"id": 60734, "size": 5, "score": 0.4 , "title": "Carbon", "type": "circle"},
+
+      
+
+        {"id": 61235, "size": 5, "score": 0.4 , "title": "Nitrogen", "type": "circle"},
+
+      
+
+        {"id": 62517, "size": 5, "score": 0.4 , "title": "Carbon cycle", "type": "circle"},
+
+      
+
+        {"id": 60958, "size": 5, "score": 0.4 , "title": "Plankton", "type": "circle"},
+
+      
+
+        {"id": 66787, "size": 5, "score": 0.4 , "title": "Pelagic zone", "type": "circle"},
+
+      
+
+        {"id": 60955, "size": 5, "score": 0.4 , "title": "Food web", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

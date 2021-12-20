@@ -1,0 +1,2058 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Yale University</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Yale University</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Yale_University" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Yale_University" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60663.html"
+        
+       title="View other articles tagged with this concept">Algorithm</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61095.html"
+        
+       title="View other articles tagged with this concept">MNIST database</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65450.html"
+        
+       title="View other articles tagged with this concept">Dimensionality reduction</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65452.html"
+        
+       title="View other articles tagged with this concept">Augmented reality</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64982.html"
+        
+       title="View other articles tagged with this concept">Wave function</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68787.html"
+        
+       title="View other articles tagged with this concept">University of Oxford</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64616.html"
+        
+       title="View other articles tagged with this concept">Transfer RNA</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60671.html"
+        
+       title="View other articles tagged with this concept">Syndrome</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64622.html"
+        
+       title="View other articles tagged with this concept">Semi-supervised learning</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61610.html"
+        
+       title="View other articles tagged with this concept">Russia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64130.html"
+        
+       title="View other articles tagged with this concept">Quantum mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60905.html"
+        
+       title="View other articles tagged with this concept">Protein</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65728.html"
+        
+       title="View other articles tagged with this concept">Portuguese language</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63770.html"
+        
+       title="View other articles tagged with this concept">Opioid use disorder</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77795.html"
+        
+       title="View other articles tagged with this concept">Operating system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60672.html"
+        
+       title="View other articles tagged with this concept">Odds ratio</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="81061.html"
+        
+       title="View other articles tagged with this concept">Obsessive–compulsive disorder</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60673.html"
+        
+       title="View other articles tagged with this concept">Obesity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73891.html"
+        
+       title="View other articles tagged with this concept">Nonlinear dimensionality reduction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64356.html"
+        
+       title="View other articles tagged with this concept">New York City</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62470.html"
+        
+       title="View other articles tagged with this concept">Neoadjuvant therapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66392.html"
+        
+       title="View other articles tagged with this concept">Linear discriminant analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62462.html"
+        
+       title="View other articles tagged with this concept">Ligand</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60896.html"
+        
+       title="View other articles tagged with this concept">Laparotomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74823.html"
+        
+       title="View other articles tagged with this concept">Laparoscopy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61205.html"
+        
+       title="View other articles tagged with this concept">International</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61318.html"
+        
+       title="View other articles tagged with this concept">Insulin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63529.html"
+        
+       title="View other articles tagged with this concept">Immunofluorescence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60966.html"
+        
+       title="View other articles tagged with this concept">HIV</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60697.html"
+        
+       title="View other articles tagged with this concept">Graphene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61350.html"
+        
+       title="View other articles tagged with this concept">Fractal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62574.html"
+        
+       title="View other articles tagged with this concept">Feature vector</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63860.html"
+        
+       title="View other articles tagged with this concept">Factor analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61547.html"
+        
+       title="View other articles tagged with this concept">Epidemiology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69702.html"
+        
+       title="View other articles tagged with this concept">Electronic health record</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66012.html"
+        
+       title="View other articles tagged with this concept">Eating disorder</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71031.html"
+        
+       title="View other articles tagged with this concept">Discriminant validity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67167.html"
+        
+       title="View other articles tagged with this concept">Density matrix</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61961.html"
+        
+       title="View other articles tagged with this concept">DNA</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61629.html"
+        
+       title="View other articles tagged with this concept">Confidence interval</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69805.html"
+        
+       title="View other articles tagged with this concept">CompactFlash</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60636.html"
+        
+       title="View other articles tagged with this concept">Chemotherapy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66011.html"
+        
+       title="View other articles tagged with this concept">Bulimia nervosa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61828.html"
+        
+       title="View other articles tagged with this concept">Breast cancer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61862.html"
+        
+       title="View other articles tagged with this concept">Boron</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62803.html"
+        
+       title="View other articles tagged with this concept">Bariatric surgery</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62436.html"
+        
+       title="View other articles tagged with this concept">Attention deficit hyperactivity disorder</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68821.html"
+        
+       title="View other articles tagged with this concept">Anorexia nervosa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69400.html"
+        
+       title="View other articles tagged with this concept">Algebraic geometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">20</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info&nbsp;<a href="javascript:megaLoad();">(open all)</a></small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#048f3f16729868503164e889170025c5" style="font-size: 90%;" title="Open panel">
+                1. Local Centre of Mass Face for face recognition under varying illumination
+              </a> 
+            </h4>
+          </div>
+          <div id="048f3f16729868503164e889170025c5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11042-017-4579-z" target="_blank" title="View Publication 10.1007/s11042-017-4579-z">DOI: 10.1007/s11042-017-4579-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11042-017-4579-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#04cf0de58e9a4be667acd9811877b3f7" style="font-size: 90%;" title="Open panel">
+                2. Local descriptor margin projections (LDMP) for face recognition
+              </a> 
+            </h4>
+          </div>
+          <div id="04cf0de58e9a4be667acd9811877b3f7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13042-017-0652-1" target="_blank" title="View Publication 10.1007/s13042-017-0652-1">DOI: 10.1007/s13042-017-0652-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13042-017-0652-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#5fe6171ca28e1d550a131329bb698f53" style="font-size: 90%;" title="Open panel">
+                3. Robust classwise and projective low-rank representation for image classification
+              </a> 
+            </h4>
+          </div>
+          <div id="5fe6171ca28e1d550a131329bb698f53" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11760-017-1136-1" target="_blank" title="View Publication 10.1007/s11760-017-1136-1">DOI: 10.1007/s11760-017-1136-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11760-017-1136-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#62b76e328ce8396323a1da21d00e6984" style="font-size: 90%;" title="Open panel">
+                4. Strengthening “Giving Voice to Values” in Business Schools by Reconsidering the “Invisible Hand” Metaphor
+              </a> 
+            </h4>
+          </div>
+          <div id="62b76e328ce8396323a1da21d00e6984" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10551-017-3506-6" target="_blank" title="View Publication 10.1007/s10551-017-3506-6">DOI: 10.1007/s10551-017-3506-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10551-017-3506-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#66c16e5133cede511924f9bcda5696b7" style="font-size: 90%;" title="Open panel">
+                5. Guest Editorial: A path through quantum crystallography: a short tribute to Professor Lou Massa
+              </a> 
+            </h4>
+          </div>
+          <div id="66c16e5133cede511924f9bcda5696b7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11224-017-0961-8" target="_blank" title="View Publication 10.1007/s11224-017-0961-8">DOI: 10.1007/s11224-017-0961-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11224-017-0961-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#67885ad538d18e735c9adb640c336006" style="font-size: 90%;" title="Open panel">
+                6. Developing medical education capacity in Russia: twenty years of experience
+              </a> 
+            </h4>
+          </div>
+          <div id="67885ad538d18e735c9adb640c336006" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12909-017-0861-z" target="_blank" title="View Publication 10.1186/s12909-017-0861-z">DOI: 10.1186/s12909-017-0861-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12909-017-0861-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#6ba065564c665f26f00d33780bac1a2f" style="font-size: 90%;" title="Open panel">
+                7. A Fast Face Recognition Method Based on Fractal Coding
+              </a> 
+            </h4>
+          </div>
+          <div id="6ba065564c665f26f00d33780bac1a2f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11760-017-1078-7" target="_blank" title="View Publication 10.1007/s11760-017-1078-7">DOI: 10.1007/s11760-017-1078-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11760-017-1078-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#7ae5e0cbeac1e77771cf41f51b8e41b1" style="font-size: 90%;" title="Open panel">
+                8. Adaptive face representation via class-specific and intra-class variation dictionaries for recognition
+              </a> 
+            </h4>
+          </div>
+          <div id="7ae5e0cbeac1e77771cf41f51b8e41b1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11042-017-5062-6" target="_blank" title="View Publication 10.1007/s11042-017-5062-6">DOI: 10.1007/s11042-017-5062-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11042-017-5062-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#7f364406f8f7532d5983df180008280a" style="font-size: 90%;" title="Open panel">
+                9. Human eye location algorithm based on multi-scale self-quotient image and morphological filtering for multimedia big data
+              </a> 
+            </h4>
+          </div>
+          <div id="7f364406f8f7532d5983df180008280a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11042-017-4945-x" target="_blank" title="View Publication 10.1007/s11042-017-4945-x">DOI: 10.1007/s11042-017-4945-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11042-017-4945-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#8ad734fe2bc281e0b111bbac94031560" style="font-size: 90%;" title="Open panel">
+                10. Effect of neoadjuvant chemotherapy on tumor-infiltrating lymphocytes and PD-L1 expression in breast cancer and its clinical significance
+              </a> 
+            </h4>
+          </div>
+          <div id="8ad734fe2bc281e0b111bbac94031560" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13058-017-0884-8" target="_blank" title="View Publication 10.1186/s13058-017-0884-8">DOI: 10.1186/s13058-017-0884-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13058-017-0884-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#8cc928e1ff9c933e07d72d82f8c843bb" style="font-size: 90%;" title="Open panel">
+                11. Tic Severity and Treatment in Children: The Effect of Comorbid Attention Deficit Hyperactivity Disorder and Obsessive Compulsive Behaviors
+              </a> 
+            </h4>
+          </div>
+          <div id="8cc928e1ff9c933e07d72d82f8c843bb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10578-017-0718-z" target="_blank" title="View Publication 10.1007/s10578-017-0718-z">DOI: 10.1007/s10578-017-0718-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10578-017-0718-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#9d406fdc6c70b6ffdc73fd4fdac9e195" style="font-size: 90%;" title="Open panel">
+                12. Psychometric properties of the Portuguese version of the Yale Food Addiction Scale
+              </a> 
+            </h4>
+          </div>
+          <div id="9d406fdc6c70b6ffdc73fd4fdac9e195" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40519-016-0349-6" target="_blank" title="View Publication 10.1007/s40519-016-0349-6">DOI: 10.1007/s40519-016-0349-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40519-016-0349-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#acc14e575a97d3dc57193702bde39183" style="font-size: 90%;" title="Open panel">
+                13. Face Recognition Using Gabor-Based Feature Extraction and Feature Space Transformation Fusion Method for Single Image per Person Problem
+              </a> 
+            </h4>
+          </div>
+          <div id="acc14e575a97d3dc57193702bde39183" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11063-017-9693-4" target="_blank" title="View Publication 10.1007/s11063-017-9693-4">DOI: 10.1007/s11063-017-9693-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11063-017-9693-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#b0915ded1f658e5e48d7fbd0ff05a1fa" style="font-size: 90%;" title="Open panel">
+                14. Eating disorders and food addiction in men with heroin use disorder: a controlled study
+              </a> 
+            </h4>
+          </div>
+          <div id="b0915ded1f658e5e48d7fbd0ff05a1fa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40519-017-0378-9" target="_blank" title="View Publication 10.1007/s40519-017-0378-9">DOI: 10.1007/s40519-017-0378-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40519-017-0378-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#b20d0e2759ca9401323e762d2a56576e" style="font-size: 90%;" title="Open panel">
+                15. Hyper-graph regularized discriminative concept factorization for data representation
+              </a> 
+            </h4>
+          </div>
+          <div id="b20d0e2759ca9401323e762d2a56576e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00500-017-2636-1" target="_blank" title="View Publication 10.1007/s00500-017-2636-1">DOI: 10.1007/s00500-017-2636-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00500-017-2636-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#cbc4f52387cf3e69d9af794848c4eae9" style="font-size: 90%;" title="Open panel">
+                16. Minimally invasive abdominal cerclage compared to laparotomy: a comparison of surgical and obstetric outcomes
+              </a> 
+            </h4>
+          </div>
+          <div id="cbc4f52387cf3e69d9af794848c4eae9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11701-017-0726-9" target="_blank" title="View Publication 10.1007/s11701-017-0726-9">DOI: 10.1007/s11701-017-0726-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11701-017-0726-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#0259349a08f1ab9079728191adbd30b9" style="font-size: 90%;" title="Open panel">
+                17. Introduction: Homo Religiosus and the Dragon
+              </a> 
+            </h4>
+          </div>
+          <div id="0259349a08f1ab9079728191adbd30b9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-62954-4_1" target="_blank" title="View Publication 10.1007/978-3-319-62954-4_1">DOI: 10.1007/978-3-319-62954-4_1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-62954-4_1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#739fa8a4109f627a86f8cf61b5ffbe95" style="font-size: 90%;" title="Open panel">
+                18. Using Original Face Image and Its Virtual Image for Face Recognition
+              </a> 
+            </h4>
+          </div>
+          <div id="739fa8a4109f627a86f8cf61b5ffbe95" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67777-4_20" target="_blank" title="View Publication 10.1007/978-3-319-67777-4_20">DOI: 10.1007/978-3-319-67777-4_20</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67777-4_20" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#a0da345c773fa1dc077fc4b808687828" style="font-size: 90%;" title="Open panel">
+                19. The ‘Secular Designs’ of Wole Soyinka
+              </a> 
+            </h4>
+          </div>
+          <div id="a0da345c773fa1dc077fc4b808687828" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1057/978-1-137-49608-9_5" target="_blank" title="View Publication 10.1057/978-1-137-49608-9_5">DOI: 10.1057/978-1-137-49608-9_5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1057/978-1-137-49608-9_5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="65141.html#b97605afc1748c26884965ee6c8e72a5" style="font-size: 90%;" title="Open panel">
+                20. Subspace Clustering Under Multiplicative Noise Corruption
+              </a> 
+            </h4>
+          </div>
+          <div id="b97605afc1748c26884965ee6c8e72a5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67777-4_41" target="_blank" title="View Publication 10.1007/978-3-319-67777-4_41">DOI: 10.1007/978-3-319-67777-4_41</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67777-4_41" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Yale_University'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 65141, "target": 60663 },
+      
+          { "source": 65141, "target": 61095 },
+      
+          { "source": 65141, "target": 76211 },
+      
+          { "source": 65141, "target": 65450 },
+      
+          { "source": 65141, "target": 65452 },
+      
+          { "source": 65141, "target": 114819 },
+      
+          { "source": 65141, "target": 91687 },
+      
+          { "source": 65141, "target": 114818 },
+      
+          { "source": 65141, "target": 64982 },
+      
+          { "source": 65141, "target": 93354 },
+      
+          { "source": 60663, "target": 61092 },
+      
+          { "source": 60663, "target": 60687 },
+      
+          { "source": 60663, "target": 60982 },
+      
+          { "source": 60663, "target": 60814 },
+      
+          { "source": 60663, "target": 61654 },
+      
+          { "source": 61095, "target": 65141 },
+      
+          { "source": 61095, "target": 68710 },
+      
+          { "source": 61095, "target": 61092 },
+      
+          { "source": 61095, "target": 61872 },
+      
+          { "source": 61095, "target": 60663 },
+      
+          { "source": 76211, "target": 65141 },
+      
+          { "source": 76211, "target": 60673 },
+      
+          { "source": 76211, "target": 62803 },
+      
+          { "source": 76211, "target": 61378 },
+      
+          { "source": 76211, "target": 65728 },
+      
+          { "source": 65450, "target": 60663 },
+      
+          { "source": 65450, "target": 64363 },
+      
+          { "source": 65450, "target": 61873 },
+      
+          { "source": 65450, "target": 62329 },
+      
+          { "source": 65450, "target": 66316 },
+      
+          { "source": 65452, "target": 60663 },
+      
+          { "source": 65452, "target": 64477 },
+      
+          { "source": 65452, "target": 70198 },
+      
+          { "source": 65452, "target": 65257 },
+      
+          { "source": 65452, "target": 60930 },
+      
+          { "source": 114819, "target": 65141 },
+      
+          { "source": 114819, "target": 114818 },
+      
+          { "source": 114819, "target": 114820 },
+      
+          { "source": 114819, "target": 102403 },
+      
+          { "source": 91687, "target": 65141 },
+      
+          { "source": 91687, "target": 64356 },
+      
+          { "source": 91687, "target": 91688 },
+      
+          { "source": 91687, "target": 88186 },
+      
+          { "source": 114818, "target": 114819 },
+      
+          { "source": 114818, "target": 65141 },
+      
+          { "source": 114818, "target": 114820 },
+      
+          { "source": 114818, "target": 102403 },
+      
+          { "source": 64982, "target": 64130 },
+      
+          { "source": 64982, "target": 62944 },
+      
+          { "source": 64982, "target": 64002 },
+      
+          { "source": 64982, "target": 61727 },
+      
+          { "source": 64982, "target": 69204 },
+      
+          { "source": 93354, "target": 65141 },
+      
+          { "source": 93354, "target": 93355 },
+      
+          { "source": 93354, "target": 71155 },
+      
+          { "source": 93354, "target": 61610 },
+      
+          { "source": 93354, "target": 93353 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 60663, "size": 50, "score": 0 , "title": "Algorithm", "type": "circle"},
+
+      
+
+        {"id": 61095, "size": 50, "score": 0 , "title": "MNIST database", "type": "circle"},
+
+      
+
+        {"id": 76211, "size": 50, "score": 0 , "title": "Food addiction", "type": "circle"},
+
+      
+
+        {"id": 65450, "size": 50, "score": 0 , "title": "Dimensionality reduction", "type": "circle"},
+
+      
+
+        {"id": 65452, "size": 50, "score": 0 , "title": "Augmented reality", "type": "circle"},
+
+      
+
+        {"id": 114819, "size": 50, "score": 0 , "title": "Yoruba religion", "type": "circle"},
+
+      
+
+        {"id": 91687, "size": 50, "score": 0 , "title": "Yale University Press", "type": "circle"},
+
+      
+
+        {"id": 114818, "size": 50, "score": 0 , "title": "Wole Soyinka", "type": "circle"},
+
+      
+
+        {"id": 64982, "size": 50, "score": 0 , "title": "Wave function", "type": "circle"},
+
+      
+
+        {"id": 93354, "size": 50, "score": 0 , "title": "University of Vermont", "type": "circle"},
+
+      
+
+        {"id": 65141, "size": 70, "score": 0.5 , "title": "Yale University", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 60687, "size": 5, "score": 0.4 , "title": "Genetic algorithm", "type": "circle"},
+
+      
+
+        {"id": 60982, "size": 5, "score": 0.4 , "title": "Graph theory", "type": "circle"},
+
+      
+
+        {"id": 60814, "size": 5, "score": 0.4 , "title": "Classical mechanics", "type": "circle"},
+
+      
+
+        {"id": 61654, "size": 5, "score": 0.4 , "title": "Artificial neural network", "type": "circle"},
+
+      
+
+        {"id": 68710, "size": 5, "score": 0.4 , "title": "Unsupervised learning", "type": "circle"},
+
+      
+
+        {"id": 61872, "size": 5, "score": 0.4 , "title": "Deep learning", "type": "circle"},
+
+      
+
+        {"id": 60673, "size": 5, "score": 0.4 , "title": "Obesity", "type": "circle"},
+
+      
+
+        {"id": 62803, "size": 5, "score": 0.4 , "title": "Bariatric surgery", "type": "circle"},
+
+      
+
+        {"id": 61378, "size": 5, "score": 0.4 , "title": "Self-efficacy", "type": "circle"},
+
+      
+
+        {"id": 65728, "size": 5, "score": 0.4 , "title": "Portuguese language", "type": "circle"},
+
+      
+
+        {"id": 64363, "size": 5, "score": 0.4 , "title": "Feature selection", "type": "circle"},
+
+      
+
+        {"id": 61873, "size": 5, "score": 0.4 , "title": "Principal component analysis", "type": "circle"},
+
+      
+
+        {"id": 62329, "size": 5, "score": 0.4 , "title": "Machine learning", "type": "circle"},
+
+      
+
+        {"id": 66316, "size": 5, "score": 0.4 , "title": "Kernel method", "type": "circle"},
+
+      
+
+        {"id": 64477, "size": 5, "score": 0.4 , "title": "Virtual reality", "type": "circle"},
+
+      
+
+        {"id": 70198, "size": 5, "score": 0.4 , "title": "Smartphone", "type": "circle"},
+
+      
+
+        {"id": 65257, "size": 5, "score": 0.4 , "title": "Robot", "type": "circle"},
+
+      
+
+        {"id": 60930, "size": 5, "score": 0.4 , "title": "Interaction", "type": "circle"},
+
+      
+
+        {"id": 114820, "size": 5, "score": 0.4 , "title": "The Road", "type": "circle"},
+
+      
+
+        {"id": 102403, "size": 5, "score": 0.4 , "title": "List of Nobel laureates", "type": "circle"},
+
+      
+
+        {"id": 64356, "size": 5, "score": 0.4 , "title": "New York City", "type": "circle"},
+
+      
+
+        {"id": 91688, "size": 5, "score": 0.4 , "title": "Invisible hand", "type": "circle"},
+
+      
+
+        {"id": 88186, "size": 5, "score": 0.4 , "title": "Adam Smith", "type": "circle"},
+
+      
+
+        {"id": 64130, "size": 5, "score": 0.4 , "title": "Quantum mechanics", "type": "circle"},
+
+      
+
+        {"id": 62944, "size": 5, "score": 0.4 , "title": "Quantum field theory", "type": "circle"},
+
+      
+
+        {"id": 64002, "size": 5, "score": 0.4 , "title": "Hamiltonian mechanics", "type": "circle"},
+
+      
+
+        {"id": 61727, "size": 5, "score": 0.4 , "title": "Factorial", "type": "circle"},
+
+      
+
+        {"id": 69204, "size": 5, "score": 0.4 , "title": "Angular momentum", "type": "circle"},
+
+      
+
+        {"id": 93355, "size": 5, "score": 0.4 , "title": "University of Connecticut", "type": "circle"},
+
+      
+
+        {"id": 71155, "size": 5, "score": 0.4 , "title": "Tropical medicine", "type": "circle"},
+
+      
+
+        {"id": 61610, "size": 5, "score": 0.4 , "title": "Russia", "type": "circle"},
+
+      
+
+        {"id": 93353, "size": 5, "score": 0.4 , "title": "Kazan", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

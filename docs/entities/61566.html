@@ -1,0 +1,3508 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Tungsten</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Tungsten</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Tungsten" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Tungsten" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="60746.html"
+        
+       title="View other articles tagged with this concept">Scanning electron microscope</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.0;"   
+        
+          href="60734.html"
+        
+       title="View other articles tagged with this concept">Carbon</a>
+      <span color="black;" style="opacity: 1.0;">&nbsp;7 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="61570.html"
+        
+       title="View other articles tagged with this concept">Hardness</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="60642.html"
+        
+       title="View other articles tagged with this concept">X-ray crystallography</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="73725.html"
+        
+       title="View other articles tagged with this concept">Tantalum</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="61299.html"
+        
+       title="View other articles tagged with this concept">Vanadium</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="60972.html"
+        
+       title="View other articles tagged with this concept">Transmission electron microscopy</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="60944.html"
+        
+       title="View other articles tagged with this concept">The Samples</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="61192.html"
+        
+       title="View other articles tagged with this concept">Spectroscopy</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="64353.html"
+        
+       title="View other articles tagged with this concept">Molybdenum</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="61479.html"
+        
+       title="View other articles tagged with this concept">Cobalt</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="61143.html"
+        
+       title="View other articles tagged with this concept">Acid</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61564.html"
+        
+       title="View other articles tagged with this concept">X-ray scattering techniques</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62402.html"
+        
+       title="View other articles tagged with this concept">Welding</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60645.html"
+        
+       title="View other articles tagged with this concept">Solid solution</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61567.html"
+        
+       title="View other articles tagged with this concept">Sintering</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61002.html"
+        
+       title="View other articles tagged with this concept">Raman spectroscopy</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62306.html"
+        
+       title="View other articles tagged with this concept">Nickel</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61494.html"
+        
+       title="View other articles tagged with this concept">Hydrogen</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61443.html"
+        
+       title="View other articles tagged with this concept">Electrode</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60975.html"
+        
+       title="View other articles tagged with this concept">Diffraction</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="65567.html"
+        
+       title="View other articles tagged with this concept">Austenite</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63197.html"
+        
+       title="View other articles tagged with this concept">Zirconium</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63732.html"
+        
+       title="View other articles tagged with this concept">Tungsten carbide</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="68239.html"
+        
+       title="View other articles tagged with this concept">Transition metal</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61150.html"
+        
+       title="View other articles tagged with this concept">Schutzstaffel</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60749.html"
+        
+       title="View other articles tagged with this concept">Saturation (magnetic)</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60853.html"
+        
+       title="View other articles tagged with this concept">Polymer</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60741.html"
+        
+       title="View other articles tagged with this concept">Photoluminescence</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61286.html"
+        
+       title="View other articles tagged with this concept">Phase transition</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="71133.html"
+        
+       title="View other articles tagged with this concept">Niobium</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65427.html"
+        
+       title="View other articles tagged with this concept">Melt spinning</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60995.html"
+        
+       title="View other articles tagged with this concept">Martensite</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62081.html"
+        
+       title="View other articles tagged with this concept">Lead</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61491.html"
+        
+       title="View other articles tagged with this concept">Ion</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65425.html"
+        
+       title="View other articles tagged with this concept">Intermetallic</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63149.html"
+        
+       title="View other articles tagged with this concept">Helium</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62899.html"
+        
+       title="View other articles tagged with this concept">Curie temperature</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63845.html"
+        
+       title="View other articles tagged with this concept">Chromium</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61863.html"
+        
+       title="View other articles tagged with this concept">Boride</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64807.html"
+        
+       title="View other articles tagged with this concept">Argon</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60776.html"
+        
+       title="View other articles tagged with this concept">Wrinkle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72640.html"
+        
+       title="View other articles tagged with this concept">Work hardening</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67409.html"
+        
+       title="View other articles tagged with this concept">Wavefront</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61465.html"
+        
+       title="View other articles tagged with this concept">Viscosity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60945.html"
+        
+       title="View other articles tagged with this concept">Vickers hardness test</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60666.html"
+        
+       title="View other articles tagged with this concept">Variance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61472.html"
+        
+       title="View other articles tagged with this concept">Uranium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61211.html"
+        
+       title="View other articles tagged with this concept">Ultimate tensile strength</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61861.html"
+        
+       title="View other articles tagged with this concept">Titanium dioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60861.html"
+        
+       title="View other articles tagged with this concept">Thyroid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62855.html"
+        
+       title="View other articles tagged with this concept">Thorium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60770.html"
+        
+       title="View other articles tagged with this concept">Thermogravimetric analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67077.html"
+        
+       title="View other articles tagged with this concept">Thermoelectric effect</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61568.html"
+        
+       title="View other articles tagged with this concept">Thermal conductivity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75746.html"
+        
+       title="View other articles tagged with this concept">The Tested</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66983.html"
+        
+       title="View other articles tagged with this concept">Tetragonal crystal system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67933.html"
+        
+       title="View other articles tagged with this concept">Sulfur trioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60765.html"
+        
+       title="View other articles tagged with this concept">Sulfur</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63760.html"
+        
+       title="View other articles tagged with this concept">Sulfide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64422.html"
+        
+       title="View other articles tagged with this concept">Sputtering</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60950.html"
+        
+       title="View other articles tagged with this concept">Spectrophotometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62255.html"
+        
+       title="View other articles tagged with this concept">Specific surface area</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64751.html"
+        
+       title="View other articles tagged with this concept">Sodium silicate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67368.html"
+        
+       title="View other articles tagged with this concept">Sodium hydroxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74088.html"
+        
+       title="View other articles tagged with this concept">Simulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62166.html"
+        
+       title="View other articles tagged with this concept">Silicon dioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61480.html"
+        
+       title="View other articles tagged with this concept">Semiconductor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70245.html"
+        
+       title="View other articles tagged with this concept">Sardinia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62205.html"
+        
+       title="View other articles tagged with this concept">Rock music</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68389.html"
+        
+       title="View other articles tagged with this concept">Rhodium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76459.html"
+        
+       title="View other articles tagged with this concept">Rhenium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68263.html"
+        
+       title="View other articles tagged with this concept">Residual stress</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63134.html"
+        
+       title="View other articles tagged with this concept">Relative permittivity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="87101.html"
+        
+       title="View other articles tagged with this concept">Precipitation hardening</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68961.html"
+        
+       title="View other articles tagged with this concept">Powder metallurgy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66676.html"
+        
+       title="View other articles tagged with this concept">Polylactic acid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60802.html"
+        
+       title="View other articles tagged with this concept">Photon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61959.html"
+        
+       title="View other articles tagged with this concept">Photocatalysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60769.html"
+        
+       title="View other articles tagged with this concept">Phosphorus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67084.html"
+        
+       title="View other articles tagged with this concept">Peroxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62667.html"
+        
+       title="View other articles tagged with this concept">Particulates</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61952.html"
+        
+       title="View other articles tagged with this concept">Oxygen</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74960.html"
+        
+       title="View other articles tagged with this concept">Oxime</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63566.html"
+        
+       title="View other articles tagged with this concept">Optical microscope</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60994.html"
+        
+       title="View other articles tagged with this concept">Nucleation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61235.html"
+        
+       title="View other articles tagged with this concept">Nitrogen</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64425.html"
+        
+       title="View other articles tagged with this concept">Monoclinic crystal system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60764.html"
+        
+       title="View other articles tagged with this concept">Microwave</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63715.html"
+        
+       title="View other articles tagged with this concept">Methylene blue</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63303.html"
+        
+       title="View other articles tagged with this concept">Methane</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66575.html"
+        
+       title="View other articles tagged with this concept">Malachite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61345.html"
+        
+       title="View other articles tagged with this concept">Magnesium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68640.html"
+        
+       title="View other articles tagged with this concept">Lung cancer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64886.html"
+        
+       title="View other articles tagged with this concept">Leukemia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61516.html"
+        
+       title="View other articles tagged with this concept">Laser</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71691.html"
+        
+       title="View other articles tagged with this concept">Isopropyl alcohol</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61003.html"
+        
+       title="View other articles tagged with this concept">Infrared spectroscopy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62768.html"
+        
+       title="View other articles tagged with this concept">Indonesia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61673.html"
+        
+       title="View other articles tagged with this concept">Heat capacity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60697.html"
+        
+       title="View other articles tagged with this concept">Graphene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64389.html"
+        
+       title="View other articles tagged with this concept">Germanium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62954.html"
+        
+       title="View other articles tagged with this concept">Gallium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61569.html"
+        
+       title="View other articles tagged with this concept">Functionally graded material</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67332.html"
+        
+       title="View other articles tagged with this concept">Fluorite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61565.html"
+        
+       title="View other articles tagged with this concept">Flexural strength</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62241.html"
+        
+       title="View other articles tagged with this concept">Finite element method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60644.html"
+        
+       title="View other articles tagged with this concept">Ferromagnetism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64690.html"
+        
+       title="View other articles tagged with this concept">Fermi level</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61285.html"
+        
+       title="View other articles tagged with this concept">Exothermic process</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64858.html"
+        
+       title="View other articles tagged with this concept">Eutectic system</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61574.html"
+        
+       title="View other articles tagged with this concept">Ethylene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63182.html"
+        
+       title="View other articles tagged with this concept">Electronvolt</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61438.html"
+        
+       title="View other articles tagged with this concept">Electrolyte</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69538.html"
+        
+       title="View other articles tagged with this concept">Electric potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61705.html"
+        
+       title="View other articles tagged with this concept">Ductility</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61469.html"
+        
+       title="View other articles tagged with this concept">Dislocation creep</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61076.html"
+        
+       title="View other articles tagged with this concept">Differential scanning calorimetry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61100.html"
+        
+       title="View other articles tagged with this concept">Correlation and dependence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61361.html"
+        
+       title="View other articles tagged with this concept">China</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61598.html"
+        
+       title="View other articles tagged with this concept">Chemical bond</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62447.html"
+        
+       title="View other articles tagged with this concept">Cavity magnetron</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62646.html"
+        
+       title="View other articles tagged with this concept">Cardiovascular disease</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60823.html"
+        
+       title="View other articles tagged with this concept">Carboxylic acid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64052.html"
+        
+       title="View other articles tagged with this concept">Carbon black</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61492.html"
+        
+       title="View other articles tagged with this concept">Calorimeter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62609.html"
+        
+       title="View other articles tagged with this concept">Calcium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64108.html"
+        
+       title="View other articles tagged with this concept">Cadmium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64407.html"
+        
+       title="View other articles tagged with this concept">Bioaccumulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63548.html"
+        
+       title="View other articles tagged with this concept">Beryllium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64274.html"
+        
+       title="View other articles tagged with this concept">Azimuth</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63256.html"
+        
+       title="View other articles tagged with this concept">Arsenic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62152.html"
+        
+       title="View other articles tagged with this concept">Arc welding</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68249.html"
+        
+       title="View other articles tagged with this concept">Antimony trioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64812.html"
+        
+       title="View other articles tagged with this concept">Antiferromagnetism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66311.html"
+        
+       title="View other articles tagged with this concept">Anatase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64036.html"
+        
+       title="View other articles tagged with this concept">Amorphous metal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74483.html"
+        
+       title="View other articles tagged with this concept">Alkali metal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60875.html"
+        
+       title="View other articles tagged with this concept">Adsorption</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68744.html"
+        
+       title="View other articles tagged with this concept">Acetaldehyde</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">50</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#0075a7d0aa3e61f89ad3ff605c68600d" style="font-size: 90%;" title="Open panel">
+                1. Hot-pressed sintering of W/Cu functionally graded materials prepared from copper-coated tungsten powders
+              </a> 
+            </h4>
+          </div>
+          <div id="0075a7d0aa3e61f89ad3ff605c68600d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12598-017-0939-0" target="_blank" title="View Publication 10.1007/s12598-017-0939-0">DOI: 10.1007/s12598-017-0939-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12598-017-0939-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#01bdb7853df2fc310b380a2f6f3b17c1" style="font-size: 90%;" title="Open panel">
+                2. Trapping of helium atom by vacancy in tungsten: a density functional theory study
+              </a> 
+            </h4>
+          </div>
+          <div id="01bdb7853df2fc310b380a2f6f3b17c1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjb/e2017-80056-1" target="_blank" title="View Publication 10.1140/epjb/e2017-80056-1">DOI: 10.1140/epjb/e2017-80056-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjb/e2017-80056-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#08867757c843447c2e78e91eb904ed80" style="font-size: 90%;" title="Open panel">
+                3. Contact resistance and arc erosion of tungsten-copper contacts in direct currents
+              </a> 
+            </h4>
+          </div>
+          <div id="08867757c843447c2e78e91eb904ed80" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11595-017-1674-y" target="_blank" title="View Publication 10.1007/s11595-017-1674-y">DOI: 10.1007/s11595-017-1674-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11595-017-1674-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#0a7201aaa87924e2a704f6712bccc4a0" style="font-size: 90%;" title="Open panel">
+                4. Kinetics of Shrinkage, Structurization, and the Mechanical Characteristics of Zirconium Boride Sintered in the Presence of Activating Additives
+              </a> 
+            </h4>
+          </div>
+          <div id="0a7201aaa87924e2a704f6712bccc4a0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11106-017-9855-y" target="_blank" title="View Publication 10.1007/s11106-017-9855-y">DOI: 10.1007/s11106-017-9855-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11106-017-9855-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#0df07e9d63c568f539b1e18aba804f90" style="font-size: 90%;" title="Open panel">
+                5. Comparison of electrical properties of Ba5−xSrxGdTi3V7O30 ceramics for different concentration of strontium
+              </a> 
+            </h4>
+          </div>
+          <div id="0df07e9d63c568f539b1e18aba804f90" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10854-017-7440-2" target="_blank" title="View Publication 10.1007/s10854-017-7440-2">DOI: 10.1007/s10854-017-7440-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10854-017-7440-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#126b6c37d56a59018c2cfcfc2cca501a" style="font-size: 90%;" title="Open panel">
+                6. Defects Induced Magnetism in WO3 and Reduced Graphene Oxide-WO3 Nanocomposites
+              </a> 
+            </h4>
+          </div>
+          <div id="126b6c37d56a59018c2cfcfc2cca501a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10948-017-4184-4" target="_blank" title="View Publication 10.1007/s10948-017-4184-4">DOI: 10.1007/s10948-017-4184-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10948-017-4184-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#15fc515dd2a4edc99ebc784c5edf42c7" style="font-size: 90%;" title="Open panel">
+                7. Effect of cobalt addition on microstructure and mechanical properties of tungsten heavy alloys
+              </a> 
+            </h4>
+          </div>
+          <div id="15fc515dd2a4edc99ebc784c5edf42c7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12666-017-1074-1" target="_blank" title="View Publication 10.1007/s12666-017-1074-1">DOI: 10.1007/s12666-017-1074-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12666-017-1074-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#16023c137e4ed9eece2c24fea5a9a15d" style="font-size: 90%;" title="Open panel">
+                8. Reduction of Intergranular Cracking Susceptibility by Precipitation Control in 2.25Cr Heat-Resistant Steels
+              </a> 
+            </h4>
+          </div>
+          <div id="16023c137e4ed9eece2c24fea5a9a15d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11661-016-3936-2" target="_blank" title="View Publication 10.1007/s11661-016-3936-2">DOI: 10.1007/s11661-016-3936-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11661-016-3936-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#168ce9d4aac3e9e0e3cab9e0a52f249f" style="font-size: 90%;" title="Open panel">
+                9. Modeling of plasma interaction with first wall in fusion reactor–measuring residual mechanical stresses in tungsten after irradiation at GOL-3 facility
+              </a> 
+            </h4>
+          </div>
+          <div id="168ce9d4aac3e9e0e3cab9e0a52f249f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0022476616070039" target="_blank" title="View Publication 10.1134/S0022476616070039">DOI: 10.1134/S0022476616070039</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0022476616070039" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#17a13e179fa07e433e33b8562df25c95" style="font-size: 90%;" title="Open panel">
+                10. A novel flotation scheme: selective flotation of tungsten minerals from calcium minerals using Pb–BHA complexes in Shizhuyuan
+              </a> 
+            </h4>
+          </div>
+          <div id="17a13e179fa07e433e33b8562df25c95" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12598-017-0907-8" target="_blank" title="View Publication 10.1007/s12598-017-0907-8">DOI: 10.1007/s12598-017-0907-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12598-017-0907-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#196063a40840f9a5b1276c58a82dfdf7" style="font-size: 90%;" title="Open panel">
+                11. Uranium, thorium and tungsten concentration measured in the soil of Italian Military Forces firing range “Poligono Interforze Salto di Quirra”: natural background or enhancement of concentration levels caused by military activities?
+              </a> 
+            </h4>
+          </div>
+          <div id="196063a40840f9a5b1276c58a82dfdf7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12210-017-0614-2" target="_blank" title="View Publication 10.1007/s12210-017-0614-2">DOI: 10.1007/s12210-017-0614-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12210-017-0614-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#1bfa3fb4295bba35f1533f18c49c8c65" style="font-size: 90%;" title="Open panel">
+                12. Centrifugal casting of tungsten in a specifically designed skull-casting furnace
+              </a> 
+            </h4>
+          </div>
+          <div id="1bfa3fb4295bba35f1533f18c49c8c65" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03378401" target="_blank" title="View Publication 10.1007/BF03378401">DOI: 10.1007/BF03378401</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03378401" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#24f72403ea2f2a7a95cd6faa8f8cc0e0" style="font-size: 90%;" title="Open panel">
+                13. Assessment of critical minerals: updated application of an early-warning screening methodology
+              </a> 
+            </h4>
+          </div>
+          <div id="24f72403ea2f2a7a95cd6faa8f8cc0e0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13563-017-0119-6" target="_blank" title="View Publication 10.1007/s13563-017-0119-6">DOI: 10.1007/s13563-017-0119-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13563-017-0119-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#29d98c3119cf9708f74fd6ce912e8650" style="font-size: 90%;" title="Open panel">
+                14. Impact of Frequency of Load Changes in Fatigue Tests on the Temperature of the Modified Polymer
+              </a> 
+            </h4>
+          </div>
+          <div id="29d98c3119cf9708f74fd6ce912e8650" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10765-017-2254-2" target="_blank" title="View Publication 10.1007/s10765-017-2254-2">DOI: 10.1007/s10765-017-2254-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10765-017-2254-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#2fd3de628fe7d6086911b574b0b75345" style="font-size: 90%;" title="Open panel">
+                15. Tungsten Contamination of Soils and Sediments: Current State of Science
+              </a> 
+            </h4>
+          </div>
+          <div id="2fd3de628fe7d6086911b574b0b75345" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40726-016-0046-0" target="_blank" title="View Publication 10.1007/s40726-016-0046-0">DOI: 10.1007/s40726-016-0046-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40726-016-0046-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#31685658dbe3f008483e486e3c83311f" style="font-size: 90%;" title="Open panel">
+                16. Root cause analysis and reliability improvement methods for orbital TIG welding process for propulsion feed system of satellites
+              </a> 
+            </h4>
+          </div>
+          <div id="31685658dbe3f008483e486e3c83311f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13198-016-0549-5" target="_blank" title="View Publication 10.1007/s13198-016-0549-5">DOI: 10.1007/s13198-016-0549-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13198-016-0549-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#324860d6492c4e86e7eb3fc9b939b098" style="font-size: 90%;" title="Open panel">
+                17. Low-Pressure, High-Temperature Oxidation of Tungsten
+              </a> 
+            </h4>
+          </div>
+          <div id="324860d6492c4e86e7eb3fc9b939b098" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03378089" target="_blank" title="View Publication 10.1007/BF03378089">DOI: 10.1007/BF03378089</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03378089" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#346f0153bbf8a7fc90262e685eb4e575" style="font-size: 90%;" title="Open panel">
+                18. Effect of stresses on the structural changes in high-chromium steel upon creep
+              </a> 
+            </h4>
+          </div>
+          <div id="346f0153bbf8a7fc90262e685eb4e575" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0031918X17040032" target="_blank" title="View Publication 10.1134/S0031918X17040032">DOI: 10.1134/S0031918X17040032</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0031918X17040032" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#3b362b736dafe62faedca209b1486f5b" style="font-size: 90%;" title="Open panel">
+                19. TiO2/WO3 photoactive bilayers in the UV–Vis light region
+              </a> 
+            </h4>
+          </div>
+          <div id="3b362b736dafe62faedca209b1486f5b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00339-017-0837-1" target="_blank" title="View Publication 10.1007/s00339-017-0837-1">DOI: 10.1007/s00339-017-0837-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00339-017-0837-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#3ec78d92058780eb657a3e2d4fbe0ad9" style="font-size: 90%;" title="Open panel">
+                20. Energy characterization based assessment of pillar recovery
+              </a> 
+            </h4>
+          </div>
+          <div id="3ec78d92058780eb657a3e2d4fbe0ad9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12517-017-3159-x" target="_blank" title="View Publication 10.1007/s12517-017-3159-x">DOI: 10.1007/s12517-017-3159-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12517-017-3159-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#42d20de8b652be91f49bf31de22bb6d0" style="font-size: 90%;" title="Open panel">
+                21. Gas tungsten arc models including the physics of the cathode layer: remaining issues
+              </a> 
+            </h4>
+          </div>
+          <div id="42d20de8b652be91f49bf31de22bb6d0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40194-017-0513-2" target="_blank" title="View Publication 10.1007/s40194-017-0513-2">DOI: 10.1007/s40194-017-0513-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40194-017-0513-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#4300a98605251f4dd30d9d12fbc1b193" style="font-size: 90%;" title="Open panel">
+                22. Intermediate Phases in Binary Systems of Certain Transition Elements
+              </a> 
+            </h4>
+          </div>
+          <div id="4300a98605251f4dd30d9d12fbc1b193" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03377684" target="_blank" title="View Publication 10.1007/BF03377684">DOI: 10.1007/BF03377684</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03377684" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#54470f015734f52aa38df3bb4cf956fa" style="font-size: 90%;" title="Open panel">
+                23. Heat-resistant alloys based on intermetallic Co3(Al, W)
+              </a> 
+            </h4>
+          </div>
+          <div id="54470f015734f52aa38df3bb4cf956fa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0012500817040036" target="_blank" title="View Publication 10.1134/S0012500817040036">DOI: 10.1134/S0012500817040036</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0012500817040036" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#5447b69fb9e74128929b4378f95ec6e5" style="font-size: 90%;" title="Open panel">
+                24. Pyridine derivatives as ligands of metal complexes for the peroxidation of organosulfur compounds
+              </a> 
+            </h4>
+          </div>
+          <div id="5447b69fb9e74128929b4378f95ec6e5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0040579517040029" target="_blank" title="View Publication 10.1134/S0040579517040029">DOI: 10.1134/S0040579517040029</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0040579517040029" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#548ef735d6cca3f7e5852b0beb84826c" style="font-size: 90%;" title="Open panel">
+                25. Powder Metallurgy in Aerospace Applications
+              </a> 
+            </h4>
+          </div>
+          <div id="548ef735d6cca3f7e5852b0beb84826c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03378242" target="_blank" title="View Publication 10.1007/BF03378242">DOI: 10.1007/BF03378242</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03378242" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#57f70571b650a799f99feec0e2af4f22" style="font-size: 90%;" title="Open panel">
+                26. Preparation of Ceramic Materials Based on TiC–W2C–Co by SHS-Extrusion
+              </a> 
+            </h4>
+          </div>
+          <div id="57f70571b650a799f99feec0e2af4f22" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11148-017-0050-y" target="_blank" title="View Publication 10.1007/s11148-017-0050-y">DOI: 10.1007/s11148-017-0050-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11148-017-0050-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#5adb2ed3e491736941595a6ffcbcaf1f" style="font-size: 90%;" title="Open panel">
+                27. Self-propagating crystallization waves in the TiCu amorphous alloy
+              </a> 
+            </h4>
+          </div>
+          <div id="5adb2ed3e491736941595a6ffcbcaf1f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0021364016220124" target="_blank" title="View Publication 10.1134/S0021364016220124">DOI: 10.1134/S0021364016220124</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0021364016220124" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#5eb6c2391b9cc0b7111acc554112ec03" style="font-size: 90%;" title="Open panel">
+                28. Influence of Re Concentration on the Mechanical Properties of Tungsten Borides from First-Principles Calculations
+              </a> 
+            </h4>
+          </div>
+          <div id="5eb6c2391b9cc0b7111acc554112ec03" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11837-017-2483-7" target="_blank" title="View Publication 10.1007/s11837-017-2483-7">DOI: 10.1007/s11837-017-2483-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11837-017-2483-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#610d25a4ecae7054756349671e096f1a" style="font-size: 90%;" title="Open panel">
+                29. Fabrication and Properties of Novel NiWFeB Amorphous Alloys
+              </a> 
+            </h4>
+          </div>
+          <div id="610d25a4ecae7054756349671e096f1a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11665-017-2855-8" target="_blank" title="View Publication 10.1007/s11665-017-2855-8">DOI: 10.1007/s11665-017-2855-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11665-017-2855-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#6588e289cae96b5f8cf4cf57ac402be3" style="font-size: 90%;" title="Open panel">
+                30. Green synthesis of UV and visible light active TiO2/WO3 powders and films for malachite green and ethylene photodegradation
+              </a> 
+            </h4>
+          </div>
+          <div id="6588e289cae96b5f8cf4cf57ac402be3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11144-016-1128-0" target="_blank" title="View Publication 10.1007/s11144-016-1128-0">DOI: 10.1007/s11144-016-1128-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11144-016-1128-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#667228a3369bc3178047c1e09f204215" style="font-size: 90%;" title="Open panel">
+                31. Properties and applications of dispersion-strengthened metals
+              </a> 
+            </h4>
+          </div>
+          <div id="667228a3369bc3178047c1e09f204215" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03378581" target="_blank" title="View Publication 10.1007/BF03378581">DOI: 10.1007/BF03378581</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03378581" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#68489856e66f591425442294ee917249" style="font-size: 90%;" title="Open panel">
+                32. Perovskite Sr1−x Ba x W1−y Ta y (O,N)3: synthesis by thermal ammonolysis and photocatalytic oxygen evolution under visible light
+              </a> 
+            </h4>
+          </div>
+          <div id="68489856e66f591425442294ee917249" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40243-017-0094-4" target="_blank" title="View Publication 10.1007/s40243-017-0094-4">DOI: 10.1007/s40243-017-0094-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40243-017-0094-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#69627aff6fe6c0e168b85f1fa5c3ae3c" style="font-size: 90%;" title="Open panel">
+                33. Liquid-phase oxidation of ethylamine to acetaldehyde oximes over tungsten-doped zeolites
+              </a> 
+            </h4>
+          </div>
+          <div id="69627aff6fe6c0e168b85f1fa5c3ae3c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11426-016-0480-y" target="_blank" title="View Publication 10.1007/s11426-016-0480-y">DOI: 10.1007/s11426-016-0480-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11426-016-0480-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#6a51eff346a269d6675363b1c54c917b" style="font-size: 90%;" title="Open panel">
+                34. Mechanical and magnetic properties of alloys near the concentration range of the existence of Co3(Al,W) intermetallic compound
+              </a> 
+            </h4>
+          </div>
+          <div id="6a51eff346a269d6675363b1c54c917b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0031918X17050064" target="_blank" title="View Publication 10.1134/S0031918X17050064">DOI: 10.1134/S0031918X17050064</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0031918X17050064" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#6ce986cf1bc3fd0ee610200c2a5bf088" style="font-size: 90%;" title="Open panel">
+                35. Production of nickel–cobalt concentrate in rhenium-containing refractory alloy processing
+              </a> 
+            </h4>
+          </div>
+          <div id="6ce986cf1bc3fd0ee610200c2a5bf088" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1067821217010035" target="_blank" title="View Publication 10.3103/S1067821217010035">DOI: 10.3103/S1067821217010035</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1067821217010035" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#6e2f8070916c97217a1b093367578426" style="font-size: 90%;" title="Open panel">
+                36. Investigation of the processes of heat propagation in W/FeSb2/W detection pixel of the single photon thermoelectric detector
+              </a> 
+            </h4>
+          </div>
+          <div id="6e2f8070916c97217a1b093367578426" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068337217030100" target="_blank" title="View Publication 10.3103/S1068337217030100">DOI: 10.3103/S1068337217030100</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068337217030100" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#6e478dea3cc95362d565c758525520fd" style="font-size: 90%;" title="Open panel">
+                37. Properties of thin films of tungsten sulfide and copper sulfide produced by magnetron sputtering method
+              </a> 
+            </h4>
+          </div>
+          <div id="6e478dea3cc95362d565c758525520fd" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S207511331701004X" target="_blank" title="View Publication 10.1134/S207511331701004X">DOI: 10.1134/S207511331701004X</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S207511331701004X" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#6e59dd91cff7065f5c5a9433f42d1eee" style="font-size: 90%;" title="Open panel">
+                38. Application of Raman Spectroscopy for Analyzing Diamond Coatings on a Hard Alloy
+              </a> 
+            </h4>
+          </div>
+          <div id="6e59dd91cff7065f5c5a9433f42d1eee" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10812-017-0469-4" target="_blank" title="View Publication 10.1007/s10812-017-0469-4">DOI: 10.1007/s10812-017-0469-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10812-017-0469-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#7243daf043645e3362c2dc77faaf0b95" style="font-size: 90%;" title="Open panel">
+                39. Microscopic structure and property of double-electrode gas metal arc welding of AZ31B magnesium alloy
+              </a> 
+            </h4>
+          </div>
+          <div id="7243daf043645e3362c2dc77faaf0b95" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12204-017-1834-4" target="_blank" title="View Publication 10.1007/s12204-017-1834-4">DOI: 10.1007/s12204-017-1834-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12204-017-1834-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#7289ac1f6358ac49ac2eca4fd8353c85" style="font-size: 90%;" title="Open panel">
+                40. Die Technology and Construction for Compacting Gas-Saturated Tungsten and Carbon Powders
+              </a> 
+            </h4>
+          </div>
+          <div id="7289ac1f6358ac49ac2eca4fd8353c85" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11015-017-0441-9" target="_blank" title="View Publication 10.1007/s11015-017-0441-9">DOI: 10.1007/s11015-017-0441-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11015-017-0441-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#78ae97df07581b83f35061638e6dbeb2" style="font-size: 90%;" title="Open panel">
+                41. Studying the Kinetics and Mechanism of Crystal Growth on Tungsten Wires in Normal Conditions
+              </a> 
+            </h4>
+          </div>
+          <div id="78ae97df07581b83f35061638e6dbeb2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11106-017-9862-z" target="_blank" title="View Publication 10.1007/s11106-017-9862-z">DOI: 10.1007/s11106-017-9862-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11106-017-9862-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#7b46bed2dcb14a7ae032e71c6a859b40" style="font-size: 90%;" title="Open panel">
+                42. Nano-structured WO3 layers sensitized with ALD Pt for quick detection of H2S
+              </a> 
+            </h4>
+          </div>
+          <div id="7b46bed2dcb14a7ae032e71c6a859b40" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10854-017-7642-7" target="_blank" title="View Publication 10.1007/s10854-017-7642-7">DOI: 10.1007/s10854-017-7642-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10854-017-7642-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#7f5728339f852a3389fb8d2be9a712f1" style="font-size: 90%;" title="Open panel">
+                43. Creation of surface catalytic active sites on tungsten oxide(s) and a study of the catalytic behavior in isopropanol and 1-hexene reactions
+              </a> 
+            </h4>
+          </div>
+          <div id="7f5728339f852a3389fb8d2be9a712f1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11144-017-1216-9" target="_blank" title="View Publication 10.1007/s11144-017-1216-9">DOI: 10.1007/s11144-017-1216-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11144-017-1216-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#7fc0d0a6c83486d25ac86b768e5617df" style="font-size: 90%;" title="Open panel">
+                44. Influence of Heavy Metal Powders on Rheological Properties of Poly(Lactic Acid)
+              </a> 
+            </h4>
+          </div>
+          <div id="7fc0d0a6c83486d25ac86b768e5617df" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11182-017-1117-4" target="_blank" title="View Publication 10.1007/s11182-017-1117-4">DOI: 10.1007/s11182-017-1117-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11182-017-1117-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#808edeaaa165a6b69a6427d97486e6ca" style="font-size: 90%;" title="Open panel">
+                45. Effect of Milling Tools on the Microstructure and Property of Cu-Based Composites Prepared by Mechanical Alloying
+              </a> 
+            </h4>
+          </div>
+          <div id="808edeaaa165a6b69a6427d97486e6ca" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40195-017-0582-7" target="_blank" title="View Publication 10.1007/s40195-017-0582-7">DOI: 10.1007/s40195-017-0582-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40195-017-0582-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#80c497ba2e5760531b8a91fa6a070467" style="font-size: 90%;" title="Open panel">
+                46. High-temperature oxidation behavior of Nb–Si-based alloy with separate vanadium, tantalum, tungsten and zirconium addition
+              </a> 
+            </h4>
+          </div>
+          <div id="80c497ba2e5760531b8a91fa6a070467" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12598-017-0916-7" target="_blank" title="View Publication 10.1007/s12598-017-0916-7">DOI: 10.1007/s12598-017-0916-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12598-017-0916-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#80d6b5542219d4f8723a2f95422c4a2e" style="font-size: 90%;" title="Open panel">
+                47. Effects of waste glass on alkali-activated tungsten mining waste: composition and mechanical properties
+              </a> 
+            </h4>
+          </div>
+          <div id="80d6b5542219d4f8723a2f95422c4a2e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1617/s11527-017-1062-2" target="_blank" title="View Publication 10.1617/s11527-017-1062-2">DOI: 10.1617/s11527-017-1062-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1617/s11527-017-1062-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#87339a049bc8c02b0adcbb74451c3d32" style="font-size: 90%;" title="Open panel">
+                48. Comparison of Microstructure and Residual Stress Between TIG and MAG Welding Using Low Transformation Temperature Welding Filler
+              </a> 
+            </h4>
+          </div>
+          <div id="87339a049bc8c02b0adcbb74451c3d32" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40195-017-0642-z" target="_blank" title="View Publication 10.1007/s40195-017-0642-z">DOI: 10.1007/s40195-017-0642-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40195-017-0642-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#90ab6aa08d77a0873625825faa9373f6" style="font-size: 90%;" title="Open panel">
+                49. High-Temperature Heat-Resistant Coatings for Protection of Refractory Metals and Their Alloys (Overview)
+              </a> 
+            </h4>
+          </div>
+          <div id="90ab6aa08d77a0873625825faa9373f6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11106-017-9887-3" target="_blank" title="View Publication 10.1007/s11106-017-9887-3">DOI: 10.1007/s11106-017-9887-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11106-017-9887-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61566.html#917ba4a53a2c708389d244e533096ca7" style="font-size: 90%;" title="Open panel">
+                50. The effect of high-power plasma flows on tungsten plates with multilayer films of tungsten nanoparticles
+              </a> 
+            </h4>
+          </div>
+          <div id="917ba4a53a2c708389d244e533096ca7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1063785017040228" target="_blank" title="View Publication 10.1134/S1063785017040228">DOI: 10.1134/S1063785017040228</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1063785017040228" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Tungsten'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 61566, "target": 64353 },
+      
+          { "source": 61566, "target": 60642 },
+      
+          { "source": 61566, "target": 60734 },
+      
+          { "source": 61566, "target": 61192 },
+      
+          { "source": 61566, "target": 60746 },
+      
+          { "source": 61566, "target": 61494 },
+      
+          { "source": 61566, "target": 61570 },
+      
+          { "source": 61566, "target": 60944 },
+      
+          { "source": 61566, "target": 73725 },
+      
+          { "source": 61566, "target": 61143 },
+      
+          { "source": 64353, "target": 60642 },
+      
+          { "source": 64353, "target": 61566 },
+      
+          { "source": 64353, "target": 63845 },
+      
+          { "source": 64353, "target": 60765 },
+      
+          { "source": 64353, "target": 62306 },
+      
+          { "source": 60642, "target": 60746 },
+      
+          { "source": 60642, "target": 60972 },
+      
+          { "source": 60642, "target": 61192 },
+      
+          { "source": 60642, "target": 61003 },
+      
+          { "source": 60642, "target": 60875 },
+      
+          { "source": 60734, "target": 61443 },
+      
+          { "source": 60734, "target": 61235 },
+      
+          { "source": 60734, "target": 60642 },
+      
+          { "source": 60734, "target": 60746 },
+      
+          { "source": 60734, "target": 60771 },
+      
+          { "source": 61192, "target": 60642 },
+      
+          { "source": 61192, "target": 60746 },
+      
+          { "source": 61192, "target": 60973 },
+      
+          { "source": 61192, "target": 60972 },
+      
+          { "source": 61192, "target": 61003 },
+      
+          { "source": 60746, "target": 60642 },
+      
+          { "source": 60746, "target": 61192 },
+      
+          { "source": 60746, "target": 60972 },
+      
+          { "source": 60746, "target": 61003 },
+      
+          { "source": 60746, "target": 60875 },
+      
+          { "source": 61494, "target": 60642 },
+      
+          { "source": 61494, "target": 60875 },
+      
+          { "source": 61494, "target": 60734 },
+      
+          { "source": 61494, "target": 61192 },
+      
+          { "source": 61494, "target": 60746 },
+      
+          { "source": 61570, "target": 60746 },
+      
+          { "source": 61570, "target": 61211 },
+      
+          { "source": 61570, "target": 60642 },
+      
+          { "source": 61570, "target": 62402 },
+      
+          { "source": 61570, "target": 60972 },
+      
+          { "source": 60944, "target": 60642 },
+      
+          { "source": 60944, "target": 60746 },
+      
+          { "source": 60944, "target": 60972 },
+      
+          { "source": 60944, "target": 61143 },
+      
+          { "source": 60944, "target": 60741 },
+      
+          { "source": 73725, "target": 61566 },
+      
+          { "source": 73725, "target": 60746 },
+      
+          { "source": 73725, "target": 60642 },
+      
+          { "source": 73725, "target": 61192 },
+      
+          { "source": 73725, "target": 71133 },
+      
+          { "source": 61143, "target": 60759 },
+      
+          { "source": 61143, "target": 60905 },
+      
+          { "source": 61143, "target": 60771 },
+      
+          { "source": 61143, "target": 61133 },
+      
+          { "source": 61143, "target": 60642 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 64353, "size": 50, "score": 0 , "title": "Molybdenum", "type": "circle"},
+
+      
+
+        {"id": 60642, "size": 50, "score": 0 , "title": "X-ray crystallography", "type": "circle"},
+
+      
+
+        {"id": 60734, "size": 50, "score": 0 , "title": "Carbon", "type": "circle"},
+
+      
+
+        {"id": 61192, "size": 50, "score": 0 , "title": "Spectroscopy", "type": "circle"},
+
+      
+
+        {"id": 60746, "size": 50, "score": 0 , "title": "Scanning electron microscope", "type": "circle"},
+
+      
+
+        {"id": 61494, "size": 50, "score": 0 , "title": "Hydrogen", "type": "circle"},
+
+      
+
+        {"id": 61570, "size": 50, "score": 0 , "title": "Hardness", "type": "circle"},
+
+      
+
+        {"id": 60944, "size": 50, "score": 0 , "title": "The Samples", "type": "circle"},
+
+      
+
+        {"id": 73725, "size": 50, "score": 0 , "title": "Tantalum", "type": "circle"},
+
+      
+
+        {"id": 61143, "size": 50, "score": 0 , "title": "Acid", "type": "circle"},
+
+      
+
+        {"id": 61566, "size": 70, "score": 0.5 , "title": "Tungsten", "type": "circle"},
+
+      
+
+        {"id": 63845, "size": 5, "score": 0.4 , "title": "Chromium", "type": "circle"},
+
+      
+
+        {"id": 60765, "size": 5, "score": 0.4 , "title": "Sulfur", "type": "circle"},
+
+      
+
+        {"id": 62306, "size": 5, "score": 0.4 , "title": "Nickel", "type": "circle"},
+
+      
+
+        {"id": 60972, "size": 5, "score": 0.4 , "title": "Transmission electron microscopy", "type": "circle"},
+
+      
+
+        {"id": 61003, "size": 5, "score": 0.4 , "title": "Infrared spectroscopy", "type": "circle"},
+
+      
+
+        {"id": 60875, "size": 5, "score": 0.4 , "title": "Adsorption", "type": "circle"},
+
+      
+
+        {"id": 61443, "size": 5, "score": 0.4 , "title": "Electrode", "type": "circle"},
+
+      
+
+        {"id": 61235, "size": 5, "score": 0.4 , "title": "Nitrogen", "type": "circle"},
+
+      
+
+        {"id": 60771, "size": 5, "score": 0.4 , "title": "PH", "type": "circle"},
+
+      
+
+        {"id": 60973, "size": 5, "score": 0.4 , "title": "Electrical impedance", "type": "circle"},
+
+      
+
+        {"id": 61211, "size": 5, "score": 0.4 , "title": "Ultimate tensile strength", "type": "circle"},
+
+      
+
+        {"id": 62402, "size": 5, "score": 0.4 , "title": "Welding", "type": "circle"},
+
+      
+
+        {"id": 60741, "size": 5, "score": 0.4 , "title": "Photoluminescence", "type": "circle"},
+
+      
+
+        {"id": 71133, "size": 5, "score": 0.4 , "title": "Niobium", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 61133, "size": 5, "score": 0.4 , "title": "Antioxidant", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

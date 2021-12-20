@@ -1,0 +1,4208 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Turbidity</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Turbidity</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Turbidity" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Turbidity" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="60771.html"
+        
+       title="View other articles tagged with this concept">PH</a>
+      <span color="black;" style="opacity: 1;">&nbsp;14 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="64472.html"
+        
+       title="View other articles tagged with this concept">Flocculation</a>
+      <span color="black;" style="opacity: 1;">&nbsp;10 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="61987.html"
+        
+       title="View other articles tagged with this concept">Salinity</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="61439.html"
+        
+       title="View other articles tagged with this concept">Electrical resistivity and conductivity</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="61143.html"
+        
+       title="View other articles tagged with this concept">Acid</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="70341.html"
+        
+       title="View other articles tagged with this concept">Total dissolved solids</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="60947.html"
+        
+       title="View other articles tagged with this concept">Nitrate</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="64090.html"
+        
+       title="View other articles tagged with this concept">Estuary</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61465.html"
+        
+       title="View other articles tagged with this concept">Viscosity</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62950.html"
+        
+       title="View other articles tagged with this concept">Surfactant</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60853.html"
+        
+       title="View other articles tagged with this concept">Polymer</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61237.html"
+        
+       title="View other articles tagged with this concept">Phosphate</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61227.html"
+        
+       title="View other articles tagged with this concept">Microfiltration</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63864.html"
+        
+       title="View other articles tagged with this concept">Hydrophobe</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63947.html"
+        
+       title="View other articles tagged with this concept">Hard water</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="69089.html"
+        
+       title="View other articles tagged with this concept">Fluoride</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61654.html"
+        
+       title="View other articles tagged with this concept">Artificial neural network</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60875.html"
+        
+       title="View other articles tagged with this concept">Adsorption</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61138.html"
+        
+       title="View other articles tagged with this concept">Starch</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61290.html"
+        
+       title="View other articles tagged with this concept">Sodium</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60746.html"
+        
+       title="View other articles tagged with this concept">Scanning electron microscope</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61793.html"
+        
+       title="View other articles tagged with this concept">Redox</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60769.html"
+        
+       title="View other articles tagged with this concept">Phosphorus</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61752.html"
+        
+       title="View other articles tagged with this concept">Mountain</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="73458.html"
+        
+       title="View other articles tagged with this concept">Moringa</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62484.html"
+        
+       title="View other articles tagged with this concept">Monoclonal antibody</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61476.html"
+        
+       title="View other articles tagged with this concept">Ionic strength</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61491.html"
+        
+       title="View other articles tagged with this concept">Ion</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61003.html"
+        
+       title="View other articles tagged with this concept">Infrared spectroscopy</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61024.html"
+        
+       title="View other articles tagged with this concept">India</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63315.html"
+        
+       title="View other articles tagged with this concept">Heavy metals</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61280.html"
+        
+       title="View other articles tagged with this concept">Fourier transform</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="68625.html"
+        
+       title="View other articles tagged with this concept">Fluid dynamics</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61140.html"
+        
+       title="View other articles tagged with this concept">Ether</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61209.html"
+        
+       title="View other articles tagged with this concept">Copolymer</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62619.html"
+        
+       title="View other articles tagged with this concept">Chlorine</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60820.html"
+        
+       title="View other articles tagged with this concept">Chloride</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64598.html"
+        
+       title="View other articles tagged with this concept">Chemical oxygen demand</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62517.html"
+        
+       title="View other articles tagged with this concept">Carbon cycle</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62609.html"
+        
+       title="View other articles tagged with this concept">Calcium</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61941.html"
+        
+       title="View other articles tagged with this concept">Brazil</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61997.html"
+        
+       title="View other articles tagged with this concept">Biofilm</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60953.html"
+        
+       title="View other articles tagged with this concept">Biodiversity</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="73823.html"
+        
+       title="View other articles tagged with this concept">Biochemical oxygen demand</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61720.html"
+        
+       title="View other articles tagged with this concept">Aureus</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61435.html"
+        
+       title="View other articles tagged with this concept">Asteroid family</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62294.html"
+        
+       title="View other articles tagged with this concept">Aluminium oxide</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="76753.html"
+        
+       title="View other articles tagged with this concept">Agar plate</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64471.html"
+        
+       title="View other articles tagged with this concept">Acrylamide</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62314.html"
+        
+       title="View other articles tagged with this concept">Zeta potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63695.html"
+        
+       title="View other articles tagged with this concept">Yangtze</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="80978.html"
+        
+       title="View other articles tagged with this concept">Xanthan gum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60642.html"
+        
+       title="View other articles tagged with this concept">X-ray crystallography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62374.html"
+        
+       title="View other articles tagged with this concept">World Health Organization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70060.html"
+        
+       title="View other articles tagged with this concept">United States Geological Survey</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70705.html"
+        
+       title="View other articles tagged with this concept">Ultrafiltration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68072.html"
+        
+       title="View other articles tagged with this concept">Tricalcium phosphate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="82580.html"
+        
+       title="View other articles tagged with this concept">Total suspended solids</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62194.html"
+        
+       title="View other articles tagged with this concept">Tomato</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65161.html"
+        
+       title="View other articles tagged with this concept">Titration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61861.html"
+        
+       title="View other articles tagged with this concept">Titanium dioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61533.html"
+        
+       title="View other articles tagged with this concept">Time series</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62790.html"
+        
+       title="View other articles tagged with this concept">Time</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62855.html"
+        
+       title="View other articles tagged with this concept">Thorium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60770.html"
+        
+       title="View other articles tagged with this concept">Thermogravimetric analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64969.html"
+        
+       title="View other articles tagged with this concept">Surface tension</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63603.html"
+        
+       title="View other articles tagged with this concept">Surface plasmon resonance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67086.html"
+        
+       title="View other articles tagged with this concept">Sulfuric acid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60793.html"
+        
+       title="View other articles tagged with this concept">Sulfate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="83246.html"
+        
+       title="View other articles tagged with this concept">Sugar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62455.html"
+        
+       title="View other articles tagged with this concept">Streptococcus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67195.html"
+        
+       title="View other articles tagged with this concept">Stratigraphy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60950.html"
+        
+       title="View other articles tagged with this concept">Spectrophotometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63144.html"
+        
+       title="View other articles tagged with this concept">Spectrometer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61474.html"
+        
+       title="View other articles tagged with this concept">Sorption</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66099.html"
+        
+       title="View other articles tagged with this concept">Sodium dodecyl sulfate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61567.html"
+        
+       title="View other articles tagged with this concept">Sintering</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62166.html"
+        
+       title="View other articles tagged with this concept">Silicon dioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71759.html"
+        
+       title="View other articles tagged with this concept">Shrimp</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="82353.html"
+        
+       title="View other articles tagged with this concept">Sewage treatment</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72744.html"
+        
+       title="View other articles tagged with this concept">Septic arthritis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71419.html"
+        
+       title="View other articles tagged with this concept">Sea level rise</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75488.html"
+        
+       title="View other articles tagged with this concept">San Francisco</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70706.html"
+        
+       title="View other articles tagged with this concept">Rhibosome</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62247.html"
+        
+       title="View other articles tagged with this concept">Reservoir</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77197.html"
+        
+       title="View other articles tagged with this concept">Rainwater harvesting</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60661.html"
+        
+       title="View other articles tagged with this concept">Radial basis function network</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61718.html"
+        
+       title="View other articles tagged with this concept">Pseudomonas aeruginosa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62010.html"
+        
+       title="View other articles tagged with this concept">Pseudomonas</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60905.html"
+        
+       title="View other articles tagged with this concept">Protein</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61873.html"
+        
+       title="View other articles tagged with this concept">Principal component analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64000.html"
+        
+       title="View other articles tagged with this concept">Polyvinyl chloride</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71701.html"
+        
+       title="View other articles tagged with this concept">Polysorbate 80</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64369.html"
+        
+       title="View other articles tagged with this concept">Polypropylene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61045.html"
+        
+       title="View other articles tagged with this concept">Polymerase chain reaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61592.html"
+        
+       title="View other articles tagged with this concept">Polymerase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65685.html"
+        
+       title="View other articles tagged with this concept">Polyethylene glycol</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67061.html"
+        
+       title="View other articles tagged with this concept">Polyelectrolyte</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67536.html"
+        
+       title="View other articles tagged with this concept">Polyacrylamide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="79917.html"
+        
+       title="View other articles tagged with this concept">Polish Navy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60958.html"
+        
+       title="View other articles tagged with this concept">Plankton</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68592.html"
+        
+       title="View other articles tagged with this concept">Phytoplankton</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60959.html"
+        
+       title="View other articles tagged with this concept">Phylum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62513.html"
+        
+       title="View other articles tagged with this concept">Phosphatidylcholine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62542.html"
+        
+       title="View other articles tagged with this concept">Petroleum reservoir</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62709.html"
+        
+       title="View other articles tagged with this concept">Petroleum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78984.html"
+        
+       title="View other articles tagged with this concept">Petrography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70701.html"
+        
+       title="View other articles tagged with this concept">Periprosthetic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63140.html"
+        
+       title="View other articles tagged with this concept">Patagonia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="86458.html"
+        
+       title="View other articles tagged with this concept">Oregon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78353.html"
+        
+       title="View other articles tagged with this concept">Odonata</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61369.html"
+        
+       title="View other articles tagged with this concept">Nuclear magnetic resonance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64591.html"
+        
+       title="View other articles tagged with this concept">North Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65974.html"
+        
+       title="View other articles tagged with this concept">Nigeria</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61845.html"
+        
+       title="View other articles tagged with this concept">Nanoparticle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72255.html"
+        
+       title="View other articles tagged with this concept">Mung bean</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61097.html"
+        
+       title="View other articles tagged with this concept">Multilayer perceptron</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62004.html"
+        
+       title="View other articles tagged with this concept">Monsoon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63084.html"
+        
+       title="View other articles tagged with this concept">Mixed model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63242.html"
+        
+       title="View other articles tagged with this concept">Minimum inhibitory concentration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60764.html"
+        
+       title="View other articles tagged with this concept">Microwave</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65837.html"
+        
+       title="View other articles tagged with this concept">Micrococcus luteus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62098.html"
+        
+       title="View other articles tagged with this concept">Michael E. Mann</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62248.html"
+        
+       title="View other articles tagged with this concept">Methylmercury</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63373.html"
+        
+       title="View other articles tagged with this concept">Methylation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75876.html"
+        
+       title="View other articles tagged with this concept">Membrane bioreactor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61511.html"
+        
+       title="View other articles tagged with this concept">Mass spectrometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63614.html"
+        
+       title="View other articles tagged with this concept">Manganese</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62986.html"
+        
+       title="View other articles tagged with this concept">Main Source</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61345.html"
+        
+       title="View other articles tagged with this concept">Magnesium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69090.html"
+        
+       title="View other articles tagged with this concept">Madhya Pradesh</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70206.html"
+        
+       title="View other articles tagged with this concept">Louisiana</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66001.html"
+        
+       title="View other articles tagged with this concept">Loop-mediated isothermal amplification</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63077.html"
+        
+       title="View other articles tagged with this concept">Linear regression</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66042.html"
+        
+       title="View other articles tagged with this concept">Limonene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69033.html"
+        
+       title="View other articles tagged with this concept">Levee</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62382.html"
+        
+       title="View other articles tagged with this concept">Legume</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62303.html"
+        
+       title="View other articles tagged with this concept">Langmuir adsorption model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76281.html"
+        
+       title="View other articles tagged with this concept">Lagoon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65372.html"
+        
+       title="View other articles tagged with this concept">Kinetic energy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65330.html"
+        
+       title="View other articles tagged with this concept">Karst</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64254.html"
+        
+       title="View other articles tagged with this concept">Kaolinite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65525.html"
+        
+       title="View other articles tagged with this concept">K-means clustering</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70231.html"
+        
+       title="View other articles tagged with this concept">Isotope fractionation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67060.html"
+        
+       title="View other articles tagged with this concept">Isothermal process</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65298.html"
+        
+       title="View other articles tagged with this concept">Irish Organic Farmers and Growers Association</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61056.html"
+        
+       title="View other articles tagged with this concept">Iran</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64466.html"
+        
+       title="View other articles tagged with this concept">Invertebrate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61383.html"
+        
+       title="View other articles tagged with this concept">Inbreeding</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60824.html"
+        
+       title="View other articles tagged with this concept">IC50</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63744.html"
+        
+       title="View other articles tagged with this concept">Hydrophile</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62593.html"
+        
+       title="View other articles tagged with this concept">Hydronium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67753.html"
+        
+       title="View other articles tagged with this concept">Hydrogeology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60951.html"
+        
+       title="View other articles tagged with this concept">High-performance liquid chromatography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61570.html"
+        
+       title="View other articles tagged with this concept">Hardness</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61904.html"
+        
+       title="View other articles tagged with this concept">Gelatin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61124.html"
+        
+       title="View other articles tagged with this concept">Gel permeation chromatography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67115.html"
+        
+       title="View other articles tagged with this concept">Gastropoda</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60998.html"
+        
+       title="View other articles tagged with this concept">Gas chromatography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61915.html"
+        
+       title="View other articles tagged with this concept">Fungus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62325.html"
+        
+       title="View other articles tagged with this concept">France</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60955.html"
+        
+       title="View other articles tagged with this concept">Food web</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61409.html"
+        
+       title="View other articles tagged with this concept">Fluorescence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64075.html"
+        
+       title="View other articles tagged with this concept">Flavonoid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62300.html"
+        
+       title="View other articles tagged with this concept">Femur</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61322.html"
+        
+       title="View other articles tagged with this concept">Fasting</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63860.html"
+        
+       title="View other articles tagged with this concept">Factor analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67448.html"
+        
+       title="View other articles tagged with this concept">Extreme learning machine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62937.html"
+        
+       title="View other articles tagged with this concept">Eutrophication</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61074.html"
+        
+       title="View other articles tagged with this concept">Ethanol</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66041.html"
+        
+       title="View other articles tagged with this concept">Essential oil</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60817.html"
+        
+       title="View other articles tagged with this concept">Enzyme inhibitor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63348.html"
+        
+       title="View other articles tagged with this concept">Endemism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62345.html"
+        
+       title="View other articles tagged with this concept">Egypt</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63596.html"
+        
+       title="View other articles tagged with this concept">Earthquake</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61126.html"
+        
+       title="View other articles tagged with this concept">Dynamic light scattering</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61009.html"
+        
+       title="View other articles tagged with this concept">Document Object Model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61076.html"
+        
+       title="View other articles tagged with this concept">Differential scanning calorimetry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62935.html"
+        
+       title="View other articles tagged with this concept">Dam</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61455.html"
+        
+       title="View other articles tagged with this concept">DPPH</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61961.html"
+        
+       title="View other articles tagged with this concept">DNA</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62405.html"
+        
+       title="View other articles tagged with this concept">Cultivar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67252.html"
+        
+       title="View other articles tagged with this concept">Coumarin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63356.html"
+        
+       title="View other articles tagged with this concept">Coagulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62089.html"
+        
+       title="View other articles tagged with this concept">Cluster analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65670.html"
+        
+       title="View other articles tagged with this concept">Cloud</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61162.html"
+        
+       title="View other articles tagged with this concept">Climate change</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61228.html"
+        
+       title="View other articles tagged with this concept">Clay</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63748.html"
+        
+       title="View other articles tagged with this concept">Chlorophyll</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61361.html"
+        
+       title="View other articles tagged with this concept">China</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62105.html"
+        
+       title="View other articles tagged with this concept">Chain reaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74395.html"
+        
+       title="View other articles tagged with this concept">Caspian Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63834.html"
+        
+       title="View other articles tagged with this concept">Candida albicans</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62299.html"
+        
+       title="View other articles tagged with this concept">Calcium phosphate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63145.html"
+        
+       title="View other articles tagged with this concept">Caffeine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64108.html"
+        
+       title="View other articles tagged with this concept">Cadmium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68377.html"
+        
+       title="View other articles tagged with this concept">Bromide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74573.html"
+        
+       title="View other articles tagged with this concept">Boehmite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70260.html"
+        
+       title="View other articles tagged with this concept">Bioproducts</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60630.html"
+        
+       title="View other articles tagged with this concept">Biomarker</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64407.html"
+        
+       title="View other articles tagged with this concept">Bioaccumulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66935.html"
+        
+       title="View other articles tagged with this concept">Bicarbonate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64473.html"
+        
+       title="View other articles tagged with this concept">Bentonite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60954.html"
+        
+       title="View other articles tagged with this concept">Benthos</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60957.html"
+        
+       title="View other articles tagged with this concept">Benthic zone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75442.html"
+        
+       title="View other articles tagged with this concept">Baroclinity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66522.html"
+        
+       title="View other articles tagged with this concept">Bacteriostatic agent</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61006.html"
+        
+       title="View other articles tagged with this concept">Backscatter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73392.html"
+        
+       title="View other articles tagged with this concept">Atomic absorption spectroscopy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71301.html"
+        
+       title="View other articles tagged with this concept">Asphyxia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63977.html"
+        
+       title="View other articles tagged with this concept">Asbestos</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63004.html"
+        
+       title="View other articles tagged with this concept">Artificial intelligence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67287.html"
+        
+       title="View other articles tagged with this concept">Artemisia Gentileschi</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63256.html"
+        
+       title="View other articles tagged with this concept">Arsenic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68254.html"
+        
+       title="View other articles tagged with this concept">Arctic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63054.html"
+        
+       title="View other articles tagged with this concept">Aquifer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61133.html"
+        
+       title="View other articles tagged with this concept">Antioxidant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60727.html"
+        
+       title="View other articles tagged with this concept">Anthocyanin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60988.html"
+        
+       title="View other articles tagged with this concept">Analysis of variance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66223.html"
+        
+       title="View other articles tagged with this concept">Anaerobic organism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63074.html"
+        
+       title="View other articles tagged with this concept">Amplitude modulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62959.html"
+        
+       title="View other articles tagged with this concept">Ammonia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64201.html"
+        
+       title="View other articles tagged with this concept">Amikacin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71762.html"
+        
+       title="View other articles tagged with this concept">Alkalinity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64474.html"
+        
+       title="View other articles tagged with this concept">Adiabatic process</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66777.html"
+        
+       title="View other articles tagged with this concept">Activated sludge</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">50</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#0013642c2263f3f68b04e56494d460bc" style="font-size: 90%;" title="Open panel">
+                1. Light traps for sampling marine biodiversity
+              </a> 
+            </h4>
+          </div>
+          <div id="0013642c2263f3f68b04e56494d460bc" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s10152-017-0483-1" target="_blank" title="View Publication 10.1186/s10152-017-0483-1">DOI: 10.1186/s10152-017-0483-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s10152-017-0483-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#03743311fa9fc4c705fc7849582efd00" style="font-size: 90%;" title="Open panel">
+                2. Comparative Study Between New Polyacrylamide Based Copolymer Poly(AM-4VP) and a Cationic Commercial Flocculant: Application in Turbidity Removal on Semi-Industrial Pilot
+              </a> 
+            </h4>
+          </div>
+          <div id="03743311fa9fc4c705fc7849582efd00" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10924-017-1049-7" target="_blank" title="View Publication 10.1007/s10924-017-1049-7">DOI: 10.1007/s10924-017-1049-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10924-017-1049-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#07f743a8ad2711af1ce811cee89ae6d0" style="font-size: 90%;" title="Open panel">
+                3. Thermodynamic Association Behaviors of Sodium Dodecyl Sulfate (SDS) with Poly(4-vinylpyridine N-oxide) (PVPNO) at Different pH Values and Ionic Strengths
+              </a> 
+            </h4>
+          </div>
+          <div id="07f743a8ad2711af1ce811cee89ae6d0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11743-017-1939-7" target="_blank" title="View Publication 10.1007/s11743-017-1939-7">DOI: 10.1007/s11743-017-1939-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11743-017-1939-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#09bf8b515caa0989d962fec688dd6a72" style="font-size: 90%;" title="Open panel">
+                4. Sea ice and primary production proxies in surface sediments from a High Arctic Greenland fjord: Spatial distribution and implications for palaeoenvironmental studies
+              </a> 
+            </h4>
+          </div>
+          <div id="09bf8b515caa0989d962fec688dd6a72" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13280-016-0894-2" target="_blank" title="View Publication 10.1007/s13280-016-0894-2">DOI: 10.1007/s13280-016-0894-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13280-016-0894-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#0b9ba025c1205c133d074973165f762f" style="font-size: 90%;" title="Open panel">
+                5. A large-scale investigation of the quality of groundwater in six major districts of Central India during the 2010–2011 sampling campaign
+              </a> 
+            </h4>
+          </div>
+          <div id="0b9ba025c1205c133d074973165f762f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10661-017-6130-0" target="_blank" title="View Publication 10.1007/s10661-017-6130-0">DOI: 10.1007/s10661-017-6130-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10661-017-6130-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#0eb6e0e8f842a9c94499c1d3bf5a9b5f" style="font-size: 90%;" title="Open panel">
+                6. Bioremediation of arsenic from water with citric acid cross-linked water hyacinth (E. crassipes) root powder
+              </a> 
+            </h4>
+          </div>
+          <div id="0eb6e0e8f842a9c94499c1d3bf5a9b5f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10661-017-6068-2" target="_blank" title="View Publication 10.1007/s10661-017-6068-2">DOI: 10.1007/s10661-017-6068-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10661-017-6068-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#0f864344f8312d394dad90ffc93ca639" style="font-size: 90%;" title="Open panel">
+                7. Hybrid coagulation-UF processes for spent filter backwash water treatment: a comparison studies for PAFCl and FeCl3 as a pre-treatment
+              </a> 
+            </h4>
+          </div>
+          <div id="0f864344f8312d394dad90ffc93ca639" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10661-017-6091-3" target="_blank" title="View Publication 10.1007/s10661-017-6091-3">DOI: 10.1007/s10661-017-6091-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10661-017-6091-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#1646d1e6c4ada47fc8d1abfcb686197c" style="font-size: 90%;" title="Open panel">
+                8. Bank filtration in a coastal lake in South Brazil: water quality, natural organic matter (NOM) and redox conditions study
+              </a> 
+            </h4>
+          </div>
+          <div id="1646d1e6c4ada47fc8d1abfcb686197c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10098-017-1382-5" target="_blank" title="View Publication 10.1007/s10098-017-1382-5">DOI: 10.1007/s10098-017-1382-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10098-017-1382-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#166308b2c578866350365e3f802aca48" style="font-size: 90%;" title="Open panel">
+                9. Phosphatidylcholine Coatings Deliver Local Antimicrobials and Reduce Infection in a Murine Model: A Preliminary Study
+              </a> 
+            </h4>
+          </div>
+          <div id="166308b2c578866350365e3f802aca48" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11999-016-5211-7" target="_blank" title="View Publication 10.1007/s11999-016-5211-7">DOI: 10.1007/s11999-016-5211-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11999-016-5211-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#1a69f58d88ebff48cb0a64cd2e4cfd78" style="font-size: 90%;" title="Open panel">
+                10. Reactive sintering and particle morphology control of β″-alumina-based water purification filters
+              </a> 
+            </h4>
+          </div>
+          <div id="1a69f58d88ebff48cb0a64cd2e4cfd78" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10853-017-1599-z" target="_blank" title="View Publication 10.1007/s10853-017-1599-z">DOI: 10.1007/s10853-017-1599-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10853-017-1599-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#2504ae355c10cf85c5aa10d4c7f43b33" style="font-size: 90%;" title="Open panel">
+                11. A compact field fluorometer and its application to dye tracing in karst environments
+              </a> 
+            </h4>
+          </div>
+          <div id="2504ae355c10cf85c5aa10d4c7f43b33" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10040-017-1577-1" target="_blank" title="View Publication 10.1007/s10040-017-1577-1">DOI: 10.1007/s10040-017-1577-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10040-017-1577-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#2654bbbf2cb8296083e709a7f05060ea" style="font-size: 90%;" title="Open panel">
+                12. Spatial and temporal variations of physicochemical and heavy metal pollution in Ramganga River—a tributary of River Ganges, India
+              </a> 
+            </h4>
+          </div>
+          <div id="2654bbbf2cb8296083e709a7f05060ea" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6547-3" target="_blank" title="View Publication 10.1007/s12665-017-6547-3">DOI: 10.1007/s12665-017-6547-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6547-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#2bfa40a3d15919c8d167f91aa3cdd450" style="font-size: 90%;" title="Open panel">
+                13. How Does Environmental Variation Affect the Distribution of Dragonfly Larvae (Odonata) in the Amazon-Cerrado Transition Zone in Central Brazil?
+              </a> 
+            </h4>
+          </div>
+          <div id="2bfa40a3d15919c8d167f91aa3cdd450" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13744-017-0506-2" target="_blank" title="View Publication 10.1007/s13744-017-0506-2">DOI: 10.1007/s13744-017-0506-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13744-017-0506-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#32814b393a3dece4fee8866c05565257" style="font-size: 90%;" title="Open panel">
+                14. How can climate change and engineered water conveyance affect sediment dynamics in the San Francisco Bay-Delta system?
+              </a> 
+            </h4>
+          </div>
+          <div id="32814b393a3dece4fee8866c05565257" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10584-017-1954-8" target="_blank" title="View Publication 10.1007/s10584-017-1954-8">DOI: 10.1007/s10584-017-1954-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10584-017-1954-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#343efe10e29a8adf811c8e78ccc93b24" style="font-size: 90%;" title="Open panel">
+                15. Hydrodynamic characterization and flocculation process in helically coiled tube flocculators: an evaluation through streamlines
+              </a> 
+            </h4>
+          </div>
+          <div id="343efe10e29a8adf811c8e78ccc93b24" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13762-017-1341-z" target="_blank" title="View Publication 10.1007/s13762-017-1341-z">DOI: 10.1007/s13762-017-1341-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13762-017-1341-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#37183cd66095e07a3908496e838bcdeb" style="font-size: 90%;" title="Open panel">
+                16. Inoculum-free start-up of biofilm- and sludge-based deammonification systems in pilot scale
+              </a> 
+            </h4>
+          </div>
+          <div id="37183cd66095e07a3908496e838bcdeb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13762-017-1374-3" target="_blank" title="View Publication 10.1007/s13762-017-1374-3">DOI: 10.1007/s13762-017-1374-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13762-017-1374-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#3afa29076273db54276f44111d276b13" style="font-size: 90%;" title="Open panel">
+                17. Seasonal Fluctuations of Trace Elements from Different Habitats of Orbetello Lagoon (Thyrrenian Sea, Italy)
+              </a> 
+            </h4>
+          </div>
+          <div id="3afa29076273db54276f44111d276b13" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00244-017-0448-z" target="_blank" title="View Publication 10.1007/s00244-017-0448-z">DOI: 10.1007/s00244-017-0448-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00244-017-0448-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#40081d21bc5bf349acf4ae35b686fa50" style="font-size: 90%;" title="Open panel">
+                18. Methylmercury Bioaccumulation in an Urban Estuary: Delaware River, USA
+              </a> 
+            </h4>
+          </div>
+          <div id="40081d21bc5bf349acf4ae35b686fa50" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12237-017-0232-3" target="_blank" title="View Publication 10.1007/s12237-017-0232-3">DOI: 10.1007/s12237-017-0232-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12237-017-0232-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#412575cc34516692a9500aca4a2d7ee4" style="font-size: 90%;" title="Open panel">
+                19. Effect of selenium-containing biocomposites based on Ganoderma mushroom isolates grown in the presence of oxopropyl-4-hydroxycoumarins, on bacterial phytopathogens
+              </a> 
+            </h4>
+          </div>
+          <div id="412575cc34516692a9500aca4a2d7ee4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0026261717020163" target="_blank" title="View Publication 10.1134/S0026261717020163">DOI: 10.1134/S0026261717020163</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0026261717020163" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#454c96e50c5ee775b8441a9fb2b9c591" style="font-size: 90%;" title="Open panel">
+                20. Spatiotemporal evaluation of the groundwater quality in Gharbiya Governorate, Egypt
+              </a> 
+            </h4>
+          </div>
+          <div id="454c96e50c5ee775b8441a9fb2b9c591" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11356-017-8445-3" target="_blank" title="View Publication 10.1007/s11356-017-8445-3">DOI: 10.1007/s11356-017-8445-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11356-017-8445-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#4c28afcbdbe4b63cdfbd14a346b23417" style="font-size: 90%;" title="Open panel">
+                21. Salinity Drives the Virioplankton Abundance but Not Production in Tropical Coastal Lagoons
+              </a> 
+            </h4>
+          </div>
+          <div id="4c28afcbdbe4b63cdfbd14a346b23417" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00248-017-1038-3" target="_blank" title="View Publication 10.1007/s00248-017-1038-3">DOI: 10.1007/s00248-017-1038-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00248-017-1038-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#52d70bd0e77f5e08e6595bb6405beeaa" style="font-size: 90%;" title="Open panel">
+                22. Coagulation performance of a novel poly-ferric-acetate (PFC) coagulant in phosphate-kaolin synthetic water treatment
+              </a> 
+            </h4>
+          </div>
+          <div id="52d70bd0e77f5e08e6595bb6405beeaa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11814-017-0193-z" target="_blank" title="View Publication 10.1007/s11814-017-0193-z">DOI: 10.1007/s11814-017-0193-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11814-017-0193-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#546f566e2b5bcf2f64b0629ecf5891e1" style="font-size: 90%;" title="Open panel">
+                23. Observation of saltwater intrusion and ETM dynamics in a stably stratified estuary: the Yangtze Estuary, China
+              </a> 
+            </h4>
+          </div>
+          <div id="546f566e2b5bcf2f64b0629ecf5891e1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10661-017-5797-6" target="_blank" title="View Publication 10.1007/s10661-017-5797-6">DOI: 10.1007/s10661-017-5797-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10661-017-5797-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#55d29fbc3db394a149fafaea5ae7f813" style="font-size: 90%;" title="Open panel">
+                24. Effects of NaCl, NaOH, and HCl concentration on the cloud point of poly(vinyl methyl ether) in water—electrostatic interactions are inevitably involved in the hydrophobic interaction
+              </a> 
+            </h4>
+          </div>
+          <div id="55d29fbc3db394a149fafaea5ae7f813" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00396-017-4130-9" target="_blank" title="View Publication 10.1007/s00396-017-4130-9">DOI: 10.1007/s00396-017-4130-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00396-017-4130-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#5ab33a1bd7071bfce059f9f73d41af96" style="font-size: 90%;" title="Open panel">
+                25. Combined Use of Caffeine and Turbidity to Evaluate the Impact of CSOs on River Water Quality
+              </a> 
+            </h4>
+          </div>
+          <div id="5ab33a1bd7071bfce059f9f73d41af96" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11270-017-3505-3" target="_blank" title="View Publication 10.1007/s11270-017-3505-3">DOI: 10.1007/s11270-017-3505-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11270-017-3505-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#5cce5805fb741d95b6b05888670f1784" style="font-size: 90%;" title="Open panel">
+                26. Extinction coefficients of gold nanoparticles and their dimers. Dependence of optical factor on particle size
+              </a> 
+            </h4>
+          </div>
+          <div id="5cce5805fb741d95b6b05888670f1784" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1061933X17050052" target="_blank" title="View Publication 10.1134/S1061933X17050052">DOI: 10.1134/S1061933X17050052</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1061933X17050052" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#61527b189aba90b0e14c36fec542098c" style="font-size: 90%;" title="Open panel">
+                27. Effect of glacial lake outburst floods on the light climate in an Andean Patagonian lake: implications for planktonic phototrophs
+              </a> 
+            </h4>
+          </div>
+          <div id="61527b189aba90b0e14c36fec542098c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10750-016-3080-4" target="_blank" title="View Publication 10.1007/s10750-016-3080-4">DOI: 10.1007/s10750-016-3080-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10750-016-3080-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#617fdd247d666a7660e966372d8e2859" style="font-size: 90%;" title="Open panel">
+                28. Self-Assembly Behaviors of Anionic–Cationic Binary Surfactant Systems in Poly(ethylene glycol) 200
+              </a> 
+            </h4>
+          </div>
+          <div id="617fdd247d666a7660e966372d8e2859" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11743-017-2018-9" target="_blank" title="View Publication 10.1007/s11743-017-2018-9">DOI: 10.1007/s11743-017-2018-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11743-017-2018-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#61e229580b47f580f5612ff822c76ee1" style="font-size: 90%;" title="Open panel">
+                29. Development of an automatic flocculation tester for highly-efficient data acquisition
+              </a> 
+            </h4>
+          </div>
+          <div id="61e229580b47f580f5612ff822c76ee1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10015-017-0352-7" target="_blank" title="View Publication 10.1007/s10015-017-0352-7">DOI: 10.1007/s10015-017-0352-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10015-017-0352-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#64675183e6fb1f914c27177fdf53f93f" style="font-size: 90%;" title="Open panel">
+                30. Coagulation/Flocculation with Moringa oleifera and Membrane Filtration for Dairy Wastewater Treatment
+              </a> 
+            </h4>
+          </div>
+          <div id="64675183e6fb1f914c27177fdf53f93f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11270-017-3509-z" target="_blank" title="View Publication 10.1007/s11270-017-3509-z">DOI: 10.1007/s11270-017-3509-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11270-017-3509-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6566cd956cd16c387ea4b868d317d7f0" style="font-size: 90%;" title="Open panel">
+                31. Antioxidant activity and antimicrobial effect of tarragon (Artemisia dracunculus) extract and chemical composition of its essential oil
+              </a> 
+            </h4>
+          </div>
+          <div id="6566cd956cd16c387ea4b868d317d7f0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11694-016-9456-3" target="_blank" title="View Publication 10.1007/s11694-016-9456-3">DOI: 10.1007/s11694-016-9456-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11694-016-9456-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#659d22c7bec05e3e2b55244462f8fd65" style="font-size: 90%;" title="Open panel">
+                32. Potential use of membrane bioreactor to treat petroleum refinery effluent: comprehension of dynamic of organic matter removal, fouling characteristics and membrane lifetime
+              </a> 
+            </h4>
+          </div>
+          <div id="659d22c7bec05e3e2b55244462f8fd65" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00449-017-1837-4" target="_blank" title="View Publication 10.1007/s00449-017-1837-4">DOI: 10.1007/s00449-017-1837-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00449-017-1837-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#661b47e5ca0e49aa352b5e06d8ee7a81" style="font-size: 90%;" title="Open panel">
+                33. Biocompatible water softening system using cationic protein from moringa oleifera extract
+              </a> 
+            </h4>
+          </div>
+          <div id="661b47e5ca0e49aa352b5e06d8ee7a81" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13201-017-0591-8" target="_blank" title="View Publication 10.1007/s13201-017-0591-8">DOI: 10.1007/s13201-017-0591-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13201-017-0591-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6752e381ac75d0a4d8d077c5d29184ef" style="font-size: 90%;" title="Open panel">
+                34. Synthesis of thorium sol for fabricating fuel kernels
+              </a> 
+            </h4>
+          </div>
+          <div id="6752e381ac75d0a4d8d077c5d29184ef" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s41365-017-0243-6" target="_blank" title="View Publication 10.1007/s41365-017-0243-6">DOI: 10.1007/s41365-017-0243-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s41365-017-0243-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6963c5289177fdfd0fd9a88a81327ee1" style="font-size: 90%;" title="Open panel">
+                35. Quality assessment and public health status of harvested rainwater in a peri-urban community in Edo State of Nigeria
+              </a> 
+            </h4>
+          </div>
+          <div id="6963c5289177fdfd0fd9a88a81327ee1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10661-017-6122-0" target="_blank" title="View Publication 10.1007/s10661-017-6122-0">DOI: 10.1007/s10661-017-6122-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10661-017-6122-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6a3d1bb3621c830162e75f13df3cd99b" style="font-size: 90%;" title="Open panel">
+                36. Seafloor change detection using multibeam echosounder backscatter: case study on the Belgian part of the North Sea
+              </a> 
+            </h4>
+          </div>
+          <div id="6a3d1bb3621c830162e75f13df3cd99b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11001-017-9323-6" target="_blank" title="View Publication 10.1007/s11001-017-9323-6">DOI: 10.1007/s11001-017-9323-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11001-017-9323-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6a883306e7324c2692af482671909ad6" style="font-size: 90%;" title="Open panel">
+                37. Extreme learning machines: a new approach for modeling dissolved oxygen (DO) concentration with and without water quality variables as predictors
+              </a> 
+            </h4>
+          </div>
+          <div id="6a883306e7324c2692af482671909ad6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11356-017-9283-z" target="_blank" title="View Publication 10.1007/s11356-017-9283-z">DOI: 10.1007/s11356-017-9283-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11356-017-9283-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6b3924987ef74fa612e7bd33df3f7052" style="font-size: 90%;" title="Open panel">
+                38. Processing Attributes and Performance of Sweet Sorghum Biomass for Large-Scale Biorefineries: A 1-Year Comparison of Commercial Hybrids and a Cultivar
+              </a> 
+            </h4>
+          </div>
+          <div id="6b3924987ef74fa612e7bd33df3f7052" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12355-017-0533-7" target="_blank" title="View Publication 10.1007/s12355-017-0533-7">DOI: 10.1007/s12355-017-0533-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12355-017-0533-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6c40f92e746d53dfd8a33f1354ad2752" style="font-size: 90%;" title="Open panel">
+                39. Gelation and thermal characteristics of microwave extracted fish gelatin–natural gum composite gels
+              </a> 
+            </h4>
+          </div>
+          <div id="6c40f92e746d53dfd8a33f1354ad2752" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13197-017-2496-9" target="_blank" title="View Publication 10.1007/s13197-017-2496-9">DOI: 10.1007/s13197-017-2496-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13197-017-2496-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6c4e843fa4cbab89bdcdf332f78694b1" style="font-size: 90%;" title="Open panel">
+                40. Assessment of water quality in Iran’s Anzali Wetland, using qualitative indices from 1985, 2007, and 2014
+              </a> 
+            </h4>
+          </div>
+          <div id="6c4e843fa4cbab89bdcdf332f78694b1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11273-017-9538-y" target="_blank" title="View Publication 10.1007/s11273-017-9538-y">DOI: 10.1007/s11273-017-9538-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11273-017-9538-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6cae596d8e0c839b3ec812a1257fa8a9" style="font-size: 90%;" title="Open panel">
+                41. Polyacrylamide-grafted legume starch for wastewater treatment: synthesis and performance comparison
+              </a> 
+            </h4>
+          </div>
+          <div id="6cae596d8e0c839b3ec812a1257fa8a9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00289-017-1959-5" target="_blank" title="View Publication 10.1007/s00289-017-1959-5">DOI: 10.1007/s00289-017-1959-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00289-017-1959-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6d612d55f4f03f0be5b13e90eae5de55" style="font-size: 90%;" title="Open panel">
+                42. Ecotoxicological assessment of the impact of fluoride (F−) and turbidity on the freshwater snail Physella acuta in a polluted river receiving an industrial effluent
+              </a> 
+            </h4>
+          </div>
+          <div id="6d612d55f4f03f0be5b13e90eae5de55" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11356-017-9208-x" target="_blank" title="View Publication 10.1007/s11356-017-9208-x">DOI: 10.1007/s11356-017-9208-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11356-017-9208-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#6e7c732f3adde4bc58378bdcd3bbbc20" style="font-size: 90%;" title="Open panel">
+                43. Architecture mode, sedimentary evolution and controlling factors of deepwater turbidity channels: A case study of the M Oilfield in West Africa
+              </a> 
+            </h4>
+          </div>
+          <div id="6e7c732f3adde4bc58378bdcd3bbbc20" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12182-017-0181-2" target="_blank" title="View Publication 10.1007/s12182-017-0181-2">DOI: 10.1007/s12182-017-0181-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12182-017-0181-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#77092c36906086d5cc77174d193d9e70" style="font-size: 90%;" title="Open panel">
+                44. Seasonal and spatial variations in rare earth elements and yttrium of dissolved load in the middle, lower reaches and estuary of the Minjiang River, southeastern China
+              </a> 
+            </h4>
+          </div>
+          <div id="77092c36906086d5cc77174d193d9e70" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00343-018-6207-9" target="_blank" title="View Publication 10.1007/s00343-018-6207-9">DOI: 10.1007/s00343-018-6207-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00343-018-6207-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#77f8190e264cc16cacd928aad794db1d" style="font-size: 90%;" title="Open panel">
+                45. Rapid detection of tomato leaf curl Bengaluru virus through loop mediated isothermal amplification assay
+              </a> 
+            </h4>
+          </div>
+          <div id="77f8190e264cc16cacd928aad794db1d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13337-017-0385-5" target="_blank" title="View Publication 10.1007/s13337-017-0385-5">DOI: 10.1007/s13337-017-0385-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13337-017-0385-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#79e5288757dd986040fbe8b463c3cca7" style="font-size: 90%;" title="Open panel">
+                46. Effect of pH and polypropylene beads in hybrid water treatment process of alumina ceramic microfiltration and PP beads with air back-flushing and UV irradiation
+              </a> 
+            </h4>
+          </div>
+          <div id="79e5288757dd986040fbe8b463c3cca7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11356-017-9635-8" target="_blank" title="View Publication 10.1007/s11356-017-9635-8">DOI: 10.1007/s11356-017-9635-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11356-017-9635-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#7c2f24b2faa7ab66ebb90f35609c66e8" style="font-size: 90%;" title="Open panel">
+                47. Application of calcium phosphate flocculation in high-density cell culture fluid with high product titer of monoclonal antibody
+              </a> 
+            </h4>
+          </div>
+          <div id="7c2f24b2faa7ab66ebb90f35609c66e8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00449-017-1735-9" target="_blank" title="View Publication 10.1007/s00449-017-1735-9">DOI: 10.1007/s00449-017-1735-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00449-017-1735-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#7c8b5a6300a0ccdaf7251ac22d3025f0" style="font-size: 90%;" title="Open panel">
+                48. Effect of Surfactants on Mechanical, Thermal, and Photostability of a Monoclonal Antibody
+              </a> 
+            </h4>
+          </div>
+          <div id="7c8b5a6300a0ccdaf7251ac22d3025f0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1208/s12249-017-0845-7" target="_blank" title="View Publication 10.1208/s12249-017-0845-7">DOI: 10.1208/s12249-017-0845-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1208/s12249-017-0845-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#7cae38cb277f73c7693fd8dc6a2c9d86" style="font-size: 90%;" title="Open panel">
+                49. Prediction of settled water turbidity and optimal coagulant dosage in drinking water treatment plant using a hybrid model of k-means clustering and adaptive neuro-fuzzy inference system
+              </a> 
+            </h4>
+          </div>
+          <div id="7cae38cb277f73c7693fd8dc6a2c9d86" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13201-017-0541-5" target="_blank" title="View Publication 10.1007/s13201-017-0541-5">DOI: 10.1007/s13201-017-0541-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13201-017-0541-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="60956.html#7f294226933d093612788a158c8856a6" style="font-size: 90%;" title="Open panel">
+                50. Experimental analysis and prediction of velocity profiles of turbidity current in a channel with abrupt slope using artificial neural network
+              </a> 
+            </h4>
+          </div>
+          <div id="7f294226933d093612788a158c8856a6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40430-017-0867-9" target="_blank" title="View Publication 10.1007/s40430-017-0867-9">DOI: 10.1007/s40430-017-0867-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40430-017-0867-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Turbidity'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 60956, "target": 60771 },
+      
+          { "source": 60956, "target": 64472 },
+      
+          { "source": 60956, "target": 61987 },
+      
+          { "source": 60956, "target": 61439 },
+      
+          { "source": 60956, "target": 70341 },
+      
+          { "source": 60956, "target": 64090 },
+      
+          { "source": 60956, "target": 61143 },
+      
+          { "source": 60956, "target": 60947 },
+      
+          { "source": 60956, "target": 61024 },
+      
+          { "source": 60956, "target": 63748 },
+      
+          { "source": 60771, "target": 61143 },
+      
+          { "source": 60771, "target": 60875 },
+      
+          { "source": 60771, "target": 60642 },
+      
+          { "source": 60771, "target": 61061 },
+      
+          { "source": 60771, "target": 60734 },
+      
+          { "source": 64472, "target": 60771 },
+      
+          { "source": 64472, "target": 60956 },
+      
+          { "source": 64472, "target": 60875 },
+      
+          { "source": 64472, "target": 60853 },
+      
+          { "source": 64472, "target": 61143 },
+      
+          { "source": 61987, "target": 60771 },
+      
+          { "source": 61987, "target": 61241 },
+      
+          { "source": 61987, "target": 60759 },
+      
+          { "source": 61987, "target": 60905 },
+      
+          { "source": 61987, "target": 61143 },
+      
+          { "source": 61439, "target": 60771 },
+      
+          { "source": 61439, "target": 60642 },
+      
+          { "source": 61439, "target": 60746 },
+      
+          { "source": 61439, "target": 60734 },
+      
+          { "source": 61439, "target": 61192 },
+      
+          { "source": 70341, "target": 60771 },
+      
+          { "source": 70341, "target": 61439 },
+      
+          { "source": 70341, "target": 61987 },
+      
+          { "source": 70341, "target": 60956 },
+      
+          { "source": 70341, "target": 61290 },
+      
+          { "source": 64090, "target": 61987 },
+      
+          { "source": 64090, "target": 61361 },
+      
+          { "source": 64090, "target": 60956 },
+      
+          { "source": 64090, "target": 63076 },
+      
+          { "source": 64090, "target": 60958 },
+      
+          { "source": 61143, "target": 60759 },
+      
+          { "source": 61143, "target": 60905 },
+      
+          { "source": 61143, "target": 60771 },
+      
+          { "source": 61143, "target": 61133 },
+      
+          { "source": 61143, "target": 60642 },
+      
+          { "source": 60947, "target": 60771 },
+      
+          { "source": 60947, "target": 60948 },
+      
+          { "source": 60947, "target": 63048 },
+      
+          { "source": 60947, "target": 61143 },
+      
+          { "source": 60947, "target": 61235 },
+      
+          { "source": 61024, "target": 61361 },
+      
+          { "source": 61024, "target": 60759 },
+      
+          { "source": 61024, "target": 62004 },
+      
+          { "source": 61024, "target": 60771 },
+      
+          { "source": 61024, "target": 62493 },
+      
+          { "source": 63748, "target": 61241 },
+      
+          { "source": 63748, "target": 60905 },
+      
+          { "source": 63748, "target": 61980 },
+      
+          { "source": 63748, "target": 61409 },
+      
+          { "source": 63748, "target": 61143 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 60771, "size": 50, "score": 0 , "title": "PH", "type": "circle"},
+
+      
+
+        {"id": 64472, "size": 50, "score": 0 , "title": "Flocculation", "type": "circle"},
+
+      
+
+        {"id": 61987, "size": 50, "score": 0 , "title": "Salinity", "type": "circle"},
+
+      
+
+        {"id": 61439, "size": 50, "score": 0 , "title": "Electrical resistivity and conductivity", "type": "circle"},
+
+      
+
+        {"id": 70341, "size": 50, "score": 0 , "title": "Total dissolved solids", "type": "circle"},
+
+      
+
+        {"id": 64090, "size": 50, "score": 0 , "title": "Estuary", "type": "circle"},
+
+      
+
+        {"id": 61143, "size": 50, "score": 0 , "title": "Acid", "type": "circle"},
+
+      
+
+        {"id": 60947, "size": 50, "score": 0 , "title": "Nitrate", "type": "circle"},
+
+      
+
+        {"id": 61024, "size": 50, "score": 0 , "title": "India", "type": "circle"},
+
+      
+
+        {"id": 63748, "size": 50, "score": 0 , "title": "Chlorophyll", "type": "circle"},
+
+      
+
+        {"id": 60956, "size": 70, "score": 0.5 , "title": "Turbidity", "type": "circle"},
+
+      
+
+        {"id": 60875, "size": 5, "score": 0.4 , "title": "Adsorption", "type": "circle"},
+
+      
+
+        {"id": 60642, "size": 5, "score": 0.4 , "title": "X-ray crystallography", "type": "circle"},
+
+      
+
+        {"id": 61061, "size": 5, "score": 0.4 , "title": "Enzyme", "type": "circle"},
+
+      
+
+        {"id": 60734, "size": 5, "score": 0.4 , "title": "Carbon", "type": "circle"},
+
+      
+
+        {"id": 60853, "size": 5, "score": 0.4 , "title": "Polymer", "type": "circle"},
+
+      
+
+        {"id": 61241, "size": 5, "score": 0.4 , "title": "Biomass", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 60746, "size": 5, "score": 0.4 , "title": "Scanning electron microscope", "type": "circle"},
+
+      
+
+        {"id": 61192, "size": 5, "score": 0.4 , "title": "Spectroscopy", "type": "circle"},
+
+      
+
+        {"id": 61290, "size": 5, "score": 0.4 , "title": "Sodium", "type": "circle"},
+
+      
+
+        {"id": 61361, "size": 5, "score": 0.4 , "title": "China", "type": "circle"},
+
+      
+
+        {"id": 63076, "size": 5, "score": 0.4 , "title": "Wetland", "type": "circle"},
+
+      
+
+        {"id": 60958, "size": 5, "score": 0.4 , "title": "Plankton", "type": "circle"},
+
+      
+
+        {"id": 61133, "size": 5, "score": 0.4 , "title": "Antioxidant", "type": "circle"},
+
+      
+
+        {"id": 60948, "size": 5, "score": 0.4 , "title": "Ammonium", "type": "circle"},
+
+      
+
+        {"id": 63048, "size": 5, "score": 0.4 , "title": "Nitrite", "type": "circle"},
+
+      
+
+        {"id": 61235, "size": 5, "score": 0.4 , "title": "Nitrogen", "type": "circle"},
+
+      
+
+        {"id": 62004, "size": 5, "score": 0.4 , "title": "Monsoon", "type": "circle"},
+
+      
+
+        {"id": 62493, "size": 5, "score": 0.4 , "title": "Bangladesh", "type": "circle"},
+
+      
+
+        {"id": 61980, "size": 5, "score": 0.4 , "title": "Photosynthesis", "type": "circle"},
+
+      
+
+        {"id": 61409, "size": 5, "score": 0.4 , "title": "Fluorescence", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,2248 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Dark energy</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Dark energy</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Dark_energy" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Dark_energy" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="63181.html"
+        
+       title="View other articles tagged with this concept">Dark matter</a>
+      <span color="black;" style="opacity: 1;">&nbsp;11 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="65642.html"
+        
+       title="View other articles tagged with this concept">Physical cosmology</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="63046.html"
+        
+       title="View other articles tagged with this concept">Deceleration parameter</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="66831.html"
+        
+       title="View other articles tagged with this concept">Cosmological constant</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="67104.html"
+        
+       title="View other articles tagged with this concept">Scalar field</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62944.html"
+        
+       title="View other articles tagged with this concept">Quantum field theory</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="65643.html"
+        
+       title="View other articles tagged with this concept">General relativity</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="68401.html"
+        
+       title="View other articles tagged with this concept">Cosmic microwave background</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="66655.html"
+        
+       title="View other articles tagged with this concept">Albert Einstein</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61465.html"
+        
+       title="View other articles tagged with this concept">Viscosity</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62537.html"
+        
+       title="View other articles tagged with this concept">Tensor</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63045.html"
+        
+       title="View other articles tagged with this concept">Redshift</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62427.html"
+        
+       title="View other articles tagged with this concept">Geometry</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="76204.html"
+        
+       title="View other articles tagged with this concept">Coupling constant</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61099.html"
+        
+       title="View other articles tagged with this concept">Anisotropy</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64954.html"
+        
+       title="View other articles tagged with this concept">Vector field</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68121.html"
+        
+       title="View other articles tagged with this concept">Vacuum energy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61406.html"
+        
+       title="View other articles tagged with this concept">The Equation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64551.html"
+        
+       title="View other articles tagged with this concept">Telescope</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61192.html"
+        
+       title="View other articles tagged with this concept">Spectroscopy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66656.html"
+        
+       title="View other articles tagged with this concept">Spacetime</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62169.html"
+        
+       title="View other articles tagged with this concept">South Africa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75976.html"
+        
+       title="View other articles tagged with this concept">Scalar potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68468.html"
+        
+       title="View other articles tagged with this concept">Scalar curvature</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71523.html"
+        
+       title="View other articles tagged with this concept">Quantum gravity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68340.html"
+        
+       title="View other articles tagged with this concept">Quantum chromodynamics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61408.html"
+        
+       title="View other articles tagged with this concept">Quantum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64368.html"
+        
+       title="View other articles tagged with this concept">Power law</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63838.html"
+        
+       title="View other articles tagged with this concept">Potential energy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77308.html"
+        
+       title="View other articles tagged with this concept">Planck length</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61286.html"
+        
+       title="View other articles tagged with this concept">Phase transition</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70648.html"
+        
+       title="View other articles tagged with this concept">Perfect fluid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61283.html"
+        
+       title="View other articles tagged with this concept">Numerical integration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62207.html"
+        
+       title="View other articles tagged with this concept">Numerical analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66367.html"
+        
+       title="View other articles tagged with this concept">Model selection</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61389.html"
+        
+       title="View other articles tagged with this concept">Manifold</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68521.html"
+        
+       title="View other articles tagged with this concept">Local field potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67376.html"
+        
+       title="View other articles tagged with this concept">Lagrangian mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65372.html"
+        
+       title="View other articles tagged with this concept">Kinetic energy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78284.html"
+        
+       title="View other articles tagged with this concept">Keynesian economics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63060.html"
+        
+       title="View other articles tagged with this concept">Infrared</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65818.html"
+        
+       title="View other articles tagged with this concept">Event horizon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71767.html"
+        
+       title="View other articles tagged with this concept">Euclidean geometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63182.html"
+        
+       title="View other articles tagged with this concept">Electronvolt</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="84033.html"
+        
+       title="View other articles tagged with this concept">Big Bang</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67740.html"
+        
+       title="View other articles tagged with this concept">Barotropic fluid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61837.html"
+        
+       title="View other articles tagged with this concept">Australia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61435.html"
+        
+       title="View other articles tagged with this concept">Asteroid family</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70361.html"
+        
+       title="View other articles tagged with this concept">Ansatz</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">30</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info&nbsp;<a href="javascript:megaLoad();">(open all)</a></small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#01b5eb7800df0d716f79a8b20d221a4f" style="font-size: 90%;" title="Open panel">
+                1. What do we know about cosmography
+              </a> 
+            </h4>
+          </div>
+          <div id="01b5eb7800df0d716f79a8b20d221a4f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-5005-4" target="_blank" title="View Publication 10.1140/epjc/s10052-017-5005-4">DOI: 10.1140/epjc/s10052-017-5005-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-5005-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#099b93d979ae03fa2952d8eed7f328c3" style="font-size: 90%;" title="Open panel">
+                2. The dark components of the Universe are slowly clarified
+              </a> 
+            </h4>
+          </div>
+          <div id="099b93d979ae03fa2952d8eed7f328c3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1063776117020029" target="_blank" title="View Publication 10.1134/S1063776117020029">DOI: 10.1134/S1063776117020029</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1063776117020029" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#09d94eb01eda15bd4e1dc0cef9125d33" style="font-size: 90%;" title="Open panel">
+                3. A parametric reconstruction of the deceleration parameter
+              </a> 
+            </h4>
+          </div>
+          <div id="09d94eb01eda15bd4e1dc0cef9125d33" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-5066-4" target="_blank" title="View Publication 10.1140/epjc/s10052-017-5066-4">DOI: 10.1140/epjc/s10052-017-5066-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-5066-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#24e8d2fbbd37cd8280202605c37793a3" style="font-size: 90%;" title="Open panel">
+                4. Reconstruction of f(G) gravity with polytropic and Chaplygin gas dark energy models
+              </a> 
+            </h4>
+          </div>
+          <div id="24e8d2fbbd37cd8280202605c37793a3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjp/i2017-11675-5" target="_blank" title="View Publication 10.1140/epjp/i2017-11675-5">DOI: 10.1140/epjp/i2017-11675-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjp/i2017-11675-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#35f29e86b0b84af953f38a9249fad058" style="font-size: 90%;" title="Open panel">
+                5. Interacting diffusive unified dark energy and dark matter from scalar fields
+              </a> 
+            </h4>
+          </div>
+          <div id="35f29e86b0b84af953f38a9249fad058" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-4939-x" target="_blank" title="View Publication 10.1140/epjc/s10052-017-4939-x">DOI: 10.1140/epjc/s10052-017-4939-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-4939-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#3bb3ecce08342c14385baefa38a6fadf" style="font-size: 90%;" title="Open panel">
+                6. Ghost Dark Energy with Sign-changeable Interaction Term
+              </a> 
+            </h4>
+          </div>
+          <div id="3bb3ecce08342c14385baefa38a6fadf" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10773-017-3513-5" target="_blank" title="View Publication 10.1007/s10773-017-3513-5">DOI: 10.1007/s10773-017-3513-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10773-017-3513-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#3d2b25f4695d28c501c59fc1a4bc2fd9" style="font-size: 90%;" title="Open panel">
+                7. Two fluid anisotropic dark energy models in a scale invariant theory
+              </a> 
+            </h4>
+          </div>
+          <div id="3d2b25f4695d28c501c59fc1a4bc2fd9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjp/i2017-11672-8" target="_blank" title="View Publication 10.1140/epjp/i2017-11672-8">DOI: 10.1140/epjp/i2017-11672-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjp/i2017-11672-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#3e88a00ec5b930bf742e21eca6b18a5b" style="font-size: 90%;" title="Open panel">
+                8. Square Kilometre Array: The radio telescope of the XXI century
+              </a> 
+            </h4>
+          </div>
+          <div id="3e88a00ec5b930bf742e21eca6b18a5b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1063772917040059" target="_blank" title="View Publication 10.1134/S1063772917040059">DOI: 10.1134/S1063772917040059</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1063772917040059" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#612e0569002f1a0f89c97f03b5d38450" style="font-size: 90%;" title="Open panel">
+                9. A new recipe for $$\Lambda $$ Λ CDM
+              </a> 
+            </h4>
+          </div>
+          <div id="612e0569002f1a0f89c97f03b5d38450" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-4796-7" target="_blank" title="View Publication 10.1140/epjc/s10052-017-4796-7">DOI: 10.1140/epjc/s10052-017-4796-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-4796-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#67c3388f0016818d4684c1ca03e9fb92" style="font-size: 90%;" title="Open panel">
+                10. AIC and BIC for cosmological interacting scenarios
+              </a> 
+            </h4>
+          </div>
+          <div id="67c3388f0016818d4684c1ca03e9fb92" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-5128-7" target="_blank" title="View Publication 10.1140/epjc/s10052-017-5128-7">DOI: 10.1140/epjc/s10052-017-5128-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-5128-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#69aa902ea16d26b0f4fb137805f64ab2" style="font-size: 90%;" title="Open panel">
+                11. Bianchi type-II universe with wet dark fluid in general theory of relativity
+              </a> 
+            </h4>
+          </div>
+          <div id="69aa902ea16d26b0f4fb137805f64ab2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10509-017-3133-9" target="_blank" title="View Publication 10.1007/s10509-017-3133-9">DOI: 10.1007/s10509-017-3133-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10509-017-3133-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#6d043cc951fcc6775db3ffbf032eb245" style="font-size: 90%;" title="Open panel">
+                12. Tests and Problems of the Standard Model in Cosmology
+              </a> 
+            </h4>
+          </div>
+          <div id="6d043cc951fcc6775db3ffbf032eb245" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10701-017-0073-8" target="_blank" title="View Publication 10.1007/s10701-017-0073-8">DOI: 10.1007/s10701-017-0073-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10701-017-0073-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#7532947c365ea4e90ef42a4b968806ab" style="font-size: 90%;" title="Open panel">
+                13. Noether symmetries of a modified model in teleparallel gravity and a new approach for exact solutions
+              </a> 
+            </h4>
+          </div>
+          <div id="7532947c365ea4e90ef42a4b968806ab" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-4790-0" target="_blank" title="View Publication 10.1140/epjc/s10052-017-4790-0">DOI: 10.1140/epjc/s10052-017-4790-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-4790-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#83e301f2b95e43ff2819e18f4c996369" style="font-size: 90%;" title="Open panel">
+                14. Plane Symmetric Anisotropic Dark Energy Cosmological Model in the Bimetric Theory of Gravitation
+              </a> 
+            </h4>
+          </div>
+          <div id="83e301f2b95e43ff2819e18f4c996369" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10511-017-9479-4" target="_blank" title="View Publication 10.1007/s10511-017-9479-4">DOI: 10.1007/s10511-017-9479-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10511-017-9479-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#8670b1a788442c26d240530e69073eaa" style="font-size: 90%;" title="Open panel">
+                15. Recent observational constraints on generalized Chaplygin gas in UDME scenario
+              </a> 
+            </h4>
+          </div>
+          <div id="8670b1a788442c26d240530e69073eaa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12043-016-1358-8" target="_blank" title="View Publication 10.1007/s12043-016-1358-8">DOI: 10.1007/s12043-016-1358-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12043-016-1358-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#8ebc12eb82ce966899bf0966c00c149d" style="font-size: 90%;" title="Open panel">
+                16. New agegraphic dark energy model in Brans-Dicke theory with logarithmic form of scalar field
+              </a> 
+            </h4>
+          </div>
+          <div id="8ebc12eb82ce966899bf0966c00c149d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10509-017-3032-0" target="_blank" title="View Publication 10.1007/s10509-017-3032-0">DOI: 10.1007/s10509-017-3032-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10509-017-3032-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#91b222f489a4836dacacbe50f98fb731" style="font-size: 90%;" title="Open panel">
+                17. Whether Lyra’s Manifold Itself is aHidden Source of Dark Energy
+              </a> 
+            </h4>
+          </div>
+          <div id="91b222f489a4836dacacbe50f98fb731" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10773-017-3417-4" target="_blank" title="View Publication 10.1007/s10773-017-3417-4">DOI: 10.1007/s10773-017-3417-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10773-017-3417-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#9650a07d4eee394b09e51471556ba37d" style="font-size: 90%;" title="Open panel">
+                18. The simplest non-minimal matter–geometry coupling in the f(R, T) cosmology
+              </a> 
+            </h4>
+          </div>
+          <div id="9650a07d4eee394b09e51471556ba37d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-5062-8" target="_blank" title="View Publication 10.1140/epjc/s10052-017-5062-8">DOI: 10.1140/epjc/s10052-017-5062-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-5062-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#9b33eb8cee284744df2c41d85191b3e0" style="font-size: 90%;" title="Open panel">
+                19. Lemaître dark energy model singled out by the holographic principle
+              </a> 
+            </h4>
+          </div>
+          <div id="9b33eb8cee284744df2c41d85191b3e0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0202289317010030" target="_blank" title="View Publication 10.1134/S0202289317010030">DOI: 10.1134/S0202289317010030</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0202289317010030" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#9bb8d6ee94ad856b86f4dfa0297bdeb3" style="font-size: 90%;" title="Open panel">
+                20. Effective couplings and the prospect of solving fundamental problems of cosmology in a quantum theory of gravity
+              </a> 
+            </h4>
+          </div>
+          <div id="9bb8d6ee94ad856b86f4dfa0297bdeb3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0040577917050026" target="_blank" title="View Publication 10.1134/S0040577917050026">DOI: 10.1134/S0040577917050026</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0040577917050026" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#9f6a5fa33ba7c210f074ed82caa7e0ec" style="font-size: 90%;" title="Open panel">
+                21. Estimation of conformal cosmological model parameters with SDSS and SNLS supernova samples
+              </a> 
+            </h4>
+          </div>
+          <div id="9f6a5fa33ba7c210f074ed82caa7e0ec" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1547477117020261" target="_blank" title="View Publication 10.1134/S1547477117020261">DOI: 10.1134/S1547477117020261</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1547477117020261" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#a67159055826014ff64e5a8095a0e838" style="font-size: 90%;" title="Open panel">
+                22. The general class of Bianchi cosmological models with dark energy and variable Λ and G in viscous cosmology
+              </a> 
+            </h4>
+          </div>
+          <div id="a67159055826014ff64e5a8095a0e838" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12043-017-1366-3" target="_blank" title="View Publication 10.1007/s12043-017-1366-3">DOI: 10.1007/s12043-017-1366-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12043-017-1366-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#ac6c0e78b85ab240dc71b277dc467cf6" style="font-size: 90%;" title="Open panel">
+                23. Model of Decaying Dark Energy Based on the Kaluza–Klein Theory
+              </a> 
+            </h4>
+          </div>
+          <div id="ac6c0e78b85ab240dc71b277dc467cf6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11182-017-1123-6" target="_blank" title="View Publication 10.1007/s11182-017-1123-6">DOI: 10.1007/s11182-017-1123-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11182-017-1123-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#b4ca5370b2e75d4b25b228c6031f8cc2" style="font-size: 90%;" title="Open panel">
+                24. Non-static spherically symmetric exact solution of the Einstein-Maxwell field equations
+              </a> 
+            </h4>
+          </div>
+          <div id="b4ca5370b2e75d4b25b228c6031f8cc2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3938/jkps.71.396" target="_blank" title="View Publication 10.3938/jkps.71.396">DOI: 10.3938/jkps.71.396</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3938/jkps.71.396" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#ba4ababc34c5b8ce83a5e912e51906a6" style="font-size: 90%;" title="Open panel">
+                25. Einstein and cosmology
+              </a> 
+            </h4>
+          </div>
+          <div id="ba4ababc34c5b8ce83a5e912e51906a6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40329-017-0162-8" target="_blank" title="View Publication 10.1007/s40329-017-0162-8">DOI: 10.1007/s40329-017-0162-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40329-017-0162-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#c43e4f150a126967527cfe472ab5a63c" style="font-size: 90%;" title="Open panel">
+                26. Cosmological study of reconstructed f(T) $f(T)$ models
+              </a> 
+            </h4>
+          </div>
+          <div id="c43e4f150a126967527cfe472ab5a63c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10509-017-3040-0" target="_blank" title="View Publication 10.1007/s10509-017-3040-0">DOI: 10.1007/s10509-017-3040-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10509-017-3040-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#c7277e51a2c675bd5ec96eda322bf874" style="font-size: 90%;" title="Open panel">
+                27. A new pressure-parametrization unified dark fluid model
+              </a> 
+            </h4>
+          </div>
+          <div id="c7277e51a2c675bd5ec96eda322bf874" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjc/s10052-017-4827-4" target="_blank" title="View Publication 10.1140/epjc/s10052-017-4827-4">DOI: 10.1140/epjc/s10052-017-4827-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjc/s10052-017-4827-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#d636d527cc547c661fe110cf135201b4" style="font-size: 90%;" title="Open panel">
+                28. Effect of anisotropy on the generalized Chaplygin gas scalar field and its interaction with other dark energy models
+              </a> 
+            </h4>
+          </div>
+          <div id="d636d527cc547c661fe110cf135201b4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjp/i2017-11464-2" target="_blank" title="View Publication 10.1140/epjp/i2017-11464-2">DOI: 10.1140/epjp/i2017-11464-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjp/i2017-11464-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#d759e9ecb2fd45b73071f13c6456a5e7" style="font-size: 90%;" title="Open panel">
+                29. Is Dark Energy due to an excited quantum state of the Universe?
+              </a> 
+            </h4>
+          </div>
+          <div id="d759e9ecb2fd45b73071f13c6456a5e7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjp/i2017-11478-8" target="_blank" title="View Publication 10.1140/epjp/i2017-11478-8">DOI: 10.1140/epjp/i2017-11478-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjp/i2017-11478-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63044.html#e00f1750e41bf4b509f72ecd8accfc86" style="font-size: 90%;" title="Open panel">
+                30. Scenario of a two-fluid FRW cosmological model with dark energy
+              </a> 
+            </h4>
+          </div>
+          <div id="e00f1750e41bf4b509f72ecd8accfc86" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1140/epjp/i2017-11409-9" target="_blank" title="View Publication 10.1140/epjp/i2017-11409-9">DOI: 10.1140/epjp/i2017-11409-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1140/epjp/i2017-11409-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Dark_energy'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 63044, "target": 63181 },
+      
+          { "source": 63044, "target": 65642 },
+      
+          { "source": 63044, "target": 63046 },
+      
+          { "source": 63044, "target": 66831 },
+      
+          { "source": 63044, "target": 78079 },
+      
+          { "source": 63044, "target": 67104 },
+      
+          { "source": 63044, "target": 62944 },
+      
+          { "source": 63044, "target": 65643 },
+      
+          { "source": 63044, "target": 68401 },
+      
+          { "source": 63044, "target": 66655 },
+      
+          { "source": 63181, "target": 63183 },
+      
+          { "source": 63181, "target": 64652 },
+      
+          { "source": 63181, "target": 64190 },
+      
+          { "source": 63181, "target": 64345 },
+      
+          { "source": 63181, "target": 63182 },
+      
+          { "source": 65642, "target": 63044 },
+      
+          { "source": 65642, "target": 66655 },
+      
+          { "source": 65642, "target": 63181 },
+      
+          { "source": 65642, "target": 66831 },
+      
+          { "source": 65642, "target": 62537 },
+      
+          { "source": 63046, "target": 63044 },
+      
+          { "source": 63046, "target": 66831 },
+      
+          { "source": 63046, "target": 68401 },
+      
+          { "source": 63046, "target": 68402 },
+      
+          { "source": 63046, "target": 63045 },
+      
+          { "source": 66831, "target": 66655 },
+      
+          { "source": 66831, "target": 65643 },
+      
+          { "source": 66831, "target": 64908 },
+      
+          { "source": 66831, "target": 68121 },
+      
+          { "source": 66831, "target": 66656 },
+      
+          { "source": 78079, "target": 63044 },
+      
+          { "source": 78079, "target": 63046 },
+      
+          { "source": 78079, "target": 63181 },
+      
+          { "source": 78079, "target": 61465 },
+      
+          { "source": 78079, "target": 67104 },
+      
+          { "source": 67104, "target": 66656 },
+      
+          { "source": 67104, "target": 62944 },
+      
+          { "source": 67104, "target": 63181 },
+      
+          { "source": 67104, "target": 66655 },
+      
+          { "source": 67104, "target": 62537 },
+      
+          { "source": 62944, "target": 66656 },
+      
+          { "source": 62944, "target": 60814 },
+      
+          { "source": 62944, "target": 64130 },
+      
+          { "source": 62944, "target": 62945 },
+      
+          { "source": 62944, "target": 65643 },
+      
+          { "source": 65643, "target": 66656 },
+      
+          { "source": 65643, "target": 66655 },
+      
+          { "source": 65643, "target": 62790 },
+      
+          { "source": 65643, "target": 64908 },
+      
+          { "source": 65643, "target": 60814 },
+      
+          { "source": 68401, "target": 68402 },
+      
+          { "source": 68401, "target": 65642 },
+      
+          { "source": 68401, "target": 64190 },
+      
+          { "source": 68401, "target": 63046 },
+      
+          { "source": 68401, "target": 63044 },
+      
+          { "source": 66655, "target": 65643 },
+      
+          { "source": 66655, "target": 66656 },
+      
+          { "source": 66655, "target": 64908 },
+      
+          { "source": 66655, "target": 66831 },
+      
+          { "source": 66655, "target": 62537 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 63181, "size": 50, "score": 0 , "title": "Dark matter", "type": "circle"},
+
+      
+
+        {"id": 65642, "size": 50, "score": 0 , "title": "Physical cosmology", "type": "circle"},
+
+      
+
+        {"id": 63046, "size": 50, "score": 0 , "title": "Deceleration parameter", "type": "circle"},
+
+      
+
+        {"id": 66831, "size": 50, "score": 0 , "title": "Cosmological constant", "type": "circle"},
+
+      
+
+        {"id": 78079, "size": 50, "score": 0 , "title": "Chaplygin gas", "type": "circle"},
+
+      
+
+        {"id": 67104, "size": 50, "score": 0 , "title": "Scalar field", "type": "circle"},
+
+      
+
+        {"id": 62944, "size": 50, "score": 0 , "title": "Quantum field theory", "type": "circle"},
+
+      
+
+        {"id": 65643, "size": 50, "score": 0 , "title": "General relativity", "type": "circle"},
+
+      
+
+        {"id": 68401, "size": 50, "score": 0 , "title": "Cosmic microwave background", "type": "circle"},
+
+      
+
+        {"id": 66655, "size": 50, "score": 0 , "title": "Albert Einstein", "type": "circle"},
+
+      
+
+        {"id": 63044, "size": 70, "score": 0.5 , "title": "Dark energy", "type": "circle"},
+
+      
+
+        {"id": 63183, "size": 5, "score": 0.4 , "title": "Large Hadron Collider", "type": "circle"},
+
+      
+
+        {"id": 64652, "size": 5, "score": 0.4 , "title": "Standard Model", "type": "circle"},
+
+      
+
+        {"id": 64190, "size": 5, "score": 0.4 , "title": "Neutrino", "type": "circle"},
+
+      
+
+        {"id": 64345, "size": 5, "score": 0.4 , "title": "Higgs boson", "type": "circle"},
+
+      
+
+        {"id": 63182, "size": 5, "score": 0.4 , "title": "Electronvolt", "type": "circle"},
+
+      
+
+        {"id": 62537, "size": 5, "score": 0.4 , "title": "Tensor", "type": "circle"},
+
+      
+
+        {"id": 68402, "size": 5, "score": 0.4 , "title": "Baryon acoustic oscillations", "type": "circle"},
+
+      
+
+        {"id": 63045, "size": 5, "score": 0.4 , "title": "Redshift", "type": "circle"},
+
+      
+
+        {"id": 64908, "size": 5, "score": 0.4 , "title": "Black hole", "type": "circle"},
+
+      
+
+        {"id": 68121, "size": 5, "score": 0.4 , "title": "Vacuum energy", "type": "circle"},
+
+      
+
+        {"id": 66656, "size": 5, "score": 0.4 , "title": "Spacetime", "type": "circle"},
+
+      
+
+        {"id": 61465, "size": 5, "score": 0.4 , "title": "Viscosity", "type": "circle"},
+
+      
+
+        {"id": 60814, "size": 5, "score": 0.4 , "title": "Classical mechanics", "type": "circle"},
+
+      
+
+        {"id": 64130, "size": 5, "score": 0.4 , "title": "Quantum mechanics", "type": "circle"},
+
+      
+
+        {"id": 62945, "size": 5, "score": 0.4 , "title": "Gauge theory", "type": "circle"},
+
+      
+
+        {"id": 62790, "size": 5, "score": 0.4 , "title": "Time", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

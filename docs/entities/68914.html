@@ -1,0 +1,1550 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">IPad</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">IPad</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/IPad" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/IPad" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="71906.html"
+        
+       title="View other articles tagged with this concept">Mathematics education</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62754.html"
+        
+       title="View other articles tagged with this concept">Mathematics</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61837.html"
+        
+       title="View other articles tagged with this concept">Australia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65847.html"
+        
+       title="View other articles tagged with this concept">Queensland</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61764.html"
+        
+       title="View other articles tagged with this concept">Percutaneous coronary intervention</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61004.html"
+        
+       title="View other articles tagged with this concept">Palliative care</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71940.html"
+        
+       title="View other articles tagged with this concept">Oral and maxillofacial surgery</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63223.html"
+        
+       title="View other articles tagged with this concept">Oncology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64670.html"
+        
+       title="View other articles tagged with this concept">New South Wales</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70348.html"
+        
+       title="View other articles tagged with this concept">Multiple baseline design</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61414.html"
+        
+       title="View other articles tagged with this concept">Ghana</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65622.html"
+        
+       title="View other articles tagged with this concept">Descriptive statistics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62437.html"
+        
+       title="View other articles tagged with this concept">Autism spectrum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65816.html"
+        
+       title="View other articles tagged with this concept">Autism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64676.html"
+        
+       title="View other articles tagged with this concept">Anatomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="81054.html"
+        
+       title="View other articles tagged with this concept">Accra</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">11</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info&nbsp;<a href="javascript:megaLoad();">(open all)</a></small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#0b2673030d712b47e4cbcaa23ce01c24" style="font-size: 90%;" title="Open panel">
+                1. Hospital staffs’ perceptions of an electronic program to engage patients in nutrition care at the bedside: a qualitative study
+              </a> 
+            </h4>
+          </div>
+          <div id="0b2673030d712b47e4cbcaa23ce01c24" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12911-017-0495-4" target="_blank" title="View Publication 10.1186/s12911-017-0495-4">DOI: 10.1186/s12911-017-0495-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12911-017-0495-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#18444a22caab5181436fa41548931e25" style="font-size: 90%;" title="Open panel">
+                2. Affordance Access Matters: Preschool Children’s Learning Progressions While Interacting with Touch-Screen Mathematics Apps
+              </a> 
+            </h4>
+          </div>
+          <div id="18444a22caab5181436fa41548931e25" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10758-017-9312-5" target="_blank" title="View Publication 10.1007/s10758-017-9312-5">DOI: 10.1007/s10758-017-9312-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10758-017-9312-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#21d97714090b9ae1bbfc7a0afdf2ebd0" style="font-size: 90%;" title="Open panel">
+                3. Analysing the relationships between students and mathematics: a tale of two paradigms
+              </a> 
+            </h4>
+          </div>
+          <div id="21d97714090b9ae1bbfc7a0afdf2ebd0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13394-016-0183-1" target="_blank" title="View Publication 10.1007/s13394-016-0183-1">DOI: 10.1007/s13394-016-0183-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13394-016-0183-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#26cda618ffc75a0de0193d0efcdec28d" style="font-size: 90%;" title="Open panel">
+                4. Improving preschoolers’ mathematics achievement with tablets: a randomized controlled trial
+              </a> 
+            </h4>
+          </div>
+          <div id="26cda618ffc75a0de0193d0efcdec28d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13394-017-0203-9" target="_blank" title="View Publication 10.1007/s13394-017-0203-9">DOI: 10.1007/s13394-017-0203-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13394-017-0203-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#334c6d604241191f4d031119e4929b8c" style="font-size: 90%;" title="Open panel">
+                5. Computer-Based Administration and Grading of Free-Response Practical Examination Items: a Comparison of Assessment Programs and Case Study
+              </a> 
+            </h4>
+          </div>
+          <div id="334c6d604241191f4d031119e4929b8c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40670-017-0458-5" target="_blank" title="View Publication 10.1007/s40670-017-0458-5">DOI: 10.1007/s40670-017-0458-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40670-017-0458-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#48d5cb9d9f47994de0d309d348720979" style="font-size: 90%;" title="Open panel">
+                6. Acquisition of Tacting Using a Speech-Generating Device in Group Learning Environments for Preschoolers with Autism
+              </a> 
+            </h4>
+          </div>
+          <div id="48d5cb9d9f47994de0d309d348720979" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10882-017-9543-3" target="_blank" title="View Publication 10.1007/s10882-017-9543-3">DOI: 10.1007/s10882-017-9543-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10882-017-9543-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#60623d76427ab4b7f17a45608bf9a367" style="font-size: 90%;" title="Open panel">
+                7. Brief Report: Using iPads for Self-Monitoring of Students with Autism
+              </a> 
+            </h4>
+          </div>
+          <div id="60623d76427ab4b7f17a45608bf9a367" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10803-017-3055-y" target="_blank" title="View Publication 10.1007/s10803-017-3055-y">DOI: 10.1007/s10803-017-3055-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10803-017-3055-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#7cc82fa0e0a7141eacef05d0e99cad70" style="font-size: 90%;" title="Open panel">
+                8. Student Outcomes and Perceptions Related to Chroma Key (Green Screen) Technology Utilized in a Drug Literature Evaluation Course
+              </a> 
+            </h4>
+          </div>
+          <div id="7cc82fa0e0a7141eacef05d0e99cad70" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40670-017-0464-7" target="_blank" title="View Publication 10.1007/s40670-017-0464-7">DOI: 10.1007/s40670-017-0464-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40670-017-0464-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#82249cfdd7c950303616cfd57e63f934" style="font-size: 90%;" title="Open panel">
+                9. How easy and confident do patients feel about using an iPad to complete the Patient Concerns Inventory without assistance in a busy head and neck oncology outpatient review clinic
+              </a> 
+            </h4>
+          </div>
+          <div id="82249cfdd7c950303616cfd57e63f934" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s41548-017-0001-9" target="_blank" title="View Publication 10.1007/s41548-017-0001-9">DOI: 10.1007/s41548-017-0001-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s41548-017-0001-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#c2e79c70d3e88cb91e330d418235e331" style="font-size: 90%;" title="Open panel">
+                10. Examining students’ experience with the use of some selected ICT devices and applications for learning and their effect on academic performance
+              </a> 
+            </h4>
+          </div>
+          <div id="c2e79c70d3e88cb91e330d418235e331" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40692-017-0089-2" target="_blank" title="View Publication 10.1007/s40692-017-0089-2">DOI: 10.1007/s40692-017-0089-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40692-017-0089-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="68914.html#fe6910279f68480a1ac00fb2a1b5284e" style="font-size: 90%;" title="Open panel">
+                11. Keep in Touch (KIT): feasibility of using internet-based communication and information technology in palliative care
+              </a> 
+            </h4>
+          </div>
+          <div id="fe6910279f68480a1ac00fb2a1b5284e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12904-017-0203-2" target="_blank" title="View Publication 10.1186/s12904-017-0203-2">DOI: 10.1186/s12904-017-0203-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12904-017-0203-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/IPad'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 68914, "target": 71906 },
+      
+          { "source": 68914, "target": 62754 },
+      
+          { "source": 68914, "target": 61837 },
+      
+          { "source": 68914, "target": 86808 },
+      
+          { "source": 68914, "target": 65847 },
+      
+          { "source": 68914, "target": 61764 },
+      
+          { "source": 68914, "target": 61004 },
+      
+          { "source": 68914, "target": 71940 },
+      
+          { "source": 68914, "target": 63223 },
+      
+          { "source": 68914, "target": 64670 },
+      
+          { "source": 71906, "target": 62754 },
+      
+          { "source": 71906, "target": 68914 },
+      
+          { "source": 71906, "target": 72809 },
+      
+          { "source": 71906, "target": 60638 },
+      
+          { "source": 71906, "target": 61837 },
+      
+          { "source": 62754, "target": 61246 },
+      
+          { "source": 62754, "target": 71906 },
+      
+          { "source": 62754, "target": 62427 },
+      
+          { "source": 62754, "target": 61092 },
+      
+          { "source": 62754, "target": 61108 },
+      
+          { "source": 61837, "target": 64820 },
+      
+          { "source": 61837, "target": 64670 },
+      
+          { "source": 61837, "target": 61096 },
+      
+          { "source": 61837, "target": 65847 },
+      
+          { "source": 61837, "target": 62916 },
+      
+          { "source": 86808, "target": 70348 },
+      
+          { "source": 86808, "target": 68914 },
+      
+          { "source": 86808, "target": 65816 },
+      
+          { "source": 65847, "target": 61837 },
+      
+          { "source": 65847, "target": 64670 },
+      
+          { "source": 65847, "target": 64820 },
+      
+          { "source": 65847, "target": 61776 },
+      
+          { "source": 65847, "target": 61378 },
+      
+          { "source": 61764, "target": 60807 },
+      
+          { "source": 61764, "target": 61522 },
+      
+          { "source": 61764, "target": 61523 },
+      
+          { "source": 61764, "target": 61629 },
+      
+          { "source": 61764, "target": 62372 },
+      
+          { "source": 61004, "target": 63223 },
+      
+          { "source": 61004, "target": 60919 },
+      
+          { "source": 61004, "target": 61081 },
+      
+          { "source": 61004, "target": 67558 },
+      
+          { "source": 61004, "target": 68640 },
+      
+          { "source": 71940, "target": 107692 },
+      
+          { "source": 71940, "target": 62298 },
+      
+          { "source": 71940, "target": 65176 },
+      
+          { "source": 71940, "target": 60672 },
+      
+          { "source": 71940, "target": 60987 },
+      
+          { "source": 63223, "target": 60636 },
+      
+          { "source": 63223, "target": 61697 },
+      
+          { "source": 63223, "target": 61828 },
+      
+          { "source": 63223, "target": 61004 },
+      
+          { "source": 63223, "target": 60720 },
+      
+          { "source": 64670, "target": 61837 },
+      
+          { "source": 64670, "target": 65847 },
+      
+          { "source": 64670, "target": 79758 },
+      
+          { "source": 64670, "target": 64820 },
+      
+          { "source": 64670, "target": 61108 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 71906, "size": 50, "score": 0 , "title": "Mathematics education", "type": "circle"},
+
+      
+
+        {"id": 62754, "size": 50, "score": 0 , "title": "Mathematics", "type": "circle"},
+
+      
+
+        {"id": 61837, "size": 50, "score": 0 , "title": "Australia", "type": "circle"},
+
+      
+
+        {"id": 86808, "size": 50, "score": 0 , "title": "Speech-generating device", "type": "circle"},
+
+      
+
+        {"id": 65847, "size": 50, "score": 0 , "title": "Queensland", "type": "circle"},
+
+      
+
+        {"id": 61764, "size": 50, "score": 0 , "title": "Percutaneous coronary intervention", "type": "circle"},
+
+      
+
+        {"id": 61004, "size": 50, "score": 0 , "title": "Palliative care", "type": "circle"},
+
+      
+
+        {"id": 71940, "size": 50, "score": 0 , "title": "Oral and maxillofacial surgery", "type": "circle"},
+
+      
+
+        {"id": 63223, "size": 50, "score": 0 , "title": "Oncology", "type": "circle"},
+
+      
+
+        {"id": 64670, "size": 50, "score": 0 , "title": "New South Wales", "type": "circle"},
+
+      
+
+        {"id": 68914, "size": 70, "score": 0.5 , "title": "IPad", "type": "circle"},
+
+      
+
+        {"id": 72809, "size": 5, "score": 0.4 , "title": "Computer science", "type": "circle"},
+
+      
+
+        {"id": 60638, "size": 5, "score": 0.4 , "title": "Camera lens", "type": "circle"},
+
+      
+
+        {"id": 61246, "size": 5, "score": 0.4 , "title": "Physics", "type": "circle"},
+
+      
+
+        {"id": 62427, "size": 5, "score": 0.4 , "title": "Geometry", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 61108, "size": 5, "score": 0.4 , "title": "Logistic regression", "type": "circle"},
+
+      
+
+        {"id": 64820, "size": 5, "score": 0.4 , "title": "New Zealand", "type": "circle"},
+
+      
+
+        {"id": 61096, "size": 5, "score": 0.4 , "title": "Canada", "type": "circle"},
+
+      
+
+        {"id": 62916, "size": 5, "score": 0.4 , "title": "Sydney", "type": "circle"},
+
+      
+
+        {"id": 70348, "size": 5, "score": 0.4 , "title": "Multiple baseline design", "type": "circle"},
+
+      
+
+        {"id": 65816, "size": 5, "score": 0.4 , "title": "Autism", "type": "circle"},
+
+      
+
+        {"id": 61776, "size": 5, "score": 0.4 , "title": "Trust law", "type": "circle"},
+
+      
+
+        {"id": 61378, "size": 5, "score": 0.4 , "title": "Self-efficacy", "type": "circle"},
+
+      
+
+        {"id": 60807, "size": 5, "score": 0.4 , "title": "Infarction", "type": "circle"},
+
+      
+
+        {"id": 61522, "size": 5, "score": 0.4 , "title": "Coronary artery disease", "type": "circle"},
+
+      
+
+        {"id": 61523, "size": 5, "score": 0.4 , "title": "Stent", "type": "circle"},
+
+      
+
+        {"id": 61629, "size": 5, "score": 0.4 , "title": "Confidence interval", "type": "circle"},
+
+      
+
+        {"id": 62372, "size": 5, "score": 0.4 , "title": "Diabetes mellitus", "type": "circle"},
+
+      
+
+        {"id": 60919, "size": 5, "score": 0.4 , "title": "Disease", "type": "circle"},
+
+      
+
+        {"id": 61081, "size": 5, "score": 0.4 , "title": "Shortness of breath", "type": "circle"},
+
+      
+
+        {"id": 67558, "size": 5, "score": 0.4 , "title": "Republic of Ireland", "type": "circle"},
+
+      
+
+        {"id": 68640, "size": 5, "score": 0.4 , "title": "Lung cancer", "type": "circle"},
+
+      
+
+        {"id": 107692, "size": 5, "score": 0.4 , "title": "Osteoradionecrosis", "type": "circle"},
+
+      
+
+        {"id": 62298, "size": 5, "score": 0.4 , "title": "Tissue engineering", "type": "circle"},
+
+      
+
+        {"id": 65176, "size": 5, "score": 0.4 , "title": "Radiology", "type": "circle"},
+
+      
+
+        {"id": 60672, "size": 5, "score": 0.4 , "title": "Odds ratio", "type": "circle"},
+
+      
+
+        {"id": 60987, "size": 5, "score": 0.4 , "title": "Malocclusion", "type": "circle"},
+
+      
+
+        {"id": 60636, "size": 5, "score": 0.4 , "title": "Chemotherapy", "type": "circle"},
+
+      
+
+        {"id": 61697, "size": 5, "score": 0.4 , "title": "Radiation therapy", "type": "circle"},
+
+      
+
+        {"id": 61828, "size": 5, "score": 0.4 , "title": "Breast cancer", "type": "circle"},
+
+      
+
+        {"id": 60720, "size": 5, "score": 0.4 , "title": "Magnetic resonance imaging", "type": "circle"},
+
+      
+
+        {"id": 79758, "size": 5, "score": 0.4 , "title": "Western Australia", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

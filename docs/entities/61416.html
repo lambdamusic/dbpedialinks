@@ -1,0 +1,2800 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Soviet Union</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Soviet Union</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Soviet_Union" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Soviet_Union" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.2;"   
+        
+          href="61610.html"
+        
+       title="View other articles tagged with this concept">Russia</a>
+      <span color="black;" style="opacity: 1.2;">&nbsp;9 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="75027.html"
+        
+       title="View other articles tagged with this concept">World War II</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62296.html"
+        
+       title="View other articles tagged with this concept">International law</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61361.html"
+        
+       title="View other articles tagged with this concept">China</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="73671.html"
+        
+       title="View other articles tagged with this concept">Ukraine</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62406.html"
+        
+       title="View other articles tagged with this concept">Siberia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61417.html"
+        
+       title="View other articles tagged with this concept">Mongolia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61605.html"
+        
+       title="View other articles tagged with this concept">Biology</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72094.html"
+        
+       title="View other articles tagged with this concept">White noise</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68489.html"
+        
+       title="View other articles tagged with this concept">Wavenumber</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62246.html"
+        
+       title="View other articles tagged with this concept">Wavelet</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71325.html"
+        
+       title="View other articles tagged with this concept">Tritium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71755.html"
+        
+       title="View other articles tagged with this concept">Transbaikal</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61692.html"
+        
+       title="View other articles tagged with this concept">Trace element</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="84730.html"
+        
+       title="View other articles tagged with this concept">Tajikistan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62373.html"
+        
+       title="View other articles tagged with this concept">Taiwan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64535.html"
+        
+       title="View other articles tagged with this concept">Switzerland</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75882.html"
+        
+       title="View other articles tagged with this concept">Stratosphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67195.html"
+        
+       title="View other articles tagged with this concept">Stratigraphy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61561.html"
+        
+       title="View other articles tagged with this concept">Solar wind</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="81623.html"
+        
+       title="View other articles tagged with this concept">Sakha Republic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60682.html"
+        
+       title="View other articles tagged with this concept">Remote sensing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66763.html"
+        
+       title="View other articles tagged with this concept">Random variable</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73546.html"
+        
+       title="View other articles tagged with this concept">Random matrix</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74033.html"
+        
+       title="View other articles tagged with this concept">Radioactive waste</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61447.html"
+        
+       title="View other articles tagged with this concept">Psychology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65973.html"
+        
+       title="View other articles tagged with this concept">Principle of locality</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66279.html"
+        
+       title="View other articles tagged with this concept">Polish language</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61833.html"
+        
+       title="View other articles tagged with this concept">Poisson regression</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61980.html"
+        
+       title="View other articles tagged with this concept">Photosynthesis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64901.html"
+        
+       title="View other articles tagged with this concept">Phase diagram</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63198.html"
+        
+       title="View other articles tagged with this concept">Permian</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74226.html"
+        
+       title="View other articles tagged with this concept">Pentatomidae</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71973.html"
+        
+       title="View other articles tagged with this concept">Olfaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61369.html"
+        
+       title="View other articles tagged with this concept">Nuclear magnetic resonance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64356.html"
+        
+       title="View other articles tagged with this concept">New York City</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67272.html"
+        
+       title="View other articles tagged with this concept">Neoliberalism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="89737.html"
+        
+       title="View other articles tagged with this concept">Neogene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70965.html"
+        
+       title="View other articles tagged with this concept">Moscow</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60690.html"
+        
+       title="View other articles tagged with this concept">Monte Carlo method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68032.html"
+        
+       title="View other articles tagged with this concept">Mars</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66477.html"
+        
+       title="View other articles tagged with this concept">Mali</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63549.html"
+        
+       title="View other articles tagged with this concept">Magnetometer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61190.html"
+        
+       title="View other articles tagged with this concept">Logic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62081.html"
+        
+       title="View other articles tagged with this concept">Lead</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67322.html"
+        
+       title="View other articles tagged with this concept">Landsat program</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73339.html"
+        
+       title="View other articles tagged with this concept">Kazakhstan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74502.html"
+        
+       title="View other articles tagged with this concept">Kara Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67707.html"
+        
+       title="View other articles tagged with this concept">Jurassic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62111.html"
+        
+       title="View other articles tagged with this concept">Japan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61083.html"
+        
+       title="View other articles tagged with this concept">Italy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62274.html"
+        
+       title="View other articles tagged with this concept">Insect</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63213.html"
+        
+       title="View other articles tagged with this concept">Inductively coupled plasma</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70111.html"
+        
+       title="View other articles tagged with this concept">Independent and identically distributed random variables</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66476.html"
+        
+       title="View other articles tagged with this concept">Hymenoptera</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70192.html"
+        
+       title="View other articles tagged with this concept">Hungarian language</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62448.html"
+        
+       title="View other articles tagged with this concept">Hong Kong</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63022.html"
+        
+       title="View other articles tagged with this concept">Google Scholar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62427.html"
+        
+       title="View other articles tagged with this concept">Geometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61915.html"
+        
+       title="View other articles tagged with this concept">Fungus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61547.html"
+        
+       title="View other articles tagged with this concept">Epidemiology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60907.html"
+        
+       title="View other articles tagged with this concept">Endoplasmic reticulum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65206.html"
+        
+       title="View other articles tagged with this concept">Electron paramagnetic resonance</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63452.html"
+        
+       title="View other articles tagged with this concept">Eigenvalues and eigenvectors</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63807.html"
+        
+       title="View other articles tagged with this concept">Ecology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61705.html"
+        
+       title="View other articles tagged with this concept">Ductility</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65272.html"
+        
+       title="View other articles tagged with this concept">Dosimetry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61469.html"
+        
+       title="View other articles tagged with this concept">Dislocation creep</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61687.html"
+        
+       title="View other articles tagged with this concept">Cretaceous</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69589.html"
+        
+       title="View other articles tagged with this concept">Conjugate gradient method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78977.html"
+        
+       title="View other articles tagged with this concept">Compass</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63316.html"
+        
+       title="View other articles tagged with this concept">Central limit theorem</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61418.html"
+        
+       title="View other articles tagged with this concept">Central Asia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66413.html"
+        
+       title="View other articles tagged with this concept">Cattle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61096.html"
+        
+       title="View other articles tagged with this concept">Canada</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67529.html"
+        
+       title="View other articles tagged with this concept">Brown marmorated stink bug</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61607.html"
+        
+       title="View other articles tagged with this concept">Black Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65094.html"
+        
+       title="View other articles tagged with this concept">Bertrand Russell</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="84282.html"
+        
+       title="View other articles tagged with this concept">Belarus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61606.html"
+        
+       title="View other articles tagged with this concept">Beetle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68254.html"
+        
+       title="View other articles tagged with this concept">Arctic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61415.html"
+        
+       title="View other articles tagged with this concept">Alternative medicine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">38</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#0065d27909ebe203f6b72def4f51fc79" style="font-size: 90%;" title="Open panel">
+                1. Complementary and alternative medicine use among patients with cancer in Mongolia: a National hospital survey
+              </a> 
+            </h4>
+          </div>
+          <div id="0065d27909ebe203f6b72def4f51fc79" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12906-017-1576-8" target="_blank" title="View Publication 10.1186/s12906-017-1576-8">DOI: 10.1186/s12906-017-1576-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12906-017-1576-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#007742848ff0a0be1c767f7d4e851586" style="font-size: 90%;" title="Open panel">
+                2. A new invasive species of buprestid beetles in the Russian fauna: Lamprodila (Palmar) festiva (L.) (Coleoptera, Buprestidae), a pest of Cupressaceae
+              </a> 
+            </h4>
+          </div>
+          <div id="007742848ff0a0be1c767f7d4e851586" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0013873817040042" target="_blank" title="View Publication 10.1134/S0013873817040042">DOI: 10.1134/S0013873817040042</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0013873817040042" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#06dafd436a62c224983416b8f31766f5" style="font-size: 90%;" title="Open panel">
+                3. Check-list of the Aphidiid-Wasp subfamily Trioxinae (Hymenoptera, Aphidiidae) from Russia and adjacent countries
+              </a> 
+            </h4>
+          </div>
+          <div id="06dafd436a62c224983416b8f31766f5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0013873816090098" target="_blank" title="View Publication 10.1134/S0013873816090098">DOI: 10.1134/S0013873816090098</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0013873816090098" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#0d2a1509faae71f79fc855c94806f07f" style="font-size: 90%;" title="Open panel">
+                4. Age, period and cohort effects on suicide mortality in Russia, 1956−2005
+              </a> 
+            </h4>
+          </div>
+          <div id="0d2a1509faae71f79fc855c94806f07f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12889-017-4158-2" target="_blank" title="View Publication 10.1186/s12889-017-4158-2">DOI: 10.1186/s12889-017-4158-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12889-017-4158-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#147b6737fd385c027cf707a1f202244f" style="font-size: 90%;" title="Open panel">
+                5. Effects of Conjugate Gradient Methods and Step-Length Formulas on the Multiscale Full Waveform Inversion in Time Domain: Numerical Experiments
+              </a> 
+            </h4>
+          </div>
+          <div id="147b6737fd385c027cf707a1f202244f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00024-017-1512-3" target="_blank" title="View Publication 10.1007/s00024-017-1512-3">DOI: 10.1007/s00024-017-1512-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00024-017-1512-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#195a112cf0099c47089cbf513c4847b0" style="font-size: 90%;" title="Open panel">
+                6. Central Limit Theorem for Linear Eigenvalue Statistics for a Tensor Product Version of Sample Covariance Matrices
+              </a> 
+            </h4>
+          </div>
+          <div id="195a112cf0099c47089cbf513c4847b0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10959-017-0741-9" target="_blank" title="View Publication 10.1007/s10959-017-0741-9">DOI: 10.1007/s10959-017-0741-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10959-017-0741-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#377a1317efa465a15d9a2124bf3621ef" style="font-size: 90%;" title="Open panel">
+                7. Human genetics in troubled times and places
+              </a> 
+            </h4>
+          </div>
+          <div id="377a1317efa465a15d9a2124bf3621ef" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s41065-017-0042-4" target="_blank" title="View Publication 10.1186/s41065-017-0042-4">DOI: 10.1186/s41065-017-0042-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s41065-017-0042-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#4a0ab3a606d99f3d2dd1c4eb084612aa" style="font-size: 90%;" title="Open panel">
+                8. A Brief Evaluation to Identify Level of Satisfaction of Art Therapy with Undergraduate Ukrainian Students
+              </a> 
+            </h4>
+          </div>
+          <div id="4a0ab3a606d99f3d2dd1c4eb084612aa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10447-017-9297-8" target="_blank" title="View Publication 10.1007/s10447-017-9297-8">DOI: 10.1007/s10447-017-9297-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10447-017-9297-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#4f2cb6310ff8e0b35e70060e239d2bab" style="font-size: 90%;" title="Open panel">
+                9. From dry hell to blossoming garden: metaphors and poetry in Soviet irrigation literature on the Hungry Steppe, 1950–1980
+              </a> 
+            </h4>
+          </div>
+          <div id="4f2cb6310ff8e0b35e70060e239d2bab" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12685-017-0191-4" target="_blank" title="View Publication 10.1007/s12685-017-0191-4">DOI: 10.1007/s12685-017-0191-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12685-017-0191-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#4f51a9747b4e9d899517115d9c339fc7" style="font-size: 90%;" title="Open panel">
+                10. Orientation and navigation of migrating birds
+              </a> 
+            </h4>
+          </div>
+          <div id="4f51a9747b4e9d899517115d9c339fc7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1062359016080069" target="_blank" title="View Publication 10.1134/S1062359016080069">DOI: 10.1134/S1062359016080069</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1062359016080069" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#541b2d7df139d2920e101767bae43f43" style="font-size: 90%;" title="Open panel">
+                11. Truffle renaissance in Poland – history, present and prospects
+              </a> 
+            </h4>
+          </div>
+          <div id="541b2d7df139d2920e101767bae43f43" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13002-017-0163-x" target="_blank" title="View Publication 10.1186/s13002-017-0163-x">DOI: 10.1186/s13002-017-0163-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13002-017-0163-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#57a73fc56f76482c37e1d1a6f68c1ca0" style="font-size: 90%;" title="Open panel">
+                12. A comparative study in tritium in precipitation in four Chinese cities with different climate regimes
+              </a> 
+            </h4>
+          </div>
+          <div id="57a73fc56f76482c37e1d1a6f68c1ca0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6574-0" target="_blank" title="View Publication 10.1007/s12665-017-6574-0">DOI: 10.1007/s12665-017-6574-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6574-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#640e06f78c20c0ac085b85d887f64194" style="font-size: 90%;" title="Open panel">
+                13. Burns and frostbite in the Red Army during World War II
+              </a> 
+            </h4>
+          </div>
+          <div id="640e06f78c20c0ac085b85d887f64194" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s40779-017-0114-9" target="_blank" title="View Publication 10.1186/s40779-017-0114-9">DOI: 10.1186/s40779-017-0114-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s40779-017-0114-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#6a9f78dac65a2b10fcd53ed7bf0d048f" style="font-size: 90%;" title="Open panel">
+                14. Observations of biota in Stepovogo Fjord, Novaya Zemlya, a former dumping site for radioactive waste
+              </a> 
+            </h4>
+          </div>
+          <div id="6a9f78dac65a2b10fcd53ed7bf0d048f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00300-017-2175-3" target="_blank" title="View Publication 10.1007/s00300-017-2175-3">DOI: 10.1007/s00300-017-2175-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00300-017-2175-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#76b4c80e275d9649d3fedaf21fda0fae" style="font-size: 90%;" title="Open panel">
+                15. The database and GIS analysis of the status of glaciation of the Kodar Mountains (Northern Transbaikalia)
+              </a> 
+            </h4>
+          </div>
+          <div id="76b4c80e275d9649d3fedaf21fda0fae" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1875372817020093" target="_blank" title="View Publication 10.1134/S1875372817020093">DOI: 10.1134/S1875372817020093</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1875372817020093" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#7bccdd16a0926824e0400969f54bf5e5" style="font-size: 90%;" title="Open panel">
+                16. Information and analysis centers in the system of state-level decision making
+              </a> 
+            </h4>
+          </div>
+          <div id="7bccdd16a0926824e0400969f54bf5e5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1019331616060137" target="_blank" title="View Publication 10.1134/S1019331616060137">DOI: 10.1134/S1019331616060137</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1019331616060137" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#7e38ad7ed9e092bda1105a143b7001bb" style="font-size: 90%;" title="Open panel">
+                17. Ideological myths of modern economic theory and reality
+              </a> 
+            </h4>
+          </div>
+          <div id="7e38ad7ed9e092bda1105a143b7001bb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1075700717010063" target="_blank" title="View Publication 10.1134/S1075700717010063">DOI: 10.1134/S1075700717010063</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1075700717010063" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#7f450341f27f13f036d64a083afd6ade" style="font-size: 90%;" title="Open panel">
+                18. The Reference Intervals of Hair Trace Element Content in Hereford Cows and Heifers (Bos taurus)
+              </a> 
+            </h4>
+          </div>
+          <div id="7f450341f27f13f036d64a083afd6ade" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12011-017-0991-5" target="_blank" title="View Publication 10.1007/s12011-017-0991-5">DOI: 10.1007/s12011-017-0991-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12011-017-0991-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#7fc3f0f16f9a1223292d372d51772f09" style="font-size: 90%;" title="Open panel">
+                19. Paleoentomology of Mongolia
+              </a> 
+            </h4>
+          </div>
+          <div id="7fc3f0f16f9a1223292d372d51772f09" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0031030116120145" target="_blank" title="View Publication 10.1134/S0031030116120145">DOI: 10.1134/S0031030116120145</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0031030116120145" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#8190d5cdcd96f7a44f06c4857dcc19cc" style="font-size: 90%;" title="Open panel">
+                20. A Review of Superplasticity and Related Phenomena
+              </a> 
+            </h4>
+          </div>
+          <div id="8190d5cdcd96f7a44f06c4857dcc19cc" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03378205" target="_blank" title="View Publication 10.1007/BF03378205">DOI: 10.1007/BF03378205</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03378205" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#822b142e3d4d5d0188b22fead6306648" style="font-size: 90%;" title="Open panel">
+                21. EPR in the USSR: the thorny path from birth to biological and chemical applications
+              </a> 
+            </h4>
+          </div>
+          <div id="822b142e3d4d5d0188b22fead6306648" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11120-017-0432-5" target="_blank" title="View Publication 10.1007/s11120-017-0432-5">DOI: 10.1007/s11120-017-0432-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11120-017-0432-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#932f979eb11ac51c116030649d5e43ec" style="font-size: 90%;" title="Open panel">
+                22. The military–strategic and humanitarian significance of the defense of Leningrad
+              </a> 
+            </h4>
+          </div>
+          <div id="932f979eb11ac51c116030649d5e43ec" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1019331617020071" target="_blank" title="View Publication 10.1134/S1019331617020071">DOI: 10.1134/S1019331617020071</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1019331617020071" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#94cb1bd57f305a24d28bb250f75751ae" style="font-size: 90%;" title="Open panel">
+                23. Russia’s Night Wolves Motorcycle Club: from 1%ers to political activists
+              </a> 
+            </h4>
+          </div>
+          <div id="94cb1bd57f305a24d28bb250f75751ae" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12117-017-9314-7" target="_blank" title="View Publication 10.1007/s12117-017-9314-7">DOI: 10.1007/s12117-017-9314-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12117-017-9314-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#96ed637095397361dde3b4915cd81820" style="font-size: 90%;" title="Open panel">
+                24. Working Class Subjectivities and Neoliberalisation in Kyrgyzstan: Developing Alternative Moral Selves
+              </a> 
+            </h4>
+          </div>
+          <div id="96ed637095397361dde3b4915cd81820" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10767-016-9251-5" target="_blank" title="View Publication 10.1007/s10767-016-9251-5">DOI: 10.1007/s10767-016-9251-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10767-016-9251-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#9e90801644bef32c90148564d8a423d9" style="font-size: 90%;" title="Open panel">
+                25. Associations and verbal consciousness: an analysis based on four English and one Hungarian translation of Bulgakov’s novel: The Master and Margarita
+              </a> 
+            </h4>
+          </div>
+          <div id="9e90801644bef32c90148564d8a423d9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11059-017-0386-9" target="_blank" title="View Publication 10.1007/s11059-017-0386-9">DOI: 10.1007/s11059-017-0386-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11059-017-0386-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#a722ec8a0e8634222185de4118b6d8e9" style="font-size: 90%;" title="Open panel">
+                26. Multi-functionality of the few: current and past uses of wild plants for food and healing in Liubań region, Belarus
+              </a> 
+            </h4>
+          </div>
+          <div id="a722ec8a0e8634222185de4118b6d8e9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13002-017-0139-x" target="_blank" title="View Publication 10.1186/s13002-017-0139-x">DOI: 10.1186/s13002-017-0139-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13002-017-0139-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#b4ffccbfbd7bc8f65076b36aed5e1cf8" style="font-size: 90%;" title="Open panel">
+                27. External dose reconstruction for the former village of Metlino (Techa River, Russia) based on environmental surveys, luminescence measurements, and radiation transport modelling
+              </a> 
+            </h4>
+          </div>
+          <div id="b4ffccbfbd7bc8f65076b36aed5e1cf8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00411-017-0688-3" target="_blank" title="View Publication 10.1007/s00411-017-0688-3">DOI: 10.1007/s00411-017-0688-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00411-017-0688-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#b5a8118a811a25473fad4e4559bfdec7" style="font-size: 90%;" title="Open panel">
+                28. Development of Russia’s network of nature reserves and academic science of the 20th century
+              </a> 
+            </h4>
+          </div>
+          <div id="b5a8118a811a25473fad4e4559bfdec7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1019331617040128" target="_blank" title="View Publication 10.1134/S1019331617040128">DOI: 10.1134/S1019331617040128</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1019331617040128" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#b65721b214c5b009bf3293dc2cf9612d" style="font-size: 90%;" title="Open panel">
+                29. W for Wiener
+              </a> 
+            </h4>
+          </div>
+          <div id="b65721b214c5b009bf3293dc2cf9612d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40329-017-0186-0" target="_blank" title="View Publication 10.1007/s40329-017-0186-0">DOI: 10.1007/s40329-017-0186-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40329-017-0186-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#b73ec1345360b6c0cf85f8124794179a" style="font-size: 90%;" title="Open panel">
+                30. Developmental Psychology in East Asia: A Preliminary Report
+              </a> 
+            </h4>
+          </div>
+          <div id="b73ec1345360b6c0cf85f8124794179a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03393850" target="_blank" title="View Publication 10.1007/BF03393850">DOI: 10.1007/BF03393850</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03393850" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#c99956b331fc4130d22b80aeec5b9a25" style="font-size: 90%;" title="Open panel">
+                31. Iosif Samuilovich Shklovskii
+              </a> 
+            </h4>
+          </div>
+          <div id="c99956b331fc4130d22b80aeec5b9a25" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1063772917040126" target="_blank" title="View Publication 10.1134/S1063772917040126">DOI: 10.1134/S1063772917040126</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1063772917040126" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#d9b48051849850c7dcac8c29bfebbef9" style="font-size: 90%;" title="Open panel">
+                32. First records of the brown marmorated stink bug Halyomorpha halys (Stål, 1855) (Heteroptera, Pentatomidae) in Russia, Abkhazia, and Georgia
+              </a> 
+            </h4>
+          </div>
+          <div id="d9b48051849850c7dcac8c29bfebbef9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S001387381608011X" target="_blank" title="View Publication 10.1134/S001387381608011X">DOI: 10.1134/S001387381608011X</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S001387381608011X" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#e531a1b3362aa4c7a5e2d9acc5c4ab56" style="font-size: 90%;" title="Open panel">
+                33. Editorial to the special issue on natural hazards and risk research in Russia
+              </a> 
+            </h4>
+          </div>
+          <div id="e531a1b3362aa4c7a5e2d9acc5c4ab56" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11069-017-2976-2" target="_blank" title="View Publication 10.1007/s11069-017-2976-2">DOI: 10.1007/s11069-017-2976-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11069-017-2976-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#eaddbbd1bfe2a54396532e32fdb0d78f" style="font-size: 90%;" title="Open panel">
+                34. Remnant magnetic fields of Mars and their interaction with the solar wind
+              </a> 
+            </h4>
+          </div>
+          <div id="eaddbbd1bfe2a54396532e32fdb0d78f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0010952517040025" target="_blank" title="View Publication 10.1134/S0010952517040025">DOI: 10.1134/S0010952517040025</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0010952517040025" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#1eafb3bb1a68700daf70bb1f0ab49ce6" style="font-size: 90%;" title="Open panel">
+                35. Colonial Factors Hidden in City Center Revitalization: Chernivtsi as an Imperial Formation
+              </a> 
+            </h4>
+          </div>
+          <div id="1eafb3bb1a68700daf70bb1f0ab49ce6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-53952-2_6" target="_blank" title="View Publication 10.1007/978-3-319-53952-2_6">DOI: 10.1007/978-3-319-53952-2_6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-53952-2_6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#39c02d9d2e1089db7c7ecaf00604a541" style="font-size: 90%;" title="Open panel">
+                36. Introduction
+              </a> 
+            </h4>
+          </div>
+          <div id="39c02d9d2e1089db7c7ecaf00604a541" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-63832-4_1" target="_blank" title="View Publication 10.1007/978-3-319-63832-4_1">DOI: 10.1007/978-3-319-63832-4_1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-63832-4_1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#72845bb02850884b8a86e0af37fc5f62" style="font-size: 90%;" title="Open panel">
+                37. Invisibility or Marginality? Assessing Religious Diversification Among Women Shamans in Eastern Siberia
+              </a> 
+            </h4>
+          </div>
+          <div id="72845bb02850884b8a86e0af37fc5f62" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-61097-9_3" target="_blank" title="View Publication 10.1007/978-3-319-61097-9_3">DOI: 10.1007/978-3-319-61097-9_3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-61097-9_3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61416.html#c9737e72e7ea65480ab873cdd88e5767" style="font-size: 90%;" title="Open panel">
+                38. Again in Calcutta
+              </a> 
+            </h4>
+          </div>
+          <div id="c9737e72e7ea65480ab873cdd88e5767" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-62102-9_9" target="_blank" title="View Publication 10.1007/978-3-319-62102-9_9">DOI: 10.1007/978-3-319-62102-9_9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-62102-9_9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Soviet_Union'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 61416, "target": 61610 },
+      
+          { "source": 61416, "target": 75027 },
+      
+          { "source": 61416, "target": 62296 },
+      
+          { "source": 61416, "target": 61361 },
+      
+          { "source": 61416, "target": 73671 },
+      
+          { "source": 61416, "target": 62406 },
+      
+          { "source": 61416, "target": 61417 },
+      
+          { "source": 61416, "target": 61605 },
+      
+          { "source": 61416, "target": 67229 },
+      
+          { "source": 61416, "target": 87952 },
+      
+          { "source": 61610, "target": 61361 },
+      
+          { "source": 61610, "target": 62406 },
+      
+          { "source": 61610, "target": 60759 },
+      
+          { "source": 61610, "target": 61416 },
+      
+          { "source": 61610, "target": 79841 },
+      
+          { "source": 75027, "target": 61416 },
+      
+          { "source": 75027, "target": 74095 },
+      
+          { "source": 75027, "target": 69318 },
+      
+          { "source": 75027, "target": 61915 },
+      
+          { "source": 75027, "target": 62404 },
+      
+          { "source": 62296, "target": 61361 },
+      
+          { "source": 62296, "target": 63001 },
+      
+          { "source": 62296, "target": 68879 },
+      
+          { "source": 62296, "target": 61837 },
+      
+          { "source": 62296, "target": 60694 },
+      
+          { "source": 61361, "target": 60759 },
+      
+          { "source": 61361, "target": 62014 },
+      
+          { "source": 61361, "target": 61143 },
+      
+          { "source": 61361, "target": 62059 },
+      
+          { "source": 61361, "target": 61961 },
+      
+          { "source": 73671, "target": 61610 },
+      
+          { "source": 73671, "target": 78510 },
+      
+          { "source": 73671, "target": 61108 },
+      
+          { "source": 73671, "target": 62296 },
+      
+          { "source": 73671, "target": 60966 },
+      
+          { "source": 62406, "target": 61610 },
+      
+          { "source": 62406, "target": 71620 },
+      
+          { "source": 62406, "target": 60759 },
+      
+          { "source": 62406, "target": 61361 },
+      
+          { "source": 62406, "target": 82281 },
+      
+          { "source": 61417, "target": 61361 },
+      
+          { "source": 61417, "target": 61418 },
+      
+          { "source": 61417, "target": 71755 },
+      
+          { "source": 61417, "target": 61610 },
+      
+          { "source": 61417, "target": 61024 },
+      
+          { "source": 61605, "target": 63807 },
+      
+          { "source": 61605, "target": 61828 },
+      
+          { "source": 61605, "target": 61447 },
+      
+          { "source": 61605, "target": 61162 },
+      
+          { "source": 61605, "target": 60636 },
+      
+          { "source": 67229, "target": 61361 },
+      
+          { "source": 67229, "target": 64991 },
+      
+          { "source": 67229, "target": 67231 },
+      
+          { "source": 67229, "target": 67228 },
+      
+          { "source": 67229, "target": 67226 },
+      
+          { "source": 87952, "target": 61416 },
+      
+          { "source": 87952, "target": 71973 },
+      
+          { "source": 87952, "target": 78977 },
+      
+          { "source": 87952, "target": 87953 },
+      
+          { "source": 87952, "target": 61605 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 61610, "size": 50, "score": 0 , "title": "Russia", "type": "circle"},
+
+      
+
+        {"id": 75027, "size": 50, "score": 0 , "title": "World War II", "type": "circle"},
+
+      
+
+        {"id": 62296, "size": 50, "score": 0 , "title": "International law", "type": "circle"},
+
+      
+
+        {"id": 61361, "size": 50, "score": 0 , "title": "China", "type": "circle"},
+
+      
+
+        {"id": 73671, "size": 50, "score": 0 , "title": "Ukraine", "type": "circle"},
+
+      
+
+        {"id": 62406, "size": 50, "score": 0 , "title": "Siberia", "type": "circle"},
+
+      
+
+        {"id": 61417, "size": 50, "score": 0 , "title": "Mongolia", "type": "circle"},
+
+      
+
+        {"id": 61605, "size": 50, "score": 0 , "title": "Biology", "type": "circle"},
+
+      
+
+        {"id": 67229, "size": 50, "score": 0 , "title": "Ürümqi", "type": "circle"},
+
+      
+
+        {"id": 87952, "size": 50, "score": 0 , "title": "Zoologicheskii Zhurnal", "type": "circle"},
+
+      
+
+        {"id": 61416, "size": 70, "score": 0.5 , "title": "Soviet Union", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 79841, "size": 5, "score": 0.4 , "title": "Kola Peninsula", "type": "circle"},
+
+      
+
+        {"id": 74095, "size": 5, "score": 0.4 , "title": "Saint Petersburg", "type": "circle"},
+
+      
+
+        {"id": 69318, "size": 5, "score": 0.4 , "title": "Microbiology", "type": "circle"},
+
+      
+
+        {"id": 61915, "size": 5, "score": 0.4 , "title": "Fungus", "type": "circle"},
+
+      
+
+        {"id": 62404, "size": 5, "score": 0.4 , "title": "Fertilizer", "type": "circle"},
+
+      
+
+        {"id": 63001, "size": 5, "score": 0.4 , "title": "Clinical trial", "type": "circle"},
+
+      
+
+        {"id": 68879, "size": 5, "score": 0.4 , "title": "Human rights", "type": "circle"},
+
+      
+
+        {"id": 61837, "size": 5, "score": 0.4 , "title": "Australia", "type": "circle"},
+
+      
+
+        {"id": 60694, "size": 5, "score": 0.4 , "title": "Embase", "type": "circle"},
+
+      
+
+        {"id": 62014, "size": 5, "score": 0.4 , "title": "Ribosomal RNA", "type": "circle"},
+
+      
+
+        {"id": 61143, "size": 5, "score": 0.4 , "title": "Acid", "type": "circle"},
+
+      
+
+        {"id": 62059, "size": 5, "score": 0.4 , "title": "Phylogenetics", "type": "circle"},
+
+      
+
+        {"id": 61961, "size": 5, "score": 0.4 , "title": "DNA", "type": "circle"},
+
+      
+
+        {"id": 78510, "size": 5, "score": 0.4 , "title": "Ukrainian language", "type": "circle"},
+
+      
+
+        {"id": 61108, "size": 5, "score": 0.4 , "title": "Logistic regression", "type": "circle"},
+
+      
+
+        {"id": 60966, "size": 5, "score": 0.4 , "title": "HIV", "type": "circle"},
+
+      
+
+        {"id": 71620, "size": 5, "score": 0.4 , "title": "Eurasia", "type": "circle"},
+
+      
+
+        {"id": 82281, "size": 5, "score": 0.4 , "title": "Yenisei River", "type": "circle"},
+
+      
+
+        {"id": 61418, "size": 5, "score": 0.4 , "title": "Central Asia", "type": "circle"},
+
+      
+
+        {"id": 71755, "size": 5, "score": 0.4 , "title": "Transbaikal", "type": "circle"},
+
+      
+
+        {"id": 61024, "size": 5, "score": 0.4 , "title": "India", "type": "circle"},
+
+      
+
+        {"id": 63807, "size": 5, "score": 0.4 , "title": "Ecology", "type": "circle"},
+
+      
+
+        {"id": 61828, "size": 5, "score": 0.4 , "title": "Breast cancer", "type": "circle"},
+
+      
+
+        {"id": 61447, "size": 5, "score": 0.4 , "title": "Psychology", "type": "circle"},
+
+      
+
+        {"id": 61162, "size": 5, "score": 0.4 , "title": "Climate change", "type": "circle"},
+
+      
+
+        {"id": 60636, "size": 5, "score": 0.4 , "title": "Chemotherapy", "type": "circle"},
+
+      
+
+        {"id": 64991, "size": 5, "score": 0.4 , "title": "Xinjiang", "type": "circle"},
+
+      
+
+        {"id": 67231, "size": 5, "score": 0.4 , "title": "Wind shear", "type": "circle"},
+
+      
+
+        {"id": 67228, "size": 5, "score": 0.4 , "title": "Wind profiler", "type": "circle"},
+
+      
+
+        {"id": 67226, "size": 5, "score": 0.4 , "title": "Weather radar", "type": "circle"},
+
+      
+
+        {"id": 71973, "size": 5, "score": 0.4 , "title": "Olfaction", "type": "circle"},
+
+      
+
+        {"id": 78977, "size": 5, "score": 0.4 , "title": "Compass", "type": "circle"},
+
+      
+
+        {"id": 87953, "size": 5, "score": 0.4 , "title": "Boris Vadimovich Sokolov", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

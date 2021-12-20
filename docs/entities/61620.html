@@ -1,0 +1,1886 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Business process</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Business process</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Business_process" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Business_process" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60929.html"
+        
+       title="View other articles tagged with this concept">Cloud computing</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62546.html"
+        
+       title="View other articles tagged with this concept">Transformer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61225.html"
+        
+       title="View other articles tagged with this concept">Social network</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68876.html"
+        
+       title="View other articles tagged with this concept">Set theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62890.html"
+        
+       title="View other articles tagged with this concept">Queueing theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61532.html"
+        
+       title="View other articles tagged with this concept">Process modeling</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61841.html"
+        
+       title="View other articles tagged with this concept">Probability distribution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67526.html"
+        
+       title="View other articles tagged with this concept">Orchestration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62207.html"
+        
+       title="View other articles tagged with this concept">Numerical analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65974.html"
+        
+       title="View other articles tagged with this concept">Nigeria</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71900.html"
+        
+       title="View other articles tagged with this concept">Network theory</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61505.html"
+        
+       title="View other articles tagged with this concept">Natural language</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62369.html"
+        
+       title="View other articles tagged with this concept">Model checking</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63532.html"
+        
+       title="View other articles tagged with this concept">Library</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72029.html"
+        
+       title="View other articles tagged with this concept">Knowledge management</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60930.html"
+        
+       title="View other articles tagged with this concept">Interaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78820.html"
+        
+       title="View other articles tagged with this concept">Google</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60687.html"
+        
+       title="View other articles tagged with this concept">Genetic algorithm</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="80908.html"
+        
+       title="View other articles tagged with this concept">Data warehouse</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">22</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info&nbsp;<a href="javascript:megaLoad();">(open all)</a></small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#007785e5f6f3d4131f10e9bea6c7dca4" style="font-size: 90%;" title="Open panel">
+                1. Norms modeling constructs of business process compliance management frameworks: a conceptual evaluation
+              </a> 
+            </h4>
+          </div>
+          <div id="007785e5f6f3d4131f10e9bea6c7dca4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10506-017-9215-8" target="_blank" title="View Publication 10.1007/s10506-017-9215-8">DOI: 10.1007/s10506-017-9215-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10506-017-9215-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#0ee8a6c8232c7e5afbbed01d65a35dbc" style="font-size: 90%;" title="Open panel">
+                2. A framework for business process modeling by QoS-based pruning
+              </a> 
+            </h4>
+          </div>
+          <div id="0ee8a6c8232c7e5afbbed01d65a35dbc" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11334-017-0293-2" target="_blank" title="View Publication 10.1007/s11334-017-0293-2">DOI: 10.1007/s11334-017-0293-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11334-017-0293-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#30e670dd628a873c3216c323a0a4ec9f" style="font-size: 90%;" title="Open panel">
+                3. Meta Modeling for Business Process Improvement
+              </a> 
+            </h4>
+          </div>
+          <div id="30e670dd628a873c3216c323a0a4ec9f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12599-017-0477-1" target="_blank" title="View Publication 10.1007/s12599-017-0477-1">DOI: 10.1007/s12599-017-0477-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12599-017-0477-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#4918d4f30636cf6347a2b89bd1c7eda6" style="font-size: 90%;" title="Open panel">
+                4. Towards a compliance requirement management for SMSEs: a model and architecture
+              </a> 
+            </h4>
+          </div>
+          <div id="4918d4f30636cf6347a2b89bd1c7eda6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10257-017-0354-y" target="_blank" title="View Publication 10.1007/s10257-017-0354-y">DOI: 10.1007/s10257-017-0354-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10257-017-0354-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#4c9a42401369f09674b7ac4e21ead72a" style="font-size: 90%;" title="Open panel">
+                5. Theoretical foundations and implementation of business process diagrams’ complexity management technique based on highlights
+              </a> 
+            </h4>
+          </div>
+          <div id="4c9a42401369f09674b7ac4e21ead72a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10270-017-0618-5" target="_blank" title="View Publication 10.1007/s10270-017-0618-5">DOI: 10.1007/s10270-017-0618-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10270-017-0618-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#74e220e5b39fb03b6395ec7bdfa2da75" style="font-size: 90%;" title="Open panel">
+                6. Process model of digital manufacturing
+              </a> 
+            </h4>
+          </div>
+          <div id="74e220e5b39fb03b6395ec7bdfa2da75" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068798X17080214" target="_blank" title="View Publication 10.3103/S1068798X17080214">DOI: 10.3103/S1068798X17080214</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068798X17080214" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#7b2a738de5c563fbb8ac1aef580dc4d0" style="font-size: 90%;" title="Open panel">
+                7. Self-configuring cloud application mashup with goals and capabilities
+              </a> 
+            </h4>
+          </div>
+          <div id="7b2a738de5c563fbb8ac1aef580dc4d0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10586-017-0911-7" target="_blank" title="View Publication 10.1007/s10586-017-0911-7">DOI: 10.1007/s10586-017-0911-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10586-017-0911-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#82e43f746fc6c2132218d7013dc5325c" style="font-size: 90%;" title="Open panel">
+                8. Prioritization of Interconnected Processes
+              </a> 
+            </h4>
+          </div>
+          <div id="82e43f746fc6c2132218d7013dc5325c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12599-017-0490-4" target="_blank" title="View Publication 10.1007/s12599-017-0490-4">DOI: 10.1007/s12599-017-0490-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12599-017-0490-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#879c743bd5b680d44cdbf3944a9d0705" style="font-size: 90%;" title="Open panel">
+                9. Visual ppinot: A Graphical Notation for Process Performance Indicators
+              </a> 
+            </h4>
+          </div>
+          <div id="879c743bd5b680d44cdbf3944a9d0705" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12599-017-0483-3" target="_blank" title="View Publication 10.1007/s12599-017-0483-3">DOI: 10.1007/s12599-017-0483-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12599-017-0483-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#a96edb9f61e479f905ab367ef39a36fe" style="font-size: 90%;" title="Open panel">
+                10. Trading revenue, reputation and trade secrets: a stochastic control framework for business operation
+              </a> 
+            </h4>
+          </div>
+          <div id="a96edb9f61e479f905ab367ef39a36fe" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12351-017-0323-8" target="_blank" title="View Publication 10.1007/s12351-017-0323-8">DOI: 10.1007/s12351-017-0323-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12351-017-0323-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#c68b7e033a07a852986b0790b49acea0" style="font-size: 90%;" title="Open panel">
+                11. Model-enabled design and engineering of organisations and their enterprises
+              </a> 
+            </h4>
+          </div>
+          <div id="c68b7e033a07a852986b0790b49acea0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s41251-016-0005-9" target="_blank" title="View Publication 10.1007/s41251-016-0005-9">DOI: 10.1007/s41251-016-0005-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s41251-016-0005-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#c8a1cbb2a2866cbdd1b42b3bf03121b3" style="font-size: 90%;" title="Open panel">
+                12. Business Architecture Flexibility as a Result of Knowledge-Intensive Process Management
+              </a> 
+            </h4>
+          </div>
+          <div id="c8a1cbb2a2866cbdd1b42b3bf03121b3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40171-016-0150-4" target="_blank" title="View Publication 10.1007/s40171-016-0150-4">DOI: 10.1007/s40171-016-0150-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40171-016-0150-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#d8b40bfacffceeae2dd67656200b2a26" style="font-size: 90%;" title="Open panel">
+                13. Integration of resource allocation and task assignment for optimizing the cost and maximum throughput of business processes
+              </a> 
+            </h4>
+          </div>
+          <div id="d8b40bfacffceeae2dd67656200b2a26" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10845-017-1329-z" target="_blank" title="View Publication 10.1007/s10845-017-1329-z">DOI: 10.1007/s10845-017-1329-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10845-017-1329-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#e45b327e99eb1faefafeb086700d73f4" style="font-size: 90%;" title="Open panel">
+                14. A process integrated engineering knowledge acquisition and management model for a project based manufacturing
+              </a> 
+            </h4>
+          </div>
+          <div id="e45b327e99eb1faefafeb086700d73f4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12541-017-0023-6" target="_blank" title="View Publication 10.1007/s12541-017-0023-6">DOI: 10.1007/s12541-017-0023-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12541-017-0023-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#0fdecd5ef6c3836b0a2e70575094289a" style="font-size: 90%;" title="Open panel">
+                15. Modeling Business Rules Compliance for Goal-Oriented Business Processes
+              </a> 
+            </h4>
+          </div>
+          <div id="0fdecd5ef6c3836b0a2e70575094289a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-68185-6_6" target="_blank" title="View Publication 10.1007/978-3-319-68185-6_6">DOI: 10.1007/978-3-319-68185-6_6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-68185-6_6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#7d7da368ad1ce572d3252588af53a548" style="font-size: 90%;" title="Open panel">
+                16. The Design of a Modeling Technique to Analyze the Impact of Process Simulation Throughout the Business Architecture
+              </a> 
+            </h4>
+          </div>
+          <div id="7d7da368ad1ce572d3252588af53a548" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-68185-6_3" target="_blank" title="View Publication 10.1007/978-3-319-68185-6_3">DOI: 10.1007/978-3-319-68185-6_3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-68185-6_3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#80eb59be778c5bd89695a093d701c3a8" style="font-size: 90%;" title="Open panel">
+                17. Role of “Bridge Person” in Software Development Projects
+              </a> 
+            </h4>
+          </div>
+          <div id="80eb59be778c5bd89695a093d701c3a8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67642-5_1" target="_blank" title="View Publication 10.1007/978-3-319-67642-5_1">DOI: 10.1007/978-3-319-67642-5_1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67642-5_1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#94b1cf267730912a13554fd2b229fade" style="font-size: 90%;" title="Open panel">
+                18. Modeling End-to-End Business Processes of a Telecom Company with a BCMP Queueing Network
+              </a> 
+            </h4>
+          </div>
+          <div id="94b1cf267730912a13554fd2b229fade" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-68069-9_23" target="_blank" title="View Publication 10.1007/978-3-319-68069-9_23">DOI: 10.1007/978-3-319-68069-9_23</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-68069-9_23" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#aa90f345e12f55373a1dbfbf2a336043" style="font-size: 90%;" title="Open panel">
+                19. Complexity-Aware Generation of Workflows by Process-Oriented Case-Based Reasoning
+              </a> 
+            </h4>
+          </div>
+          <div id="aa90f345e12f55373a1dbfbf2a336043" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-67190-1_16" target="_blank" title="View Publication 10.1007/978-3-319-67190-1_16">DOI: 10.1007/978-3-319-67190-1_16</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-67190-1_16" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#db55616a4510e7c3ec824b8dcc45c1b9" style="font-size: 90%;" title="Open panel">
+                20. Philippine Services Sector: Domestic Policy and Global Markets
+              </a> 
+            </h4>
+          </div>
+          <div id="db55616a4510e7c3ec824b8dcc45c1b9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-55038-1_8" target="_blank" title="View Publication 10.1007/978-3-319-55038-1_8">DOI: 10.1007/978-3-319-55038-1_8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-55038-1_8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#e8527dc2969c1d1dccf90a6ba8f1d46d" style="font-size: 90%;" title="Open panel">
+                21. Conceptual Model of the BIA Data Warehouse
+              </a> 
+            </h4>
+          </div>
+          <div id="e8527dc2969c1d1dccf90a6ba8f1d46d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-68185-6_9" target="_blank" title="View Publication 10.1007/978-3-319-68185-6_9">DOI: 10.1007/978-3-319-68185-6_9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-68185-6_9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="61620.html#ef9f3ffc6144a0d3a9b8e4818de1f2c1" style="font-size: 90%;" title="Open panel">
+                22. A Rules Based Decision Making Model for Business Impact Analysis: The Business Function Criticality Classifier
+              </a> 
+            </h4>
+          </div>
+          <div id="ef9f3ffc6144a0d3a9b8e4818de1f2c1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: None
+              <br />View: <a href="http://dx.doi.org/10.1007/978-3-319-68185-6_8" target="_blank" title="View Publication 10.1007/978-3-319-68185-6_8">DOI: 10.1007/978-3-319-68185-6_8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/978-3-319-68185-6_8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Business_process'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 61620, "target": 60929 },
+      
+          { "source": 61620, "target": 62546 },
+      
+          { "source": 61620, "target": 98380 },
+      
+          { "source": 61620, "target": 114723 },
+      
+          { "source": 61620, "target": 89708 },
+      
+          { "source": 61620, "target": 61225 },
+      
+          { "source": 61620, "target": 68876 },
+      
+          { "source": 61620, "target": 62890 },
+      
+          { "source": 61620, "target": 86869 },
+      
+          { "source": 61620, "target": 84195 },
+      
+          { "source": 60929, "target": 60663 },
+      
+          { "source": 60929, "target": 61189 },
+      
+          { "source": 60929, "target": 61092 },
+      
+          { "source": 60929, "target": 60926 },
+      
+          { "source": 60929, "target": 68680 },
+      
+          { "source": 62546, "target": 60663 },
+      
+          { "source": 62546, "target": 61092 },
+      
+          { "source": 62546, "target": 63267 },
+      
+          { "source": 62546, "target": 62547 },
+      
+          { "source": 62546, "target": 65984 },
+      
+          { "source": 98380, "target": 62913 },
+      
+          { "source": 98380, "target": 70684 },
+      
+          { "source": 98380, "target": 61620 },
+      
+          { "source": 98380, "target": 73149 },
+      
+          { "source": 114723, "target": 62890 },
+      
+          { "source": 114723, "target": 61841 },
+      
+          { "source": 114723, "target": 114722 },
+      
+          { "source": 114723, "target": 61620 },
+      
+          { "source": 114723, "target": 114724 },
+      
+          { "source": 89708, "target": 63265 },
+      
+          { "source": 89708, "target": 92382 },
+      
+          { "source": 89708, "target": 85519 },
+      
+          { "source": 89708, "target": 60690 },
+      
+          { "source": 89708, "target": 61092 },
+      
+          { "source": 61225, "target": 64967 },
+      
+          { "source": 61225, "target": 61533 },
+      
+          { "source": 61225, "target": 73304 },
+      
+          { "source": 61225, "target": 60930 },
+      
+          { "source": 61225, "target": 62374 },
+      
+          { "source": 68876, "target": 60663 },
+      
+          { "source": 68876, "target": 63585 },
+      
+          { "source": 68876, "target": 78794 },
+      
+          { "source": 68876, "target": 62691 },
+      
+          { "source": 68876, "target": 61092 },
+      
+          { "source": 62890, "target": 60663 },
+      
+          { "source": 62890, "target": 61050 },
+      
+          { "source": 62890, "target": 61841 },
+      
+          { "source": 62890, "target": 62888 },
+      
+          { "source": 62890, "target": 63156 },
+      
+          { "source": 86869, "target": 100568 },
+      
+          { "source": 86869, "target": 73873 },
+      
+          { "source": 86869, "target": 100569 },
+      
+          { "source": 86869, "target": 65974 },
+      
+          { "source": 86869, "target": 71900 },
+      
+          { "source": 84195, "target": 62546 },
+      
+          { "source": 84195, "target": 87697 },
+      
+          { "source": 84195, "target": 72029 },
+      
+          { "source": 84195, "target": 62815 },
+      
+          { "source": 84195, "target": 101402 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 60929, "size": 50, "score": 0 , "title": "Cloud computing", "type": "circle"},
+
+      
+
+        {"id": 62546, "size": 50, "score": 0 , "title": "Transformer", "type": "circle"},
+
+      
+
+        {"id": 98380, "size": 50, "score": 0 , "title": "Trade secret", "type": "circle"},
+
+      
+
+        {"id": 114723, "size": 50, "score": 0 , "title": "TM Forum", "type": "circle"},
+
+      
+
+        {"id": 89708, "size": 50, "score": 0 , "title": "Systems engineering", "type": "circle"},
+
+      
+
+        {"id": 61225, "size": 50, "score": 0 , "title": "Social network", "type": "circle"},
+
+      
+
+        {"id": 68876, "size": 50, "score": 0 , "title": "Set theory", "type": "circle"},
+
+      
+
+        {"id": 62890, "size": 50, "score": 0 , "title": "Queueing theory", "type": "circle"},
+
+      
+
+        {"id": 86869, "size": 50, "score": 0 , "title": "Program lifecycle phase", "type": "circle"},
+
+      
+
+        {"id": 84195, "size": 50, "score": 0 , "title": "Product data management", "type": "circle"},
+
+      
+
+        {"id": 61620, "size": 70, "score": 0.5 , "title": "Business process", "type": "circle"},
+
+      
+
+        {"id": 60663, "size": 5, "score": 0.4 , "title": "Algorithm", "type": "circle"},
+
+      
+
+        {"id": 61189, "size": 5, "score": 0.4 , "title": "Internet", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 60926, "size": 5, "score": 0.4 , "title": "Data center", "type": "circle"},
+
+      
+
+        {"id": 68680, "size": 5, "score": 0.4 , "title": "Virtual machine", "type": "circle"},
+
+      
+
+        {"id": 63267, "size": 5, "score": 0.4 , "title": "Turbine", "type": "circle"},
+
+      
+
+        {"id": 62547, "size": 5, "score": 0.4 , "title": "Network topology", "type": "circle"},
+
+      
+
+        {"id": 65984, "size": 5, "score": 0.4 , "title": "Lignite", "type": "circle"},
+
+      
+
+        {"id": 62913, "size": 5, "score": 0.4 , "title": "Quantum computing", "type": "circle"},
+
+      
+
+        {"id": 70684, "size": 5, "score": 0.4 , "title": "Public key infrastructure", "type": "circle"},
+
+      
+
+        {"id": 73149, "size": 5, "score": 0.4 , "title": "Blind signature", "type": "circle"},
+
+      
+
+        {"id": 61841, "size": 5, "score": 0.4 , "title": "Probability distribution", "type": "circle"},
+
+      
+
+        {"id": 114722, "size": 5, "score": 0.4 , "title": "Company Business", "type": "circle"},
+
+      
+
+        {"id": 114724, "size": 5, "score": 0.4 , "title": "BCMP network", "type": "circle"},
+
+      
+
+        {"id": 63265, "size": 5, "score": 0.4 , "title": "Resonance", "type": "circle"},
+
+      
+
+        {"id": 92382, "size": 5, "score": 0.4 , "title": "Passive house", "type": "circle"},
+
+      
+
+        {"id": 85519, "size": 5, "score": 0.4 , "title": "Nitriding", "type": "circle"},
+
+      
+
+        {"id": 60690, "size": 5, "score": 0.4 , "title": "Monte Carlo method", "type": "circle"},
+
+      
+
+        {"id": 64967, "size": 5, "score": 0.4 , "title": "Twitter", "type": "circle"},
+
+      
+
+        {"id": 61533, "size": 5, "score": 0.4 , "title": "Time series", "type": "circle"},
+
+      
+
+        {"id": 73304, "size": 5, "score": 0.4 , "title": "Random graph", "type": "circle"},
+
+      
+
+        {"id": 60930, "size": 5, "score": 0.4 , "title": "Interaction", "type": "circle"},
+
+      
+
+        {"id": 62374, "size": 5, "score": 0.4 , "title": "World Health Organization", "type": "circle"},
+
+      
+
+        {"id": 63585, "size": 5, "score": 0.4 , "title": "Fuzzy set", "type": "circle"},
+
+      
+
+        {"id": 78794, "size": 5, "score": 0.4 , "title": "Rough set", "type": "circle"},
+
+      
+
+        {"id": 62691, "size": 5, "score": 0.4 , "title": "Multiple-criteria decision analysis", "type": "circle"},
+
+      
+
+        {"id": 61050, "size": 5, "score": 0.4 , "title": "Wireless sensor network", "type": "circle"},
+
+      
+
+        {"id": 62888, "size": 5, "score": 0.4 , "title": "Markov chain", "type": "circle"},
+
+      
+
+        {"id": 63156, "size": 5, "score": 0.4 , "title": "Heuristic", "type": "circle"},
+
+      
+
+        {"id": 100568, "size": 5, "score": 0.4 , "title": "Wingbox", "type": "circle"},
+
+      
+
+        {"id": 73873, "size": 5, "score": 0.4 , "title": "Semiconductor intellectual property core", "type": "circle"},
+
+      
+
+        {"id": 100569, "size": 5, "score": 0.4 , "title": "North American F-86 Sabre", "type": "circle"},
+
+      
+
+        {"id": 65974, "size": 5, "score": 0.4 , "title": "Nigeria", "type": "circle"},
+
+      
+
+        {"id": 71900, "size": 5, "score": 0.4 , "title": "Network theory", "type": "circle"},
+
+      
+
+        {"id": 87697, "size": 5, "score": 0.4 , "title": "Role-based access control", "type": "circle"},
+
+      
+
+        {"id": 72029, "size": 5, "score": 0.4 , "title": "Knowledge management", "type": "circle"},
+
+      
+
+        {"id": 62815, "size": 5, "score": 0.4 , "title": "International Organization for Standardization", "type": "circle"},
+
+      
+
+        {"id": 101402, "size": 5, "score": 0.4 , "title": "Engineering change order", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

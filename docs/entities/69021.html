@@ -1,0 +1,3914 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Morphine</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Morphine</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Morphine" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Morphine" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="62261.html"
+        
+       title="View other articles tagged with this concept">Analgesic</a>
+      <span color="black;" style="opacity: 1;">&nbsp;12 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="61838.html"
+        
+       title="View other articles tagged with this concept">Opioid</a>
+      <span color="black;" style="opacity: 1;">&nbsp;11 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="63026.html"
+        
+       title="View other articles tagged with this concept">Fentanyl</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8999999999999999;"   
+        
+          href="60937.html"
+        
+       title="View other articles tagged with this concept">Mechanical ventilation</a>
+      <span color="black;" style="opacity: 0.8999999999999999;">&nbsp;6 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="63769.html"
+        
+       title="View other articles tagged with this concept">Nociception</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="60694.html"
+        
+       title="View other articles tagged with this concept">Embase</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="60696.html"
+        
+       title="View other articles tagged with this concept">PubMed</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="63033.html"
+        
+       title="View other articles tagged with this concept">Placebo</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="65764.html"
+        
+       title="View other articles tagged with this concept">Intrathecal administration</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63368.html"
+        
+       title="View other articles tagged with this concept">Sciatic nerve</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="67352.html"
+        
+       title="View other articles tagged with this concept">Opioid receptor</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="84316.html"
+        
+       title="View other articles tagged with this concept">Hypoventilation</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="65301.html"
+        
+       title="View other articles tagged with this concept">Glutamic acid</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63724.html"
+        
+       title="View other articles tagged with this concept">General anaesthesia</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61957.html"
+        
+       title="View other articles tagged with this concept">Formaldehyde</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="64526.html"
+        
+       title="View other articles tagged with this concept">Epidural administration</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63001.html"
+        
+       title="View other articles tagged with this concept">Clinical trial</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="66090.html"
+        
+       title="View other articles tagged with this concept">Bupivacaine</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="65738.html"
+        
+       title="View other articles tagged with this concept">Arthroplasty</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61143.html"
+        
+       title="View other articles tagged with this concept">Acid</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61145.html"
+        
+       title="View other articles tagged with this concept">Visual analogue scale</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60967.html"
+        
+       title="View other articles tagged with this concept">Toxicology</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60671.html"
+        
+       title="View other articles tagged with this concept">Syndrome</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65050.html"
+        
+       title="View other articles tagged with this concept">Pulmonary edema</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60968.html"
+        
+       title="View other articles tagged with this concept">Paracetamol</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="71854.html"
+        
+       title="View other articles tagged with this concept">Midazolam</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61080.html"
+        
+       title="View other articles tagged with this concept">Methanol</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60848.html"
+        
+       title="View other articles tagged with this concept">Memory</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61644.html"
+        
+       title="View other articles tagged with this concept">Knee replacement</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66335.html"
+        
+       title="View other articles tagged with this concept">Itch</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62267.html"
+        
+       title="View other articles tagged with this concept">Hemodynamics</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="70177.html"
+        
+       title="View other articles tagged with this concept">Gabapentin</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61074.html"
+        
+       title="View other articles tagged with this concept">Ethanol</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60817.html"
+        
+       title="View other articles tagged with this concept">Enzyme inhibitor</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="69022.html"
+        
+       title="View other articles tagged with this concept">Diclofenac</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60692.html"
+        
+       title="View other articles tagged with this concept">Cochrane Library</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="67621.html"
+        
+       title="View other articles tagged with this concept">Cochrane (organisation)</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61244.html"
+        
+       title="View other articles tagged with this concept">Central nervous system</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61885.html"
+        
+       title="View other articles tagged with this concept">Cell surface receptor</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="69018.html"
+        
+       title="View other articles tagged with this concept">Carrageenan</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="77801.html"
+        
+       title="View other articles tagged with this concept">Buprenorphine</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62269.html"
+        
+       title="View other articles tagged with this concept">Anxiolytic</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65443.html"
+        
+       title="View other articles tagged with this concept">Amitriptyline</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65898.html"
+        
+       title="View other articles tagged with this concept">Albinism</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62176.html"
+        
+       title="View other articles tagged with this concept">Agonist</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65167.html"
+        
+       title="View other articles tagged with this concept">Abdomen</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="80413.html"
+        
+       title="View other articles tagged with this concept">Windows 3.0</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78236.html"
+        
+       title="View other articles tagged with this concept">Veterinary medicine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68050.html"
+        
+       title="View other articles tagged with this concept">Vasodilation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69087.html"
+        
+       title="View other articles tagged with this concept">Valproate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69020.html"
+        
+       title="View other articles tagged with this concept">Traditional medicine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75277.html"
+        
+       title="View other articles tagged with this concept">Tracheotomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68463.html"
+        
+       title="View other articles tagged with this concept">Toxicant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66336.html"
+        
+       title="View other articles tagged with this concept">Topical medication</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60860.html"
+        
+       title="View other articles tagged with this concept">Thyroidectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73667.html"
+        
+       title="View other articles tagged with this concept">This Condition</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62984.html"
+        
+       title="View other articles tagged with this concept">Tegmentum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61646.html"
+        
+       title="View other articles tagged with this concept">TKA</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73398.html"
+        
+       title="View other articles tagged with this concept">Syphilis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64535.html"
+        
+       title="View other articles tagged with this concept">Switzerland</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60793.html"
+        
+       title="View other articles tagged with this concept">Sulfate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61936.html"
+        
+       title="View other articles tagged with this concept">Sucrose</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64049.html"
+        
+       title="View other articles tagged with this concept">Substance dependence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62544.html"
+        
+       title="View other articles tagged with this concept">Spinal cord</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65713.html"
+        
+       title="View other articles tagged with this concept">Spinal anaesthesia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="80536.html"
+        
+       title="View other articles tagged with this concept">Sphingomyelin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61341.html"
+        
+       title="View other articles tagged with this concept">Single Center</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61081.html"
+        
+       title="View other articles tagged with this concept">Shortness of breath</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63688.html"
+        
+       title="View other articles tagged with this concept">Schizophrenia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67950.html"
+        
+       title="View other articles tagged with this concept">Rodent</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72856.html"
+        
+       title="View other articles tagged with this concept">Remifentanil</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60763.html"
+        
+       title="View other articles tagged with this concept">Real-time polymerase chain reaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64672.html"
+        
+       title="View other articles tagged with this concept">Pulmonary alveolus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61447.html"
+        
+       title="View other articles tagged with this concept">Psychology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62545.html"
+        
+       title="View other articles tagged with this concept">Psychiatry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66217.html"
+        
+       title="View other articles tagged with this concept">Protein kinase C</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60905.html"
+        
+       title="View other articles tagged with this concept">Protein</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63239.html"
+        
+       title="View other articles tagged with this concept">Prostatectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63238.html"
+        
+       title="View other articles tagged with this concept">Propofol</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63036.html"
+        
+       title="View other articles tagged with this concept">Propensity score matching</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71701.html"
+        
+       title="View other articles tagged with this concept">Polysorbate 80</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62813.html"
+        
+       title="View other articles tagged with this concept">Pneumonia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70179.html"
+        
+       title="View other articles tagged with this concept">Phenytoin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76189.html"
+        
+       title="View other articles tagged with this concept">Pharmacology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72577.html"
+        
+       title="View other articles tagged with this concept">Pharmacodynamics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66281.html"
+        
+       title="View other articles tagged with this concept">Peristalsis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66848.html"
+        
+       title="View other articles tagged with this concept">Paroxysmal attack</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61502.html"
+        
+       title="View other articles tagged with this concept">Parathyroid gland</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63518.html"
+        
+       title="View other articles tagged with this concept">Paradox</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63770.html"
+        
+       title="View other articles tagged with this concept">Opioid use disorder</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63223.html"
+        
+       title="View other articles tagged with this concept">Oncology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60672.html"
+        
+       title="View other articles tagged with this concept">Odds ratio</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68806.html"
+        
+       title="View other articles tagged with this concept">Nucleus accumbens</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61172.html"
+        
+       title="View other articles tagged with this concept">Non-small-cell lung carcinoma</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60935.html"
+        
+       title="View other articles tagged with this concept">New International Version</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77245.html"
+        
+       title="View other articles tagged with this concept">Neurostimulation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68171.html"
+        
+       title="View other articles tagged with this concept">Neuropathic pain</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62186.html"
+        
+       title="View other articles tagged with this concept">Neuron</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76541.html"
+        
+       title="View other articles tagged with this concept">Neonatal intensive care unit</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="85947.html"
+        
+       title="View other articles tagged with this concept">Naloxone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77073.html"
+        
+       title="View other articles tagged with this concept">Myoglobin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60921.html"
+        
+       title="View other articles tagged with this concept">Multivariate analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73458.html"
+        
+       title="View other articles tagged with this concept">Moringa</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60690.html"
+        
+       title="View other articles tagged with this concept">Monte Carlo method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61111.html"
+        
+       title="View other articles tagged with this concept">Microglia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63911.html"
+        
+       title="View other articles tagged with this concept">Microarray</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62098.html"
+        
+       title="View other articles tagged with this concept">Michael E. Mann</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60851.html"
+        
+       title="View other articles tagged with this concept">Methadone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61338.html"
+        
+       title="View other articles tagged with this concept">Metastasis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60721.html"
+        
+       title="View other articles tagged with this concept">Metabolism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61794.html"
+        
+       title="View other articles tagged with this concept">Membrane potential</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62265.html"
+        
+       title="View other articles tagged with this concept">Mastectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67763.html"
+        
+       title="View other articles tagged with this concept">MIMO</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61057.html"
+        
+       title="View other articles tagged with this concept">MEDLINE</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70205.html"
+        
+       title="View other articles tagged with this concept">Lumbar puncture</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65066.html"
+        
+       title="View other articles tagged with this concept">Los Angeles</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75638.html"
+        
+       title="View other articles tagged with this concept">Local anesthetic</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63077.html"
+        
+       title="View other articles tagged with this concept">Linear regression</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="83982.html"
+        
+       title="View other articles tagged with this concept">Lidocaine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70180.html"
+        
+       title="View other articles tagged with this concept">Levetiracetam</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65445.html"
+        
+       title="View other articles tagged with this concept">Lamotrigine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65215.html"
+        
+       title="View other articles tagged with this concept">Lactate dehydrogenase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66343.html"
+        
+       title="View other articles tagged with this concept">KEGG</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64055.html"
+        
+       title="View other articles tagged with this concept">Intensive care unit</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62274.html"
+        
+       title="View other articles tagged with this concept">Insect</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62108.html"
+        
+       title="View other articles tagged with this concept">Inflammation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63529.html"
+        
+       title="View other articles tagged with this concept">Immunofluorescence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64411.html"
+        
+       title="View other articles tagged with this concept">Ileum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61744.html"
+        
+       title="View other articles tagged with this concept">Hysterectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60892.html"
+        
+       title="View other articles tagged with this concept">Hypotension</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60675.html"
+        
+       title="View other articles tagged with this concept">Homeostasis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75979.html"
+        
+       title="View other articles tagged with this concept">Heroin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66146.html"
+        
+       title="View other articles tagged with this concept">Hernia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63022.html"
+        
+       title="View other articles tagged with this concept">Google Scholar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69351.html"
+        
+       title="View other articles tagged with this concept">Goat</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63454.html"
+        
+       title="View other articles tagged with this concept">Glycerol</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60680.html"
+        
+       title="View other articles tagged with this concept">Gestational age</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61637.html"
+        
+       title="View other articles tagged with this concept">Genetically modified mouse</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60759.html"
+        
+       title="View other articles tagged with this concept">Gene</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60888.html"
+        
+       title="View other articles tagged with this concept">Gastrointestinal tract</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61834.html"
+        
+       title="View other articles tagged with this concept">Gastrectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74795.html"
+        
+       title="View other articles tagged with this concept">Förster resonance energy transfer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="79154.html"
+        
+       title="View other articles tagged with this concept">Furosemide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64891.html"
+        
+       title="View other articles tagged with this concept">Forebrain</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62023.html"
+        
+       title="View other articles tagged with this concept">Fluorescence microscope</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64911.html"
+        
+       title="View other articles tagged with this concept">Fabaceae</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61061.html"
+        
+       title="View other articles tagged with this concept">Enzyme</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77029.html"
+        
+       title="View other articles tagged with this concept">Edmonton</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62257.html"
+        
+       title="View other articles tagged with this concept">Edema</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63812.html"
+        
+       title="View other articles tagged with this concept">EC50</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63637.html"
+        
+       title="View other articles tagged with this concept">Drug interaction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66088.html"
+        
+       title="View other articles tagged with this concept">Dorsal root ganglion</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62595.html"
+        
+       title="View other articles tagged with this concept">Dimethyl sulfoxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65489.html"
+        
+       title="View other articles tagged with this concept">Dexmedetomidine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61645.html"
+        
+       title="View other articles tagged with this concept">Deep vein thrombosis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65558.html"
+        
+       title="View other articles tagged with this concept">Decompressive craniectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63405.html"
+        
+       title="View other articles tagged with this concept">Cyclic adenosine monophosphate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63153.html"
+        
+       title="View other articles tagged with this concept">Cutaneous condition</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67928.html"
+        
+       title="View other articles tagged with this concept">Cumulative dose</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77033.html"
+        
+       title="View other articles tagged with this concept">Creatine kinase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64760.html"
+        
+       title="View other articles tagged with this concept">Constipation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61629.html"
+        
+       title="View other articles tagged with this concept">Confidence interval</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69805.html"
+        
+       title="View other articles tagged with this concept">CompactFlash</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66814.html"
+        
+       title="View other articles tagged with this concept">Cocaine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64442.html"
+        
+       title="View other articles tagged with this concept">Cinnamaldehyde</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70126.html"
+        
+       title="View other articles tagged with this concept">Chronic pancreatitis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62666.html"
+        
+       title="View other articles tagged with this concept">Chronic obstructive pulmonary disease</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="80358.html"
+        
+       title="View other articles tagged with this concept">Chorioallantoic membrane</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61107.html"
+        
+       title="View other articles tagged with this concept">Cholecystectomy</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65835.html"
+        
+       title="View other articles tagged with this concept">Chloroform</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70713.html"
+        
+       title="View other articles tagged with this concept">Chemokine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73239.html"
+        
+       title="View other articles tagged with this concept">Ceramide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64427.html"
+        
+       title="View other articles tagged with this concept">Cell membrane</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64796.html"
+        
+       title="View other articles tagged with this concept">Catheter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68275.html"
+        
+       title="View other articles tagged with this concept">Catalysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61059.html"
+        
+       title="View other articles tagged with this concept">Cat</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67081.html"
+        
+       title="View other articles tagged with this concept">Carlo Emilio Bonferroni</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71147.html"
+        
+       title="View other articles tagged with this concept">Cardiopulmonary resuscitation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60862.html"
+        
+       title="View other articles tagged with this concept">Carcinoma</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66704.html"
+        
+       title="View other articles tagged with this concept">Carbonic anhydrase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64589.html"
+        
+       title="View other articles tagged with this concept">Carbamazepine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62571.html"
+        
+       title="View other articles tagged with this concept">Cannabis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68062.html"
+        
+       title="View other articles tagged with this concept">Cannabinoid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62609.html"
+        
+       title="View other articles tagged with this concept">Calcium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="77642.html"
+        
+       title="View other articles tagged with this concept">Caesarean section</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63752.html"
+        
+       title="View other articles tagged with this concept">Bronchitis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60667.html"
+        
+       title="View other articles tagged with this concept">Body mass index</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60630.html"
+        
+       title="View other articles tagged with this concept">Biomarker</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66028.html"
+        
+       title="View other articles tagged with this concept">Bioinformatics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71137.html"
+        
+       title="View other articles tagged with this concept">Benzodiazepine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62493.html"
+        
+       title="View other articles tagged with this concept">Bangladesh</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66768.html"
+        
+       title="View other articles tagged with this concept">Autotransplantation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63099.html"
+        
+       title="View other articles tagged with this concept">Ataxia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62033.html"
+        
+       title="View other articles tagged with this concept">Astrocyte</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67034.html"
+        
+       title="View other articles tagged with this concept">Aspirin</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72550.html"
+        
+       title="View other articles tagged with this concept">Apnea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67664.html"
+        
+       title="View other articles tagged with this concept">Antidepressant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64817.html"
+        
+       title="View other articles tagged with this concept">Anterior cruciate ligament injury</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61177.html"
+        
+       title="View other articles tagged with this concept">Angiogenesis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61147.html"
+        
+       title="View other articles tagged with this concept">Anesthesia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63901.html"
+        
+       title="View other articles tagged with this concept">Amygdala</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62672.html"
+        
+       title="View other articles tagged with this concept">Adjuvant</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63322.html"
+        
+       title="View other articles tagged with this concept">Adenocarcinoma</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">45</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#0b64edd07d13b538b33c9a0b2336e4a6" style="font-size: 90%;" title="Open panel">
+                1. Hydro-ethanolic leaf extract of Ziziphus abyssinica Hochst Ex A. Rich (Rhamnaceae) exhibits anti-nociceptive effects in murine models
+              </a> 
+            </h4>
+          </div>
+          <div id="0b64edd07d13b538b33c9a0b2336e4a6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12906-017-1750-z" target="_blank" title="View Publication 10.1186/s12906-017-1750-z">DOI: 10.1186/s12906-017-1750-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12906-017-1750-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#0e576ef969897cca6b8691c9fb4cc456" style="font-size: 90%;" title="Open panel">
+                2. Preclinical Comparison of Mechanistically Different Antiseizure, Antinociceptive, and/or Antidepressant Drugs in a Battery of Rodent Models of Nociceptive and Neuropathic Pain
+              </a> 
+            </h4>
+          </div>
+          <div id="0e576ef969897cca6b8691c9fb4cc456" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11064-017-2286-9" target="_blank" title="View Publication 10.1007/s11064-017-2286-9">DOI: 10.1007/s11064-017-2286-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11064-017-2286-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#1cfa593a82fddf0e13b4beff79af8f7c" style="font-size: 90%;" title="Open panel">
+                3. Car8 dorsal root ganglion expression and genetic regulation of analgesic responses are associated with a cis-eQTL in mice
+              </a> 
+            </h4>
+          </div>
+          <div id="1cfa593a82fddf0e13b4beff79af8f7c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00335-017-9694-7" target="_blank" title="View Publication 10.1007/s00335-017-9694-7">DOI: 10.1007/s00335-017-9694-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00335-017-9694-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#1dbab05879fbfb569cf5b28a75dd0f14" style="font-size: 90%;" title="Open panel">
+                4. Analysis of opioid consumption in clinical trials: a simulation based analysis of power of four approaches
+              </a> 
+            </h4>
+          </div>
+          <div id="1dbab05879fbfb569cf5b28a75dd0f14" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10928-017-9522-4" target="_blank" title="View Publication 10.1007/s10928-017-9522-4">DOI: 10.1007/s10928-017-9522-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10928-017-9522-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#217d80056cc44b6d2c265b8e6938fbc2" style="font-size: 90%;" title="Open panel">
+                5. Superior perioperative analgesia with combined femoral–obturator–sciatic nerve block in comparison with posterior lumbar plexus and sciatic nerve block for ACL reconstructive surgery
+              </a> 
+            </h4>
+          </div>
+          <div id="217d80056cc44b6d2c265b8e6938fbc2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00167-017-4525-7" target="_blank" title="View Publication 10.1007/s00167-017-4525-7">DOI: 10.1007/s00167-017-4525-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00167-017-4525-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#2d3e5ed5279cedcbff05f8600c564758" style="font-size: 90%;" title="Open panel">
+                6. Continuous femoral nerve blockade and single-shot sciatic nerve block promotes better analgesia and lower bleeding for total knee arthroplasty compared to intrathecal morphine: a randomized trial
+              </a> 
+            </h4>
+          </div>
+          <div id="2d3e5ed5279cedcbff05f8600c564758" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12871-017-0355-x" target="_blank" title="View Publication 10.1186/s12871-017-0355-x">DOI: 10.1186/s12871-017-0355-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12871-017-0355-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#391a0cdbf00fadb8bcf3d0eff891b8d4" style="font-size: 90%;" title="Open panel">
+                7. Gabapentin in procedure-specific postoperative pain management – preplanned subgroup analyses from a systematic review with meta-analyses and trial sequential analyses
+              </a> 
+            </h4>
+          </div>
+          <div id="391a0cdbf00fadb8bcf3d0eff891b8d4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12871-017-0373-8" target="_blank" title="View Publication 10.1186/s12871-017-0373-8">DOI: 10.1186/s12871-017-0373-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12871-017-0373-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#3db638f3676ece12a12d502fdf21d28c" style="font-size: 90%;" title="Open panel">
+                8. Intravenous Drug Self-Administration in Rats: Substitution of Ethyl Alcohol for Morphine
+              </a> 
+            </h4>
+          </div>
+          <div id="3db638f3676ece12a12d502fdf21d28c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03394285" target="_blank" title="View Publication 10.1007/BF03394285">DOI: 10.1007/BF03394285</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03394285" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#3f16ed1d1318dc694d5b46c84fd80760" style="font-size: 90%;" title="Open panel">
+                9. The Basic Pharmacology of Opioids Informs the Opioid Discourse about Misuse and Abuse: A Review
+              </a> 
+            </h4>
+          </div>
+          <div id="3f16ed1d1318dc694d5b46c84fd80760" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40122-017-0068-3" target="_blank" title="View Publication 10.1007/s40122-017-0068-3">DOI: 10.1007/s40122-017-0068-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40122-017-0068-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#50474e225e220d5aa35f927a52e666b7" style="font-size: 90%;" title="Open panel">
+                10. Continuous Transversus Abdominis Plane Blocks via Laparoscopically Placed Catheters for Bariatric Surgery
+              </a> 
+            </h4>
+          </div>
+          <div id="50474e225e220d5aa35f927a52e666b7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11695-017-2667-9" target="_blank" title="View Publication 10.1007/s11695-017-2667-9">DOI: 10.1007/s11695-017-2667-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11695-017-2667-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#5441879c1899a2523d9c26eac41acea8" style="font-size: 90%;" title="Open panel">
+                11. Forensic entomotoxicology revisited—towards professional standardisation of study designs
+              </a> 
+            </h4>
+          </div>
+          <div id="5441879c1899a2523d9c26eac41acea8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00414-017-1603-9" target="_blank" title="View Publication 10.1007/s00414-017-1603-9">DOI: 10.1007/s00414-017-1603-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00414-017-1603-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#591fa78fb4b831db5ba22787d3d08234" style="font-size: 90%;" title="Open panel">
+                12. Conscious sedation with dexmedetomidine for implantation of a phrenic nerve stimulator in a pediatric case of late-onset congenital central hypoventilation syndrome
+              </a> 
+            </h4>
+          </div>
+          <div id="591fa78fb4b831db5ba22787d3d08234" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s40981-017-0117-2" target="_blank" title="View Publication 10.1186/s40981-017-0117-2">DOI: 10.1186/s40981-017-0117-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s40981-017-0117-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#59aa47f1789c957726bfbe76db1a7d14" style="font-size: 90%;" title="Open panel">
+                13. Local anesthetic infusion pump for pain management following total knee arthroplasty: a meta-analysis
+              </a> 
+            </h4>
+          </div>
+          <div id="59aa47f1789c957726bfbe76db1a7d14" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12891-016-1382-3" target="_blank" title="View Publication 10.1186/s12891-016-1382-3">DOI: 10.1186/s12891-016-1382-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12891-016-1382-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#5bafa3746d7710452bf04e14ea20db96" style="font-size: 90%;" title="Open panel">
+                14. The suppressive role of miR-542-5p in NSCLC: the evidence from clinical data and in vivo validation using a chick chorioallantoic membrane model
+              </a> 
+            </h4>
+          </div>
+          <div id="5bafa3746d7710452bf04e14ea20db96" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12885-017-3646-1" target="_blank" title="View Publication 10.1186/s12885-017-3646-1">DOI: 10.1186/s12885-017-3646-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12885-017-3646-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#63b7099e1547cde81017978ee17c8662" style="font-size: 90%;" title="Open panel">
+                15. Topical application of morphine for wound healing and analgesia in patients with oral lichen planus: a randomized, double-blind, placebo-controlled study
+              </a> 
+            </h4>
+          </div>
+          <div id="63b7099e1547cde81017978ee17c8662" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00784-017-2112-4" target="_blank" title="View Publication 10.1007/s00784-017-2112-4">DOI: 10.1007/s00784-017-2112-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00784-017-2112-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#65494054d867cab563dcc80a1f23a53c" style="font-size: 90%;" title="Open panel">
+                16. Study of μ- and δ-Opioid Activities in Agents with Various κ-Receptor Selectivity
+              </a> 
+            </h4>
+          </div>
+          <div id="65494054d867cab563dcc80a1f23a53c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10517-017-3674-5" target="_blank" title="View Publication 10.1007/s10517-017-3674-5">DOI: 10.1007/s10517-017-3674-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10517-017-3674-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#6a8449f822836f5f2522d044baa67479" style="font-size: 90%;" title="Open panel">
+                17. Urine drug screen findings among ambulatory oncology patients in a supportive care clinic
+              </a> 
+            </h4>
+          </div>
+          <div id="6a8449f822836f5f2522d044baa67479" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00520-017-3575-1" target="_blank" title="View Publication 10.1007/s00520-017-3575-1">DOI: 10.1007/s00520-017-3575-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00520-017-3575-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#6cdddd0b561d04642b7fdb0018664d54" style="font-size: 90%;" title="Open panel">
+                18. Intra-accumbal Cannabinoid Agonist Attenuated Reinstatement but not Extinction Period of Morphine-Induced Conditioned Place Preference; Evidence for Different Characteristics of Extinction Period and Reinstatement
+              </a> 
+            </h4>
+          </div>
+          <div id="6cdddd0b561d04642b7fdb0018664d54" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11064-017-2374-x" target="_blank" title="View Publication 10.1007/s11064-017-2374-x">DOI: 10.1007/s11064-017-2374-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11064-017-2374-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#6dc842ce29b46c79e96fb945f5375de2" style="font-size: 90%;" title="Open panel">
+                19. Degree of dyspnoea at admission and discharge in patients with heart failure and respiratory diseases
+              </a> 
+            </h4>
+          </div>
+          <div id="6dc842ce29b46c79e96fb945f5375de2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12904-017-0208-x" target="_blank" title="View Publication 10.1186/s12904-017-0208-x">DOI: 10.1186/s12904-017-0208-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12904-017-0208-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#7bc0c283310b44783bdbdef4f492dd6c" style="font-size: 90%;" title="Open panel">
+                20. Study Design and Rationale of “A Multicenter, Open-Labeled, Randomized Controlled Trial Comparing MIdazolam Versus MOrphine in Acute Pulmonary Edema”: MIMO Trial
+              </a> 
+            </h4>
+          </div>
+          <div id="7bc0c283310b44783bdbdef4f492dd6c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10557-017-6722-5" target="_blank" title="View Publication 10.1007/s10557-017-6722-5">DOI: 10.1007/s10557-017-6722-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10557-017-6722-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#8024c1e999c065a3a5d0bd8b272678e4" style="font-size: 90%;" title="Open panel">
+                21. Total intravenous anaesthesia in a goat undergoing craniectomy
+              </a> 
+            </h4>
+          </div>
+          <div id="8024c1e999c065a3a5d0bd8b272678e4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12917-017-1205-2" target="_blank" title="View Publication 10.1186/s12917-017-1205-2">DOI: 10.1186/s12917-017-1205-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12917-017-1205-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#8083468b990d3abc51e86eb911ec5fd8" style="font-size: 90%;" title="Open panel">
+                22. Linking Death Certificates, Postmortem Toxicology, and Prescription History Data for Better Identification of Populations at Increased Risk for Drug Intoxication Deaths
+              </a> 
+            </h4>
+          </div>
+          <div id="8083468b990d3abc51e86eb911ec5fd8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40290-017-0185-7" target="_blank" title="View Publication 10.1007/s40290-017-0185-7">DOI: 10.1007/s40290-017-0185-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40290-017-0185-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#812599119444014978fb944fdcbfe60a" style="font-size: 90%;" title="Open panel">
+                23. Intrathecal morphine for postoperative pain control following robot-assisted prostatectomy: a prospective randomized trial
+              </a> 
+            </h4>
+          </div>
+          <div id="812599119444014978fb944fdcbfe60a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00540-017-2356-9" target="_blank" title="View Publication 10.1007/s00540-017-2356-9">DOI: 10.1007/s00540-017-2356-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00540-017-2356-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#881c5cf71692d5c19abe01c6f080d2c9" style="font-size: 90%;" title="Open panel">
+                24. Could remifentanil reduce duration of mechanical ventilation in comparison with other opioids for mechanically ventilated patients? A systematic review and meta-analysis
+              </a> 
+            </h4>
+          </div>
+          <div id="881c5cf71692d5c19abe01c6f080d2c9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13054-017-1789-8" target="_blank" title="View Publication 10.1186/s13054-017-1789-8">DOI: 10.1186/s13054-017-1789-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13054-017-1789-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#8abee1538f3d14b0df736f696f18bdb8" style="font-size: 90%;" title="Open panel">
+                25. Sufentanil sublingual tablet system in the treatment of acute postoperative pain in adults: a profile of its use
+              </a> 
+            </h4>
+          </div>
+          <div id="8abee1538f3d14b0df736f696f18bdb8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40267-017-0434-6" target="_blank" title="View Publication 10.1007/s40267-017-0434-6">DOI: 10.1007/s40267-017-0434-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40267-017-0434-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#8c151a0f7647ee4de2acc7b4577c7bd2" style="font-size: 90%;" title="Open panel">
+                26. Sedation and analgesia practices at Italian neonatal intensive care units: results from the EUROPAIN study
+              </a> 
+            </h4>
+          </div>
+          <div id="8c151a0f7647ee4de2acc7b4577c7bd2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s13052-017-0343-2" target="_blank" title="View Publication 10.1186/s13052-017-0343-2">DOI: 10.1186/s13052-017-0343-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s13052-017-0343-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#8d131dc74d720d0e9b3b9a6d548ffe33" style="font-size: 90%;" title="Open panel">
+                27. Transitioning to the direct anterior approach in total hip arthroplasty. Is it a true muscle sparing approach when performed by a low volume hip replacement surgeon?
+              </a> 
+            </h4>
+          </div>
+          <div id="8d131dc74d720d0e9b3b9a6d548ffe33" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00264-017-3480-8" target="_blank" title="View Publication 10.1007/s00264-017-3480-8">DOI: 10.1007/s00264-017-3480-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00264-017-3480-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#8f29ad3fa930b91443b9d36e4d631694" style="font-size: 90%;" title="Open panel">
+                28. Opioid Medications in the Management of Chronic Abdominal Pain
+              </a> 
+            </h4>
+          </div>
+          <div id="8f29ad3fa930b91443b9d36e4d631694" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11916-017-0640-x" target="_blank" title="View Publication 10.1007/s11916-017-0640-x">DOI: 10.1007/s11916-017-0640-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11916-017-0640-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#9a60bd732f9cfa2abdf376d54a4572f0" style="font-size: 90%;" title="Open panel">
+                29. Optimizing Outpatient Pain Management After Thyroid and Parathyroid Surgery: A Two-Institution Experience
+              </a> 
+            </h4>
+          </div>
+          <div id="9a60bd732f9cfa2abdf376d54a4572f0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1245/s10434-017-5781-y" target="_blank" title="View Publication 10.1245/s10434-017-5781-y">DOI: 10.1245/s10434-017-5781-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1245/s10434-017-5781-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#9ee3479180d84254bd2b744a36ee31f2" style="font-size: 90%;" title="Open panel">
+                30. Aquaporin 4 Forms a Macromolecular Complex with Glutamate Transporter 1 and Mu Opioid Receptor in Astrocytes and Participates in Morphine Dependence
+              </a> 
+            </h4>
+          </div>
+          <div id="9ee3479180d84254bd2b744a36ee31f2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12031-017-0905-1" target="_blank" title="View Publication 10.1007/s12031-017-0905-1">DOI: 10.1007/s12031-017-0905-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12031-017-0905-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#9f1d5ea3a86fd679c7f7033aade69a02" style="font-size: 90%;" title="Open panel">
+                31. Morphine in Acute Pulmonary Oedema Treatment
+              </a> 
+            </h4>
+          </div>
+          <div id="9f1d5ea3a86fd679c7f7033aade69a02" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40138-017-0131-8" target="_blank" title="View Publication 10.1007/s40138-017-0131-8">DOI: 10.1007/s40138-017-0131-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40138-017-0131-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#a1c7c40ce57a9b6296d8b8e189c27ee4" style="font-size: 90%;" title="Open panel">
+                32. Changes over time in prescription practices of pain medications in Switzerland between 2006 and 2013: an analysis of insurance claims
+              </a> 
+            </h4>
+          </div>
+          <div id="a1c7c40ce57a9b6296d8b8e189c27ee4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12913-017-2086-6" target="_blank" title="View Publication 10.1186/s12913-017-2086-6">DOI: 10.1186/s12913-017-2086-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12913-017-2086-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#a2d24ab8f1a5cf0b9b4b794d763a15b6" style="font-size: 90%;" title="Open panel">
+                33. An up-down determination of the required seated duration after intrathecal injection of bupivacaine and fentanyl for the prevention of hypotension during Cesarean delivery
+              </a> 
+            </h4>
+          </div>
+          <div id="a2d24ab8f1a5cf0b9b4b794d763a15b6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12630-017-0931-z" target="_blank" title="View Publication 10.1007/s12630-017-0931-z">DOI: 10.1007/s12630-017-0931-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12630-017-0931-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#a775c6053a8f494117887bbf4ea969df" style="font-size: 90%;" title="Open panel">
+                34. Modulation of Synaptic Reactions of the “Nociceptive” Neurons in the Cat Cortex upon Stimulation of the Periaqueductal Gray and Application of Some Pharmacological Agents
+              </a> 
+            </h4>
+          </div>
+          <div id="a775c6053a8f494117887bbf4ea969df" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11062-017-9639-5" target="_blank" title="View Publication 10.1007/s11062-017-9639-5">DOI: 10.1007/s11062-017-9639-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11062-017-9639-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#ad84ab2e5c31ae0eef1973567e9f9bc1" style="font-size: 90%;" title="Open panel">
+                35. Prenatal Stress+Morphine and Postnatal Re-exposure to Stress Alter Pentylenetetrazol-Induced Epileptic Manifestations in Rats
+              </a> 
+            </h4>
+          </div>
+          <div id="ad84ab2e5c31ae0eef1973567e9f9bc1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11062-017-9610-5" target="_blank" title="View Publication 10.1007/s11062-017-9610-5">DOI: 10.1007/s11062-017-9610-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11062-017-9610-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#b16f328b8fe967ed3233350529d2d8d0" style="font-size: 90%;" title="Open panel">
+                36. Clinical safety and effectiveness of transversus abdominis plane (TAP) block in post-operative analgesia: a systematic review and meta-analysis
+              </a> 
+            </h4>
+          </div>
+          <div id="b16f328b8fe967ed3233350529d2d8d0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00540-017-2323-5" target="_blank" title="View Publication 10.1007/s00540-017-2323-5">DOI: 10.1007/s00540-017-2323-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00540-017-2323-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#b63908d0adcc4923038650ffff32c126" style="font-size: 90%;" title="Open panel">
+                37. Spinal CX3CL1/CX3CR1 May Not Directly Participate in the Development of Morphine Tolerance in Rats
+              </a> 
+            </h4>
+          </div>
+          <div id="b63908d0adcc4923038650ffff32c126" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11064-017-2364-z" target="_blank" title="View Publication 10.1007/s11064-017-2364-z">DOI: 10.1007/s11064-017-2364-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11064-017-2364-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#bb1b98f279b07f848656fc4b61ec2025" style="font-size: 90%;" title="Open panel">
+                38. The consummatory and motivational behaviors for natural rewards following long-term withdrawal from morphine: no anhedonia but persistent maladaptive behaviors for high-value rewards
+              </a> 
+            </h4>
+          </div>
+          <div id="bb1b98f279b07f848656fc4b61ec2025" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00213-017-4565-1" target="_blank" title="View Publication 10.1007/s00213-017-4565-1">DOI: 10.1007/s00213-017-4565-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00213-017-4565-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#bd3fce72c0b4a47d2b42e3c5b5af664f" style="font-size: 90%;" title="Open panel">
+                39. Anti-inflammatory and analgesic activities of solvent fractions of the leaves of Moringa stenopetala Bak. (Moringaceae) in mice models
+              </a> 
+            </h4>
+          </div>
+          <div id="bd3fce72c0b4a47d2b42e3c5b5af664f" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12906-017-1982-y" target="_blank" title="View Publication 10.1186/s12906-017-1982-y">DOI: 10.1186/s12906-017-1982-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12906-017-1982-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#cf3da2fa50bdb60ef08fa78906d9e71c" style="font-size: 90%;" title="Open panel">
+                40. Tourniquet use in arthroscopic anterior cruciate ligament reconstruction: a systematic review and meta-analysis of randomised controlled trials
+              </a> 
+            </h4>
+          </div>
+          <div id="cf3da2fa50bdb60ef08fa78906d9e71c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12891-017-1722-y" target="_blank" title="View Publication 10.1186/s12891-017-1722-y">DOI: 10.1186/s12891-017-1722-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12891-017-1722-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#d8b5b2d9325d6778db27937d8f54728b" style="font-size: 90%;" title="Open panel">
+                41. Antinociceptive effect of methanol extract of Dalbergia sissoo leaves in mice
+              </a> 
+            </h4>
+          </div>
+          <div id="d8b5b2d9325d6778db27937d8f54728b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12906-017-1565-y" target="_blank" title="View Publication 10.1186/s12906-017-1565-y">DOI: 10.1186/s12906-017-1565-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12906-017-1565-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#e6cf011dc2b87cd31f312085c8d8816e" style="font-size: 90%;" title="Open panel">
+                42. Effect of Morphine Dose Size on the Conditioned Reinforcing Potency of Stimuli Paired with Morphine
+              </a> 
+            </h4>
+          </div>
+          <div id="e6cf011dc2b87cd31f312085c8d8816e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/BF03394112" target="_blank" title="View Publication 10.1007/BF03394112">DOI: 10.1007/BF03394112</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/BF03394112" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#f30acb7d9054ea95b7e8708ccb49bf1d" style="font-size: 90%;" title="Open panel">
+                43. Ceramide and Its Related Neurochemical Networks as Targets for Some Brain Disorder Therapies
+              </a> 
+            </h4>
+          </div>
+          <div id="f30acb7d9054ea95b7e8708ccb49bf1d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12640-017-9798-6" target="_blank" title="View Publication 10.1007/s12640-017-9798-6">DOI: 10.1007/s12640-017-9798-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12640-017-9798-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#f95850557f04fd24419c633a8e4c2c18" style="font-size: 90%;" title="Open panel">
+                44. Impact of intrathecal morphine analgesia on the incidence of pulmonary complications after cardiac surgery: a single center propensity-matched cohort study
+              </a> 
+            </h4>
+          </div>
+          <div id="f95850557f04fd24419c633a8e4c2c18" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s12871-017-0398-z" target="_blank" title="View Publication 10.1186/s12871-017-0398-z">DOI: 10.1186/s12871-017-0398-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s12871-017-0398-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="69021.html#fb9c89e0978bcc71878de94d2f7ccf0c" style="font-size: 90%;" title="Open panel">
+                45. Controlled Substance Agreements for Opioids in a Primary Care Practice
+              </a> 
+            </h4>
+          </div>
+          <div id="fb9c89e0978bcc71878de94d2f7ccf0c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1186/s40545-017-0119-5" target="_blank" title="View Publication 10.1186/s40545-017-0119-5">DOI: 10.1186/s40545-017-0119-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1186/s40545-017-0119-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Morphine'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 69021, "target": 62261 },
+      
+          { "source": 69021, "target": 61838 },
+      
+          { "source": 69021, "target": 63026 },
+      
+          { "source": 69021, "target": 60937 },
+      
+          { "source": 69021, "target": 63769 },
+      
+          { "source": 69021, "target": 60694 },
+      
+          { "source": 69021, "target": 60696 },
+      
+          { "source": 69021, "target": 63033 },
+      
+          { "source": 69021, "target": 65764 },
+      
+          { "source": 69021, "target": 63368 },
+      
+          { "source": 62261, "target": 61838 },
+      
+          { "source": 62261, "target": 63001 },
+      
+          { "source": 62261, "target": 63769 },
+      
+          { "source": 62261, "target": 69021 },
+      
+          { "source": 62261, "target": 63724 },
+      
+          { "source": 61838, "target": 62261 },
+      
+          { "source": 61838, "target": 63026 },
+      
+          { "source": 61838, "target": 60851 },
+      
+          { "source": 61838, "target": 77801 },
+      
+          { "source": 61838, "target": 85947 },
+      
+          { "source": 63026, "target": 61838 },
+      
+          { "source": 63026, "target": 63724 },
+      
+          { "source": 63026, "target": 62261 },
+      
+          { "source": 63026, "target": 63238 },
+      
+          { "source": 63026, "target": 69021 },
+      
+          { "source": 60937, "target": 60671 },
+      
+          { "source": 60937, "target": 64055 },
+      
+          { "source": 60937, "target": 61108 },
+      
+          { "source": 60937, "target": 61629 },
+      
+          { "source": 60937, "target": 62813 },
+      
+          { "source": 63769, "target": 62261 },
+      
+          { "source": 63769, "target": 73586 },
+      
+          { "source": 63769, "target": 62257 },
+      
+          { "source": 63769, "target": 62544 },
+      
+          { "source": 63769, "target": 69021 },
+      
+          { "source": 60694, "target": 60696 },
+      
+          { "source": 60694, "target": 61057 },
+      
+          { "source": 60694, "target": 60692 },
+      
+          { "source": 60694, "target": 63001 },
+      
+          { "source": 60694, "target": 61741 },
+      
+          { "source": 60696, "target": 60694 },
+      
+          { "source": 60696, "target": 60692 },
+      
+          { "source": 60696, "target": 61057 },
+      
+          { "source": 60696, "target": 61104 },
+      
+          { "source": 60696, "target": 63001 },
+      
+          { "source": 63033, "target": 63001 },
+      
+          { "source": 63033, "target": 64612 },
+      
+          { "source": 63033, "target": 61251 },
+      
+          { "source": 63033, "target": 61629 },
+      
+          { "source": 63033, "target": 60671 },
+      
+          { "source": 65764, "target": 61254 },
+      
+          { "source": 65764, "target": 61244 },
+      
+          { "source": 65764, "target": 62544 },
+      
+          { "source": 65764, "target": 69021 },
+      
+          { "source": 65764, "target": 60720 },
+      
+          { "source": 63368, "target": 60905 },
+      
+          { "source": 63368, "target": 68171 },
+      
+          { "source": 63368, "target": 75035 },
+      
+          { "source": 63368, "target": 63640 },
+      
+          { "source": 63368, "target": 60720 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 62261, "size": 50, "score": 0 , "title": "Analgesic", "type": "circle"},
+
+      
+
+        {"id": 61838, "size": 50, "score": 0 , "title": "Opioid", "type": "circle"},
+
+      
+
+        {"id": 63026, "size": 50, "score": 0 , "title": "Fentanyl", "type": "circle"},
+
+      
+
+        {"id": 60937, "size": 50, "score": 0 , "title": "Mechanical ventilation", "type": "circle"},
+
+      
+
+        {"id": 63769, "size": 50, "score": 0 , "title": "Nociception", "type": "circle"},
+
+      
+
+        {"id": 60694, "size": 50, "score": 0 , "title": "Embase", "type": "circle"},
+
+      
+
+        {"id": 60696, "size": 50, "score": 0 , "title": "PubMed", "type": "circle"},
+
+      
+
+        {"id": 63033, "size": 50, "score": 0 , "title": "Placebo", "type": "circle"},
+
+      
+
+        {"id": 65764, "size": 50, "score": 0 , "title": "Intrathecal administration", "type": "circle"},
+
+      
+
+        {"id": 63368, "size": 50, "score": 0 , "title": "Sciatic nerve", "type": "circle"},
+
+      
+
+        {"id": 69021, "size": 70, "score": 0.5 , "title": "Morphine", "type": "circle"},
+
+      
+
+        {"id": 63001, "size": 5, "score": 0.4 , "title": "Clinical trial", "type": "circle"},
+
+      
+
+        {"id": 63724, "size": 5, "score": 0.4 , "title": "General anaesthesia", "type": "circle"},
+
+      
+
+        {"id": 60851, "size": 5, "score": 0.4 , "title": "Methadone", "type": "circle"},
+
+      
+
+        {"id": 77801, "size": 5, "score": 0.4 , "title": "Buprenorphine", "type": "circle"},
+
+      
+
+        {"id": 85947, "size": 5, "score": 0.4 , "title": "Naloxone", "type": "circle"},
+
+      
+
+        {"id": 63238, "size": 5, "score": 0.4 , "title": "Propofol", "type": "circle"},
+
+      
+
+        {"id": 60671, "size": 5, "score": 0.4 , "title": "Syndrome", "type": "circle"},
+
+      
+
+        {"id": 64055, "size": 5, "score": 0.4 , "title": "Intensive care unit", "type": "circle"},
+
+      
+
+        {"id": 61108, "size": 5, "score": 0.4 , "title": "Logistic regression", "type": "circle"},
+
+      
+
+        {"id": 61629, "size": 5, "score": 0.4 , "title": "Confidence interval", "type": "circle"},
+
+      
+
+        {"id": 62813, "size": 5, "score": 0.4 , "title": "Pneumonia", "type": "circle"},
+
+      
+
+        {"id": 73586, "size": 5, "score": 0.4 , "title": "Hyperalgesia", "type": "circle"},
+
+      
+
+        {"id": 62257, "size": 5, "score": 0.4 , "title": "Edema", "type": "circle"},
+
+      
+
+        {"id": 62544, "size": 5, "score": 0.4 , "title": "Spinal cord", "type": "circle"},
+
+      
+
+        {"id": 61057, "size": 5, "score": 0.4 , "title": "MEDLINE", "type": "circle"},
+
+      
+
+        {"id": 60692, "size": 5, "score": 0.4 , "title": "Cochrane Library", "type": "circle"},
+
+      
+
+        {"id": 61741, "size": 5, "score": 0.4 , "title": "CINAHL", "type": "circle"},
+
+      
+
+        {"id": 61104, "size": 5, "score": 0.4 , "title": "Scopus", "type": "circle"},
+
+      
+
+        {"id": 64612, "size": 5, "score": 0.4 , "title": "ClinicalTrials.gov", "type": "circle"},
+
+      
+
+        {"id": 61251, "size": 5, "score": 0.4 , "title": "Blood plasma", "type": "circle"},
+
+      
+
+        {"id": 61254, "size": 5, "score": 0.4 , "title": "Cerebrospinal fluid", "type": "circle"},
+
+      
+
+        {"id": 61244, "size": 5, "score": 0.4 , "title": "Central nervous system", "type": "circle"},
+
+      
+
+        {"id": 60720, "size": 5, "score": 0.4 , "title": "Magnetic resonance imaging", "type": "circle"},
+
+      
+
+        {"id": 60905, "size": 5, "score": 0.4 , "title": "Protein", "type": "circle"},
+
+      
+
+        {"id": 68171, "size": 5, "score": 0.4 , "title": "Neuropathic pain", "type": "circle"},
+
+      
+
+        {"id": 75035, "size": 5, "score": 0.4 , "title": "Schwann cell", "type": "circle"},
+
+      
+
+        {"id": 63640, "size": 5, "score": 0.4 , "title": "Peripheral neuropathy", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

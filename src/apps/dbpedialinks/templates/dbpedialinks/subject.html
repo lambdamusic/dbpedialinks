@@ -25,6 +25,9 @@
 
   <div class="row">
 
+
+
+
     <div class="col-md-12" style="margin-top: 20px;">
 
       <h5 class="text-muted">
@@ -102,7 +105,7 @@
     <div class="col-md-4" style="margin-top: 30px;">
 
 
-      <h5 class="text-muted">REFINE YOUR SEARCH:
+      <h5 class="text-muted">RELATED SUBJECTS:
       <br /><small class="text-muted">The publications listed also have these subjects</small>
       </h5>
       
@@ -110,7 +113,13 @@
 
       {% for k,v in related_subjects %} {% if not k in filters %}
 
-      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: {{v|tagcloud_opacity}};" href="{% url 'dbpedialinks:entities_detail' entity.id %}?filters={{k.id}}{% if filters_minus_entity %}{% for f  in  filters_minus_entity %}&filters={{f.id}}{% endfor %}{% endif %}" title="View other articles tagged with this concept">{{k.title}}</a>
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: {{v|tagcloud_opacity}};"   
+        {% if DEMO_MODE_FLAG %}
+          href="{% url 'dbpedialinks:entities_detail' k.id %}"
+        {% else %}
+          href="{% url 'dbpedialinks:entities_detail' entity.id %}?filters={{k.id}}{% if filters_minus_entity %}{% for f  in  filters_minus_entity %}&filters={{f.id}}{% endfor %}{% endif %}"
+        {% endif %}
+       title="View other articles tagged with this concept">{{k.title}}</a>
       <span color="black;" style="opacity: {{v|tagcloud_opacity}};">&nbsp;{{v}} time{{v|pluralize}}</span>
       <br /> {% endif %} {% endfor %}
 
@@ -127,7 +136,7 @@
       </p>
 
       <p>
-        <small class="text-muted">Note: open an item panel to view more info{% if articles|length < 31 %}&nbsp;<a href="javascript:megaLoad();">(open all)</a>{% endif %}</small>
+        <small class="text-muted">Note: {% if DEMO_MODE_FLAG %}Top 50 publications shown only. {% endif %}Open an item panel to view more info{% if articles|length < 31 %}&nbsp;<a href="javascript:megaLoad();">(open all)</a>{% endif %}</small>
       </p>
 
       <br />
@@ -151,7 +160,13 @@
             </div>
             <div class="panel-footer">
 
+            
+            {% if not DEMO_MODE_FLAG %}
               Subjects loading..
+            {% endif %}
+              
+
+              
 
             </div>
           </div>
@@ -226,7 +241,9 @@
 
     if (!$(this).hasClass('ajax_pub_info_loaded')) {
       article_id = $(this).attr('id');
+      {% if not DEMO_MODE_FLAG %}
       $(this).children(".panel-body").html("loading...");
+      {% endif %}
       dest = $(this).children(".panel-body")
       ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
       $(this).addClass('ajax_pub_info_loaded');
@@ -234,7 +251,9 @@
 
     if (!$(this).hasClass('ajax_tags_loaded')) {
       article_id = $(this).attr('id');
+      {% if not DEMO_MODE_FLAG %}
       $(this).children(".panel-footer").html("loading...");
+      {% endif %}
       dest = $(this).children(".panel-footer")
       ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
       $(this).addClass('ajax_tags_loaded');
@@ -244,7 +263,7 @@
 
 
 
-  {% if 0 and not filters_minus_entity %}
+  {% if not DEMO_MODE_FLAG and not filters_minus_entity %}
     $(function () {
       ajax_load_dbpedia_info();
     });

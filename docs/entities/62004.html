@@ -1,0 +1,3680 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Monsoon</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Monsoon</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Monsoon" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Monsoon" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="61024.html"
+        
+       title="View other articles tagged with this concept">India</a>
+      <span color="black;" style="opacity: 1;">&nbsp;16 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="62007.html"
+        
+       title="View other articles tagged with this concept">Sea surface temperature</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.1;"   
+        
+          href="66784.html"
+        
+       title="View other articles tagged with this concept">Indian Ocean</a>
+      <span color="black;" style="opacity: 1.1;">&nbsp;8 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.0;"   
+        
+          href="61361.html"
+        
+       title="View other articles tagged with this concept">China</a>
+      <span color="black;" style="opacity: 1.0;">&nbsp;7 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="62102.html"
+        
+       title="View other articles tagged with this concept">Convection</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="61162.html"
+        
+       title="View other articles tagged with this concept">Climate change</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="71506.html"
+        
+       title="View other articles tagged with this concept">Solar irradiance</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="62003.html"
+        
+       title="View other articles tagged with this concept">El Niño–Southern Oscillation</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="71202.html"
+        
+       title="View other articles tagged with this concept">Climate model</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="61241.html"
+        
+       title="View other articles tagged with this concept">Biomass</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="63054.html"
+        
+       title="View other articles tagged with this concept">Aquifer</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="63695.html"
+        
+       title="View other articles tagged with this concept">Yangtze</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="69266.html"
+        
+       title="View other articles tagged with this concept">Teleconnection</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62006.html"
+        
+       title="View other articles tagged with this concept">South China Sea</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61473.html"
+        
+       title="View other articles tagged with this concept">Rice</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60771.html"
+        
+       title="View other articles tagged with this concept">PH</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60947.html"
+        
+       title="View other articles tagged with this concept">Nitrate</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="62242.html"
+        
+       title="View other articles tagged with this concept">Isotope</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="61600.html"
+        
+       title="View other articles tagged with this concept">Fossil fuel</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65046.html"
+        
+       title="View other articles tagged with this concept">Western Ghats</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62885.html"
+        
+       title="View other articles tagged with this concept">Tibetan Plateau</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="73987.html"
+        
+       title="View other articles tagged with this concept">Subarctic climate</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="65517.html"
+        
+       title="View other articles tagged with this concept">South Asia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61751.html"
+        
+       title="View other articles tagged with this concept">Silicate</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61987.html"
+        
+       title="View other articles tagged with this concept">Salinity</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66065.html"
+        
+       title="View other articles tagged with this concept">Rajasthan</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="61873.html"
+        
+       title="View other articles tagged with this concept">Principal component analysis</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="67913.html"
+        
+       title="View other articles tagged with this concept">National Center for Atmospheric Research</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62887.html"
+        
+       title="View other articles tagged with this concept">Moderate-resolution imaging spectroradiometer</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="77122.html"
+        
+       title="View other articles tagged with this concept">Indian subcontinent</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66055.html"
+        
+       title="View other articles tagged with this concept">Holocene</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63617.html"
+        
+       title="View other articles tagged with this concept">Groundwater recharge</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62200.html"
+        
+       title="View other articles tagged with this concept">Dependent and independent variables</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60820.html"
+        
+       title="View other articles tagged with this concept">Chloride</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60734.html"
+        
+       title="View other articles tagged with this concept">Carbon</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="66935.html"
+        
+       title="View other articles tagged with this concept">Bicarbonate</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="68073.html"
+        
+       title="View other articles tagged with this concept">Bengal</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60988.html"
+        
+       title="View other articles tagged with this concept">Analysis of variance</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="62959.html"
+        
+       title="View other articles tagged with this concept">Ammonia</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60663.html"
+        
+       title="View other articles tagged with this concept">Algorithm</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60933.html"
+        
+       title="View other articles tagged with this concept">Aerosol</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68101.html"
+        
+       title="View other articles tagged with this concept">World Bank</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63891.html"
+        
+       title="View other articles tagged with this concept">Wood fuel</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67231.html"
+        
+       title="View other articles tagged with this concept">Wind shear</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63076.html"
+        
+       title="View other articles tagged with this concept">Wetland</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62140.html"
+        
+       title="View other articles tagged with this concept">Weibull distribution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62884.html"
+        
+       title="View other articles tagged with this concept">Vorticity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61690.html"
+        
+       title="View other articles tagged with this concept">Vietnam</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74235.html"
+        
+       title="View other articles tagged with this concept">Uttarakhand</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60969.html"
+        
+       title="View other articles tagged with this concept">Ultraviolet</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69897.html"
+        
+       title="View other articles tagged with this concept">Turkish copula</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60956.html"
+        
+       title="View other articles tagged with this concept">Turbidity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75439.html"
+        
+       title="View other articles tagged with this concept">Troposphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64827.html"
+        
+       title="View other articles tagged with this concept">Transfer function</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70341.html"
+        
+       title="View other articles tagged with this concept">Total dissolved solids</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61533.html"
+        
+       title="View other articles tagged with this concept">Time series</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63234.html"
+        
+       title="View other articles tagged with this concept">The Strongest</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69346.html"
+        
+       title="View other articles tagged with this concept">Sudan</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75882.html"
+        
+       title="View other articles tagged with this concept">Stratosphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71119.html"
+        
+       title="View other articles tagged with this concept">Southern Hemisphere</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63560.html"
+        
+       title="View other articles tagged with this concept">Southeast Asia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61290.html"
+        
+       title="View other articles tagged with this concept">Sodium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71013.html"
+        
+       title="View other articles tagged with this concept">Shortwave radio</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66312.html"
+        
+       title="View other articles tagged with this concept">Shale</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64280.html"
+        
+       title="View other articles tagged with this concept">Saudi Arabia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="79304.html"
+        
+       title="View other articles tagged with this concept">Sahel</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65121.html"
+        
+       title="View other articles tagged with this concept">Punjab (region)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61315.html"
+        
+       title="View other articles tagged with this concept">Probability density function</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67082.html"
+        
+       title="View other articles tagged with this concept">Precession</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64462.html"
+        
+       title="View other articles tagged with this concept">Polychaete</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62882.html"
+        
+       title="View other articles tagged with this concept">Planetary boundary layer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63590.html"
+        
+       title="View other articles tagged with this concept">Pinophyta</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68592.html"
+        
+       title="View other articles tagged with this concept">Phytoplankton</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61246.html"
+        
+       title="View other articles tagged with this concept">Physics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78101.html"
+        
+       title="View other articles tagged with this concept">Phragmites</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61237.html"
+        
+       title="View other articles tagged with this concept">Phosphate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61134.html"
+        
+       title="View other articles tagged with this concept">Percolation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66600.html"
+        
+       title="View other articles tagged with this concept">Pacific Ocean</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70918.html"
+        
+       title="View other articles tagged with this concept">Outline of air pollution dispersion</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62881.html"
+        
+       title="View other articles tagged with this concept">Orography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64182.html"
+        
+       title="View other articles tagged with this concept">Optical depth</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76240.html"
+        
+       title="View other articles tagged with this concept">Numerical weather prediction</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="76730.html"
+        
+       title="View other articles tagged with this concept">Northeast India</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69884.html"
+        
+       title="View other articles tagged with this concept">Northeast China</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68196.html"
+        
+       title="View other articles tagged with this concept">North Atlantic oscillation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61313.html"
+        
+       title="View other articles tagged with this concept">Normal distribution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69339.html"
+        
+       title="View other articles tagged with this concept">Nitrogen dioxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63048.html"
+        
+       title="View other articles tagged with this concept">Nitrite</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62886.html"
+        
+       title="View other articles tagged with this concept">National Oceanic and Atmospheric Administration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67112.html"
+        
+       title="View other articles tagged with this concept">Mudflat</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61752.html"
+        
+       title="View other articles tagged with this concept">Mountain</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69880.html"
+        
+       title="View other articles tagged with this concept">Microscope</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62098.html"
+        
+       title="View other articles tagged with this concept">Michael E. Mann</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61511.html"
+        
+       title="View other articles tagged with this concept">Mass spectrometry</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71654.html"
+        
+       title="View other articles tagged with this concept">Mangrove</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62189.html"
+        
+       title="View other articles tagged with this concept">Malaysia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62058.html"
+        
+       title="View other articles tagged with this concept">Maharashtra</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61345.html"
+        
+       title="View other articles tagged with this concept">Magnesium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69482.html"
+        
+       title="View other articles tagged with this concept">Magnaporthe grisea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69881.html"
+        
+       title="View other articles tagged with this concept">MPEG-1 Audio Layer II</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61790.html"
+        
+       title="View other articles tagged with this concept">Log-normal distribution</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61359.html"
+        
+       title="View other articles tagged with this concept">Lithology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66326.html"
+        
+       title="View other articles tagged with this concept">Limestone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62005.html"
+        
+       title="View other articles tagged with this concept">Latent heat</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67322.html"
+        
+       title="View other articles tagged with this concept">Landsat program</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71023.html"
+        
+       title="View other articles tagged with this concept">Kriging</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61491.html"
+        
+       title="View other articles tagged with this concept">Ion</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67588.html"
+        
+       title="View other articles tagged with this concept">Indo-Pacific</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62170.html"
+        
+       title="View other articles tagged with this concept">Humidity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66411.html"
+        
+       title="View other articles tagged with this concept">Himalayas</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63315.html"
+        
+       title="View other articles tagged with this concept">Heavy metals</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="78718.html"
+        
+       title="View other articles tagged with this concept">Haryana</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69314.html"
+        
+       title="View other articles tagged with this concept">Gypsum</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62297.html"
+        
+       title="View other articles tagged with this concept">Greenhouse gas</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63711.html"
+        
+       title="View other articles tagged with this concept">Global warming</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64010.html"
+        
+       title="View other articles tagged with this concept">General circulation model</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69089.html"
+        
+       title="View other articles tagged with this concept">Fluoride</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74371.html"
+        
+       title="View other articles tagged with this concept">Feldspar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63860.html"
+        
+       title="View other articles tagged with this concept">Factor analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71118.html"
+        
+       title="View other articles tagged with this concept">Extratropical cyclone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61439.html"
+        
+       title="View other articles tagged with this concept">Electrical resistivity and conductivity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63807.html"
+        
+       title="View other articles tagged with this concept">Ecology</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61031.html"
+        
+       title="View other articles tagged with this concept">Debris flow</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72687.html"
+        
+       title="View other articles tagged with this concept">Cyprus</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62644.html"
+        
+       title="View other articles tagged with this concept">Cyanobacteria</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63018.html"
+        
+       title="View other articles tagged with this concept">Critical Role</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61163.html"
+        
+       title="View other articles tagged with this concept">Coupled model intercomparison project</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61100.html"
+        
+       title="View other articles tagged with this concept">Correlation and dependence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67116.html"
+        
+       title="View other articles tagged with this concept">Coral reef</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70073.html"
+        
+       title="View other articles tagged with this concept">Continental shelf</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64844.html"
+        
+       title="View other articles tagged with this concept">Conditional probability</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62387.html"
+        
+       title="View other articles tagged with this concept">Concentration</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="70390.html"
+        
+       title="View other articles tagged with this concept">Coliform bacteria</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62089.html"
+        
+       title="View other articles tagged with this concept">Cluster analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65670.html"
+        
+       title="View other articles tagged with this concept">Cloud</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64255.html"
+        
+       title="View other articles tagged with this concept">Clay minerals</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60814.html"
+        
+       title="View other articles tagged with this concept">Classical mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63748.html"
+        
+       title="View other articles tagged with this concept">Chlorophyll</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64598.html"
+        
+       title="View other articles tagged with this concept">Chemical oxygen demand</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61418.html"
+        
+       title="View other articles tagged with this concept">Central Asia</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65615.html"
+        
+       title="View other articles tagged with this concept">Causality</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63577.html"
+        
+       title="View other articles tagged with this concept">Carbon monoxide</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62517.html"
+        
+       title="View other articles tagged with this concept">Carbon cycle</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67274.html"
+        
+       title="View other articles tagged with this concept">Canis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62609.html"
+        
+       title="View other articles tagged with this concept">Calcium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64108.html"
+        
+       title="View other articles tagged with this concept">Cadmium</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65627.html"
+        
+       title="View other articles tagged with this concept">Bog</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="72025.html"
+        
+       title="View other articles tagged with this concept">Bivariate analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60953.html"
+        
+       title="View other articles tagged with this concept">Biodiversity</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73823.html"
+        
+       title="View other articles tagged with this concept">Biochemical oxygen demand</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="79807.html"
+        
+       title="View other articles tagged with this concept">Bihar</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60957.html"
+        
+       title="View other articles tagged with this concept">Benthic zone</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68783.html"
+        
+       title="View other articles tagged with this concept">Before Present</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62493.html"
+        
+       title="View other articles tagged with this concept">Bangladesh</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65651.html"
+        
+       title="View other articles tagged with this concept">Autocorrelation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67951.html"
+        
+       title="View other articles tagged with this concept">Atlantic Ocean</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61654.html"
+        
+       title="View other articles tagged with this concept">Artificial neural network</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66782.html"
+        
+       title="View other articles tagged with this concept">Arabian Sea</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60875.html"
+        
+       title="View other articles tagged with this concept">Adsorption</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">50</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#00b274807466a689d71f9cf2b15952e9" style="font-size: 90%;" title="Open panel">
+                1. The asymmetric effects of El Niño and La Niña on the East Asian winter monsoon and their simulation by CMIP5 atmospheric models
+              </a> 
+            </h4>
+          </div>
+          <div id="00b274807466a689d71f9cf2b15952e9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13351-017-6095-5" target="_blank" title="View Publication 10.1007/s13351-017-6095-5">DOI: 10.1007/s13351-017-6095-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13351-017-6095-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#019ec1ec5118d5e647f37deedfa6720a" style="font-size: 90%;" title="Open panel">
+                2. Light absorption by water-soluble organic carbon in atmospheric fine particles in the central Tibetan Plateau
+              </a> 
+            </h4>
+          </div>
+          <div id="019ec1ec5118d5e647f37deedfa6720a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11356-017-9688-8" target="_blank" title="View Publication 10.1007/s11356-017-9688-8">DOI: 10.1007/s11356-017-9688-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11356-017-9688-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#0958fde79b266fa6c6a646a7fd3affa6" style="font-size: 90%;" title="Open panel">
+                3. Multidecadal-scale adjustment of the ocean mixed layer heat budget in the tropics: examining ocean reanalyses
+              </a> 
+            </h4>
+          </div>
+          <div id="0958fde79b266fa6c6a646a7fd3affa6" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3703-0" target="_blank" title="View Publication 10.1007/s00382-017-3703-0">DOI: 10.1007/s00382-017-3703-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3703-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#09db7d9f79c5ce3a18abc15c885a8be7" style="font-size: 90%;" title="Open panel">
+                4. Holocene peatland development and vegetation changes in the Zoige Basin, eastern Tibetan Plateau
+              </a> 
+            </h4>
+          </div>
+          <div id="09db7d9f79c5ce3a18abc15c885a8be7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11430-017-9086-5" target="_blank" title="View Publication 10.1007/s11430-017-9086-5">DOI: 10.1007/s11430-017-9086-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11430-017-9086-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#0dbf4bd8fef3bd2a9843bb51073741ed" style="font-size: 90%;" title="Open panel">
+                5. Historical pyrogenic sources of black carbon during the last 150 years in the Great Hinggan Mountains, Northeast China
+              </a> 
+            </h4>
+          </div>
+          <div id="0dbf4bd8fef3bd2a9843bb51073741ed" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11368-017-1825-y" target="_blank" title="View Publication 10.1007/s11368-017-1825-y">DOI: 10.1007/s11368-017-1825-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11368-017-1825-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#11f7db4406a2a23318ccf012086d4525" style="font-size: 90%;" title="Open panel">
+                6. SST and OLR relationship during Indian summer monsoon: a coupled climate modelling perspective
+              </a> 
+            </h4>
+          </div>
+          <div id="11f7db4406a2a23318ccf012086d4525" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00703-017-0514-0" target="_blank" title="View Publication 10.1007/s00703-017-0514-0">DOI: 10.1007/s00703-017-0514-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00703-017-0514-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#1c12a977eb88f667192ae25c7c15950c" style="font-size: 90%;" title="Open panel">
+                7. Debris flow susceptibility analysis based on the combined impacts of antecedent earthquakes and droughts: a case study for cascade hydropower stations in the upper Yangtze River, China
+              </a> 
+            </h4>
+          </div>
+          <div id="1c12a977eb88f667192ae25c7c15950c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11629-017-4375-1" target="_blank" title="View Publication 10.1007/s11629-017-4375-1">DOI: 10.1007/s11629-017-4375-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11629-017-4375-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#20f089ebc89ebe8e41a2e1c501fcf442" style="font-size: 90%;" title="Open panel">
+                8. Statistical analysis of rainfall trends over Damodar River basin, India
+              </a> 
+            </h4>
+          </div>
+          <div id="20f089ebc89ebe8e41a2e1c501fcf442" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12517-017-3096-8" target="_blank" title="View Publication 10.1007/s12517-017-3096-8">DOI: 10.1007/s12517-017-3096-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12517-017-3096-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#23b4239b4cc9c16c857e90f0ebd42914" style="font-size: 90%;" title="Open panel">
+                9. Seasonal distribution of phytoplankton and its association with physico-chemical parameters in coastal waters of Malvan, west coast of India
+              </a> 
+            </h4>
+          </div>
+          <div id="23b4239b4cc9c16c857e90f0ebd42914" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10661-017-5835-4" target="_blank" title="View Publication 10.1007/s10661-017-5835-4">DOI: 10.1007/s10661-017-5835-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10661-017-5835-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#249fcf06f6f384e1359f2ba6a7706767" style="font-size: 90%;" title="Open panel">
+                10. Sensitivity of convective precipitation to soil moisture and vegetation during break spell of Indian summer monsoon
+              </a> 
+            </h4>
+          </div>
+          <div id="249fcf06f6f384e1359f2ba6a7706767" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00704-017-2228-0" target="_blank" title="View Publication 10.1007/s00704-017-2228-0">DOI: 10.1007/s00704-017-2228-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00704-017-2228-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#2654bbbf2cb8296083e709a7f05060ea" style="font-size: 90%;" title="Open panel">
+                11. Spatial and temporal variations of physicochemical and heavy metal pollution in Ramganga River—a tributary of River Ganges, India
+              </a> 
+            </h4>
+          </div>
+          <div id="2654bbbf2cb8296083e709a7f05060ea" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6547-3" target="_blank" title="View Publication 10.1007/s12665-017-6547-3">DOI: 10.1007/s12665-017-6547-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6547-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#271274c67408b96cf6e1f09c21ad7c03" style="font-size: 90%;" title="Open panel">
+                12. Has the prediction of the South China Sea summer monsoon improved since the late 1970s?
+              </a> 
+            </h4>
+          </div>
+          <div id="271274c67408b96cf6e1f09c21ad7c03" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13351-016-6052-8" target="_blank" title="View Publication 10.1007/s13351-016-6052-8">DOI: 10.1007/s13351-016-6052-8</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13351-016-6052-8" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#29cd70f3277a2f51588c7dca50f55586" style="font-size: 90%;" title="Open panel">
+                13. Enhancement of the relationship between the winter Arctic oscillation and the following summer circulation anomalies over central East Asia since the early 1990s
+              </a> 
+            </h4>
+          </div>
+          <div id="29cd70f3277a2f51588c7dca50f55586" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3818-3" target="_blank" title="View Publication 10.1007/s00382-017-3818-3">DOI: 10.1007/s00382-017-3818-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3818-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#2a3a6ca931075d5ac31028265850a909" style="font-size: 90%;" title="Open panel">
+                14. Five-year measurements of ambient ammonia and its relationships with other trace gases at an urban site of Delhi, India
+              </a> 
+            </h4>
+          </div>
+          <div id="2a3a6ca931075d5ac31028265850a909" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00703-017-0512-2" target="_blank" title="View Publication 10.1007/s00703-017-0512-2">DOI: 10.1007/s00703-017-0512-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00703-017-0512-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#2b76a2b9443894697735f754f7e891a7" style="font-size: 90%;" title="Open panel">
+                15. Application of Archimedean copulas to the impact assessment of hydro-climatic variables in semi-arid aquifers of western India
+              </a> 
+            </h4>
+          </div>
+          <div id="2b76a2b9443894697735f754f7e891a7" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10040-017-1636-7" target="_blank" title="View Publication 10.1007/s10040-017-1636-7">DOI: 10.1007/s10040-017-1636-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10040-017-1636-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#2c0cd88786a13fd8d9f507c3f0f855eb" style="font-size: 90%;" title="Open panel">
+                16. Evaluating the impact of artificial groundwater recharge structures using geo-spatial techniques in the hard-rock terrain of Rajasthan, India
+              </a> 
+            </h4>
+          </div>
+          <div id="2c0cd88786a13fd8d9f507c3f0f855eb" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6953-6" target="_blank" title="View Publication 10.1007/s12665-017-6953-6">DOI: 10.1007/s12665-017-6953-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6953-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#2ecd920d0604f816fb2a3c41d4613048" style="font-size: 90%;" title="Open panel">
+                17. Future projections of Indian summer monsoon rainfall extremes over India with statistical downscaling and its consistency with observed characteristics
+              </a> 
+            </h4>
+          </div>
+          <div id="2ecd920d0604f816fb2a3c41d4613048" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3604-2" target="_blank" title="View Publication 10.1007/s00382-017-3604-2">DOI: 10.1007/s00382-017-3604-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3604-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#2faef9608cdf4d3165949285b9b3c1ff" style="font-size: 90%;" title="Open panel">
+                18. Use of remote sensing data in comprehending an extremely unusual flooding event over southwest Bangladesh
+              </a> 
+            </h4>
+          </div>
+          <div id="2faef9608cdf4d3165949285b9b3c1ff" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11069-017-2947-7" target="_blank" title="View Publication 10.1007/s11069-017-2947-7">DOI: 10.1007/s11069-017-2947-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11069-017-2947-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#313e91865679e7be1b8818a44bd3414b" style="font-size: 90%;" title="Open panel">
+                19. Anti-phase relationship between the East Asian winter monsoon and summer monsoon during the Holocene?
+              </a> 
+            </h4>
+          </div>
+          <div id="313e91865679e7be1b8818a44bd3414b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11802-017-3098-x" target="_blank" title="View Publication 10.1007/s11802-017-3098-x">DOI: 10.1007/s11802-017-3098-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11802-017-3098-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#31dea2bce690987d1962a260feebc7d9" style="font-size: 90%;" title="Open panel">
+                20. Study of the global and regional climatic impacts of ENSO magnitude using SPEEDY AGCM
+              </a> 
+            </h4>
+          </div>
+          <div id="31dea2bce690987d1962a260feebc7d9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12040-017-0804-4" target="_blank" title="View Publication 10.1007/s12040-017-0804-4">DOI: 10.1007/s12040-017-0804-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12040-017-0804-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#33455d5ababee9f750f6311cf53ef3aa" style="font-size: 90%;" title="Open panel">
+                21. Multi-ensemble regional simulation of Indian monsoon during contrasting rainfall years: role of convective schemes and nested domain
+              </a> 
+            </h4>
+          </div>
+          <div id="33455d5ababee9f750f6311cf53ef3aa" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3864-x" target="_blank" title="View Publication 10.1007/s00382-017-3864-x">DOI: 10.1007/s00382-017-3864-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3864-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#3700ad98e46f0084bc9a85000b636349" style="font-size: 90%;" title="Open panel">
+                22. Impact of East Asian summer monsoon circulation on the regional aerosol distribution in observations and models
+              </a> 
+            </h4>
+          </div>
+          <div id="3700ad98e46f0084bc9a85000b636349" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00704-017-2199-1" target="_blank" title="View Publication 10.1007/s00704-017-2199-1">DOI: 10.1007/s00704-017-2199-1</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00704-017-2199-1" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#37daac1dbac9a24e041293fd83c710e2" style="font-size: 90%;" title="Open panel">
+                23. Performance Investigation of a Solar Heat Driven Adsorption Chiller under Two Different Climatic Conditions
+              </a> 
+            </h4>
+          </div>
+          <div id="37daac1dbac9a24e041293fd83c710e2" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40032-017-0358-x" target="_blank" title="View Publication 10.1007/s40032-017-0358-x">DOI: 10.1007/s40032-017-0358-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40032-017-0358-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#3ac4a37b1a499b4ea8a35f01a68acbbf" style="font-size: 90%;" title="Open panel">
+                24. Effect of Rainfall Variability on Rice Yield in North Eastern Hills of India: A Case Study
+              </a> 
+            </h4>
+          </div>
+          <div id="3ac4a37b1a499b4ea8a35f01a68acbbf" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40003-017-0276-4" target="_blank" title="View Publication 10.1007/s40003-017-0276-4">DOI: 10.1007/s40003-017-0276-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40003-017-0276-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#3aca9e20c119c38149e498205c81e605" style="font-size: 90%;" title="Open panel">
+                25. Seasonal occupancy of sympatric larger carnivores in the southern San Andres Mountains, south-central New Mexico, USA
+              </a> 
+            </h4>
+          </div>
+          <div id="3aca9e20c119c38149e498205c81e605" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13364-017-0318-0" target="_blank" title="View Publication 10.1007/s13364-017-0318-0">DOI: 10.1007/s13364-017-0318-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13364-017-0318-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#3d75795678f9e6ec39c70ad6efb69aad" style="font-size: 90%;" title="Open panel">
+                26. Short-term variations in surface water properties in the Sundarban Estuarine System, India
+              </a> 
+            </h4>
+          </div>
+          <div id="3d75795678f9e6ec39c70ad6efb69aad" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40899-017-0139-y" target="_blank" title="View Publication 10.1007/s40899-017-0139-y">DOI: 10.1007/s40899-017-0139-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40899-017-0139-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#40f28598c3790e178d23ae8ed68fb195" style="font-size: 90%;" title="Open panel">
+                27. Zero-tillage is a proven technology for sustainable wheat intensification in the Eastern Indo-Gangetic Plains: what determines farmer awareness and adoption?
+              </a> 
+            </h4>
+          </div>
+          <div id="40f28598c3790e178d23ae8ed68fb195" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12571-017-0707-x" target="_blank" title="View Publication 10.1007/s12571-017-0707-x">DOI: 10.1007/s12571-017-0707-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12571-017-0707-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#42e36ed499ac36599e4c17f203047529" style="font-size: 90%;" title="Open panel">
+                28. Distributional changes in rainfall and river flow in Sarawak, Malaysia
+              </a> 
+            </h4>
+          </div>
+          <div id="42e36ed499ac36599e4c17f203047529" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13143-017-0051-2" target="_blank" title="View Publication 10.1007/s13143-017-0051-2">DOI: 10.1007/s13143-017-0051-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13143-017-0051-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#436d0a2ada40c73ba05440ee6e5c6d86" style="font-size: 90%;" title="Open panel">
+                29. Integrated approach for identifying the factors controlling groundwater quality of a tropical coastal zone in Kerala, India
+              </a> 
+            </h4>
+          </div>
+          <div id="436d0a2ada40c73ba05440ee6e5c6d86" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6818-z" target="_blank" title="View Publication 10.1007/s12665-017-6818-z">DOI: 10.1007/s12665-017-6818-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6818-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#436d7a4432e18d636e90e67b808260d3" style="font-size: 90%;" title="Open panel">
+                30. Potential of Wetland Macrophytes to Sequester Carbon and Assessment of Seasonal Carbon Input into the East Kolkata Wetland Ecosystem
+              </a> 
+            </h4>
+          </div>
+          <div id="436d7a4432e18d636e90e67b808260d3" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13157-017-0885-5" target="_blank" title="View Publication 10.1007/s13157-017-0885-5">DOI: 10.1007/s13157-017-0885-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13157-017-0885-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4401f2f979d46020fa2e5aa8f606c096" style="font-size: 90%;" title="Open panel">
+                31. Measures to mitigate direct flood risks at riverbank filtration sites with a focus on India
+              </a> 
+            </h4>
+          </div>
+          <div id="4401f2f979d46020fa2e5aa8f606c096" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40899-017-0146-z" target="_blank" title="View Publication 10.1007/s40899-017-0146-z">DOI: 10.1007/s40899-017-0146-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40899-017-0146-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#46c89d74f79e0b85c6660e29654b420e" style="font-size: 90%;" title="Open panel">
+                32. Influences of spring-to-summer sea surface temperatures over different Indian Ocean domains on the Asian summer monsoon
+              </a> 
+            </h4>
+          </div>
+          <div id="46c89d74f79e0b85c6660e29654b420e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13143-017-0050-3" target="_blank" title="View Publication 10.1007/s13143-017-0050-3">DOI: 10.1007/s13143-017-0050-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13143-017-0050-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4784262fedc16a65459be297faab1e92" style="font-size: 90%;" title="Open panel">
+                33. Characteristics and sources of atmospheric composition based on precipitation chemistry in the Shiyang River Basin, Northwestern China
+              </a> 
+            </h4>
+          </div>
+          <div id="4784262fedc16a65459be297faab1e92" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12517-016-2820-0" target="_blank" title="View Publication 10.1007/s12517-016-2820-0">DOI: 10.1007/s12517-016-2820-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12517-016-2820-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4926ab43696d8681a21fdbea140e905b" style="font-size: 90%;" title="Open panel">
+                34. Numerical simulations to quantify the diurnal contrast in local climate trend induced by desert urbanization
+              </a> 
+            </h4>
+          </div>
+          <div id="4926ab43696d8681a21fdbea140e905b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10669-017-9657-2" target="_blank" title="View Publication 10.1007/s10669-017-9657-2">DOI: 10.1007/s10669-017-9657-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10669-017-9657-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4b6104faf7e144edfb4da41b3db6b8e5" style="font-size: 90%;" title="Open panel">
+                35. Cyclical Events in the Life and Death of an Ephemeral Polychaete Reef on a Tropical Mudflat
+              </a> 
+            </h4>
+          </div>
+          <div id="4b6104faf7e144edfb4da41b3db6b8e5" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12237-017-0217-2" target="_blank" title="View Publication 10.1007/s12237-017-0217-2">DOI: 10.1007/s12237-017-0217-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12237-017-0217-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4b760fb56e8c9c4a8f2c937a3a09ecaf" style="font-size: 90%;" title="Open panel">
+                36. The trivariate seasonal analysis of couplings between El Niño, North Atlantic Oscillation, and Indian monsoon
+              </a> 
+            </h4>
+          </div>
+          <div id="4b760fb56e8c9c4a8f2c937a3a09ecaf" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S106837391611008X" target="_blank" title="View Publication 10.3103/S106837391611008X">DOI: 10.3103/S106837391611008X</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S106837391611008X" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4ba11920adebb8319381af5880df7fa9" style="font-size: 90%;" title="Open panel">
+                37. Assessment of two versions of regional climate model in simulating the Indian Summer Monsoon over South Asia CORDEX domain
+              </a> 
+            </h4>
+          </div>
+          <div id="4ba11920adebb8319381af5880df7fa9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3792-9" target="_blank" title="View Publication 10.1007/s00382-017-3792-9">DOI: 10.1007/s00382-017-3792-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3792-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#4d72730536fe4469308b1ad6c1b2f87d" style="font-size: 90%;" title="Open panel">
+                38. Recharge mechanism and processes controlling groundwater chemistry in a Precambrian sedimentary terrain: a case study from Central India
+              </a> 
+            </h4>
+          </div>
+          <div id="4d72730536fe4469308b1ad6c1b2f87d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12665-017-6435-x" target="_blank" title="View Publication 10.1007/s12665-017-6435-x">DOI: 10.1007/s12665-017-6435-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12665-017-6435-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#51bceb9654516b25d8584b529c17c641" style="font-size: 90%;" title="Open panel">
+                39. On the added value of the regional climate model REMO in the assessment of climate change signal over Central Africa
+              </a> 
+            </h4>
+          </div>
+          <div id="51bceb9654516b25d8584b529c17c641" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3547-7" target="_blank" title="View Publication 10.1007/s00382-017-3547-7">DOI: 10.1007/s00382-017-3547-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3547-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#530301aa852e50f1beacaaa6633cb4ce" style="font-size: 90%;" title="Open panel">
+                40. Simulation of centennial-scale drought events over eastern China during the past 1500 years
+              </a> 
+            </h4>
+          </div>
+          <div id="530301aa852e50f1beacaaa6633cb4ce" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13351-017-6090-x" target="_blank" title="View Publication 10.1007/s13351-017-6090-x">DOI: 10.1007/s13351-017-6090-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13351-017-6090-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#545b96ce4cea228f9061335215c83c5a" style="font-size: 90%;" title="Open panel">
+                41. Abundance and Distribution of Indian Mackerel (Rastrelliger kanagurta) along the South-West Coast of India in Respect to the Hydro-Biological Changes
+              </a> 
+            </h4>
+          </div>
+          <div id="545b96ce4cea228f9061335215c83c5a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s41208-017-0033-2" target="_blank" title="View Publication 10.1007/s41208-017-0033-2">DOI: 10.1007/s41208-017-0033-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s41208-017-0033-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#5731b5b43b2810b6934b680fa2d0a26d" style="font-size: 90%;" title="Open panel">
+                42. Simulation of leaf blast infection in tropical rice agro-ecology under climate change scenario
+              </a> 
+            </h4>
+          </div>
+          <div id="5731b5b43b2810b6934b680fa2d0a26d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10584-017-1942-z" target="_blank" title="View Publication 10.1007/s10584-017-1942-z">DOI: 10.1007/s10584-017-1942-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10584-017-1942-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#5915a6a31fbe9bdc5595916055aeb06b" style="font-size: 90%;" title="Open panel">
+                43. A comprehensive analysis of coherent rainfall patterns in China and potential drivers. Part II: intraseasonal variability
+              </a> 
+            </h4>
+          </div>
+          <div id="5915a6a31fbe9bdc5595916055aeb06b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3904-6" target="_blank" title="View Publication 10.1007/s00382-017-3904-6">DOI: 10.1007/s00382-017-3904-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3904-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#5ac7488e79974e651380e4e5a2fadb4e" style="font-size: 90%;" title="Open panel">
+                44. A distinction between summer rainy season and summer monsoon season over the Central Highlands of Vietnam
+              </a> 
+            </h4>
+          </div>
+          <div id="5ac7488e79974e651380e4e5a2fadb4e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00704-017-2178-6" target="_blank" title="View Publication 10.1007/s00704-017-2178-6">DOI: 10.1007/s00704-017-2178-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00704-017-2178-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#5cd081b155e421813daa8526bb676eb1" style="font-size: 90%;" title="Open panel">
+                45. Seasonal variation of solar irradiance and sunshine duration in Saudi Arabia
+              </a> 
+            </h4>
+          </div>
+          <div id="5cd081b155e421813daa8526bb676eb1" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13762-016-1230-x" target="_blank" title="View Publication 10.1007/s13762-016-1230-x">DOI: 10.1007/s13762-016-1230-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13762-016-1230-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#5fe53c9a4f8973dcc411cdddc0fa2cd9" style="font-size: 90%;" title="Open panel">
+                46. Estimation of nitrate concentration in groundwater of Kadava river basin-Nashik district, Maharashtra, India by using artificial neural network model
+              </a> 
+            </h4>
+          </div>
+          <div id="5fe53c9a4f8973dcc411cdddc0fa2cd9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40808-017-0290-3" target="_blank" title="View Publication 10.1007/s40808-017-0290-3">DOI: 10.1007/s40808-017-0290-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40808-017-0290-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#62e0b7a99a7e6d963f8cc0dfc75eedfc" style="font-size: 90%;" title="Open panel">
+                47. On the climate model simulation of Indian monsoon low pressure systems and the effect of remote disturbances and systematic biases
+              </a> 
+            </h4>
+          </div>
+          <div id="62e0b7a99a7e6d963f8cc0dfc75eedfc" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3900-x" target="_blank" title="View Publication 10.1007/s00382-017-3900-x">DOI: 10.1007/s00382-017-3900-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3900-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#6312e15c3d708b0029cc9217475d4254" style="font-size: 90%;" title="Open panel">
+                48. Orbital-scale nonlinear response of East Asian summer monsoon to its potential driving forces in the late Quaternary
+              </a> 
+            </h4>
+          </div>
+          <div id="6312e15c3d708b0029cc9217475d4254" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00382-017-3743-5" target="_blank" title="View Publication 10.1007/s00382-017-3743-5">DOI: 10.1007/s00382-017-3743-5</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00382-017-3743-5" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#6383c859dcbb776ed0cc116cbfb65f1a" style="font-size: 90%;" title="Open panel">
+                49. The role of shallow convection in promoting the northward propagation of boreal summer intraseasonal oscillation
+              </a> 
+            </h4>
+          </div>
+          <div id="6383c859dcbb776ed0cc116cbfb65f1a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00704-017-2064-2" target="_blank" title="View Publication 10.1007/s00704-017-2064-2">DOI: 10.1007/s00704-017-2064-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00704-017-2064-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="62004.html#65d4066488681ee867c1c4c26bc736fd" style="font-size: 90%;" title="Open panel">
+                50. Characterization of black carbon in the ambient air of Agra, India: Seasonal variation and meteorological influence
+              </a> 
+            </h4>
+          </div>
+          <div id="65d4066488681ee867c1c4c26bc736fd" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00376-017-6234-z" target="_blank" title="View Publication 10.1007/s00376-017-6234-z">DOI: 10.1007/s00376-017-6234-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00376-017-6234-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Monsoon'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 62004, "target": 61024 },
+      
+          { "source": 62004, "target": 62007 },
+      
+          { "source": 62004, "target": 66784 },
+      
+          { "source": 62004, "target": 61361 },
+      
+          { "source": 62004, "target": 73987 },
+      
+          { "source": 62004, "target": 62003 },
+      
+          { "source": 62004, "target": 62885 },
+      
+          { "source": 62004, "target": 62102 },
+      
+          { "source": 62004, "target": 61162 },
+      
+          { "source": 62004, "target": 61241 },
+      
+          { "source": 61024, "target": 61361 },
+      
+          { "source": 61024, "target": 60759 },
+      
+          { "source": 61024, "target": 62004 },
+      
+          { "source": 61024, "target": 60771 },
+      
+          { "source": 61024, "target": 62493 },
+      
+          { "source": 62007, "target": 62003 },
+      
+          { "source": 62007, "target": 62004 },
+      
+          { "source": 62007, "target": 64010 },
+      
+          { "source": 62007, "target": 73987 },
+      
+          { "source": 62007, "target": 66784 },
+      
+          { "source": 66784, "target": 62004 },
+      
+          { "source": 66784, "target": 62007 },
+      
+          { "source": 66784, "target": 66600 },
+      
+          { "source": 66784, "target": 61361 },
+      
+          { "source": 66784, "target": 62006 },
+      
+          { "source": 61361, "target": 60759 },
+      
+          { "source": 61361, "target": 62014 },
+      
+          { "source": 61361, "target": 61143 },
+      
+          { "source": 61361, "target": 62059 },
+      
+          { "source": 61361, "target": 61961 },
+      
+          { "source": 73987, "target": 62007 },
+      
+          { "source": 73987, "target": 62004 },
+      
+          { "source": 73987, "target": 63990 },
+      
+          { "source": 73987, "target": 62102 },
+      
+          { "source": 73987, "target": 66784 },
+      
+          { "source": 62003, "target": 62007 },
+      
+          { "source": 62003, "target": 62004 },
+      
+          { "source": 62003, "target": 61361 },
+      
+          { "source": 62003, "target": 69266 },
+      
+          { "source": 62003, "target": 61163 },
+      
+          { "source": 62885, "target": 61361 },
+      
+          { "source": 62885, "target": 62004 },
+      
+          { "source": 62885, "target": 61241 },
+      
+          { "source": 62885, "target": 66055 },
+      
+          { "source": 62885, "target": 62305 },
+      
+          { "source": 62102, "target": 62852 },
+      
+          { "source": 62102, "target": 68596 },
+      
+          { "source": 62102, "target": 64780 },
+      
+          { "source": 62102, "target": 61783 },
+      
+          { "source": 62102, "target": 62007 },
+      
+          { "source": 61162, "target": 61361 },
+      
+          { "source": 61162, "target": 62517 },
+      
+          { "source": 61162, "target": 61241 },
+      
+          { "source": 61162, "target": 62297 },
+      
+          { "source": 61162, "target": 60953 },
+      
+          { "source": 61241, "target": 60734 },
+      
+          { "source": 61241, "target": 61235 },
+      
+          { "source": 61241, "target": 61143 },
+      
+          { "source": 61241, "target": 60771 },
+      
+          { "source": 61241, "target": 62517 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 61024, "size": 50, "score": 0 , "title": "India", "type": "circle"},
+
+      
+
+        {"id": 62007, "size": 50, "score": 0 , "title": "Sea surface temperature", "type": "circle"},
+
+      
+
+        {"id": 66784, "size": 50, "score": 0 , "title": "Indian Ocean", "type": "circle"},
+
+      
+
+        {"id": 61361, "size": 50, "score": 0 , "title": "China", "type": "circle"},
+
+      
+
+        {"id": 73987, "size": 50, "score": 0 , "title": "Subarctic climate", "type": "circle"},
+
+      
+
+        {"id": 62003, "size": 50, "score": 0 , "title": "El Niño–Southern Oscillation", "type": "circle"},
+
+      
+
+        {"id": 62885, "size": 50, "score": 0 , "title": "Tibetan Plateau", "type": "circle"},
+
+      
+
+        {"id": 62102, "size": 50, "score": 0 , "title": "Convection", "type": "circle"},
+
+      
+
+        {"id": 61162, "size": 50, "score": 0 , "title": "Climate change", "type": "circle"},
+
+      
+
+        {"id": 61241, "size": 50, "score": 0 , "title": "Biomass", "type": "circle"},
+
+      
+
+        {"id": 62004, "size": 70, "score": 0.5 , "title": "Monsoon", "type": "circle"},
+
+      
+
+        {"id": 60759, "size": 5, "score": 0.4 , "title": "Gene", "type": "circle"},
+
+      
+
+        {"id": 60771, "size": 5, "score": 0.4 , "title": "PH", "type": "circle"},
+
+      
+
+        {"id": 62493, "size": 5, "score": 0.4 , "title": "Bangladesh", "type": "circle"},
+
+      
+
+        {"id": 64010, "size": 5, "score": 0.4 , "title": "General circulation model", "type": "circle"},
+
+      
+
+        {"id": 66600, "size": 5, "score": 0.4 , "title": "Pacific Ocean", "type": "circle"},
+
+      
+
+        {"id": 62006, "size": 5, "score": 0.4 , "title": "South China Sea", "type": "circle"},
+
+      
+
+        {"id": 62014, "size": 5, "score": 0.4 , "title": "Ribosomal RNA", "type": "circle"},
+
+      
+
+        {"id": 61143, "size": 5, "score": 0.4 , "title": "Acid", "type": "circle"},
+
+      
+
+        {"id": 62059, "size": 5, "score": 0.4 , "title": "Phylogenetics", "type": "circle"},
+
+      
+
+        {"id": 61961, "size": 5, "score": 0.4 , "title": "DNA", "type": "circle"},
+
+      
+
+        {"id": 63990, "size": 5, "score": 0.4 , "title": "Advection", "type": "circle"},
+
+      
+
+        {"id": 69266, "size": 5, "score": 0.4 , "title": "Teleconnection", "type": "circle"},
+
+      
+
+        {"id": 61163, "size": 5, "score": 0.4 , "title": "Coupled model intercomparison project", "type": "circle"},
+
+      
+
+        {"id": 66055, "size": 5, "score": 0.4 , "title": "Holocene", "type": "circle"},
+
+      
+
+        {"id": 62305, "size": 5, "score": 0.4 , "title": "Plateau", "type": "circle"},
+
+      
+
+        {"id": 62852, "size": 5, "score": 0.4 , "title": "Nusselt number", "type": "circle"},
+
+      
+
+        {"id": 68596, "size": 5, "score": 0.4 , "title": "Rayleigh number", "type": "circle"},
+
+      
+
+        {"id": 64780, "size": 5, "score": 0.4 , "title": "Reynolds number", "type": "circle"},
+
+      
+
+        {"id": 61783, "size": 5, "score": 0.4 , "title": "Heat transfer coefficient", "type": "circle"},
+
+      
+
+        {"id": 62517, "size": 5, "score": 0.4 , "title": "Carbon cycle", "type": "circle"},
+
+      
+
+        {"id": 62297, "size": 5, "score": 0.4 , "title": "Greenhouse gas", "type": "circle"},
+
+      
+
+        {"id": 60953, "size": 5, "score": 0.4 , "title": "Biodiversity", "type": "circle"},
+
+      
+
+        {"id": 60734, "size": 5, "score": 0.4 , "title": "Carbon", "type": "circle"},
+
+      
+
+        {"id": 61235, "size": 5, "score": 0.4 , "title": "Nitrogen", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>

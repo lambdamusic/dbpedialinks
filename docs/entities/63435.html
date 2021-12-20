@@ -1,0 +1,2564 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2000254-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2000254-3');
+</script>
+
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SciGraph 2 DBpedia links browser">
+    <meta name="author" content="Michele Pasin">
+    <link rel="icon" href="../media/static/favicon.ico">
+
+	
+		<title>SciGraph 2 DBpedia Links Browser</title>
+	
+
+
+	
+    <!-- Bootstrap core CSS -->
+    
+    <!-- Bootswatch:  -->
+    <!-- cerulean  | cyborg |  flatly |  lumen |  sandstone |   spacelab  |  yeti | cosmo |  darkly |  paper | simplex | superhero |  journal | readable  |   slate |  united -->
+    
+    <link href="../media/static/libs/bootswatch3.2/yeti/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../media/static/libs/bootstrap-3.3.7-dist/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+
+
+
+  <style type="text/css">
+
+    .lead-plus {font-size: 26.5px;}
+    .label-dark {background: #2c3e50; color: white; padding: 1px;}
+    .margin50 {margin-top: 50px; margin-bottom: 50px;}
+    .marginb100 {margin-bottom: 100px;}
+
+    .namespaces {background: #ced2d6; width: 100%;}
+    .footer {background-color: #3e3f3a;}
+
+    /*so that the d3plus tooltip panel doesnt cover the top banner*/
+    .navbar {z-index: 3000;}
+
+
+    .navbar-alpha {
+      font-size: 65%;
+      font-style: italic;
+      font-weight: bold;
+      color: darkgoldenrod;
+    }
+
+
+  .black {
+    color: black;
+  }
+
+  .breadcrumb {
+    margin-top: 20px;
+  }
+
+  .panel-default>.panel-heading {
+    background-color: #9cfbf661;
+  }
+
+  .panel panel-default {
+    margin-bottom: 10px;
+  }
+
+  a.high_contrast:hover {
+    color: white; 
+    background: darkblue; 
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+    font-size: 100%;
+  }
+
+  </style>
+
+
+  
+  
+
+  </head>
+
+
+
+
+
+  <body>
+
+
+
+
+ 
+ 
+
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">
+      <span class="glyphicon glyphicon-home" aria-hidden="true" style="font-size: 90%;"></span>&nbsp;&nbsp;SciGraph 2 DBPedia links browser
+      </a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+
+      </ul>
+
+
+
+    </div><!--/.nav-collapse -->
+
+  </div>
+</nav>
+ 
+ 
+
+
+
+
+
+
+
+    <!-- Begin page content -->
+    <div class="container">
+
+
+	
+
+<ol class="breadcrumb">
+  <li>
+    <a href="../index.html">Home</a>
+  </li>
+  <li class="active">Stator</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject:</h5>
+      <h1>
+        <span class="text-warning">Stator</span>
+
+
+        
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="../index.html">New Search</a>
+
+
+      </h1>
+      <hr> 
+      
+
+          
+          
+
+
+          <a class="btn btn-xs btn-info" href="http://dbpedia.org/resource/Stator" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/Stator" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      
+
+
+    </div>
+
+
+
+  </div> 
+  
+
+
+  
+
+  
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">RELATED SUBJECTS:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+       
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1;"   
+        
+          href="68928.html"
+        
+       title="View other articles tagged with this concept">Induction motor</a>
+      <span color="black;" style="opacity: 1;">&nbsp;10 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 1.0;"   
+        
+          href="61403.html"
+        
+       title="View other articles tagged with this concept">Harmonic</a>
+      <span color="black;" style="opacity: 1.0;">&nbsp;7 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.8;"   
+        
+          href="60643.html"
+        
+       title="View other articles tagged with this concept">Magnetic field</a>
+      <span color="black;" style="opacity: 0.8;">&nbsp;5 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="65239.html"
+        
+       title="View other articles tagged with this concept">Simulink</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.7;"   
+        
+          href="63545.html"
+        
+       title="View other articles tagged with this concept">MATLAB</a>
+      <span color="black;" style="opacity: 0.7;">&nbsp;4 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="64596.html"
+        
+       title="View other articles tagged with this concept">Wind turbine</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="71524.html"
+        
+       title="View other articles tagged with this concept">Orbital eccentricity</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.6;"   
+        
+          href="60663.html"
+        
+       title="View other articles tagged with this concept">Algorithm</a>
+      <span color="black;" style="opacity: 0.6;">&nbsp;3 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="63370.html"
+        
+       title="View other articles tagged with this concept">The Technique</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="78577.html"
+        
+       title="View other articles tagged with this concept">Power inverter</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="60644.html"
+        
+       title="View other articles tagged with this concept">Ferromagnetism</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.5;"   
+        
+          href="64783.html"
+        
+       title="View other articles tagged with this concept">Ansys</a>
+      <span color="black;" style="opacity: 0.5;">&nbsp;2 times</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60642.html"
+        
+       title="View other articles tagged with this concept">X-ray crystallography</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63267.html"
+        
+       title="View other articles tagged with this concept">Turbine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61626.html"
+        
+       title="View other articles tagged with this concept">Test cricket</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64139.html"
+        
+       title="View other articles tagged with this concept">Succinic acid</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62385.html"
+        
+       title="View other articles tagged with this concept">Stiffness</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="68176.html"
+        
+       title="View other articles tagged with this concept">Steam turbine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69513.html"
+        
+       title="View other articles tagged with this concept">Spectral density</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60625.html"
+        
+       title="View other articles tagged with this concept">Signal processing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61480.html"
+        
+       title="View other articles tagged with this concept">Semiconductor</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60749.html"
+        
+       title="View other articles tagged with this concept">Saturation (magnetic)</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65503.html"
+        
+       title="View other articles tagged with this concept">Reynolds stress</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61397.html"
+        
+       title="View other articles tagged with this concept">Proton</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67082.html"
+        
+       title="View other articles tagged with this concept">Precession</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71055.html"
+        
+       title="View other articles tagged with this concept">Periplasm</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63168.html"
+        
+       title="View other articles tagged with this concept">PID controller</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62207.html"
+        
+       title="View other articles tagged with this concept">Numerical analysis</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62127.html"
+        
+       title="View other articles tagged with this concept">Mutation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61097.html"
+        
+       title="View other articles tagged with this concept">Multilayer perceptron</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65374.html"
+        
+       title="View other articles tagged with this concept">Model predictive control</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="79929.html"
+        
+       title="View other articles tagged with this concept">Micro-g environment</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61092.html"
+        
+       title="View other articles tagged with this concept">Mathematical optimization</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64212.html"
+        
+       title="View other articles tagged with this concept">Lysine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69847.html"
+        
+       title="View other articles tagged with this concept">Lyapunov function</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73244.html"
+        
+       title="View other articles tagged with this concept">Lorentz force</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61516.html"
+        
+       title="View other articles tagged with this concept">Laser</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="67889.html"
+        
+       title="View other articles tagged with this concept">Kalman filter</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60729.html"
+        
+       title="View other articles tagged with this concept">Hydrocarbon</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64558.html"
+        
+       title="View other articles tagged with this concept">GOST</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73766.html"
+        
+       title="View other articles tagged with this concept">Fourier series</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="71435.html"
+        
+       title="View other articles tagged with this concept">Flat spline</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="62241.html"
+        
+       title="View other articles tagged with this concept">Finite element method</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61336.html"
+        
+       title="View other articles tagged with this concept">Escherichia coli</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61061.html"
+        
+       title="View other articles tagged with this concept">Enzyme</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="85839.html"
+        
+       title="View other articles tagged with this concept">Electromagnetism</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="73728.html"
+        
+       title="View other articles tagged with this concept">Eddy current</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="75086.html"
+        
+       title="View other articles tagged with this concept">Dynamometer</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="74495.html"
+        
+       title="View other articles tagged with this concept">Digital signal processing</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="65311.html"
+        
+       title="View other articles tagged with this concept">Cysteine</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61100.html"
+        
+       title="View other articles tagged with this concept">Correlation and dependence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="60814.html"
+        
+       title="View other articles tagged with this concept">Classical mechanics</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61251.html"
+        
+       title="View other articles tagged with this concept">Blood plasma</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="69521.html"
+        
+       title="View other articles tagged with this concept">Backpropagation</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="61654.html"
+        
+       title="View other articles tagged with this concept">Artificial neural network</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="63004.html"
+        
+       title="View other articles tagged with this concept">Artificial intelligence</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64141.html"
+        
+       title="View other articles tagged with this concept">Adenosine triphosphate</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="66562.html"
+        
+       title="View other articles tagged with this concept">Active fault</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />   
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: 0.4;"   
+        
+          href="64154.html"
+        
+       title="View other articles tagged with this concept">ATP synthase</a>
+      <span color="black;" style="opacity: 0.4;">&nbsp;1 time</span>
+      <br />  
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with this subject:
+        <span style="font-size: 150%; color: blue;">38</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: Top 50 publications shown only. Open an item panel to view more info</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#0229e4c302028d1fa96bee2db61f9859" style="font-size: 90%;" title="Open panel">
+                1. An electric-machine–magnetic-reducer combination set
+              </a> 
+            </h4>
+          </div>
+          <div id="0229e4c302028d1fa96bee2db61f9859" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217010023" target="_blank" title="View Publication 10.3103/S1068371217010023">DOI: 10.3103/S1068371217010023</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217010023" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#06a0c19571b8f780ce6bd35258993836" style="font-size: 90%;" title="Open panel">
+                2. Design procedure of coreless stator PM axial field synchronous machine for small-scale wind applications
+              </a> 
+            </h4>
+          </div>
+          <div id="06a0c19571b8f780ce6bd35258993836" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00202-017-0540-4" target="_blank" title="View Publication 10.1007/s00202-017-0540-4">DOI: 10.1007/s00202-017-0540-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00202-017-0540-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#12d7af463cb1f26424e5aa13568ed837" style="font-size: 90%;" title="Open panel">
+                3. Stator current fault diagnosis of induction motor bearings based on the fast Fourier transform
+              </a> 
+            </h4>
+          </div>
+          <div id="12d7af463cb1f26424e5aa13568ed837" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371216120063" target="_blank" title="View Publication 10.3103/S1068371216120063">DOI: 10.3103/S1068371216120063</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371216120063" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#1a33a85dfcc009eeebd0df1e8db972de" style="font-size: 90%;" title="Open panel">
+                4. An experimental demonstration of hybrid fuzzy-fuzzy space-vector control on AC variable speed drives
+              </a> 
+            </h4>
+          </div>
+          <div id="1a33a85dfcc009eeebd0df1e8db972de" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00521-017-3008-6" target="_blank" title="View Publication 10.1007/s00521-017-3008-6">DOI: 10.1007/s00521-017-3008-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00521-017-3008-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#1f7a16af2d4d95b52589cb3086fd5dce" style="font-size: 90%;" title="Open panel">
+                5. Eddy current losses in permanent magnets of surface mounted permanent magnet synchronous machines—Analytical calculation and high order finite element analyses
+              </a> 
+            </h4>
+          </div>
+          <div id="1f7a16af2d4d95b52589cb3086fd5dce" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00502-017-0498-y" target="_blank" title="View Publication 10.1007/s00502-017-0498-y">DOI: 10.1007/s00502-017-0498-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00502-017-0498-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#1fe31696a5cd73ad90d97d36ea98aa6d" style="font-size: 90%;" title="Open panel">
+                6. Analysis of an N-terminal deletion in subunit a of the Escherichia coli ATP synthase
+              </a> 
+            </h4>
+          </div>
+          <div id="1fe31696a5cd73ad90d97d36ea98aa6d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10863-017-9694-z" target="_blank" title="View Publication 10.1007/s10863-017-9694-z">DOI: 10.1007/s10863-017-9694-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10863-017-9694-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#3b84286c1c721bc8a13b7671e246772a" style="font-size: 90%;" title="Open panel">
+                7. Diagnostics of electrical components by means of their external magnetic field
+              </a> 
+            </h4>
+          </div>
+          <div id="3b84286c1c721bc8a13b7671e246772a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068798X17060120" target="_blank" title="View Publication 10.3103/S1068798X17060120">DOI: 10.3103/S1068798X17060120</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068798X17060120" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#5f9924183cd945119c5bcb828cd1ff43" style="font-size: 90%;" title="Open panel">
+                8. Evaluation of the energy characteristics of an asynchronous inverter-fed induction motor at different approximations of the magnetization curve
+              </a> 
+            </h4>
+          </div>
+          <div id="5f9924183cd945119c5bcb828cd1ff43" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217060153" target="_blank" title="View Publication 10.3103/S1068371217060153">DOI: 10.3103/S1068371217060153</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217060153" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#61939be7fdcd2c4b7083757a03d6b334" style="font-size: 90%;" title="Open panel">
+                9. Unknown input observer-based active fault tolerant control for induction machine
+              </a> 
+            </h4>
+          </div>
+          <div id="61939be7fdcd2c4b7083757a03d6b334" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40435-017-0334-6" target="_blank" title="View Publication 10.1007/s40435-017-0334-6">DOI: 10.1007/s40435-017-0334-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40435-017-0334-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#61d0e0c3a3c3184b1bc133d4bd0d4cfd" style="font-size: 90%;" title="Open panel">
+                10. A comparative performance analysis of induction and synchronous reluctant motors in an adjustable-speed electric drive
+              </a> 
+            </h4>
+          </div>
+          <div id="61d0e0c3a3c3184b1bc133d4bd0d4cfd" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217040095" target="_blank" title="View Publication 10.3103/S1068371217040095">DOI: 10.3103/S1068371217040095</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217040095" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#620a108b3fb59c4ee233d448bdee39f4" style="font-size: 90%;" title="Open panel">
+                11. Design and simulation of electrical dynamometer using improved DTC induction motor driver
+              </a> 
+            </h4>
+          </div>
+          <div id="620a108b3fb59c4ee233d448bdee39f4" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11771-017-3540-7" target="_blank" title="View Publication 10.1007/s11771-017-3540-7">DOI: 10.1007/s11771-017-3540-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11771-017-3540-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#62a523dc50d47709f46165811ff9be4c" style="font-size: 90%;" title="Open panel">
+                12. Application of BEMF-MRAS with Kalman filter in sensorless control of induction motor drive
+              </a> 
+            </h4>
+          </div>
+          <div id="62a523dc50d47709f46165811ff9be4c" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00202-017-0613-4" target="_blank" title="View Publication 10.1007/s00202-017-0613-4">DOI: 10.1007/s00202-017-0613-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00202-017-0613-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#65dad867bcb55ee6773e61d1e8d0211d" style="font-size: 90%;" title="Open panel">
+                13. Adaptive direct torque control using Luenberger-sliding mode observer for online stator resistance estimation for five-phase induction motor drives
+              </a> 
+            </h4>
+          </div>
+          <div id="65dad867bcb55ee6773e61d1e8d0211d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00202-017-0639-7" target="_blank" title="View Publication 10.1007/s00202-017-0639-7">DOI: 10.1007/s00202-017-0639-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00202-017-0639-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#6856edef4204ac32cae721b1e50e1d53" style="font-size: 90%;" title="Open panel">
+                14. Verification of the Microgravity Active Vibration Isolation System based on Parabolic Flight
+              </a> 
+            </h4>
+          </div>
+          <div id="6856edef4204ac32cae721b1e50e1d53" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12217-017-9559-4" target="_blank" title="View Publication 10.1007/s12217-017-9559-4">DOI: 10.1007/s12217-017-9559-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12217-017-9559-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#6d5a63cad4ad3ae88513dc9a9af729ce" style="font-size: 90%;" title="Open panel">
+                15. Magnetic conduction of a magnetic reducer modulator
+              </a> 
+            </h4>
+          </div>
+          <div id="6d5a63cad4ad3ae88513dc9a9af729ce" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217070021" target="_blank" title="View Publication 10.3103/S1068371217070021">DOI: 10.3103/S1068371217070021</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217070021" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#70de879b7a4b547b3db9e70f5ea867ac" style="font-size: 90%;" title="Open panel">
+                16. Adjustable magnetic gear
+              </a> 
+            </h4>
+          </div>
+          <div id="70de879b7a4b547b3db9e70f5ea867ac" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217070057" target="_blank" title="View Publication 10.3103/S1068371217070057">DOI: 10.3103/S1068371217070057</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217070057" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#71cd378be502894deb239150d9f6788a" style="font-size: 90%;" title="Open panel">
+                17. Unsupervised on-line method to diagnose unbalanced voltage in three-phase induction motor
+              </a> 
+            </h4>
+          </div>
+          <div id="71cd378be502894deb239150d9f6788a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00521-017-2973-0" target="_blank" title="View Publication 10.1007/s00521-017-2973-0">DOI: 10.1007/s00521-017-2973-0</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00521-017-2973-0" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#734912448e8453441e07212b77c2bd74" style="font-size: 90%;" title="Open panel">
+                18. Ways to decrease losses in electric drives and improvement of electrical safety during their service
+              </a> 
+            </h4>
+          </div>
+          <div id="734912448e8453441e07212b77c2bd74" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217040125" target="_blank" title="View Publication 10.3103/S1068371217040125">DOI: 10.3103/S1068371217040125</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217040125" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#7374e32e1449da34d6d2c3da1a00bd9a" style="font-size: 90%;" title="Open panel">
+                19. An Analytical and Experimental Approach to Diagnose Unbalanced Voltage Supply
+              </a> 
+            </h4>
+          </div>
+          <div id="7374e32e1449da34d6d2c3da1a00bd9a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s13369-017-2769-7" target="_blank" title="View Publication 10.1007/s13369-017-2769-7">DOI: 10.1007/s13369-017-2769-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s13369-017-2769-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#77f5ae03d6ede6ac2356939b21af5301" style="font-size: 90%;" title="Open panel">
+                20. Determination of the inductance of a synchronous reactive machine for sensorless control
+              </a> 
+            </h4>
+          </div>
+          <div id="77f5ae03d6ede6ac2356939b21af5301" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217060104" target="_blank" title="View Publication 10.3103/S1068371217060104">DOI: 10.3103/S1068371217060104</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217060104" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#7c29e9955fd231d8cc4d1c144d5cf361" style="font-size: 90%;" title="Open panel">
+                21. Hybrid control method of the voltage of a permanent magnetic generator
+              </a> 
+            </h4>
+          </div>
+          <div id="7c29e9955fd231d8cc4d1c144d5cf361" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S1064230717020149" target="_blank" title="View Publication 10.1134/S1064230717020149">DOI: 10.1134/S1064230717020149</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S1064230717020149" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#80d9ff56658ef534a09b0778f752d30b" style="font-size: 90%;" title="Open panel">
+                22. Doubly fed induction generator (DFIG) wind turbine controlled by artificial organic networks
+              </a> 
+            </h4>
+          </div>
+          <div id="80d9ff56658ef534a09b0778f752d30b" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00500-017-2537-3" target="_blank" title="View Publication 10.1007/s00500-017-2537-3">DOI: 10.1007/s00500-017-2537-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00500-017-2537-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#83f8193d2f4cb828ccc2af40f75ec0cc" style="font-size: 90%;" title="Open panel">
+                23. Accurate Prediction of Motor Failures by Application of Multi CBM Tools: A Case Study
+              </a> 
+            </h4>
+          </div>
+          <div id="83f8193d2f4cb828ccc2af40f75ec0cc" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40032-017-0352-3" target="_blank" title="View Publication 10.1007/s40032-017-0352-3">DOI: 10.1007/s40032-017-0352-3</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40032-017-0352-3" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#88d7d8292db4530c1868f335f9b878e0" style="font-size: 90%;" title="Open panel">
+                24. A Method of Experimental Determination of Parameters of Equivalent Circuits of Induction Motors
+              </a> 
+            </h4>
+          </div>
+          <div id="88d7d8292db4530c1868f335f9b878e0" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s10749-017-0794-z" target="_blank" title="View Publication 10.1007/s10749-017-0794-z">DOI: 10.1007/s10749-017-0794-z</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s10749-017-0794-z" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#9996cac2bf44df3fef9500bc0f3fdfe9" style="font-size: 90%;" title="Open panel">
+                25. An improved sensorless sliding mode control/adaptive observer of a five-phase permanent magnet synchronous motor drive
+              </a> 
+            </h4>
+          </div>
+          <div id="9996cac2bf44df3fef9500bc0f3fdfe9" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00170-017-0557-x" target="_blank" title="View Publication 10.1007/s00170-017-0557-x">DOI: 10.1007/s00170-017-0557-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00170-017-0557-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#99a8d2e340338802b7c7cc6529b9491e" style="font-size: 90%;" title="Open panel">
+                26. Hot forming of complex surface of hollow blade back arc based on drawing process
+              </a> 
+            </h4>
+          </div>
+          <div id="99a8d2e340338802b7c7cc6529b9491e" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00170-017-0817-9" target="_blank" title="View Publication 10.1007/s00170-017-0817-9">DOI: 10.1007/s00170-017-0817-9</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00170-017-0817-9" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#acf3cff618b14c14c3f8968bf8386dfe" style="font-size: 90%;" title="Open panel">
+                27. Dynamics modeling and modal experimental study of high speed motorized spindle
+              </a> 
+            </h4>
+          </div>
+          <div id="acf3cff618b14c14c3f8968bf8386dfe" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s12206-017-0203-4" target="_blank" title="View Publication 10.1007/s12206-017-0203-4">DOI: 10.1007/s12206-017-0203-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s12206-017-0203-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#b0afccd26de390d6c15087e7886f9989" style="font-size: 90%;" title="Open panel">
+                28. Optimized and coordinated model predictive control scheme for DFIGs with DC-based converter system
+              </a> 
+            </h4>
+          </div>
+          <div id="b0afccd26de390d6c15087e7886f9989" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40565-017-0299-7" target="_blank" title="View Publication 10.1007/s40565-017-0299-7">DOI: 10.1007/s40565-017-0299-7</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40565-017-0299-7" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#baa7fdd025b3516596d2517077daec97" style="font-size: 90%;" title="Open panel">
+                29. A control system of an electromagnetic bearing
+              </a> 
+            </h4>
+          </div>
+          <div id="baa7fdd025b3516596d2517077daec97" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.3103/S1068371217060050" target="_blank" title="View Publication 10.3103/S1068371217060050">DOI: 10.3103/S1068371217060050</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.3103/S1068371217060050" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#c0a8fcc0361cf705b0dcc5d7881c50f8" style="font-size: 90%;" title="Open panel">
+                30. Enhancement of demagnetization control for low-voltage ride-through capability in DFIG-based wind farm
+              </a> 
+            </h4>
+          </div>
+          <div id="c0a8fcc0361cf705b0dcc5d7881c50f8" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00202-017-0522-6" target="_blank" title="View Publication 10.1007/s00202-017-0522-6">DOI: 10.1007/s00202-017-0522-6</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00202-017-0522-6" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#c6569ad9a025a505b2c892713ea7f15a" style="font-size: 90%;" title="Open panel">
+                31. Precision control of a sensorless PM BLDC motor using PLL control algorithm
+              </a> 
+            </h4>
+          </div>
+          <div id="c6569ad9a025a505b2c892713ea7f15a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00202-017-0571-x" target="_blank" title="View Publication 10.1007/s00202-017-0571-x">DOI: 10.1007/s00202-017-0571-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00202-017-0571-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#d68405cfdb754c8cd168d5d1e740345a" style="font-size: 90%;" title="Open panel">
+                32. Design and measurements of a permanent magnet Flux-Switching-Machine for industrial applications
+              </a> 
+            </h4>
+          </div>
+          <div id="d68405cfdb754c8cd168d5d1e740345a" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00502-017-0492-4" target="_blank" title="View Publication 10.1007/s00502-017-0492-4">DOI: 10.1007/s00502-017-0492-4</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00502-017-0492-4" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#d6d94c77fea179689a1da9d0fc16aa7d" style="font-size: 90%;" title="Open panel">
+                33. Investigation of the effect of a low-temperature plasma of vapor–gas discharges with the use of electrolytic electrodes at lower pressure on products of complex shape
+              </a> 
+            </h4>
+          </div>
+          <div id="d6d94c77fea179689a1da9d0fc16aa7d" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S207511331703008X" target="_blank" title="View Publication 10.1134/S207511331703008X">DOI: 10.1134/S207511331703008X</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S207511331703008X" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#ebf6086389456ec6004cf60ab3019407" style="font-size: 90%;" title="Open panel">
+                34. Phase-averaged flow statistics in compressors using a rotated hot-wire technique
+              </a> 
+            </h4>
+          </div>
+          <div id="ebf6086389456ec6004cf60ab3019407" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00348-017-2326-x" target="_blank" title="View Publication 10.1007/s00348-017-2326-x">DOI: 10.1007/s00348-017-2326-x</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00348-017-2326-x" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#ecd1f30cab8d017165dc09d4338d4f57" style="font-size: 90%;" title="Open panel">
+                35. Broken rotor bar fault diagnosis using fast Fourier transform applied to field-oriented control induction machine: simulation and experimental study
+              </a> 
+            </h4>
+          </div>
+          <div id="ecd1f30cab8d017165dc09d4338d4f57" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s00170-017-0143-2" target="_blank" title="View Publication 10.1007/s00170-017-0143-2">DOI: 10.1007/s00170-017-0143-2</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s00170-017-0143-2" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#f34062a9ef0fd20913cc1286b8f23c21" style="font-size: 90%;" title="Open panel">
+                36. Noise-induced transition in a piecewise smooth system by generalized cell mapping method with evolving probabilistic vector
+              </a> 
+            </h4>
+          </div>
+          <div id="f34062a9ef0fd20913cc1286b8f23c21" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s11071-016-3323-y" target="_blank" title="View Publication 10.1007/s11071-016-3323-y">DOI: 10.1007/s11071-016-3323-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s11071-016-3323-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#f52b98a93b86e2c388db514fc3670679" style="font-size: 90%;" title="Open panel">
+                37. Application of Order Analysis to Diagnose Fatigue within Wind Turbine Gearbox
+              </a> 
+            </h4>
+          </div>
+          <div id="f52b98a93b86e2c388db514fc3670679" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1007/s40866-016-0017-y" target="_blank" title="View Publication 10.1007/s40866-016-0017-y">DOI: 10.1007/s40866-016-0017-y</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1007/s40866-016-0017-y" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="63435.html#f7a30febff719957a044b997ec698309" style="font-size: 90%;" title="Open panel">
+                38. Forces exciting generation roll at rotor vibrations when rotor-to-stator rubbing
+              </a> 
+            </h4>
+          </div>
+          <div id="f7a30febff719957a044b997ec698309" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: 2017
+              <br />View: <a href="http://dx.doi.org/10.1134/S0040601517070072" target="_blank" title="View Publication 10.1134/S0040601517070072">DOI: 10.1134/S0040601517070072</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.10.1134/S0040601517070072" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+            
+            
+              
+
+              
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+
+
+
+
+  <div class="row">
+
+    <hr>
+
+
+    <div class="col-md-12" style="margin-bottom:50px;">
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Drop us a <a href="mailto:m.pasin@digital-science.com">message</a>.</p>
+    </div>
+
+
+  </div>
+
+
+
+	</div>
+
+
+  
+
+
+
+  
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+    
+      <p class="text-muted">SciGraph 2 DBpedia links browser</p>
+    
+    </div>
+  </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../media/static/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../media/static/libs/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+    
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('/ajax/sg',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('/ajax/tags',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('/ajax/dbpedia',
+      {
+        id: 'http://dbpedia.org/resource/Stator'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+
+
+  
+
+   
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// based on http://bl.ocks.org/eyaler/10586116 
+
+
+
+
+
+var data_local_dynamic = {
+  "graph": [],
+  "links": [
+      
+          { "source": 63435, "target": 68928 },
+      
+          { "source": 63435, "target": 61403 },
+      
+          { "source": 63435, "target": 60643 },
+      
+          { "source": 63435, "target": 65239 },
+      
+          { "source": 63435, "target": 95902 },
+      
+          { "source": 63435, "target": 63545 },
+      
+          { "source": 63435, "target": 64596 },
+      
+          { "source": 63435, "target": 63436 },
+      
+          { "source": 63435, "target": 71524 },
+      
+          { "source": 63435, "target": 60663 },
+      
+          { "source": 68928, "target": 63435 },
+      
+          { "source": 68928, "target": 78577 },
+      
+          { "source": 68928, "target": 61403 },
+      
+          { "source": 68928, "target": 63436 },
+      
+          { "source": 68928, "target": 65239 },
+      
+          { "source": 61403, "target": 61516 },
+      
+          { "source": 61403, "target": 63435 },
+      
+          { "source": 61403, "target": 60643 },
+      
+          { "source": 61403, "target": 63265 },
+      
+          { "source": 61403, "target": 61092 },
+      
+          { "source": 60643, "target": 60644 },
+      
+          { "source": 60643, "target": 60642 },
+      
+          { "source": 60643, "target": 61100 },
+      
+          { "source": 60643, "target": 60746 },
+      
+          { "source": 60643, "target": 61251 },
+      
+          { "source": 65239, "target": 63545 },
+      
+          { "source": 65239, "target": 60663 },
+      
+          { "source": 65239, "target": 63435 },
+      
+          { "source": 65239, "target": 68342 },
+      
+          { "source": 65239, "target": 61092 },
+      
+          { "source": 95902, "target": 63435 },
+      
+          { "source": 95902, "target": 60643 },
+      
+          { "source": 95902, "target": 68928 },
+      
+          { "source": 95902, "target": 61403 },
+      
+          { "source": 95902, "target": 63168 },
+      
+          { "source": 63545, "target": 60663 },
+      
+          { "source": 63545, "target": 65239 },
+      
+          { "source": 63545, "target": 61092 },
+      
+          { "source": 63545, "target": 62241 },
+      
+          { "source": 63545, "target": 60687 },
+      
+          { "source": 64596, "target": 64720 },
+      
+          { "source": 64596, "target": 64184 },
+      
+          { "source": 64596, "target": 60663 },
+      
+          { "source": 64596, "target": 63818 },
+      
+          { "source": 64596, "target": 63267 },
+      
+          { "source": 63436, "target": 63435 },
+      
+          { "source": 63436, "target": 68928 },
+      
+          { "source": 63436, "target": 61403 },
+      
+          { "source": 63436, "target": 61626 },
+      
+          { "source": 63436, "target": 71524 },
+      
+          { "source": 71524, "target": 63435 },
+      
+          { "source": 71524, "target": 64783 },
+      
+          { "source": 71524, "target": 61626 },
+      
+          { "source": 71524, "target": 67297 },
+      
+          { "source": 71524, "target": 63436 },
+      
+          { "source": 60663, "target": 61092 },
+      
+          { "source": 60663, "target": 60687 },
+      
+          { "source": 60663, "target": 60982 },
+      
+          { "source": 60663, "target": 60814 },
+      
+          { "source": 60663, "target": 61654 },
+                
+    //{"source": 0, "target": 1},
+    ],
+  "nodes": [
+      
+
+        {"id": 68928, "size": 50, "score": 0 , "title": "Induction motor", "type": "circle"},
+
+      
+
+        {"id": 61403, "size": 50, "score": 0 , "title": "Harmonic", "type": "circle"},
+
+      
+
+        {"id": 60643, "size": 50, "score": 0 , "title": "Magnetic field", "type": "circle"},
+
+      
+
+        {"id": 65239, "size": 50, "score": 0 , "title": "Simulink", "type": "circle"},
+
+      
+
+        {"id": 95902, "size": 50, "score": 0 , "title": "Magnetomotive force", "type": "circle"},
+
+      
+
+        {"id": 63545, "size": 50, "score": 0 , "title": "MATLAB", "type": "circle"},
+
+      
+
+        {"id": 64596, "size": 50, "score": 0 , "title": "Wind turbine", "type": "circle"},
+
+      
+
+        {"id": 63436, "size": 50, "score": 0 , "title": "Squirrel-cage rotor", "type": "circle"},
+
+      
+
+        {"id": 71524, "size": 50, "score": 0 , "title": "Orbital eccentricity", "type": "circle"},
+
+      
+
+        {"id": 60663, "size": 50, "score": 0 , "title": "Algorithm", "type": "circle"},
+
+      
+
+        {"id": 63435, "size": 70, "score": 0.5 , "title": "Stator", "type": "circle"},
+
+      
+
+        {"id": 78577, "size": 5, "score": 0.4 , "title": "Power inverter", "type": "circle"},
+
+      
+
+        {"id": 61516, "size": 5, "score": 0.4 , "title": "Laser", "type": "circle"},
+
+      
+
+        {"id": 63265, "size": 5, "score": 0.4 , "title": "Resonance", "type": "circle"},
+
+      
+
+        {"id": 61092, "size": 5, "score": 0.4 , "title": "Mathematical optimization", "type": "circle"},
+
+      
+
+        {"id": 60644, "size": 5, "score": 0.4 , "title": "Ferromagnetism", "type": "circle"},
+
+      
+
+        {"id": 60642, "size": 5, "score": 0.4 , "title": "X-ray crystallography", "type": "circle"},
+
+      
+
+        {"id": 61100, "size": 5, "score": 0.4 , "title": "Correlation and dependence", "type": "circle"},
+
+      
+
+        {"id": 60746, "size": 5, "score": 0.4 , "title": "Scanning electron microscope", "type": "circle"},
+
+      
+
+        {"id": 61251, "size": 5, "score": 0.4 , "title": "Blood plasma", "type": "circle"},
+
+      
+
+        {"id": 68342, "size": 5, "score": 0.4 , "title": "Maximum power point tracking", "type": "circle"},
+
+      
+
+        {"id": 63168, "size": 5, "score": 0.4 , "title": "PID controller", "type": "circle"},
+
+      
+
+        {"id": 62241, "size": 5, "score": 0.4 , "title": "Finite element method", "type": "circle"},
+
+      
+
+        {"id": 60687, "size": 5, "score": 0.4 , "title": "Genetic algorithm", "type": "circle"},
+
+      
+
+        {"id": 64720, "size": 5, "score": 0.4 , "title": "Wind power", "type": "circle"},
+
+      
+
+        {"id": 64184, "size": 5, "score": 0.4 , "title": "Renewable energy", "type": "circle"},
+
+      
+
+        {"id": 63818, "size": 5, "score": 0.4 , "title": "Wind tunnel", "type": "circle"},
+
+      
+
+        {"id": 63267, "size": 5, "score": 0.4 , "title": "Turbine", "type": "circle"},
+
+      
+
+        {"id": 61626, "size": 5, "score": 0.4 , "title": "Test cricket", "type": "circle"},
+
+      
+
+        {"id": 64783, "size": 5, "score": 0.4 , "title": "Ansys", "type": "circle"},
+
+      
+
+        {"id": 67297, "size": 5, "score": 0.4 , "title": "Sun", "type": "circle"},
+
+      
+
+        {"id": 60982, "size": 5, "score": 0.4 , "title": "Graph theory", "type": "circle"},
+
+      
+
+        {"id": 60814, "size": 5, "score": 0.4 , "title": "Classical mechanics", "type": "circle"},
+
+      
+
+        {"id": 61654, "size": 5, "score": 0.4 , "title": "Artificial neural network", "type": "circle"},
+
+       
+
+    // {"size": 60, "score": 0, "id": "Androsynth", "type": "circle"},
+  ],
+    "directed": false,
+   "multigraph": false
+} 
+
+var chartDiv = document.getElementById("graph_div");
+// Extract the width and height that was computed by CSS.
+var divWidth = chartDiv.clientWidth;
+var divHeight = chartDiv.clientHeight;
+
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+
+var keyc = true, keys = true, keyt = true, keyr = true, keyx = true, keyd = true, keyl = true, keym = true, keyh = true, key1 = true, key2 = true, key3 = true, key0 = true
+
+var focus_node = null, highlight_node = null;
+
+var text_center = false;
+var outline = false;
+
+var min_score = 0;
+var max_score = 1;
+
+var color = d3.scale.linear()
+  .domain([min_score, (min_score+max_score)/2, max_score])
+  .range(["lime", "yellow", "red"]);
+
+var highlight_color = "blue";
+var highlight_trans = 0.1;
+  
+var size = d3.scale.pow().exponent(1)
+  .domain([1,100])
+  .range([8,24]);
+	
+var force = d3.layout.force()
+  .linkDistance(100)
+  .charge(-500) // was 800
+  .size([divWidth,divHeight]);
+
+var default_node_color = "#ccc";
+//var default_node_color = "rgb(3,190,100)";
+var default_link_color = "#888";
+var nominal_base_node_size = 8;
+var nominal_text_size = 10;
+var max_text_size = 24;
+var nominal_stroke = 1.5;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+// append to DOM
+var svg = d3.select("#graph_div").append("svg");
+var zoom = d3.behavior.zoom().scaleExtent([min_zoom,max_zoom])
+var g = svg.append("g");
+//
+svg.style("cursor","move");
+
+// d3.json("graph.json", function(error, graph) {
+
+    var graph = data_local_dynamic;
+
+    var linkedByIndex = {};
+    graph.links.forEach(function(d) {
+        linkedByIndex[d.source + "," + d.target] = true;
+    });
+
+    console.log(linkedByIndex);
+
+    function isConnected(a, b) {
+        return linkedByIndex[a.id + "," + b.id] || linkedByIndex[b.id + "," + a.id] || a.id == b.id;
+    }
+    // console.log( isConnected(graph.nodes[0], graph.nodes[1]));
+
+    function hasConnections(a) {
+        for (var property in linkedByIndex) {
+                s = property.split(",");
+                if ((s[0] == a.id || s[1] == a.id) && linkedByIndex[property]) 					return true;
+        }
+    return false;
+    }
+
+    /* resolve node IDs (not optimized at all!)
+    http://bl.ocks.org/nitaku/7483341
+    */
+    _ref = graph.links;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      l = _ref[_i];
+      _ref2 = graph.nodes;
+      for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
+        n = _ref2[_j];
+        if (l.source === n.id) {
+          l.source = n;
+          continue;
+        }
+        if (l.target === n.id) {
+          l.target = n;
+          continue;
+        }
+      }
+    }
+
+    force
+        .nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+
+    var link = g.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width",nominal_stroke)
+        .style("stroke", function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_link_color; })
+
+
+    var node = g.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        
+        .call(force.drag)
+
+ 
+    //
+    // NEW: requery on a dbclick 
+    //
+    node.on("dblclick", function(d) { d3.event.stopPropagation();
+            window.location.href = "/entities/" + d.id + ".html";
+        });   
+
+
+        
+        var tocolor = "fill";
+        var towhite = "stroke";
+        if (outline) {
+            tocolor = "stroke"
+            towhite = "fill"
+        }
+            
+        
+        
+    var circle = node.append("path")
+    .attr("d", d3.svg.symbol()
+        .size(function(d) { return Math.PI*Math.pow(size(d.size)||nominal_base_node_size,2); })
+        .type(function(d) { return d.type; }))
+    
+        .style(tocolor, function(d) { 
+        if (isNumber(d.score) && d.score>=0) return color(d.score);
+        else return default_node_color; })
+        //.attr("r", function(d) { return size(d.size)||nominal_base_node_size; })
+        .style("stroke-width", nominal_stroke)
+        .style(towhite, "white");
+        
+                    
+    var text = g.selectAll(".text")
+        .data(graph.nodes)
+        .enter().append("text")
+        .attr("dy", ".35em")
+        .style("font-size", nominal_text_size + "px")
+
+        if (text_center)
+        text.text(function(d) { return d.title; })
+        .style("text-anchor", "middle");
+        else 
+        text.attr("dx", function(d) {return (size(d.size)||nominal_base_node_size);})
+        .text(function(d) { return '\u2002'+d.title; });
+
+        node.on("mouseover", function(d) {
+        set_highlight(d);
+        })
+    .on("mousedown", function(d) { d3.event.stopPropagation();
+        focus_node = d;
+        set_focus(d)
+        if (highlight_node === null) set_highlight(d)
+        
+    }	).on("mouseout", function(d) {
+            exit_highlight();
+
+    }	);
+
+            d3.select(window).on("mouseup",  
+            function() {
+            if (focus_node!==null)
+            {
+                focus_node = null;
+                if (highlight_trans<1)
+                {
+        
+            circle.style("opacity", 1);
+        text.style("opacity", 1);
+        link.style("opacity", 1);
+        }
+            }
+        
+        if (highlight_node === null) exit_highlight();
+            });
+
+    function exit_highlight()
+    {
+            highlight_node = null;
+        if (focus_node===null)
+        {
+            svg.style("cursor","move");
+            if (highlight_color!="white")
+        {
+        circle.style(towhite, "white");
+        text.style("font-weight", "normal");
+        link.style("stroke", function(o) {return (isNumber(o.score) && o.score>=0)?color(o.score):default_link_color});
+    }
+                
+        }
+    }
+
+    function set_focus(d)
+    {	
+    if (highlight_trans<1)  {
+        circle.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+
+                text.style("opacity", function(o) {
+                    return isConnected(d, o) ? 1 : highlight_trans;
+                });
+                
+                link.style("opacity", function(o) {
+                    return o.source.id == d.id || o.target.id == d.id ? 1 : highlight_trans;
+                });		
+        }
+    }
+
+
+    function set_highlight(d)
+    {
+        svg.style("cursor","pointer");
+        if (focus_node!==null) d = focus_node;
+        highlight_node = d;
+
+        if (highlight_color!="white")
+        {
+            circle.style(towhite, function(o) {
+                    return isConnected(d, o) ? highlight_color : "white";});
+                text.style("font-weight", function(o) {
+                    return isConnected(d, o) ? "bold" : "normal";});
+                link.style("stroke", function(o) {
+                return o.source.id == d.id || o.target.id == d.id ? highlight_color : ((isNumber(o.score) && o.score>=0)?color(o.score):default_link_color);
+
+                });
+        }
+    }
+        
+        
+    zoom.on("zoom", function() {
+    
+        var stroke = nominal_stroke;
+        if (nominal_stroke*zoom.scale()>max_stroke) stroke = max_stroke/zoom.scale();
+        link.style("stroke-width",stroke);
+        circle.style("stroke-width",stroke);
+        
+        var base_radius = nominal_base_node_size;
+        if (nominal_base_node_size*zoom.scale()>max_base_node_size) base_radius = max_base_node_size/zoom.scale();
+            circle.attr("d", d3.svg.symbol()
+            .size(function(d) { return Math.PI*Math.pow(size(d.size)*base_radius/nominal_base_node_size||base_radius,2); })
+            .type(function(d) { return d.type; }))
+            
+        //circle.attr("r", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); })
+        if (!text_center) text.attr("dx", function(d) { return (size(d.size)*base_radius/nominal_base_node_size||base_radius); });
+        
+        var text_size = nominal_text_size;
+        if (nominal_text_size*zoom.scale()>max_text_size) text_size = max_text_size/zoom.scale();
+        text.style("font-size",text_size + "px");
+
+        g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        });
+        
+    svg.call(zoom);	  
+    svg.attr("transform","scale(1,1)");
+        
+    resize();
+    //window.focus();
+    d3.select(window).on("resize", resize).on("keydown", keydown);
+        
+    force.on("tick", function() {
+        
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        text.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+        link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+            
+        node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+        });
+    
+    function resize() {
+        var width = chartDiv.clientWidth, height = chartDiv.clientHeight;
+        svg.attr("width", width).attr("height", height);
+        
+        force.size([force.size()[0]+(width-divWidth)/zoom.scale(),force.size()[1]+(height-divHeight)/zoom.scale()]).resume();
+        w = width;
+        h = height;
+        }
+        
+        function keydown() {
+        if (d3.event.keyCode==32) {  force.stop();}
+        else if (d3.event.keyCode>=48 && d3.event.keyCode<=90 && !d3.event.ctrlKey && !d3.event.altKey && !d3.event.metaKey)
+        {
+    switch (String.fromCharCode(d3.event.keyCode)) {
+        case "C": keyc = !keyc; break;
+        case "S": keys = !keys; break;
+        case "T": keyt = !keyt; break;
+        case "R": keyr = !keyr; break;
+        case "X": keyx = !keyx; break;
+        case "D": keyd = !keyd; break;
+        case "L": keyl = !keyl; break;
+        case "M": keym = !keym; break;
+        case "H": keyh = !keyh; break;
+        case "1": key1 = !key1; break;
+        case "2": key2 = !key2; break;
+        case "3": key3 = !key3; break;
+        case "0": key0 = !key0; break;
+    }
+        
+    link.style("display", function(d) {
+                    var flag  = vis_by_type(d.source.type)&&vis_by_type(d.target.type)&&vis_by_node_score(d.source.score)&&vis_by_node_score(d.target.score)&&vis_by_link_score(d.score);
+                    // console.log(d);
+                    linkedByIndex[d.source.id + "," + d.target.id] = flag; // IMPORTANT?
+                return flag?"inline":"none";});
+    node.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+    text.style("display", function(d) {
+                    return (key0||hasConnections(d))&&vis_by_type(d.type)&&vis_by_node_score(d.score)?"inline":"none";});
+                    
+                    if (highlight_node !== null)
+                    {
+                        if ((key0||hasConnections(highlight_node))&&vis_by_type(highlight_node.type)&&vis_by_node_score(highlight_node.score)) { 
+                        if (focus_node!==null) set_focus(focus_node);
+                        set_highlight(highlight_node);
+                        }
+                        else {exit_highlight();}
+                    }
+
+    }	
+    }
+ 
+// });  // original d3.json ends here
+
+function vis_by_type(type)
+{
+	switch (type) {
+	  case "circle": return keyc;
+	  case "square": return keys;
+	  case "triangle-up": return keyt;
+	  case "diamond": return keyr;
+	  case "cross": return keyx;
+	  case "triangle-down": return keyd;
+	  default: return true;
+}
+}
+function vis_by_node_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return keyh;
+	else if (score>=0.333) return keym;
+	else if (score>=0) return keyl;
+	}
+	return true;
+}
+
+function vis_by_link_score(score)
+{
+	if (isNumber(score))
+	{
+	if (score>=0.666) return key3;
+	else if (score>=0.333) return key2;
+	else if (score>=0) return key1;
+}
+	return true;
+}
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}	
+
+
+</script>
+
+
+
+  
+  
+
+
+
+
+  </body>
+</html>
