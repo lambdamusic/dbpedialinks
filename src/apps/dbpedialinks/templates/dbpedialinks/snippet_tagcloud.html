@@ -1,0 +1,23 @@
+{% load static %}
+{% load commontags %}
+
+
+      <p class="lead text-muted" style="font-size: 160%;">{{entities|length}} subjects 
+      
+      {% if thisletter %}
+            starting with <b>'{{thisletter|upper}}'</b></p>
+      {% endif %}
+      {% if query %}
+            containing <b>'{{query|upper}}'</b></p>
+      {% endif %}
+             
+      <small class="text-muted">NOTE: subjects with more publications have stronger colors</small>
+
+      <br /><br />
+
+      {% for e in entities  %}
+
+      <a href="{% url 'dbpedialinks:entities_detail' e.id %}" class="btn btn-xs btn-warning" style="font-size: {{e.totarticles|tagcloud_sizing:11}}px; margin:2px; opacity: {{e.totarticles|tagcloud_opacity}};" title="Publications: {{e.totarticles}}">{{e.title}}</a> | 
+      
+      {% endfor %}
+

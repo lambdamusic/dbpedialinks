@@ -1,0 +1,113 @@
+{% extends "dbpedialinks/base.html" %}
+{% load commontags %}
+{% load static %}
+
+{% block navbar %}
+
+    {% with thispage="home" %}
+
+    {% include "dbpedialinks/default-navbar.html" %}
+
+    {% endwith %}
+
+{% endblock navbar %}
+
+
+  {% block bodycontent %}
+
+
+  <ol class="breadcrumb">
+      <li><a href="{% url 'dbpedialinks:home' %}">Home</a></li>
+      <li class="active">Article details</li>
+    </ol>
+
+
+    <div class="page-header">
+      <h1>Article:
+        {% if article %}
+          <span class="text-default" style="font-size: 70%;">{{article.uri}}</span>
+        {% endif %}
+      </h1>
+    </div>
+
+
+    <div class="container">
+
+
+    <div class="row">
+
+      <div class="col-md-12" style="margin-top: 20px;">
+
+
+        
+        {% if article %}
+
+
+        <h5 class="black">SciGraph URI</h5>
+        <a href="{{article.uri}}" target="_blank">{{article.uri}}</a> <span class="text-muted">Click to view document details</span>
+        
+        <br /><br />
+        <hr>
+
+        <h5 class="black">Tagged with DBpedia Entities ({{article.dbentities.count}})</h5>
+        <br />
+
+        
+        {% for a in article.dbentities.all %}
+          <li style="-margin-top: 2px;">
+            <a class="btn btn-xs btn-warning" href="{% url 'dbpedialinks:entities_detail' a.id %}"   title="View other articles tagged with this concept" >{{a.title}}</a> 
+
+             &nbsp;<a class="btn btn-xs btn-default" href="{{a.uri}}" target="_blank"   >view on DBpedia</a> 
+             &nbsp;<a class="btn btn-xs btn-default" href="https://en.wikipedia.org/wiki/{{a.uri|url_last_bit}}" target="_blank"   >view on WikiPedia</a> 
+          
+          </li> <br />
+        {% endfor %}
+          
+
+
+
+          
+        {% endif %}
+          
+          
+
+       </div>
+
+    </div>
+
+
+
+    <div class="row">
+
+      <hr>
+
+
+    <div class="col-md-12">
+       {# <hr class="-margin50"> #}
+
+
+       <br />
+       <p><b class="text-muted text-uppercase">Questions?</b></p>
+       <p class="-lead">Ping us on our  <a href="https://hive.springernature.com/groups/knowledge-graph" target="_blank">Hive homepage</a>.</p>
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+    </div> <!-- /container -->
+
+
+    <div class="container margin50">
+
+
+    </div> <!-- /container -->
+
+
+  {% endblock bodycontent %}

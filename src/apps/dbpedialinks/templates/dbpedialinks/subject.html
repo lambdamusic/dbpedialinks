@@ -1,0 +1,265 @@
+{% extends "dbpedialinks/base.html" %} 
+{% load commontags %} 
+{% load static %} 
+
+{% block navbar %} 
+{% with thispage="home" %} 
+{% include "dbpedialinks/default-navbar.html" %} 
+{% endwith %} 
+{% endblock navbar %} 
+
+
+{% block bodycontent %}
+
+<ol class="breadcrumb">
+  <li>
+    <a href="{% url 'dbpedialinks:home' %}">Home</a>
+  </li>
+  <li class="active">{{entity.title}}</li>
+</ol>
+
+
+
+<div class="container">
+
+
+  <div class="row">
+
+    <div class="col-md-12" style="margin-top: 20px;">
+
+      <h5 class="text-muted">
+        <span class="glyphicon glyphicon-tags" aria-hidden="true" style="font-size: 100%;"></span>&nbsp;&nbsp;Subject{{filters|pluralize}}:</h5>
+      <h1>
+        <span class="text-warning">{{entity.title}}</span>
+
+
+        {% if filters_minus_entity %} 
+          {% for f in filters_minus_entity %}
+          &nbsp;+&nbsp;
+          <a class="text-warning" style="font-size: 60%" href="{% url 'dbpedialinks:entities_detail' f.id %}" title="Click to focus on this subject">{{f.title}}</a>
+          <a class="text-danger" style="font-size: 30%" href="{% url 'dbpedialinks:entities_detail' entity.id %}?{% for x in  filters_minus_entity %}{% if not f.id == x.id %}filters={{x.id}}&{% endif %}{% endfor %}" title="Remove subject from filters">remove</a>
+          {% endfor %} 
+        {% endif %}
+
+        &nbsp;&nbsp;<a class="btn btn-xs btn-default" style="-margin-top: 15px;" href="{% url 'dbpedialinks:home' %}">New Search</a>
+
+
+      </h1>
+      <hr> 
+      {% if not filters_minus_entity %}
+          <div id="subject_desc" class="text-muted">
+            loading DBpedia info...
+          </div>
+          <a class="btn btn-xs btn-info" href="{{entity.uri}}" target="_blank">View on DBpedia</a>
+          &nbsp;&nbsp;
+          <a class="btn btn-xs btn-primary" href="https://en.wikipedia.org/wiki/{{entity.uri|url_last_bit}}" target="_blank">View on Wikipedia</a>
+
+          <hr> 
+      {% else %}
+          <div class="text-muted">
+          <small>Tip: click on one of the filters above to pivot your search</small>
+          </div>
+          <hr>
+      {% endif %}
+
+
+    </div>
+
+
+
+  </div> 
+  {% comment %} first row ends {% endcomment %}
+
+
+  {% comment %} **** D3 CHART ***** {% endcomment %}
+
+  {% if not filters_minus_entity %}
+  <div class="row">
+
+    <div class="col-md-12" style="margin-bottom: 30px;">
+
+      <span class="text-muted">Top related subjects:</span>
+      
+      
+      <div id="graph_div" class="-col-md-12" style="min-height: 500px; border: lightgray 0.1px solid; overflow: hidden;">       
+
+      </div>
+    
+    </div>
+  </div>
+  <!-- /row -->
+  {% endif %}
+
+  <div class="row">
+
+    <div class="col-md-4" style="margin-top: 30px;">
+
+
+      <h5 class="text-muted">REFINE YOUR SEARCH:
+      <br /><small class="text-muted">The publications listed also have these subjects</small>
+      </h5>
+      
+        <hr>
+
+      {% for k,v in related_subjects %} {% if not k in filters %}
+
+      <a class="-btn -btn-xs -btn-primary high_contrast" style="margin-bottom: 5px; opacity: {{v|tagcloud_opacity}};" href="{% url 'dbpedialinks:entities_detail' entity.id %}?filters={{k.id}}{% if filters_minus_entity %}{% for f  in  filters_minus_entity %}&filters={{f.id}}{% endfor %}{% endif %}" title="View other articles tagged with this concept">{{k.title}}</a>
+      <span color="black;" style="opacity: {{v|tagcloud_opacity}};">&nbsp;{{v}} time{{v|pluralize}}</span>
+      <br /> {% endif %} {% endfor %}
+
+
+
+    </div>
+
+
+
+    <div class="col-md-8" style="-margin-top: 20px;">
+
+      <p class="lead text-muted" style="font-size: 160%;">Publications tagged with {{ filters|length|pluralize:"this,these" }} subject{{filters|pluralize}}:
+        <span style="font-size: 150%; color: blue;">{{articles|length}}</span>
+      </p>
+
+      <p>
+        <small class="text-muted">Note: open an item panel to view more info{% if articles|length < 31 %}&nbsp;<a href="javascript:megaLoad();">(open all)</a>{% endif %}</small>
+      </p>
+
+      <br />
+
+
+      <div class="panel-group">
+        {% for a in articles %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" class="text-warning" href="#{{a.uri|url_last_bit}}" style="font-size: 90%;" title="Open panel">
+                {{forloop.counter}}. {{a.title}}
+              </a> 
+            </h4>
+          </div>
+          <div id="{{a.uri|url_last_bit}}" class="panel-collapse collapse ajax_pub_info_loaded">
+            <div class="panel-body ">
+              Year: {{a.pubyear}}
+              <br />View: <a href="http://dx.doi.org/{{a.description}}" target="_blank" title="View Publication {{a.description}}">DOI: {{a.description}}</a> | <a target="_blank" href="https://scigraph.springernature.com/pub.{{a.description}}" title="View in SciGraph">scigraph record</a>
+              <br />
+            </div>
+            <div class="panel-footer">
+
+              Subjects loading..
+
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+<!-- /container -->
+
+
+<div class="container margin50">
+
+
+</div>
+<!-- /container -->
+
+
+{% endblock bodycontent %} {% block extrajs %}
+
+
+<script>
+
+  function ajax_load_pub_info(uri, dest) {
+    $.get('{% url 'dbpedialinks:ajax_scigraph' %}',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+      });
+  }
+
+
+  function ajax_load_tag_info(uri, dest) {
+    $.get('{% url 'dbpedialinks:ajax_tags_info' %}',
+      {
+        id: uri //'http://scigraph.springernature.com/things/articles/0786393400bb0690ffbbc208884e5271'
+      },
+      function (data) {
+        dest.html(data);
+
+      });
+  }
+
+
+  function ajax_load_dbpedia_info() {
+    $.get('{% url 'dbpedialinks:ajax_dbpedia_info' %}',
+      {
+        id: '{{entity.uri}}'
+      },
+      function (data) {
+        if (data) {
+           $("#subject_desc").html(data);
+        } else {
+          $("#subject_desc").html("<i>No description returned by DBPedia</i>");
+        }
+       
+
+      });
+  }
+
+  $(".panel-collapse").on("show.bs.collapse", function () {
+    console.log("Loading..." + $(this).attr('id'));
+
+    if (!$(this).hasClass('ajax_pub_info_loaded')) {
+      article_id = $(this).attr('id');
+      $(this).children(".panel-body").html("loading...");
+      dest = $(this).children(".panel-body")
+      ajax_load_pub_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_pub_info_loaded');
+    }
+
+    if (!$(this).hasClass('ajax_tags_loaded')) {
+      article_id = $(this).attr('id');
+      $(this).children(".panel-footer").html("loading...");
+      dest = $(this).children(".panel-footer")
+      ajax_load_tag_info("http://scigraph.springernature.com/things/articles/" + article_id, dest);
+      $(this).addClass('ajax_tags_loaded');
+    }
+
+  });
+
+
+
+  {% if not filters_minus_entity %}
+    $(function () {
+      ajax_load_dbpedia_info();
+    });
+  {% endif %}
+
+
+  function megaLoad() {
+    $(".panel-collapse").collapse();
+  }
+
+</script> 
+
+
+
+{% if not filters_minus_entity %}
+
+  {% comment %} JS for D3 Graph {% endcomment %}
+
+   {% include 'dbpedialinks/snippet_graph.html' %}
+
+{% endif %}
+  
+  
+
+{% endblock extrajs %}
