@@ -1,6 +1,4 @@
-# README  
-
-DBpedia links project
+# DBpedia links project
 
 Navigation of the links to DBpedia generated in the context of https://github.com/dbpedia/sci-graph-links
 

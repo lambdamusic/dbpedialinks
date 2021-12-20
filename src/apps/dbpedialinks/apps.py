@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class DbpedialinksConfig(AppConfig):
-    name = 'DbPediaLinks'
+    name = 'dbpedialinks'
